@@ -71,3 +71,9 @@
 成员列表可列出本组织 active 与 disabled 关系，字段为 user_id、display_name、role、status、created_at，不返回邮箱、密码散列或认证信息。组织列表只返回本人 active 关系，不通过分页前的未过滤结果泄露其他组织。
 
 默认拒绝、逐次请求检查权限的原则参考 [OWASP 授权指南](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)。本周无成员角色/状态变更接口；未来新增时还须处理并发撤权，不能只加一个路由跳过事务设计。
+
+## W03 工单当前权限衔接
+
+工单九接口统一继承RequireUser与目标组织active关系；所有active member/admin可读本组织未删除工单/评论/事件。member仅编辑本人OPEN基础字段，admin可编辑本组织任意OPEN并指派同组织active受理人、按状态机关闭/重开和软删除。与W1旧蓝图不同，不限制member仅看本人；没有support或claim。
+
+正式规则见[状态机](ticket-state-machine.md)、[API](api/ticket.md)、[ADR-0003](decisions/0003-ticket-transaction.md)。角色不足403、不可见/disabled/软删404、版本或状态409，非成员不因请求中orgID而自动授权。以上不改变本表W02组织/成员动作规则。

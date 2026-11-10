@@ -1,0 +1,84 @@
+# 虚构输入/占位ID。真实Token只在客户端私有变量提供，不保存回仓库。
+@baseUrl = http://127.0.0.1:8080
+@orgId = 201
+@ticketId = 301
+@accessToken = <ACCESS_TOKEN>
+
+### 创建：201 OPEN/version0；先按README迁移到6并登录
+POST {{baseUrl}}/api/v1/organizations/{{orgId}}/tickets
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{"title":"示例问题","body":"虚构的问题描述","priority":2}
+
+### 列表：active成员可读本组织全部，过滤后分页
+GET {{baseUrl}}/api/v1/organizations/{{orgId}}/tickets?page=1&page_size=20&status=OPEN&priority=2
+Authorization: Bearer {{accessToken}}
+
+### 详情：获取当前version
+GET {{baseUrl}}/api/v1/organizations/{{orgId}}/tickets/{{ticketId}}
+Authorization: Bearer {{accessToken}}
+
+### 创建者编辑本人OPEN，admin可编辑他人OPEN；按实际version填写
+PATCH {{baseUrl}}/api/v1/organizations/{{orgId}}/tickets/{{ticketId}}
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{"expected_version":0,"title":"更新标题","priority":3}
+
+### admin指派：102为虚构的同组织active用户ID
+PATCH {{baseUrl}}/api/v1/organizations/{{orgId}}/tickets/{{ticketId}}
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{"expected_version":1,"assignee_id":102}
+
+### 受理人或admin启动；后续RESOLVED、admin CLOSED同一接口
+POST {{baseUrl}}/api/v1/organizations/{{orgId}}/tickets/{{ticketId}}/transition
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{"expected_version":2,"to_status":"IN_PROGRESS"}
+
+### 评论：不改工单version，但同事务记录TICKET_COMMENTED
+POST {{baseUrl}}/api/v1/organizations/{{orgId}}/tickets/{{ticketId}}/comments
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{"content":"虚构处理进展"}
+
+### 评论列表：按created_at/id升序
+GET {{baseUrl}}/api/v1/organizations/{{orgId}}/tickets/{{ticketId}}/comments?page=1&page_size=20
+Authorization: Bearer {{accessToken}}
+
+### 事件列表：结构化字段，不返回凭据或评论全文
+GET {{baseUrl}}/api/v1/organizations/{{orgId}}/tickets/{{ticketId}}/events?page=1&page_size=20
+Authorization: Bearer {{accessToken}}
+
+### admin软删除：204，之后详情/评论/事件及写入均404
+DELETE {{baseUrl}}/api/v1/organizations/{{orgId}}/tickets/{{ticketId}}
+Authorization: Bearer {{accessToken}}
+
+### 伪造身份：400
+POST {{baseUrl}}/api/v1/organizations/{{orgId}}/tickets
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{"title":"不应创建","body":"B","creator_id":999,"org_id":999}
+
+### PATCH状态：400，不绕过状态机
+PATCH {{baseUrl}}/api/v1/organizations/{{orgId}}/tickets/{{ticketId}}
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{"expected_version":0,"status":"CLOSED"}
+
+### 过期版本：409（实际工单版本大于0时）
+PATCH {{baseUrl}}/api/v1/organizations/{{orgId}}/tickets/{{ticketId}}
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{"expected_version":0,"title":"旧版本修改"}
+
+# 跨组织/disabled请用客户端私有凭据切换测试，不保存真实Token。
+# 无claim接口；重复POST无Idempotency-Key去重。

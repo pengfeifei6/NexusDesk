@@ -4,7 +4,7 @@
 - 日期：2026-11-10（W02 Day 2 增量更新）
 - 用途：第一周 Day 2 六张核心表的关系与约束设计。
 - 依据：[需求说明](requirements.md)、[架构说明](architecture.md)。
-- 状态：organizations、users、organization_members 的三条迁移已在专用测试库验证；其余三张工单表仍为设计。实际证据见第二周周报；日常开发库未由 AI 操作。
+- 状态：W03六张业务表及00001～00006已在专用库验证，工单/评论/事件和事务已实现；实际证据见第三周周报，日常开发库未由AI操作。
 
 > 先看第 1、2 节理解关系，再看各表字段。第 4、5 节解释数据库约束与业务授权的区别。W1 只实际建立 `organizations`，其余表分周实现。
 
@@ -118,6 +118,7 @@ Day 6 已实现成员读取/添加与组织授权：读取查询限定org_id，�
 | `version` | BIGINT | 非空，0 | 每次工单修改递增，不能为负 |
 | `created_at` | TIMESTAMPTZ | 非空，当前时间 | 创建时间 |
 | `updated_at` | TIMESTAMPTZ | 非空，当前时间 | 最近工单修改时间 |
+| `deleted_at` | TIMESTAMPTZ | 可空 | W03软删除标记，普通父/子API统一隐藏 |
 
 除主键外增加 `UNIQUE (org_id, id)`，供评论和事件使用组合外键，确保引用的工单属于同一个组织。
 
@@ -126,7 +127,7 @@ Day 6 已实现成员读取/添加与组织授权：读取查询限定org_id，�
 - `(org_id, creator_id)` 引用 `organization_members(org_id, user_id)`。
 - `(org_id, assignee_id)` 引用同一张成员表；处理人为空时允许尚未分配。
 - `status` 仅允许 `OPEN`、`IN_PROGRESS`、`RESOLVED`、`CLOSED`。
-- `OPEN` 必须没有处理人，其余三种状态必须有处理人。
+- W03允许OPEN预先指派或为空，其余三种状态必须有处理人（覆盖W1旧蓝图）。
 - 优先级只允许 1、2、3，`version >= 0`。
 
 标题、描述等内容由 Service 按需求校验，并在数据库中补充适用的非空白约束。简单的数据库空格清理不能代替应用对全部空白字符的统一处理。
@@ -158,18 +159,13 @@ P0 评论只新增，不编辑、不删除，不区分内部私密评论。只�
 | `actor_id` | BIGINT | 非空 | 与 `org_id` 一起引用操作者成员关系 |
 | `event_type` | VARCHAR(30) | 非空 | 事件类型白名单 |
 | `ticket_version` | BIGINT | 非空 | 对应本次工单版本，不能为负 |
-| `before_state` | JSONB | 可空 | 操作前相关字段快照，创建事件为 NULL |
-| `after_state` | JSONB | 非空 | 操作后相关字段快照 |
-| `reason` | TEXT | 可空 | 解决说明或重新打开原因 |
+| `before_data` | JSONB | 非空，{} | 操作前相关结构化字段 |
+| `after_data` | JSONB | 非空，{} | 操作后相关结构化字段 |
 | `created_at` | TIMESTAMPTZ | 非空，当前时间 | 事件发生时间 |
 
-建议事件类型：`CREATED`、`EDITED`、`CLAIMED`、`RESOLVED`、`CLOSED`、`REOPENED`。创建事件对应 `version=0`，之后每次工单修改递增版本并生成一条事件。加入 `EDITED` 是为记录需求中的工单编辑，不额外增加编辑权限。
+W03事件类型固定TICKET_CREATED/TICKET_UPDATED/TICKET_ASSIGNED/TICKET_STATUS_CHANGED/TICKET_COMMENTED/TICKET_DELETED。before_data/after_data为非空JSONB对象，创建前值{}；不保留旧蓝图before_state/after_state/reason字段。无UNIQUE(org_id,ticket_id,ticket_version)：同PATCH可有UPDATED和ASSIGNED，评论事件也可共享父版本；不能用“每版本一事件”约束阻止合法审计。
 
-增加 `UNIQUE (org_id, ticket_id, ticket_version)`，防止同一工单版本重复写事件。版本与实际工单变更的对应关系仍需 Service 和事务保证。
-
-快照只保存本次变化需要的业务字段，如状态、处理人、优先级和版本；`EDITED` 记录发生变化的可编辑字段。禁止复制凭据、完整认证上下文或无关个人资料。`RESOLVED` 与 `REOPENED` 的 `reason` 必须非空白。
-
-事件仅通过业务操作生成，不提供客户端直接创建、修改或删除事件的接口。评论不生成同版本工单事件。
+快照仅结构化title/priority/assignee/status/version及必要变化标记，不复制body/评论正文/凭据。评论事件只保存comment_id；业务API无事件修改/删除入口。ticket_version不随评论增加，事件原子性由Service和tx保证。
 
 ## 4. 外键、组织隔离与历史保留
 
@@ -244,13 +240,13 @@ P0 采用 `READ COMMITTED` 隔离级别。等待并取得组织锁后，再通�
 | `tickets` | `(org_id, creator_id, created_at DESC, id DESC)` | 普通用户查询本人创建的工单 |
 | `tickets` | `(org_id, assignee_id, status)` | 查询处理人未关闭的工单 |
 | `ticket_comments` | `(org_id, ticket_id, created_at, id)` | 按时间与 ID 读取评论 |
-| `ticket_events` | `UNIQUE (org_id, ticket_id, ticket_version)` | 版本去重与工单历史顺序 |
+| `ticket_events` | `(org_id,ticket_id,created_at,id)` | W03按时间/ID排序，允许同版本多事件，不做版本唯一 |
 
 分页排序使用稳定的次级 ID，避免时间相同导致顺序不确定。分页参数、游标或页码协议在接口设计中确定，所有查询先应用组织与对象可见范围。
 
 索引不能代替权限检查；添加冗余索引会增加写入与存储成本。上述候选不要求 W1 提前创建。
 
-## 7. Migration 与验证计划
+## 7. Migration 与验证约定
 
 ### 7.1 迁移原则
 
@@ -297,3 +293,13 @@ P0 采用 `READ COMMITTED` 隔离级别。等待并取得组织锁后，再通�
 已实际验证字段类型、默认值、非空/长度、邮箱大小写唯一、成员联合唯一、外键、角色/状态 CHECK、多组织成员、禁止级联删除，以及并发重复邮箱与成员只有一条成功。反向 Down 在本次可丢弃库按 3 → 2 → 1 执行，再升级到 3，原组织保留；不据此建议回滚日常数据。
 
 八个 Repository 方法的参数、返回、错误映射与事务归属见 [Repository 契约](repository-contracts.md)。本日没有实现 Service 或 Repository，不能把数据库约束测试计为 API 注册、组织授权或业务事务已通过。
+
+## 10. W03 增量实现
+
+00004/5/6新增工单、评论、事件；旧00001～3未改。父表(org_id,id)唯一键与creator/assignee成员复合FK、子表ticket/author/actor复合FK已在专用库验证，CHECK和VARCHAR的23514/22001、缺关联23503分开记录。active状态和动作策略不能由FK替代。
+
+实际索引是未删除工单的(org_id,created_at DESC,id DESC)与(org_id,status,created_at DESC,id DESC)，以及评论/事件(org_id,ticket_id,created_at,id)。未加无当前查询用途的assignee索引；W04按未分配列表真实查询再评估。小数据EXPLAIN只证明语句可规划，不能当性能基准。
+
+事务由ticket.Service显式管理，Repository兼容只读pool和写tx，所有SQL带组织/父软删过滤。详情/更新父锁、版本和状态条件、审计回滚证据见[week03](weekly/week03.md)与[ADR-0003](decisions/0003-ticket-transaction.md)。
+
+W03当前六表已经落地，字段细节与最新状态以00001～00006和[ticket-design](ticket-design.md)为准。旧W1中的每版本单一事件、member只读本人、OPEN不可指派等蓝图规则已被W03明确覆盖；下周不应恢复这些旧约束。

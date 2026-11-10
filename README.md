@@ -6,13 +6,13 @@
 
 ## 当前进度
 
-**2026-11-10：Week 2 Day 7 工程收尾已完成**。当前可用全部七个身份/组织业务接口及 GET /healthz。阅读入口见 [第二周工作记录](docs/weekly/week02.md)。
+**2026-11-10：Week 3 工单核心工程已完成**。新增九个工单API，包含状态机、指派、软删除、评论、事件及事务/版本校验；W02七个业务API与健康检查保留。阅读入口见 [第三周工作记录](docs/weekly/week03.md)，历史见[第二周](docs/weekly/week02.md)。
 
 Day 1 已形成认证、API 与权限设计；Day 2 已增加 users / organization_members 迁移；Day 3 实现了用户存储、Argon2id、注册与严格输入；Day 4 增加登录、dummy 与 JWT；Day 5 接入可信身份、本人资料、组织/admin原子创建与本人列表；Day 6完成成员列表、添加与组织RBAC；Day 7完成整周审查、新目录复现和复习材料。验证使用独立可丢弃数据库，日常配置由开发者本地维护。
 
-**Week 1 工程基础继续保留**：API 先验证数据库可连接，再启动 HTTP，已有迁移、连接池、测试与复现证据。当前已有第一周提交 923ae93；本次第二周成果未由 AI 自动提交，个人复习与远程 CI 仍按实际记录。
+**Week 1 工程基础继续保留**：API 先验证数据库可连接，再启动 HTTP，已有迁移、连接池、测试与复现证据。当前已有第二周提交da47b6c；本次第三周成果未由AI自动提交，个人复习与远程 CI 仍按实际记录。
 
-工单业务、前端、角色修改与停用接口尚未实现。`/healthz` 是固定响应的存活检查，不在每次请求查询数据库；数据库启动与迁移是独立步骤，启动 API 不会自动建表。
+前端、claim抢单、support、角色修改与停用接口尚未实现；W03权限按[ticket API](docs/api/ticket.md)和[状态机](docs/ticket-state-machine.md)，组织active成员可读全部本组织未删除工单。`/healthz` 是固定响应的存活检查，不在每次请求查询数据库；数据库启动与迁移是独立步骤，启动 API 不会自动建表。
 
 | 阶段 | 计划成果 |
 | --- | --- |
@@ -73,9 +73,10 @@ NexusDesk/
 │   ├── httpserver/           # 已实现 Gin 健康检查与测试
 │   └── database/             # pgxpool 创建、启动 Ping、失败脱敏与测试
 ├── internal/auth/            # 注册/登录、JWT、可信身份中间件、/me 与测试
+├── internal/ticket/          # W03九接口、状态机、同tx事件、软删除与测试
 ├── internal/organization/    # 组织/成员事务、列表、RBAC、严格输入与测试
 ├── deploy/compose.yaml       # 本机 PostgreSQL 17
-├── migrations/               # 组织、用户、成员三条增量 Goose migration
+├── migrations/               # 六条增量Goose migration（组织/用户/成员/工单/评论/事件）
 ├── scripts/day5-smoke.py     # 独立可丢弃数据库的完整验证
 ├── scripts/week02-day2-smoke.py # W02验收；--closeout含全量测试与八步TCP演示
 ├── tests/integration/        # 显式启用的真实 schema / 注册 / 登录 / 组织 / 成员测试
@@ -178,7 +179,7 @@ for action in ("up", "status"):
 PY
 ```
 
-`-env=none` 禁止 Goose 自动重新读取默认 `.env`，这里统一使用当前终端已经加载的变量。Up 应用到当前最新版本 3，包含 organizations、users、organization_members 与 Goose 版本记录；首条组织迁移仍为版本 1，不改写历史文件。
+`-env=none` 禁止 Goose 自动重新读取默认 `.env`，这里统一使用当前终端已经加载的变量。Up应用到当前最新版本6，包含organizations/users/organization_members/tickets/ticket_comments/ticket_events和Goose版本记录；首条组织迁移仍为版本 1，不改写历史文件。
 
 查询组织表结构：
 
@@ -187,7 +188,7 @@ docker compose --env-file .env -f deploy/compose.yaml exec db \
   psql -U "$DB_USER" -d "$DB_NAME" -c '\d organizations'
 ```
 
-Down 每次撤销最新一条迁移：当前从 3 开始会先删除成员表，再向下回滚才涉及用户和组织表。所有 Down 都可能丢失对应表数据；回滚实验只在烟测创建的可丢弃测试库执行，不在已有开发数据上自动运行。
+Down 每次撤销最新一条迁移：当前从6开始依次撤销事件/评论/工单，再向下才涉及成员/用户/组织表。所有 Down 都可能丢失对应表数据；回滚实验只在烟测创建的可丢弃测试库执行，不在已有开发数据上自动运行。
 
 ### 3. 启动 Go API
 
@@ -233,7 +234,7 @@ docker compose --env-file .env -f deploy/compose.yaml down
 
 ### Day 3 注册演示
 
-先按前面的步骤应用到版本 3 并启动 API。以下仅使用虚构账号与示例密码，作为本地演示输入：
+先按前面的步骤应用到当前版本6（认证至少需3）并启动API。以下仅使用虚构账号与示例密码，作为本地演示输入：
 
 ```bash
 curl -i http://127.0.0.1:8080/api/v1/auth/register \
@@ -399,4 +400,21 @@ Day 7 已在不含真实 `.env`、`.git` 和生成缓存的新项目目录中执
 - [第一周源码基线校验清单（W02 已有增量修改）](docs/weekly/evidence/week01-source-baseline.json)
 - [第一周详细开发手册](项目开发文件/每周开发手册/04_NexusDesk_第一周详细开发手册.md)
 
-下一步：按 [第二周记录](docs/weekly/week02.md) 阅读Day7交接与参考回答，复习后按第三周手册实现工单事务及对象级权限。实现与工程验证由 AI 按开发者委托完成，不代替个人理解记录。
+下一步：按 [第二周记录](docs/weekly/week02.md) 阅读[第三周回答](docs/weekly/week03-answers.md)和[W04交接](docs/weekly/week03.md)，再实现数据库原子claim与Vue联调。实现与工程验证由 AI 按开发者委托完成，不代替个人理解记录。
+
+
+## W03 当前运行与维护
+
+[工单设计](docs/ticket-design.md) · [API](docs/api/ticket.md) · [状态机](docs/ticket-state-machine.md) · [T01～T26](docs/testing/ticket-test-matrix.md) · [演示](docs/weekly/week03-demo.md) · [参考回答](docs/weekly/week03-answers.md)。九个端点统一为/api/v1/organizations/:orgID/tickets，要求现有Bearer身份；当前本组织active member/admin均可读，member仅编辑本人OPEN，admin可编辑/指派OPEN及软删除。
+
+完整隔离验收：
+
+```bash
+python3 scripts/week03-smoke.py
+```
+
+默认Go检查8包，顶层65通过、8个数据库入口跳过；最终新目录真实库顶层73通过、无失败/跳过。单独-tags=integration不会自动启用环境开关，不作为真实DB已执行的证据。最新结果见[统计](docs/weekly/evidence/week03-test-summary.json)。W02 --closeout仍固定迁移3，W1仍固定1，W03模式升6；脚本均不加载真实.env，只清理自己的测试资源。
+
+PATCH/transition必须用详情中的expected_version，旧版本409。JSON严格64KiB，title/body/comment有长度/Unicode限制，PATCH不能写status。CLOSED不可评论，评论不加工单version但有事件；软删后普通详情/评论/事件和写入均404。重复POST无请求级幂等，claim留W04，当前仅本地回环演示。
+
+每次小改跑相关包测试，提交前race/vet/build/diff；结构变化追加迁移，不改已执行的00001～00006；接口与权限变化同步契约和测试，进展记week03及后续周。真实.env仍由开发者本地维护，源码/测试不代替数据库备份或远程Git保存。

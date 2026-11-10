@@ -1,0 +1,4 @@
+# github.com/pengfeifei6/NexusDesk/internal/ticket [github.com/pengfeifei6/NexusDesk/internal/ticket.test]
+internal/ticket/handler_test.go:19: undefined: NewHandler
+FAIL	github.com/pengfeifei6/NexusDesk/internal/ticket [build failed]
+FAIL

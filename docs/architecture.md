@@ -4,13 +4,13 @@
 - 日期：2026-11-10（W02 Day 1 增量更新）
 - 用途：第一周 Day 2 架构设计产出。
 - 依据：[需求说明](requirements.md)、[原始项目设计](../项目开发文件/01_NexusDesk_完整项目设计文档.md)。
-- 状态：由 AI 按开发者要求整理；W1 基础与 W02 Day 6注册/登录、密码/JWT、可信身份、组织事务/列表、成员读取/添加与组织RBAC已实现验证，工单和角色修改仍是设计，实际证据见周报。
+- 状态：由 AI 按开发者要求整理；W1/W2基础与W03工单九接口、状态机、软删除和同tx事件已实现验证；claim、前端和角色修改仍待后续，实际证据见周报。
 
 > 阅读顺序建议：先看第 1～4 节理解系统与分层，再看第 5～7 节理解权限、事务和启动。除明确标记已实现的内容外，文中的目录、流程和测试均为设计；运行证据以周报为准。
 
 W02 Day 1 已形成 [认证设计](auth-design.md)、[权限矩阵](authorization-matrix.md)、[API 契约](api/auth-organization.md) 与 [ADR-0002](decisions/0002-auth-security.md)。本周只落地 admin/member、active/disabled；support、角色变更与下面的工单并发锁方案均为后续设计，不是本周已实现能力。
 
-W02 Day 2 已添加 users 与 organization_members 增量迁移，并在专用测试库验证；[Repository 契约](repository-contracts.md) 定义了八个方法。Day 3 落实三个用户存储方法与注册，Day 4 增加 LoginService/Handler、TokenManager 与四个 JWT 配置。启动入口注入同一个 PasswordHasher、预建 dummy hash；Token 不携带角色。Day 5 已接通 RequireUser 与 /me，落实组织创建和本人列表两个存储方法，Day 6已落实成员三方法与MemberService/Handler/policy。组织创建采用 Service 定义原子动作、专用 Repository 方法内部持有同一 tx 的方式；后续工单跨仓储事务再按第 6 节设计实现。
+W02 Day 2 已添加 users 与 organization_members 增量迁移，并在专用测试库验证；[Repository 契约](repository-contracts.md) 定义了八个方法。Day 3 落实三个用户存储方法与注册，Day 4 增加 LoginService/Handler、TokenManager 与四个 JWT 配置。启动入口注入同一个 PasswordHasher、预建 dummy hash；Token 不携带角色。Day 5 已接通 RequireUser 与 /me，落实组织创建和本人列表两个存储方法，Day 6已落实成员三方法与MemberService/Handler/policy。组织创建采用 Service 定义原子动作、专用 Repository 方法内部持有同一 tx 的方式；W03工单已按第6节由Service显式管理小事务接口，Repository只执行SQL。
 
 ## 1. 架构目标与阶段边界
 
@@ -121,20 +121,20 @@ Day 2 仅新增设计文档。目录表中的 Go 文件、Compose 和 migration 
 
 ## 5. 身份与组织权限
 
-本周七个 API 的授权使用专门的 [W02 权限矩阵](authorization-matrix.md)：active member/admin 都可读成员列表，添加只允许 active admin；不提供角色变更。下表是后续工单角色规划，不扩大本周角色取值。
+本周七个 API 的授权使用专门的 [W02 权限矩阵](authorization-matrix.md)：active member/admin 都可读成员列表，添加只允许 active admin；不提供角色变更。下表按W03更新，support仍不是允许值。
 
 授权依次处理三件事：用户身份是否有效、是否为当前组织有效成员、是否有权操作目标工单。
 
 | 身份或角色 | 工单可见范围 | 关键业务限制 |
 | --- | --- | --- |
 | 未登录 | 无 | 业务接口返回 `401` |
-| `member` | 当前组织内自己创建的工单 | 不能领取，不能解决其他人的工单 |
-| `support` | 当前组织全部工单 | 只能解决自己领取且仍处于处理中的工单 |
-| `admin` | 当前组织全部工单 | 管理角色、关闭与重开；P0 不兼任支持人员 |
+| `member` | 本组织全部未删除工单/评论/事件 | 仅编辑本人OPEN，active assignee可启动/解决，无claim |
+| `support` | 尚无此角色取值 | 未来扩展需增量迁移 |
+| `admin` | 本组织全部未删除工单/评论/事件 | 编辑/指派OPEN、按状态机操作、软删除；无角色修改API |
 
 角色来自 `organization_members`，不使用前端字段或旧凭据中的角色作为唯一事实来源。有效成员状态也需要检查。
 
-Repository 的工单查询必须限定 `org_id`，普通用户查询还需限定 `creator_id`。评论和事件必须同时匹配当前组织与目标工单，禁止通过子资源 ID 绕过工单授权。
+W03工单查询必须限定org_id和deleted_at IS NULL，所有active成员可读；creator_id只用于member编辑OPEN的对象策略。评论和事件必须同时匹配当前组织与目标工单，禁止通过子资源 ID 绕过工单授权。
 
 错误语义遵循需求稿：
 

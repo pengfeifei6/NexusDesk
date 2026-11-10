@@ -1,0 +1,61 @@
+{
+  "recorded_date": "2026-11-10",
+  "timezone": "Asia/Shanghai",
+  "default_race_suite": {
+    "packages_passed": 8,
+    "top_level": {
+      "pass": 65,
+      "fail": 0,
+      "skip": 8
+    },
+    "all_test_nodes": {
+      "pass": 373,
+      "fail": 0,
+      "skip": 8
+    },
+    "skipped_tests": [
+      "TestWeek02Login",
+      "TestWeek02Members",
+      "TestWeek02Organizations",
+      "TestWeek02Registration",
+      "TestWeek02Schema",
+      "TestWeek03Schema",
+      "TestWeek03Tickets",
+      "TestOpenPostgresIntegration"
+    ]
+  },
+  "isolated_postgres_race_suite": {
+    "packages_passed": 8,
+    "top_level": {
+      "pass": 73,
+      "fail": 0,
+      "skip": 0
+    },
+    "all_test_nodes": {
+      "pass": 458,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "default_race_exit": 0,
+  "clean_reproduction_exit": 0,
+  "week02_regression_exit": 0,
+  "week01_regression_exit": 0,
+  "ticket_fuzz": {
+    "executions": 13117,
+    "exit": 0
+  },
+  "auth_fuzz": {
+    "executions": 19275,
+    "exit": 0
+  },
+  "demo": [
+    "1: create/detail/initial event and scoped filtered list",
+    "2: admin update and assignment, two audited changes",
+    "3: Bob starts/comments/resolves, admin closes, CLOSED reopen rejected",
+    "4: organization B visitor cannot read/write A ticket or children",
+    "5: soft delete 204, ordinary parent/children hidden, database audit retained",
+    "6: real event failure rolls back state/version/comment; restored database usable"
+  ],
+  "note": "Top-level excludes duplicate subtests. Standalone -tags=integration also passes with DB gates skipped, not counted as real DB verification. Actual SQL/race/TCP runs in owned fresh snapshot. No claim/support/frontend/idempotency-key deployment."
+}

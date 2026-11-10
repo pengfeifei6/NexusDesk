@@ -1,0 +1,27 @@
+PASS isolated PostgreSQL 17 healthy; project=nexusdesk-w02d2-38830c483924
+2026/11/10 21:28:17 OK   00001_create_organizations.sql (2.26ms)
+2026/11/10 21:28:17 goose: successfully migrated database to version: 1
+2026/11/10 21:28:17 OK   00002_create_users.sql (6.28ms)
+2026/11/10 21:28:17 OK   00003_create_organization_members.sql (4.86ms)
+2026/11/10 21:28:17 goose: successfully migrated database to version: 3
+2026/11/10 21:28:17     Applied At                  Migration
+2026/11/10 21:28:17     =======================================
+2026/11/10 21:28:17     Tue Nov 10 13:28:17 2026 -- 00001_create_organizations.sql
+2026/11/10 21:28:17     Tue Nov 10 13:28:17 2026 -- 00002_create_users.sql
+2026/11/10 21:28:17     Tue Nov 10 13:28:17 2026 -- 00003_create_organization_members.sql
+2026/11/10 21:28:18 goose: no migrations to run. current version: 3
+PASS W1 to W02 upgrade preserves existing organization; repeated Up is stable
+2026/11/10 21:28:18 OK   00003_create_organization_members.sql (8.23ms)
+2026/11/10 21:28:18 OK   00002_create_users.sql (6.16ms)
+2026/11/10 21:28:19 OK   00002_create_users.sql (5.4ms)
+2026/11/10 21:28:19 OK   00003_create_organization_members.sql (3.61ms)
+2026/11/10 21:28:19 goose: successfully migrated database to version: 3
+PASS reverse Down 3 to 2 to 1, then Up to 3; W1 data retained
+=== RUN   TestWeek03Schema
+    ticket_schema_test.go:45: W03 schema missing
+--- FAIL: TestWeek03Schema (0.01s)
+FAIL
+FAIL	github.com/pengfeifei6/NexusDesk/tests/integration	0.024s
+FAIL
+
+CLEANUP only this run's test containers and labeled volume

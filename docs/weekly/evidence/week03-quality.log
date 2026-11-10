@@ -1,0 +1,24 @@
+COMMAND: go test -race -count=1 -json ./...
+OUTPUT: week03-go-test.jsonl
+EXIT: 0
+
+COMMAND: go test -tags=integration -count=1 ./tests/integration/...
+ok  	github.com/pengfeifei6/NexusDesk/tests/integration	0.007s
+EXIT: 0
+
+COMMAND: go vet ./...
+EXIT: 0
+
+COMMAND: go build ./...
+EXIT: 0
+
+COMMAND: go mod verify
+all modules verified
+EXIT: 0
+
+COMMAND: gofmt -l cmd internal tests
+EXIT: 0
+
+COMMAND: git diff --check
+EXIT: 0
+

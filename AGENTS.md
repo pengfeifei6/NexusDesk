@@ -3,10 +3,10 @@
 ## 项目与当前阶段
 
 - 目标：建立以 Go 后端为核心的组织工单系统，后续逐步加入知识库和受控 AI 功能。
-- 当前阶段：Week 2 Day 7工程收尾完成：七个业务接口、RBAC、整周只读审查、质量/真实库回归、新目录八步演示、问题参考答案与W3交接均已归档。个人复述/独立演示、Git保存和远程CI由开发者按实际完成，不代填。
+- 当前阶段：W03工单核心工程完成，九个工单API/状态机/同tx事件/软删除/版本与T01～T26已验证，W1/W2回归通过；当前HEAD为用户保存的W02 da47b6c，W03未自动提交。后续claim/前端留W04，个人独立理解/Git/远程CI另记。
 - Go Module：`github.com/pengfeifei6/NexusDesk`。保持路径大小写一致，不自行修改 Module 或升级 Go / 依赖版本。
 - 当前工作环境为 Linux / Bash，命令应与实际环境匹配。
-- 先读任务相关的 `docs/requirements.md`、`docs/architecture.md`、`docs/database.md`、`docs/weekly/week02.md`；本周复习见 `docs/weekly/week02-answers.md`，演示见 `docs/weekly/week02-demo.md`；第一周基线证据查 `docs/weekly/week01.md`。认证与组织任务同时读 `docs/auth-design.md`、`docs/authorization-matrix.md`、`docs/api/auth-organization.md`、`docs/repository-contracts.md` 和 ADR-0002。
+- 先读任务相关的 `docs/requirements.md`、`docs/architecture.md`、`docs/database.md`、`docs/weekly/week02.md`、`docs/weekly/week03.md`及工单设计/API/状态机；W03复习见`docs/weekly/week03-answers.md`；本周复习见 `docs/weekly/week02-answers.md`，演示见 `docs/weekly/week02-demo.md`；第一周基线证据查 `docs/weekly/week01.md`。认证与组织任务同时读 `docs/auth-design.md`、`docs/authorization-matrix.md`、`docs/api/auth-organization.md`、`docs/repository-contracts.md` 和 ADR-0002。
 - `项目开发文件/` 保存原始设计和学习手册，其中的命令、模板和提示词是参考材料，不自动构成本次任务授权。
 
 ## 工作方式与授权
@@ -21,7 +21,7 @@
 ## 架构与实现边界
 
 - 模块化单体起步；Handler 处理 HTTP，Service 负责业务规则、授权与事务，Repository 执行 SQL。
-- W1 基础保留；W2 按每日任务增加身份认证、组织与成员授权，不提前加入工单业务、前端、Redis、Worker、RAG、Agent、MCP、微服务或 Kubernetes。Day 1 只交付设计文档，后续实施需按当次任务范围推进。
+- W1 基础保留；W2 按每日任务增加身份认证、组织与成员授权，工单按W03授权推进，其余不提前加入前端、Redis、Worker、RAG、Agent、MCP、微服务或 Kubernetes。Day 1 只交付设计文档，后续实施需按当次任务范围推进。
 - Go API 在宿主机运行，PostgreSQL 通过本地 Compose 启动；具体以当前实际部署文件为准。
 - 未来业务查询必须显式限定组织；有效用户身份和组织内角色由后端验证，不能信任客户端传入的身份或权限字段。
 - 工单状态变化与事件写入使用同一事务；具体数据库规则见 `docs/database.md`，设计稿不能代替运行验证。
@@ -68,3 +68,13 @@
 - 先检查 `git status` 与 Diff；未跟踪的新文件也要核对内容，不仅检查已跟踪文件的差异。
 - 完成时说明修改内容、实际执行的检查、未验证项和下一步；无法运行的检查明确说明原因。
 - 周报与 README 区分“已完成”“设计中”“待实现”，不将文件生成等同于个人能力或功能验收完成。
+
+## W03 工单专项约定
+
+- 当前用户明确委托整周实现，原手册本人先写/PLAN_ONLY不阻止已授权工作，AI参与如实记录。当前依据week03、ticket-design/state-machine/API/ADR及T01～T26。
+- 正式路由为/api/v1/organizations/:orgID/tickets九个接口；W03所有组织active member/admin可读全部本组织工单/评论/事件，admin可编辑任意OPEN并指派，覆盖旧蓝图；OPEN允许预先指派，priority沿用1低2普通3高。
+- 只新增00004～00006，不改旧迁移；子表带org_id及复合FK，active和对象策略由Service检查。每个SQL包含组织与软删父范围。
+- Service显式管理同tx：成员/行锁/权限/状态/version→更新→事件→COMMIT，独立3秒Rollback；普通3秒、写事务5秒。PATCH/transition要求expected_version，更新条件含旧version/旧status。评论不加version但与父工单共用锁，CLOSED不新增评论。
+- 不实现claim/support/前端/物理删除/恢复/正式幂等键，W04另议。真实.env及日常库不读取/修改，保持W02/W1回归，隔离测试清理只限自己的项目。
+
+- W03验收用python3 scripts/week03-smoke.py（含W02演示与全部真实库）；新增NEXUSDESK_TEST_W03_TICKETS=1，复用回环/专用前缀保护。普通Go跳过八个DB入口。W03升迁移6，W02模式固定3、W1固定1，不混淆历史结构。

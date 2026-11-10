@@ -1,0 +1,5 @@
+--- FAIL: TestStateMachineAllEdges (0.00s)
+    state_machine_test.go:39: edge OPEN/IN_PROGRESS role member: permission denied want state or version conflict
+FAIL
+FAIL	github.com/pengfeifei6/NexusDesk/internal/ticket	0.007s
+FAIL

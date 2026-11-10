@@ -1,0 +1,9 @@
+# github.com/pengfeifei6/NexusDesk/internal/ticket [github.com/pengfeifei6/NexusDesk/internal/ticket.test]
+internal/ticket/service_test.go:16:42: undefined: Transaction
+internal/ticket/service_test.go:32:57: undefined: NewService
+internal/ticket/service_test.go:34:29: undefined: NewService
+internal/ticket/service_test.go:44:76: undefined: NewService
+internal/ticket/service_test.go:48:101: undefined: NewService
+internal/ticket/service_test.go:52:53: undefined: NewService
+FAIL	github.com/pengfeifei6/NexusDesk/internal/ticket [build failed]
+FAIL

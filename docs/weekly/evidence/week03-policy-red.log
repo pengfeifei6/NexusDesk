@@ -1,0 +1,14 @@
+# github.com/pengfeifei6/NexusDesk/internal/ticket [github.com/pengfeifei6/NexusDesk/internal/ticket.test]
+internal/ticket/state_machine_test.go:10:12: undefined: Status
+internal/ticket/state_machine_test.go:10:19: undefined: Open
+internal/ticket/state_machine_test.go:10:24: undefined: InProgress
+internal/ticket/state_machine_test.go:10:35: undefined: Resolved
+internal/ticket/state_machine_test.go:10:44: undefined: Closed
+internal/ticket/state_machine_test.go:11:16: undefined: Status
+internal/ticket/state_machine_test.go:11:29: undefined: Open
+internal/ticket/state_machine_test.go:11:34: undefined: InProgress
+internal/ticket/state_machine_test.go:11:63: undefined: Resolved
+internal/ticket/state_machine_test.go:11:88: undefined: Closed
+internal/ticket/state_machine_test.go:11:88: too many errors
+FAIL	github.com/pengfeifei6/NexusDesk/internal/ticket [build failed]
+FAIL

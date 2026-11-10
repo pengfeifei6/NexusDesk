@@ -1,0 +1,5 @@
+# github.com/pengfeifei6/NexusDesk/tests/integration [github.com/pengfeifei6/NexusDesk/tests/integration.test]
+tests/integration/ticket_test.go:27:105: undefined: ticket.NewPostgresRepository
+tests/integration/ticket_test.go:110:41: undefined: ticket.NewPostgresRepository
+FAIL	github.com/pengfeifei6/NexusDesk/tests/integration [build failed]
+FAIL

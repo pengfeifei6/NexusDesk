@@ -1,0 +1,8 @@
+ok  	github.com/pengfeifei6/NexusDesk/cmd/api	0.020s
+ok  	github.com/pengfeifei6/NexusDesk/internal/auth	(cached)
+ok  	github.com/pengfeifei6/NexusDesk/internal/organization	(cached)
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/config	(cached)
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/database	(cached)
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/httpserver	(cached)
+ok  	github.com/pengfeifei6/NexusDesk/internal/ticket	(cached)
+ok  	github.com/pengfeifei6/NexusDesk/tests/integration	0.016s

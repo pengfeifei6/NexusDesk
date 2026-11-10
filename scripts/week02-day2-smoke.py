@@ -35,9 +35,15 @@ def main():
                         help="also run W02 Day 6 member/RBAC tests (includes organizations)")
     parser.add_argument("--closeout", action="store_true",
                         help="run full W02 suite and ordered Day 7 Alice/Bob/expired-token demo")
+    parser.add_argument("--tickets", action="store_true", help="run W03 schema/business/TCP suite (includes W02 closeout)")
+    parser.add_argument("--ticket-schema-baseline", action="store_true", help="expected failure: W03 schema checks on W02 version 3")
     options = parser.parse_args()
+    if options.ticket_schema_baseline:
+        options.tickets = True
+    if options.tickets:
+        options.closeout = True
     baseline = options.baseline
-    if baseline and (options.registration or options.login or options.organizations or options.members or options.closeout):
+    if baseline and (options.registration or options.login or options.organizations or options.members or options.closeout or options.tickets):
         parser.error("--baseline cannot be combined with registration, login or organization mode")
     if options.closeout:
         options.members = True
@@ -74,6 +80,8 @@ def main():
         env["NEXUSDESK_TEST_W02_ORGANIZATIONS"] = "1"
     if options.members:
         env["NEXUSDESK_TEST_W02_MEMBERS"] = "1"
+    if options.tickets:
+        env["NEXUSDESK_TEST_W03_TICKETS"] = "1"
     connection_url = ("postgres://" + env["DB_USER"] + ":"
                       + urllib.parse.quote(password, safe="") + "@127.0.0.1:"
                       + str(port) + "/" + env["DB_NAME"] + "?sslmode=disable")
@@ -210,6 +218,9 @@ def main():
                             assert response.headers.get("Cache-Control") == "no-store"
                             if expected_status == 401:
                                 assert response.headers.get("WWW-Authenticate") == "Bearer"
+                            if expected_status == 204:
+                                assert response.read() == b""
+                                return None
                             result = json.load(response)
                             assert token not in json.dumps(result) and fixture_password not in json.dumps(result)
                             return result
@@ -273,6 +284,58 @@ def main():
                         protected_request("POST", member_path, {"user_id": bob["id"], "role": "member"}, expected_status=409)
                         assert sql("SELECT role,status FROM organization_members WHERE org_id=" + str(org["id"]) + " AND user_id=" + str(bob["id"])) == "member|disabled"
                         print("PASS real TCP Alice/Bob member read/add, cross-org 404, member 403, admin 201, duplicate 409, disabled old-token 404 and other-org access retained", flush=True)
+                        if options.tickets:
+                            sql("UPDATE organization_members SET status='active' WHERE org_id=" + str(org["id"]) + " AND user_id=" + str(bob["id"]))
+                            tickets_path = "/api/v1/organizations/" + str(org["id"]) + "/tickets"
+                            made = protected_request("POST", tickets_path, {"title": "Process W03 ticket", "body": "Fictional body", "priority": 2}, expected_status=201)["data"]
+                            ticket_path = tickets_path + "/" + str(made["id"])
+                            assert made["status"] == "OPEN" and made["version"] == 0
+                            assert protected_request("GET", ticket_path)["data"]["id"] == made["id"]
+                            assert len(protected_request("GET", ticket_path + "/events")["data"]["items"]) == 1
+                            print("W03 DEMO 1: create/detail/initial event and scoped filtered list", flush=True)
+                            assert protected_request("GET", tickets_path + "?status=OPEN&priority=2")["data"]["items"][0]["id"] == made["id"]
+                            assert protected_request("PATCH", ticket_path, {"expected_version": 0, "priority": 3})["data"]["version"] == 1
+                            assert protected_request("PATCH", ticket_path, {"expected_version": 1, "assignee_id": bob["id"]})["data"]["version"] == 2
+                            assert len(protected_request("GET", ticket_path + "/events")["data"]["items"]) == 3
+                            print("W03 DEMO 2: admin update and assignment, two audited changes", flush=True)
+                            protected_request("POST", ticket_path + "/transition", {"expected_version": 2, "to_status": "IN_PROGRESS"}, credential=bob_token)
+                            protected_request("POST", ticket_path + "/comments", {"content": "Bob process comment"}, credential=bob_token, expected_status=201)
+                            assert protected_request("GET", ticket_path)["data"]["version"] == 3
+                            protected_request("POST", ticket_path + "/transition", {"expected_version": 3, "to_status": "RESOLVED"}, credential=bob_token)
+                            protected_request("POST", ticket_path + "/transition", {"expected_version": 4, "to_status": "CLOSED"})
+                            protected_request("POST", ticket_path + "/transition", {"expected_version": 5, "to_status": "OPEN"}, expected_status=409)
+                            print("W03 DEMO 3: Bob starts/comments/resolves, admin closes, CLOSED reopen rejected", flush=True)
+                            visitor = auth_request("/api/v1/auth/register", {"email": "w03-visitor@example.test", "display_name": "Visitor", "password": fixture_password}, 201)["data"]
+                            visitor_token = auth_request("/api/v1/auth/login", {"email": visitor["email"], "password": fixture_password}, 200)["data"]["access_token"]
+                            protected_request("POST", bob_path, {"user_id": visitor["id"], "role": "member"}, credential=bob_token, expected_status=201)
+                            for suffix in ("", "/comments", "/events"):
+                                protected_request("GET", ticket_path + suffix, credential=visitor_token, expected_status=404)
+                            protected_request("POST", tickets_path, {"title": "forged", "body": "B"}, credential=visitor_token, expected_status=404)
+                            protected_request("PATCH", ticket_path, {"expected_version": 5, "title": "forged"}, credential=visitor_token, expected_status=404)
+                            print("W03 DEMO 4: organization B visitor cannot read/write A ticket or children", flush=True)
+                            deleted = protected_request("POST", tickets_path, {"title": "Process delete", "body": "B"}, expected_status=201)["data"]
+                            deleted_path = tickets_path + "/" + str(deleted["id"])
+                            protected_request("DELETE", deleted_path, expected_status=204)
+                            for suffix in ("", "/comments", "/events"):
+                                protected_request("GET", deleted_path + suffix, expected_status=404)
+                            assert sql("SELECT count(*) FROM ticket_events WHERE ticket_id=" + str(deleted["id"]) + " AND event_type='TICKET_DELETED'") == "1"
+                            print("W03 DEMO 5: soft delete 204, ordinary parent/children hidden, database audit retained", flush=True)
+                            rollback = protected_request("POST", tickets_path, {"title": "Process rollback", "body": "B"}, expected_status=201)["data"]
+                            rollback_path = tickets_path + "/" + str(rollback["id"])
+                            protected_request("PATCH", rollback_path, {"expected_version": 0, "assignee_id": bob["id"]})
+                            sql("CREATE FUNCTION nexusdesk_w03_process_fail() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN RAISE EXCEPTION 'controlled fixture'; END $$")
+                            sql("CREATE TRIGGER nexusdesk_w03_process_failure BEFORE INSERT ON ticket_events FOR EACH ROW EXECUTE FUNCTION nexusdesk_w03_process_fail()")
+                            try:
+                                protected_request("POST", rollback_path + "/transition", {"expected_version": 1, "to_status": "IN_PROGRESS"}, credential=bob_token, expected_status=500)
+                                protected_request("POST", rollback_path + "/comments", {"content": "must roll back"}, credential=bob_token, expected_status=500)
+                            finally:
+                                sql("DROP TRIGGER nexusdesk_w03_process_failure ON ticket_events")
+                                sql("DROP FUNCTION nexusdesk_w03_process_fail()")
+                            state = protected_request("GET", rollback_path)["data"]
+                            assert state["status"] == "OPEN" and state["version"] == 1
+                            assert protected_request("GET", rollback_path + "/comments")["data"]["items"] == []
+                            print("W03 DEMO 6: real event failure rolls back state/version/comment; restored database usable", flush=True)
+
                 process.send_signal(signal.SIGTERM)
                 stdout, stderr = process.communicate(timeout=8)
                 assert process.returncode == 0
@@ -328,6 +391,24 @@ def main():
         migrate("up-to", "3")
         assert version() == "3"
         print("PASS reverse Down 3 to 2 to 1, then Up to 3; W1 data retained", flush=True)
+        if options.tickets:
+            if options.ticket_schema_baseline:
+                result = run(["go", "test", "-count=1", "-v", "./tests/integration", "-run", "^TestWeek03Schema$"], check=False)
+                print(redacted(result.stdout + result.stderr), flush=True)
+                if result.returncode == 0 or "W03 schema missing" not in result.stdout + result.stderr:
+                    raise RuntimeError("W03 baseline did not fail for missing tables")
+                return result.returncode
+            migrate("up-to", "6")
+            migrate("status")
+            assert version() == "6"
+            migrate("up-to", "6")
+            for expected in ("5", "4", "3"):
+                migrate("down")
+                assert version() == expected
+            assert sql("SELECT count(*) FROM organizations WHERE name='W1 upgrade sentinel'") == "1"
+            migrate("up-to", "6")
+            assert version() == "6"
+            print("PASS W03 3 -> 6, repeated Up, reverse Down to 3, Up to 6; old organization retained", flush=True)
         result = run(["go", "test", "-race", "-count=1", "-v", "./..."], timeout=240)
         print(redacted(result.stdout + result.stderr), flush=True)
         print("PASS full race suite including real W1 connection and W02 schema tests", flush=True)

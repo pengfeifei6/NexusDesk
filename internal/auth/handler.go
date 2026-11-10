@@ -54,6 +54,24 @@ func ReadObjectFields(c *gin.Context, names ...string) (map[string]json.RawMessa
 }
 
 func decodeObjectFields(body []byte, fields ...string) (map[string]json.RawMessage, error) {
+	return decodeSelectedFields(body, fields, fields)
+}
+
+// ReadJSONFields shares strict Unicode/object validation with optional typed fields.
+func ReadJSONFields(c *gin.Context, limit int64, allowed, required []string) (map[string]json.RawMessage, bool) {
+	body, ok := readBoundedBody(c, limit)
+	if !ok {
+		return nil, false
+	}
+	fields, err := decodeSelectedFields(body, allowed, required)
+	if err != nil {
+		apiError(c, 400, "INVALID_REQUEST", "invalid request")
+		return nil, false
+	}
+	return fields, true
+}
+
+func decodeSelectedFields(body []byte, fields, required []string) (map[string]json.RawMessage, error) {
 	if !validJSONUnicode(body) {
 		return nil, ErrInvalidRequest
 	}
@@ -83,8 +101,13 @@ func decodeObjectFields(body []byte, fields ...string) (map[string]json.RawMessa
 		values[key] = value
 	}
 	end, err := decoder.Token()
-	if err != nil || end != json.Delim('}') || len(values) != len(fields) {
+	if err != nil || end != json.Delim('}') {
 		return nil, ErrInvalidRequest
+	}
+	for _, name := range required {
+		if _, ok := values[name]; !ok {
+			return nil, ErrInvalidRequest
+		}
 	}
 	if _, err := decoder.Token(); err != io.EOF {
 		return nil, ErrInvalidRequest
@@ -116,9 +139,11 @@ func decodeRegister(body []byte) (RegisterInput, error) {
 	return RegisterInput{Email: values["email"], DisplayName: values["display_name"], Password: values["password"]}, nil
 }
 
-func readAuthBody(c *gin.Context) ([]byte, bool) {
+func readAuthBody(c *gin.Context) ([]byte, bool) { return readBoundedBody(c, maxAuthBody) }
+
+func readBoundedBody(c *gin.Context, limit int64) ([]byte, bool) {
 	c.Header("Cache-Control", "no-store")
-	if c.Request.ContentLength > maxAuthBody {
+	if c.Request.ContentLength > limit {
 		apiError(c, 413, "REQUEST_TOO_LARGE", "request body too large")
 		return nil, false
 	}
@@ -127,8 +152,8 @@ func readAuthBody(c *gin.Context) ([]byte, bool) {
 		apiError(c, 415, "UNSUPPORTED_MEDIA_TYPE", "application/json required")
 		return nil, false
 	}
-	body, err := io.ReadAll(io.LimitReader(c.Request.Body, maxAuthBody+1))
-	if len(body) > maxAuthBody {
+	body, err := io.ReadAll(io.LimitReader(c.Request.Body, limit+1))
+	if int64(len(body)) > limit {
 		apiError(c, 413, "REQUEST_TOO_LARGE", "request body too large")
 		return nil, false
 	}

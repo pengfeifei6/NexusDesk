@@ -29,6 +29,15 @@ func memberWriteError(ctx context.Context, err error) error {
 }
 
 func (r *PostgresRepository) FindActiveMembership(ctx context.Context, org, user int64) (Membership, error) {
+	return FindActiveMembershipWith(ctx, r.pool, org, user)
+}
+
+// MembershipQuerier lets an existing pool or transaction reuse the same scoped lookup.
+type MembershipQuerier interface {
+	QueryRow(context.Context, string, ...any) pgx.Row
+}
+
+func FindActiveMembershipWith(ctx context.Context, q MembershipQuerier, org, user int64) (Membership, error) {
 	if err := ctx.Err(); err != nil {
 		return Membership{}, err
 	}
@@ -38,7 +47,7 @@ func (r *PostgresRepository) FindActiveMembership(ctx context.Context, org, user
 	ctx, cancel := context.WithTimeout(ctx, 3*time.Second)
 	defer cancel()
 	var m Membership
-	err := r.pool.QueryRow(ctx, `SELECT org_id,user_id,role,status,created_at FROM organization_members WHERE org_id=$1 AND user_id=$2 AND status='active'`, org, user).Scan(&m.OrgID, &m.UserID, &m.Role, &m.Status, &m.CreatedAt)
+	err := q.QueryRow(ctx, `SELECT org_id,user_id,role,status,created_at FROM organization_members WHERE org_id=$1 AND user_id=$2 AND status='active'`, org, user).Scan(&m.OrgID, &m.UserID, &m.Role, &m.Status, &m.CreatedAt)
 	if err != nil {
 		if ctx.Err() == nil && errors.Is(err, pgx.ErrNoRows) {
 			return Membership{}, ErrNotFound

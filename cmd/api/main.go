@@ -18,6 +18,7 @@ import (
 	"github.com/pengfeifei6/NexusDesk/internal/platform/config"
 	"github.com/pengfeifei6/NexusDesk/internal/platform/database"
 	"github.com/pengfeifei6/NexusDesk/internal/platform/httpserver"
+	"github.com/pengfeifei6/NexusDesk/internal/ticket"
 )
 
 func main() {
@@ -61,6 +62,7 @@ func run(ctx context.Context) error {
 		me.RegisterRoutes(protected)
 		organizations.RegisterRoutes(protected)
 		organization.NewMemberHandler(organization.NewMemberService(organization.NewPostgresRepository(pool))).RegisterRoutes(protected)
+		ticket.NewHandler(ticket.NewService(ticket.NewPostgresRepository(pool), organization.NewPostgresRepository(pool))).RegisterRoutes(protected)
 	}))
 }
 
