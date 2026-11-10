@@ -1,0 +1,78 @@
+{
+  "recorded_date": "2026-11-09",
+  "timezone": "Asia/Shanghai",
+  "kind": "uncommitted Week 1 source/configuration snapshot",
+  "git_head": "28bee06be8ae96e1c73dd8d6aabcad8972d7aa2d",
+  "source_manifest_sha256": "da004bbcec73f7520ad14b8bd1ee6db3bfc529691c68ba151ff5e45290892307",
+  "note": "Does not include real .env, generated caches, evidence, or human documentation. Does not claim a new commit or tag.",
+  "files": [
+    {
+      "path": ".env.example",
+      "sha256": "8b86a70c0bada9f3e82646f5c719e64e62aa2729f35dd04b0f5e78fae0bd982b"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "337426b4d9666e20961aa8f27bf82d4e8ae7d1b4568834a67858f1cd89f92b6c"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "cc7fe433335ee457d6ea6ea87be9fa0f9d41408ede7f66109dd40c2bd799be7f"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "bc1452464679182ade7d75cf13bde2f180c90e14754581649c838f39a28376a6"
+    },
+    {
+      "path": "cmd/api/main.go",
+      "sha256": "c386c387f111309cf2678d0987e4e5886cc313b9c6085f09087bd6f2c42a5ead"
+    },
+    {
+      "path": "cmd/api/main_test.go",
+      "sha256": "5af42f94e42a37fdcb87499e9b18aba700223364cccddccd87423221a993d756"
+    },
+    {
+      "path": "deploy/compose.yaml",
+      "sha256": "6a61b690453971bd10a1ef37562db43d6a2f32d3547f365a159bdc5133ce08dd"
+    },
+    {
+      "path": "go.mod",
+      "sha256": "ec6ac4a4856a89f3a4a01df2424c737f5db40de3f55caee540c722f521448363"
+    },
+    {
+      "path": "go.sum",
+      "sha256": "3f3277164424bc96eaf101debe34e873afcbbb18f6e3cc3b4766f750aa396566"
+    },
+    {
+      "path": "internal/platform/config/config.go",
+      "sha256": "f26caa1df04a567a4d9f008a7192385acb26793f62d4c75654e949bd826d5f0b"
+    },
+    {
+      "path": "internal/platform/config/config_test.go",
+      "sha256": "55dd7d3b1504a80bd0ccd8de127b6d7f6291c8a0b787047ddd2f7f8db8d8b576"
+    },
+    {
+      "path": "internal/platform/database/postgres.go",
+      "sha256": "7d9123350cb0abc68dd81aa04d5aac637ca7e540888c66c6fc250abea03050e5"
+    },
+    {
+      "path": "internal/platform/database/postgres_test.go",
+      "sha256": "84b5359e824fe519834b50cc79d9fe6d222a307fdeb70fecab0d969cb4502685"
+    },
+    {
+      "path": "internal/platform/httpserver/router.go",
+      "sha256": "210d11ac38b72b8b49807d373b6a40bfeedda3e51435f36e8d36e0b249874a55"
+    },
+    {
+      "path": "internal/platform/httpserver/router_test.go",
+      "sha256": "fde2eae3104e9167f3790160d13de354005844bbff67302275f4a133447c5e76"
+    },
+    {
+      "path": "migrations/00001_create_organizations.sql",
+      "sha256": "89124652aa238e36a3049c0469801f947f6d1873c2edcb87620977045aedb00b"
+    },
+    {
+      "path": "scripts/day5-smoke.py",
+      "sha256": "a64fa1e300d60c25a669dfedd9a8a299344ae7a65892546aa53a8c6f5675ce83"
+    }
+  ]
+}

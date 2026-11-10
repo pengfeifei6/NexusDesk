@@ -1,0 +1,16 @@
+$ go test -race -count=1 ./...
+ok  	github.com/pengfeifei6/NexusDesk/cmd/api	1.037s
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/config	1.030s
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/database	6.034s
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/httpserver	1.024s
+exit=0 duration_seconds=7.193
+
+$ go vet ./...
+exit=0 duration_seconds=0.215
+
+$ go build ./...
+exit=0 duration_seconds=1.079
+
+$ git diff --check
+exit=0 duration_seconds=0.011
+

@@ -1,0 +1,28 @@
+Snapshot under /var/tmp excludes real .env, .git and generated caches.
+Uses existing host tools, module cache and local postgres:17 image.
+$ go mod download
+exit=0
+$ python3 scripts/day5-smoke.py
+Docker Compose version v5.6.0
+PASS PostgreSQL container is healthy
+NAME                               IMAGE         COMMAND                  SERVICE   CREATED         STATUS                   PORTS
+nexusdesk-day5-40fb178c2c5e-db-1   postgres:17   "docker-entrypoint.s…"   db        6 seconds ago   Up 5 seconds (healthy)   127.0.0.1:53155->5432/tcp
+2026/11/09 22:59:45 OK   00001_create_organizations.sql (3.05ms)
+2026/11/09 22:59:45 goose: successfully migrated database to version: 1
+2026/11/09 22:59:45     Applied At                  Migration
+2026/11/09 22:59:45     =======================================
+2026/11/09 22:59:45     Mon Nov  9 14:59:45 2026 -- 00001_create_organizations.sql
+2026/11/09 22:59:45 OK   00001_create_organizations.sql (6.41ms)
+2026/11/09 22:59:45 OK   00001_create_organizations.sql (3.93ms)
+2026/11/09 22:59:45 goose: successfully migrated database to version: 1
+PASS Goose Up / Status / Down / Up and version 1
+2026/11/09 22:59:53 goose: no migrations to run. current version: 1
+PASS README restart preserves the volume, organizations table and migration version
+PASS full race suite including PostgreSQL integration and SQL defaults
+PASS organizations name NOT NULL constraint
+PASS database-backed API /healthz and SIGTERM exit 0
+PASS database-backed API /healthz and SIGINT exit 0
+PASS authentication / missing database / unreachable database fail before HTTP
+Cleaned up only this run's test containers and labeled volume
+
+exit=0

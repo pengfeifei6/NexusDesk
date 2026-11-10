@@ -1,0 +1,36 @@
+Snapshot excludes real .env, .git and generated caches.
+Uses existing host tools, module cache and local postgres:17 image.
+$ go mod download
+exit=0
+$ python3 scripts/day5-smoke.py
+Docker Compose version v5.6.0
+PASS PostgreSQL container is healthy
+NAME                               IMAGE         COMMAND                  SERVICE   CREATED         STATUS                   PORTS
+nexusdesk-day5-61b2ef790524-db-1   postgres:17   "docker-entrypoint.s…"   db        6 seconds ago   Up 5 seconds (healthy)   127.0.0.1:34259->5432/tcp
+2026/11/09 22:57:29 OK   00001_create_organizations.sql (3.17ms)
+2026/11/09 22:57:29 goose: successfully migrated database to version: 1
+2026/11/09 22:57:29     Applied At                  Migration
+2026/11/09 22:57:29     =======================================
+2026/11/09 22:57:29     Mon Nov  9 14:57:29 2026 -- 00001_create_organizations.sql
+2026/11/09 22:57:29 OK   00001_create_organizations.sql (5.33ms)
+2026/11/09 22:57:30 OK   00001_create_organizations.sql (5.38ms)
+2026/11/09 22:57:30 goose: successfully migrated database to version: 1
+PASS Goose Up / Status / Down / Up and version 1
+2026/11/09 22:57:37 goose: no migrations to run. current version: 1
+PASS README restart preserves the volume, organizations table and migration version
+PASS full race suite including PostgreSQL integration and SQL defaults
+PASS organizations name NOT NULL constraint
+Cleaned up only this run's test containers and labeled volume
+Traceback (most recent call last):
+  File "scripts/day5-smoke.py", line 169, in <module>
+    main()
+  File "scripts/day5-smoke.py", line 114, in main
+    command(["go", "build", "-o", binary, "./cmd/api"])
+  File "scripts/day5-smoke.py", line 62, in command
+    raise RuntimeError("command failed: " + " ".join(args)
+RuntimeError: command failed: go build -o /tmp/nexusdesk-day5-api-o2gbq8m8/api ./cmd/api
+error obtaining VCS status: exit status 128
+	Use -buildvcs=false to disable VCS stamping.
+
+
+exit=1

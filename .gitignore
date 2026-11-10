@@ -1,0 +1,36 @@
+# 本地环境配置；示例模板可以提交。
+.env
+.env.*
+!.env.example
+
+# 编译产物、测试二进制与性能采样。
+/bin/
+/build/
+/dist/
+*.exe
+*.test
+*.prof
+*.pprof
+
+# 覆盖率、日志、缓存和本地数据。
+/coverage/
+/coverage.out
+/coverage.html
+/tmp/
+/.local/
+/deploy/pgdata/
+*.log
+# 保留经过脱敏、用于交付审查的第一周验证记录。
+!/docs/weekly/evidence/*.log
+__pycache__/
+*.py[cod]
+
+# 编辑器临时文件与系统文件。
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# go.mod、go.sum、迁移和设计文档均应纳入版本管理。

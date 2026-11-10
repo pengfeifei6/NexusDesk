@@ -1,0 +1,36 @@
+name: Go checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GIN_MODE: test
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+          cache: true
+      - name: Check Go formatting
+        run: |
+          unformatted_files=$(gofmt -l cmd internal)
+          if [ -n "$unformatted_files" ]; then
+            printf '%s\n' "$unformatted_files"
+            exit 1
+          fi
+      - name: Test with race detection
+        run: go test -race -count=1 ./...
+      - name: Vet
+        run: go vet ./...
+      - name: Build
+        run: go build ./...

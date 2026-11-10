@@ -1,0 +1,15 @@
+Date: 2026-11-10; timezone: Asia/Shanghai
+Scope: W02 Day 1 documentation only; executed Python 3 static checks and git diff --check.
+PASS: 12 UTF-8 Markdown files; balanced fences; 43 consistent tables.
+PASS: 80 local file links and heading anchors resolve.
+PASS: 12 JSON examples parse.
+PASS: exactly seven W02 API method/path pairs; healthz excluded.
+PASS: two Mermaid sequence sources have declared participants and balanced alt/end; no external rendering.
+PASS: authorization error entries exist in API dictionary; current role/status vocabulary aligned.
+PASS: login Token response exception is explicit; A01-A18 remain unexecuted; plan checklist complete.
+PASS: 16 W1 source/config/dependency/migration hashes unchanged; AGENTS intentionally updated.
+PASS: git diff --check; evidence log verified trackable via git ls-files.
+Check-script correction: first attempt misread git check-ignore negation-rule status; verified ! rule and trackable list; .gitignore unchanged.
+Independent read-only design review: one P2 Token wording contradiction fixed; see docs/reviews/week02-day1-design-review.md.
+NOT RUN: Go unit/race/vet/build, PostgreSQL, migrations, auth benchmarks, JWT or API runtime tests, remote CI.
+NO ACTION: real .env read/write, key generation, dependency installation, database mutation, Git stage/commit/push.

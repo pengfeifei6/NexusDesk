@@ -1,0 +1,21 @@
+{
+  "recorded_date": "2026-11-09",
+  "timezone": "Asia/Shanghai",
+  "command": "go test -json -count=1 ./...",
+  "exit_code": 0,
+  "duration_seconds": 6.417,
+  "packages_passed": 4,
+  "top_level": {
+    "pass": 14,
+    "fail": 0,
+    "skip": 1
+  },
+  "all_test_nodes": {
+    "pass": 33,
+    "fail": 0,
+    "skip": 1
+  },
+  "skipped_tests": [
+    "TestOpenPostgresIntegration"
+  ]
+}
