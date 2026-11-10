@@ -1,0 +1,242 @@
+{
+  "recorded_date": "2026-11-10",
+  "timezone": "Asia/Shanghai",
+  "kind": "uncommitted W02 Day 6 source/config/test baseline",
+  "git_head": "923ae934f749c9d41b9f0d0ced46a1b23afceb72",
+  "previous_source_manifest_sha256": "9f0e07066221dfab4f0ed2244599f957609cd58ec6d8dd3109af287f5a1e2879",
+  "note": "Seven business endpoints and scoped organization RBAC implemented/verified. Day7 whole-week review, retrospective/demo and handoff pending. Real .env excluded; inherited AGENTS retained; not a new commit or release.",
+  "files": [
+    {
+      "path": ".env.example",
+      "sha256": "5f6d9eb3beb41b5fd4c9c83d9126b8dded65d3988d4e30fbe9618fba93c29091"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "1bff4d24a79945376507a37ffc21a6c68f577d9ce63cf1736a3db824eece82d1"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "cc7fe433335ee457d6ea6ea87be9fa0f9d41408ede7f66109dd40c2bd799be7f"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "16e4693fcd91c8ff1c60d080e229eb04a39fb8f0935be886e34b5c40c8add965"
+    },
+    {
+      "path": "cmd/api/main.go",
+      "sha256": "3767548709672d37cf81da25dace8e6c1dafb6f893b0e9208285c202248b85bf"
+    },
+    {
+      "path": "cmd/api/main_test.go",
+      "sha256": "3930db197b7cdea8cdce6f6b67ab95ba2fe52ead008b2a48576151a5d98b886f"
+    },
+    {
+      "path": "deploy/compose.yaml",
+      "sha256": "6a61b690453971bd10a1ef37562db43d6a2f32d3547f365a159bdc5133ce08dd"
+    },
+    {
+      "path": "go.mod",
+      "sha256": "8091ded00f83ae72ec820267337d3882b84b42b90bda2954da3a20c131d74078"
+    },
+    {
+      "path": "go.sum",
+      "sha256": "209e05405870fb50365e60f335c8182c76f2d7c882c3a31cbcce50d8f8922958"
+    },
+    {
+      "path": "internal/auth/errors.go",
+      "sha256": "935a7b097ad66da1207d9b95e20619b26cd8d01b523699705f1c832e4c0ea692"
+    },
+    {
+      "path": "internal/auth/handler.go",
+      "sha256": "8981deb269df18fd21c64f6e67eeab80cc2982dd14e05f0cf1ab9cee57cb89d8"
+    },
+    {
+      "path": "internal/auth/handler_test.go",
+      "sha256": "72bf77a55bfb37538d7d6f795bbfd0821fea243d5ae4e5e2b1226bd7c6b85774"
+    },
+    {
+      "path": "internal/auth/json_input.go",
+      "sha256": "a5cb7052decf08945461e32b78a30e1a05fa193bba89635524f45ef548c8a9fb"
+    },
+    {
+      "path": "internal/auth/login_handler_test.go",
+      "sha256": "d3a528fa7523eb2805a495c6a8b7d1a7ba03a5d963c1d28c7d4105c5d62510d1"
+    },
+    {
+      "path": "internal/auth/login_test.go",
+      "sha256": "958774f793a9edd7ae4193910815d035452e7e065c4d47d9c908ef60c74d381d"
+    },
+    {
+      "path": "internal/auth/me.go",
+      "sha256": "ace84f5165b9808e60988125568f8fb1b4a11caffa846ea9d2100e4e700a65af"
+    },
+    {
+      "path": "internal/auth/middleware.go",
+      "sha256": "4d4dedf8ae5d3cf01daedeb67dd07217e5bfae5d902cf04241ab3724b72d4291"
+    },
+    {
+      "path": "internal/auth/middleware_test.go",
+      "sha256": "21ff53ce878857e219e8e71dd12a6b4ed76754745a5daab8e4a78e60703c9280"
+    },
+    {
+      "path": "internal/auth/middleware_token_test.go",
+      "sha256": "1a305a0e9824efdb865cf935ad1770c38b5b885e47994c52480756c60878938d"
+    },
+    {
+      "path": "internal/auth/model.go",
+      "sha256": "b5c094adf3f3c01e85d14d815b622a781cfe81c026ac83c0ed3cf3e0380b91b6"
+    },
+    {
+      "path": "internal/auth/password.go",
+      "sha256": "c56c716720afe14ded4ace38dc68eb11fd58eb48cfec405e96a407ae068d1e39"
+    },
+    {
+      "path": "internal/auth/password_test.go",
+      "sha256": "9fd1bdf89ca2972393cc6260df94bd5fa513137c3fedc7fd89eea61df4e7020c"
+    },
+    {
+      "path": "internal/auth/repository.go",
+      "sha256": "baeca80a8824343adde97ba41a0a163ea0ca9ff3c80c82fcf5d272186fb48c62"
+    },
+    {
+      "path": "internal/auth/repository_test.go",
+      "sha256": "9628ed60c7675f94dcfcae7af554db54ad9927c013f6dd928727b4e961ad71cc"
+    },
+    {
+      "path": "internal/auth/service.go",
+      "sha256": "5620c5600b57f0a08db789af8c71ac6e3d4b31ebeec03c37218e8848a965a508"
+    },
+    {
+      "path": "internal/auth/service_test.go",
+      "sha256": "54298c80dca5f5c741bb56ab9083dc5a7659836f8d07008f0d0813d337a1a93f"
+    },
+    {
+      "path": "internal/auth/token.go",
+      "sha256": "bb582b166d3c7fb97a7b235f63655cf93c327bd33b1c0fd146b7b9d2303309f6"
+    },
+    {
+      "path": "internal/auth/token_test.go",
+      "sha256": "077a335daee5a17052add2aea9b7f539780374d29042a987fc7c2d34475cc2e3"
+    },
+    {
+      "path": "internal/organization/errors.go",
+      "sha256": "86703f70a2871b0a59c852beda54da502bd5dcfab64bbd6bb609ba623d71fd33"
+    },
+    {
+      "path": "internal/organization/handler.go",
+      "sha256": "13283d6eeb66f4fd93303090f0381cc3776f4647ec8b68b475f91f6b496602c6"
+    },
+    {
+      "path": "internal/organization/handler_test.go",
+      "sha256": "421a4a776cf73bd6c36b5c582736212acc89bd68ab39645c5eb2b96dfea1ddf7"
+    },
+    {
+      "path": "internal/organization/member_handler.go",
+      "sha256": "6481c2a098ff9e73dad0df85bc52181d29cee0cc6bd68fe69e9781ed0502943b"
+    },
+    {
+      "path": "internal/organization/member_handler_test.go",
+      "sha256": "0b52cd391372b04478b94e5d4ffb5ed37bc92d04d13679c14cf4ebdc7608676e"
+    },
+    {
+      "path": "internal/organization/member_repository.go",
+      "sha256": "37cff9ab6bae654b4bdf72b00b491da260c271201a3ffc0556d4810fe178f611"
+    },
+    {
+      "path": "internal/organization/member_repository_test.go",
+      "sha256": "0a734535943202bb0910fbb33cc29ac1f594371fce15ab34ae05eabf6c12a67b"
+    },
+    {
+      "path": "internal/organization/member_service.go",
+      "sha256": "f0e519717d1c53893e7a302453921ff246d2a7b8044a98a773af26167890c78a"
+    },
+    {
+      "path": "internal/organization/members_test.go",
+      "sha256": "daf53d1759a40d4aa56549277dcc95191568b2091bf0abdeec9b867844cb46cf"
+    },
+    {
+      "path": "internal/organization/model.go",
+      "sha256": "f7593f63b2e6cf9af6637bb17b992e76a7c50e174c21a93448f58eeb6993e342"
+    },
+    {
+      "path": "internal/organization/policy.go",
+      "sha256": "2b72d28c1ea81bf47cbced54357665e4a459d6596d5afbacf388842e59c02f66"
+    },
+    {
+      "path": "internal/organization/repository.go",
+      "sha256": "319ee1679173d9becbf97b48f805e339ad6581769ecf11cada4dfa69f2b73012"
+    },
+    {
+      "path": "internal/organization/service.go",
+      "sha256": "fb2441c3435aff44587f5f350c412fe643f60d5bb1cbc0bbd68ca0d368ea049a"
+    },
+    {
+      "path": "internal/organization/service_test.go",
+      "sha256": "25cd6682b1fb093d396fc80463739b5e82dece29908ba6e1caad2f2ae447ecf1"
+    },
+    {
+      "path": "internal/platform/config/config.go",
+      "sha256": "449e325850d8d28052cc993e43ec41563db7b0478c23e09348def62cf45bd6b2"
+    },
+    {
+      "path": "internal/platform/config/config_test.go",
+      "sha256": "9e0a2d4340b6de50b00a25b4ec9b3271f65c3d642ccc705a926fedcf1aec2103"
+    },
+    {
+      "path": "internal/platform/database/postgres.go",
+      "sha256": "7d9123350cb0abc68dd81aa04d5aac637ca7e540888c66c6fc250abea03050e5"
+    },
+    {
+      "path": "internal/platform/database/postgres_test.go",
+      "sha256": "84b5359e824fe519834b50cc79d9fe6d222a307fdeb70fecab0d969cb4502685"
+    },
+    {
+      "path": "internal/platform/httpserver/router.go",
+      "sha256": "c44812525994ddc3fb51619def074de2a48aa7ab8993963692517b95c6cdf3d1"
+    },
+    {
+      "path": "internal/platform/httpserver/router_test.go",
+      "sha256": "fb7580804bf7da6f66400a7f93a685f9a311716fbcc4f84170d488e72b05b4ee"
+    },
+    {
+      "path": "migrations/00001_create_organizations.sql",
+      "sha256": "89124652aa238e36a3049c0469801f947f6d1873c2edcb87620977045aedb00b"
+    },
+    {
+      "path": "migrations/00002_create_users.sql",
+      "sha256": "ed4668091f82dc5f55e7ef6f893879117508487e855a8c2b90bc2e020d97af8c"
+    },
+    {
+      "path": "migrations/00003_create_organization_members.sql",
+      "sha256": "44dd2acb37d7963a57eb4a5fd8cd41b139c5c5cc5850d42a00ed8e0862fb638b"
+    },
+    {
+      "path": "scripts/day5-smoke.py",
+      "sha256": "b07c6e1fd57cfc0678208455b4cce28175c7d4c533f7df31b0efaa86f9540343"
+    },
+    {
+      "path": "scripts/week02-day2-smoke.py",
+      "sha256": "60ff80a62ee926fb8e66d73c929ec0b92c5da7c85cfc8a3d49df0838c0b5df2b"
+    },
+    {
+      "path": "tests/integration/login_test.go",
+      "sha256": "0e3d658d588b4e64fac2bc9b2bcddaf3003836bc204665a315327f62779d5877"
+    },
+    {
+      "path": "tests/integration/members_test.go",
+      "sha256": "f17fee9c377fc25c698405ff80b76874a90763287cefe69dbb268b0e6bdc6454"
+    },
+    {
+      "path": "tests/integration/organization_test.go",
+      "sha256": "ee57ef1a4dd796b79097336053f209f3dd083249b0584e0176789675d21889bd"
+    },
+    {
+      "path": "tests/integration/register_test.go",
+      "sha256": "be24c83cee05cbbc37e0e034ece948499d0ca6a391167b89ace98ef1a72b49b5"
+    },
+    {
+      "path": "tests/integration/schema_test.go",
+      "sha256": "84456ec7cca2a03862a529eff8408515d36aca76c466d66fd9f14f9ea257f986"
+    }
+  ]
+}

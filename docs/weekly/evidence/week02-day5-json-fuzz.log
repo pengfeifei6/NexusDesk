@@ -1,0 +1,7 @@
+fuzz: elapsed: 0s, gathering baseline coverage: 0/5 completed
+fuzz: elapsed: 0s, gathering baseline coverage: 5/5 completed, now fuzzing with 2 workers
+fuzz: elapsed: 3s, execs: 7718 (2572/sec), new interesting: 30 (total: 35)
+fuzz: elapsed: 6s, execs: 11119 (1134/sec), new interesting: 51 (total: 56)
+fuzz: elapsed: 6s, execs: 11119 (0/sec), new interesting: 51 (total: 56)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/internal/organization	6.076s

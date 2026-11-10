@@ -1,0 +1,50 @@
+=== RUN   TestPasswordSaltAndVerification
+--- PASS: TestPasswordSaltAndVerification (0.23s)
+=== RUN   TestPasswordPreservesWhitespaceAndUnicode
+    password_test.go:47: trimming changed the password identity or caused an unexpected error
+--- FAIL: TestPasswordPreservesWhitespaceAndUnicode (0.06s)
+=== RUN   TestPasswordPolicyBoundaries
+=== RUN   TestPasswordPolicyBoundaries/empty
+=== RUN   TestPasswordPolicyBoundaries/too_short
+=== RUN   TestPasswordPolicyBoundaries/whitespace
+=== RUN   TestPasswordPolicyBoundaries/invalid_utf8
+=== RUN   TestPasswordPolicyBoundaries/too_many_characters
+=== RUN   TestPasswordPolicyBoundaries/too_many_bytes
+=== RUN   TestPasswordPolicyBoundaries/minimum
+=== RUN   TestPasswordPolicyBoundaries/maximum_unicode
+--- PASS: TestPasswordPolicyBoundaries (0.06s)
+    --- PASS: TestPasswordPolicyBoundaries/empty (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/too_short (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/whitespace (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/invalid_utf8 (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/too_many_characters (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/too_many_bytes (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/minimum (0.03s)
+    --- PASS: TestPasswordPolicyBoundaries/maximum_unicode (0.03s)
+=== RUN   TestPasswordRejectsUntrustedHashParameters
+=== RUN   TestPasswordRejectsUntrustedHashParameters/empty
+=== RUN   TestPasswordRejectsUntrustedHashParameters/plaintext
+=== RUN   TestPasswordRejectsUntrustedHashParameters/huge_input
+=== RUN   TestPasswordRejectsUntrustedHashParameters/unbounded_memory
+=== RUN   TestPasswordRejectsUntrustedHashParameters/unbounded_iterations
+=== RUN   TestPasswordRejectsUntrustedHashParameters/zero_parallelism
+=== RUN   TestPasswordRejectsUntrustedHashParameters/wrong_version
+=== RUN   TestPasswordRejectsUntrustedHashParameters/wrong_variant
+=== RUN   TestPasswordRejectsUntrustedHashParameters/invalid_encoding
+=== RUN   TestPasswordRejectsUntrustedHashParameters/short_salt_key
+--- PASS: TestPasswordRejectsUntrustedHashParameters (0.04s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/empty (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/plaintext (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/huge_input (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/unbounded_memory (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/unbounded_iterations (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/zero_parallelism (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/wrong_version (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/wrong_variant (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/invalid_encoding (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/short_salt_key (0.00s)
+=== RUN   TestPasswordBudgetAndCancellation
+--- PASS: TestPasswordBudgetAndCancellation (0.06s)
+FAIL
+FAIL	github.com/pengfeifei6/NexusDesk/internal/auth	0.473s
+FAIL

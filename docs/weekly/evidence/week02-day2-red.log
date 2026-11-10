@@ -1,0 +1,11 @@
+PASS isolated PostgreSQL 17 healthy; project=nexusdesk-w02d2-40ae61751c00
+2026/11/10 10:48:43 OK   00001_create_organizations.sql (4.17ms)
+2026/11/10 10:48:43 goose: successfully migrated database to version: 1
+=== RUN   TestWeek02Schema
+    schema_test.go:42: W02 schema missing users or organization_members: ready=false, error=<nil>
+--- FAIL: TestWeek02Schema (0.01s)
+FAIL
+FAIL	github.com/pengfeifei6/NexusDesk/tests/integration	0.021s
+FAIL
+
+CLEANUP only this run's test containers and labeled volume

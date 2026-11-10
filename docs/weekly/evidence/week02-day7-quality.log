@@ -1,0 +1,20 @@
+COMMAND: go test -race -count=1 -json ./...
+OUTPUT: week02-day7-go-test.jsonl
+EXIT: 0
+
+COMMAND: go vet ./...
+EXIT: 0
+
+COMMAND: go build ./...
+EXIT: 0
+
+COMMAND: go mod verify
+all modules verified
+EXIT: 0
+
+COMMAND: gofmt -l cmd internal tests
+EXIT: 0
+
+COMMAND: git diff --check
+EXIT: 0
+

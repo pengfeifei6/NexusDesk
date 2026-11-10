@@ -1,0 +1,14 @@
+2026-11-10 Asia/Shanghai — W02 Day 6 final delivery check
+PASS 16 Markdown files: 256 local links/anchors, fences/tables and 14 JSON examples
+PASS requests/week02.http: 11 fictional JSON request bodies
+PASS both Python smoke scripts parse
+PASS CI YAML structure and embedded Bash syntax
+PASS 12-variable example retains placeholders; Bash syntax valid; real .env ignored/untracked; contents never read
+PASS 58-path current manifest matches; 15 protected Day 5 files unchanged; existing HEAD retained
+PASS pinned Go/Gin/pgx/Argon2id/x/crypto retained; JWT v5.3.1 retained
+PASS Day 6 evidence is Git-trackable and contains no raw JWT-shaped credentials
+PASS week02-day6-postgres.log: own test containers and volume absent
+PASS week02-day6-week01-regression.log: own test containers and volume absent
+PASS final formatting and git diff --check
+No product changes after final race/real database checks; this verifies final documentation and artifacts.
+No real .env read; no stage/commit/push/deploy performed.

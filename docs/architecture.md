@@ -4,11 +4,13 @@
 - 日期：2026-11-10（W02 Day 1 增量更新）
 - 用途：第一周 Day 2 架构设计产出。
 - 依据：[需求说明](requirements.md)、[原始项目设计](../项目开发文件/01_NexusDesk_完整项目设计文档.md)。
-- 状态：由 AI 按开发者要求整理；W1 最小 API、连接池与首条迁移已在 Day 5 实现验证，后续业务分层仍是设计，实际证据见周报。
+- 状态：由 AI 按开发者要求整理；W1 基础与 W02 Day 6注册/登录、密码/JWT、可信身份、组织事务/列表、成员读取/添加与组织RBAC已实现验证，工单和角色修改仍是设计，实际证据见周报。
 
-> 阅读顺序建议：先看第 1～4 节理解系统与分层，再看第 5～7 节理解权限、事务和启动。文中的目录、流程和测试均为设计，不代表仓库中已有对应代码或通过记录。
+> 阅读顺序建议：先看第 1～4 节理解系统与分层，再看第 5～7 节理解权限、事务和启动。除明确标记已实现的内容外，文中的目录、流程和测试均为设计；运行证据以周报为准。
 
 W02 Day 1 已形成 [认证设计](auth-design.md)、[权限矩阵](authorization-matrix.md)、[API 契约](api/auth-organization.md) 与 [ADR-0002](decisions/0002-auth-security.md)。本周只落地 admin/member、active/disabled；support、角色变更与下面的工单并发锁方案均为后续设计，不是本周已实现能力。
+
+W02 Day 2 已添加 users 与 organization_members 增量迁移，并在专用测试库验证；[Repository 契约](repository-contracts.md) 定义了八个方法。Day 3 落实三个用户存储方法与注册，Day 4 增加 LoginService/Handler、TokenManager 与四个 JWT 配置。启动入口注入同一个 PasswordHasher、预建 dummy hash；Token 不携带角色。Day 5 已接通 RequireUser 与 /me，落实组织创建和本人列表两个存储方法，Day 6已落实成员三方法与MemberService/Handler/policy。组织创建采用 Service 定义原子动作、专用 Repository 方法内部持有同一 tx 的方式；后续工单跨仓储事务再按第 6 节设计实现。
 
 ## 1. 架构目标与阶段边界
 
@@ -17,7 +19,7 @@ W02 Day 1 已形成 [认证设计](auth-design.md)、[权限矩阵](authorizatio
 | 阶段 | 实际实现范围 | 尚未实现的范围 |
 | --- | --- | --- |
 | W1 | Go 启动入口、环境配置、Gin、健康检查、PostgreSQL 连接池、首条组织表迁移 | 身份认证、业务 Service / Repository、前端、Worker |
-| W2 | 注册、登录、JWT、本人信息、组织与首名管理员事务、组织列表、成员列表与添加、组织授权 | 角色修改、停用接口、support、工单业务；Day 1 当前只有设计文档 |
+| W2 | Day 6已完成注册/登录、密码/JWT、认证中间件、本人信息、组织/admin事务、本人组织列表、成员读取/添加和RBAC | Day 7工程收尾已归档；角色修改、停用接口、support 和工单留后续阶段 |
 | W3 | 工单创建、查询、编辑、评论、状态机和操作事件 | 前端与完整并发验收 |
 | W4 / G1 | 并发领取验证、最简 Vue 前端、业务端到端演示 | 知识库和 AI |
 | W5 以后 | 按周计划加入文档、RAG、Worker、SSE 和受控工具调用 | 不提前创建无用途模块 |

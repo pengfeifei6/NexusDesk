@@ -1,0 +1,19 @@
+# github.com/pengfeifei6/NexusDesk/internal/platform/config [github.com/pengfeifei6/NexusDesk/internal/platform/config.test]
+internal/platform/config/config_test.go:62:23: cfg.JWT undefined (type Config has no field or method JWT)
+internal/platform/config/config_test.go:63:20: cfg.JWT undefined (type Config has no field or method JWT)
+internal/platform/config/config_test.go:66:38: cfg.JWT undefined (type Config has no field or method JWT)
+# github.com/pengfeifei6/NexusDesk/internal/auth [github.com/pengfeifei6/NexusDesk/internal/auth.test]
+internal/auth/token_test.go:17:27: undefined: TokenConfig
+internal/auth/token_test.go:18:9: undefined: TokenConfig
+internal/auth/token_test.go:21:41: undefined: TokenManager
+internal/auth/token_test.go:23:18: undefined: NewTokenManager
+internal/auth/token_test.go:55:67: undefined: ErrInvalidToken
+internal/auth/token_test.go:104:85: undefined: ErrInvalidToken
+internal/auth/token_test.go:120:65: undefined: ErrInvalidToken
+internal/auth/token_test.go:125:51: undefined: ErrTokenIssue
+internal/auth/token_test.go:132:33: undefined: TokenConfig
+internal/auth/token_test.go:133:11: undefined: TokenConfig
+internal/auth/token_test.go:133:11: too many errors
+FAIL	github.com/pengfeifei6/NexusDesk/internal/auth [build failed]
+FAIL	github.com/pengfeifei6/NexusDesk/internal/platform/config [build failed]
+FAIL

@@ -1,0 +1,5 @@
+# github.com/pengfeifei6/NexusDesk/internal/organization [github.com/pengfeifei6/NexusDesk/internal/organization.test]
+internal/organization/member_repository_test.go:16:118: undefined: memberWriteError
+internal/organization/member_repository_test.go:17:72: undefined: memberWriteError
+FAIL	github.com/pengfeifei6/NexusDesk/internal/organization [build failed]
+FAIL

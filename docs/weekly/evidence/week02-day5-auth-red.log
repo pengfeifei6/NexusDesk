@@ -1,0 +1,10 @@
+# github.com/pengfeifei6/NexusDesk/internal/auth [github.com/pengfeifei6/NexusDesk/internal/auth.test]
+internal/auth/middleware_test.go:44:76: undefined: RequireUser
+internal/auth/middleware_test.go:44:131: undefined: CurrentUserID
+internal/auth/middleware_test.go:58:89: undefined: currentUserIDKey
+internal/auth/middleware_test.go:58:119: undefined: NewMeHandler
+internal/auth/middleware_test.go:65:85: undefined: currentUserIDKey
+internal/auth/middleware_test.go:65:115: undefined: NewMeHandler
+internal/auth/middleware_test.go:68:26: undefined: NewMeHandler
+FAIL	github.com/pengfeifei6/NexusDesk/internal/auth [build failed]
+FAIL

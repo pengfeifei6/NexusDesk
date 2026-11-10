@@ -1,0 +1,14 @@
+# github.com/pengfeifei6/NexusDesk/internal/organization [github.com/pengfeifei6/NexusDesk/internal/organization.test]
+internal/organization/members_test.go:10:46: undefined: MembershipStatus
+internal/organization/members_test.go:11:80: undefined: Membership
+internal/organization/members_test.go:12:80: undefined: Member
+internal/organization/members_test.go:13:79: undefined: Member
+internal/organization/member_handler_test.go:17:104: undefined: NewMemberHandler
+internal/organization/member_handler_test.go:17:121: undefined: NewMemberService
+internal/organization/member_handler_test.go:32:83: undefined: StatusActive
+internal/organization/member_handler_test.go:36:44: undefined: MembershipStatus
+internal/organization/member_handler_test.go:36:105: undefined: StatusActive
+internal/organization/member_handler_test.go:36:150: undefined: StatusDisabled
+internal/organization/member_handler_test.go:36:150: too many errors
+FAIL	github.com/pengfeifei6/NexusDesk/internal/organization [build failed]
+FAIL

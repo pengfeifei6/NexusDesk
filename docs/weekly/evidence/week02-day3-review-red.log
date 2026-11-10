@@ -1,0 +1,221 @@
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/unknown_field
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/wrong_case_field
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/duplicate_field
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/multiple_objects
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/array
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/null_object
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/missing_fields
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/null_field
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/wrong_type
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/empty_password
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/invalid_utf8
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/unpaired_high_surrogate
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+    handler_test.go:56: rejected input performed password work
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/different_unpaired_surrogate
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+    handler_test.go:56: rejected input performed password work
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/unpaired_low_surrogate
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+    handler_test.go:56: rejected input performed password work
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/two_high_surrogates
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+    handler_test.go:56: rejected input performed password work
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/display_name_nul
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+    handler_test.go:56: rejected input performed password work
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/malformed_json
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/bad_email
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/short_password
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/oversize
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/wrong_media
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/missing_media
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+--- FAIL: TestRegisterHandlerRejectsUnsafeInputs (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/unknown_field (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/wrong_case_field (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/duplicate_field (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/multiple_objects (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/array (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/null_object (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/missing_fields (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/null_field (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/wrong_type (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/empty_password (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/invalid_utf8 (0.00s)
+    --- FAIL: TestRegisterHandlerRejectsUnsafeInputs/unpaired_high_surrogate (0.00s)
+    --- FAIL: TestRegisterHandlerRejectsUnsafeInputs/different_unpaired_surrogate (0.00s)
+    --- FAIL: TestRegisterHandlerRejectsUnsafeInputs/unpaired_low_surrogate (0.00s)
+    --- FAIL: TestRegisterHandlerRejectsUnsafeInputs/two_high_surrogates (0.00s)
+    --- FAIL: TestRegisterHandlerRejectsUnsafeInputs/display_name_nul (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/malformed_json (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/bad_email (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/short_password (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/oversize (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/wrong_media (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/missing_media (0.00s)
+=== RUN   TestRegisterPreservesValidJSONUnicodeEscapes
+=== RUN   TestRegisterPreservesValidJSONUnicodeEscapes/valid_surrogate_pair
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterPreservesValidJSONUnicodeEscapes/explicit_replacement_character
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterPreservesValidJSONUnicodeEscapes/literal_backslash_u
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterPreservesValidJSONUnicodeEscapes/password_nul
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+--- PASS: TestRegisterPreservesValidJSONUnicodeEscapes (0.00s)
+    --- PASS: TestRegisterPreservesValidJSONUnicodeEscapes/valid_surrogate_pair (0.00s)
+    --- PASS: TestRegisterPreservesValidJSONUnicodeEscapes/explicit_replacement_character (0.00s)
+    --- PASS: TestRegisterPreservesValidJSONUnicodeEscapes/literal_backslash_u (0.00s)
+    --- PASS: TestRegisterPreservesValidJSONUnicodeEscapes/password_nul (0.00s)
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/empty_email
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/invalid_email
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/display_address
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/unicode_email
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/email_whitespace
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/email_too_long
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/blank_display
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/long_display
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/invalid_display_utf8
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/display_name_nul
+    service_test.go:67: invalid registration performed expensive password work
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/short_password
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/blank_password
+--- FAIL: TestRegisterRejectsInvalidInputBeforeHashing (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/empty_email (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/invalid_email (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/display_address (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/unicode_email (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/email_whitespace (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/email_too_long (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/blank_display (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/long_display (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/invalid_display_utf8 (0.00s)
+    --- FAIL: TestRegisterRejectsInvalidInputBeforeHashing/display_name_nul (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/short_password (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/blank_password (0.00s)
+FAIL
+FAIL	github.com/pengfeifei6/NexusDesk/internal/auth	0.020s
+FAIL

@@ -1,0 +1,5 @@
+# github.com/pengfeifei6/NexusDesk/internal/auth
+internal/auth/password.go:8:2: no required module provides package github.com/alexedwards/argon2id; to add it:
+	go get github.com/alexedwards/argon2id
+FAIL	github.com/pengfeifei6/NexusDesk/internal/auth [setup failed]
+FAIL

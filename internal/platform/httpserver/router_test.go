@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/gin-gonic/gin"
 )
 
 func TestHealthz(t *testing.T) {
@@ -25,5 +27,16 @@ func TestHealthz(t *testing.T) {
 	}
 	if len(body) != 1 || body["status"] != "ok" {
 		t.Fatalf("unexpected health response: %v", body)
+	}
+}
+
+func TestRouterMountsAPICallbackUnderVersionPrefix(t *testing.T) {
+	router := NewRouter(func(group *gin.RouterGroup) {
+		group.POST("/auth/register", func(c *gin.Context) { c.JSON(201, gin.H{"route": "registered"}) })
+	})
+	response := httptest.NewRecorder()
+	router.ServeHTTP(response, httptest.NewRequest(http.MethodPost, "/api/v1/auth/register", nil))
+	if response.Code != 201 || response.Body.String() != `{"route":"registered"}` {
+		t.Fatal("business route was not mounted under /api/v1")
 	}
 }

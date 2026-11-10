@@ -1,0 +1,46 @@
+{
+  "recorded_date": "2026-11-10",
+  "timezone": "Asia/Shanghai",
+  "default_race_suite": {
+    "packages_passed": 7,
+    "top_level": {
+      "pass": 53,
+      "fail": 0,
+      "skip": 5
+    },
+    "all_test_nodes": {
+      "pass": 267,
+      "fail": 0,
+      "skip": 5
+    },
+    "skipped_tests": [
+      "TestWeek02Login",
+      "TestWeek02Organizations",
+      "TestWeek02Registration",
+      "TestWeek02Schema",
+      "TestOpenPostgresIntegration"
+    ]
+  },
+  "isolated_postgres_race_suite": {
+    "packages_passed": 7,
+    "top_level": {
+      "pass": 58,
+      "fail": 0,
+      "skip": 0
+    },
+    "all_test_nodes": {
+      "pass": 310,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "default_race_exit": 0,
+  "postgres_smoke_exit": 0,
+  "week01_smoke_exit": 0,
+  "fuzz": {
+    "command": "go test -run '^$' -fuzz '^FuzzOrganizationJSON$' -fuzztime=5s -parallel=2 ./internal/organization",
+    "executions": 11119,
+    "exit_code": 0
+  },
+  "note": "Top-level counts exclude subtest duplicates; all nodes include fuzz seeds. Day 5 protected identity/create/own-list verified; member endpoints and full RBAC remain Day 6."
+}

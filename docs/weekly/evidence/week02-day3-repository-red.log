@@ -1,0 +1,8 @@
+# github.com/pengfeifei6/NexusDesk/internal/auth [github.com/pengfeifei6/NexusDesk/internal/auth.test]
+internal/auth/repository_test.go:28:11: undefined: mapUserError
+FAIL	github.com/pengfeifei6/NexusDesk/internal/auth [build failed]
+# github.com/pengfeifei6/NexusDesk/tests/integration [github.com/pengfeifei6/NexusDesk/tests/integration.test]
+tests/integration/register_test.go:40:15: undefined: auth.NewPostgresRepository
+tests/integration/register_test.go:179:77: undefined: auth.NewPostgresRepository
+FAIL	github.com/pengfeifei6/NexusDesk/tests/integration [build failed]
+FAIL

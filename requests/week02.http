@@ -1,0 +1,111 @@
+# 本地演示专用，下面均为虚构输入。真实密码、密钥和响应 Token 不保存到此文件。
+# 先按 README 准备本地环境、应用迁移并启动 API。
+@baseUrl = http://127.0.0.1:8080
+@email = alice@example.test
+@password = ExampleOnly-ChooseYourOwnLongPassword
+# 占位符，仅在本地客户端的私有变量中提供登录结果，真实Token不保存回此文件。
+@accessToken = <ACCESS_TOKEN>
+# 虚构组织ID，实际使用时在本地客户端替换为自己创建的组织ID。
+@orgId = 201
+
+### 存活检查
+GET {{baseUrl}}/healthz
+
+### 注册：首次 201；已有邮箱 409。注册不自动建立组织或返回 Token。
+POST {{baseUrl}}/api/v1/auth/register
+Content-Type: application/json
+
+{"email":"{{email}}","display_name":"Alice","password":"{{password}}"}
+
+### 登录：200，Token 只在客户端响应中查看，不复制回仓库。
+POST {{baseUrl}}/api/v1/auth/login
+Content-Type: application/json
+
+{"email":"{{email}}","password":"{{password}}"}
+
+### 错误密码：401 INVALID_CREDENTIALS
+POST {{baseUrl}}/api/v1/auth/login
+Content-Type: application/json
+
+{"email":"{{email}}","password":"Wrong-ExampleOnly-LongPassword"}
+
+### 不存在邮箱：与错密码使用相同的 401 响应
+POST {{baseUrl}}/api/v1/auth/login
+Content-Type: application/json
+
+{"email":"unknown-demo@example.test","password":"Wrong-ExampleOnly-LongPassword"}
+
+### 空密码：400 INVALID_REQUEST
+POST {{baseUrl}}/api/v1/auth/login
+Content-Type: application/json
+
+{"email":"{{email}}","password":""}
+
+### 当前用户：200，仅返回 id/email/display_name
+GET {{baseUrl}}/api/v1/me
+Authorization: Bearer {{accessToken}}
+
+### 本人组织列表：新账号 items=[]，创建后可见本人 active 组织
+GET {{baseUrl}}/api/v1/organizations?page=1&page_size=20
+Authorization: Bearer {{accessToken}}
+
+### 创建组织：201，创建者同时成为 admin/active
+POST {{baseUrl}}/api/v1/organizations
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{"name":"Engineering Support"}
+
+### 伪造创建者：400，无写入
+POST {{baseUrl}}/api/v1/organizations
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{"name":"Should Not Exist","owner_id":999}
+
+### 试图指定他人的组织：400
+GET {{baseUrl}}/api/v1/organizations?user_id=999
+Authorization: Bearer {{accessToken}}
+
+### 无身份访问：401，WWW-Authenticate: Bearer
+GET {{baseUrl}}/api/v1/me
+
+### 分页溢出：400
+GET {{baseUrl}}/api/v1/organizations?page=9223372036854775807&page_size=100
+Authorization: Bearer {{accessToken}}
+
+### 成员列表：当前组织 active member/admin可读，返回五字段DTO
+GET {{baseUrl}}/api/v1/organizations/{{orgId}}/members?page=1&page_size=20
+Authorization: Bearer {{accessToken}}
+
+### 添加已注册用户：仅当前组织admin；102是虚构目标用户ID
+POST {{baseUrl}}/api/v1/organizations/{{orgId}}/members
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{"user_id":102,"role":"member"}
+
+### 重复关系：再次添加已存在关系为409，disabled也不会恢复
+POST {{baseUrl}}/api/v1/organizations/{{orgId}}/members
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{"user_id":102,"role":"admin"}
+
+### 额外身份/状态字段：admin得到400且无写入
+POST {{baseUrl}}/api/v1/organizations/{{orgId}}/members
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{"user_id":102,"role":"member","owner_id":101,"status":"active"}
+
+### 非JSON整数目标：admin得到400
+POST {{baseUrl}}/api/v1/organizations/{{orgId}}/members
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{"user_id":102.0,"role":"member"}
+
+# 用本地客户端私有变量换成member凭据，添加返回403；
+# 换成非成员凭据或把orgId改成他人组织，读取/添加统一404。
+# disabled测试由--members隔离运行器准备夹具，不提供修改状态API。

@@ -1,0 +1,63 @@
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/expired
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/future_iat
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/excessive_lifetime
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/future_nbf
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/fractional_future_iat
+    token_test.go:110: invalid token accepted or exposed in error
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/fractional_future_nbf
+    token_test.go:110: invalid token accepted or exposed in error
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/fractional_excess_lifetime
+    token_test.go:110: invalid token accepted or exposed in error
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/null_nbf
+    token_test.go:110: invalid token accepted or exposed in error
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/string_iat
+    token_test.go:110: invalid token accepted or exposed in error
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/missing_sub
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/missing_iss
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/missing_aud
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/missing_iat
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/missing_exp
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_issuer
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_audience
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/numeric_subject
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/zero_subject
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/negative_subject
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/noncanonical_subject
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/overflow_subject
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_key
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_algorithm
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/unsigned
+--- FAIL: TestTokenRejectsInvalidClaimsAndAlgorithms (0.01s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/expired (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/future_iat (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/excessive_lifetime (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/future_nbf (0.00s)
+    --- FAIL: TestTokenRejectsInvalidClaimsAndAlgorithms/fractional_future_iat (0.00s)
+    --- FAIL: TestTokenRejectsInvalidClaimsAndAlgorithms/fractional_future_nbf (0.00s)
+    --- FAIL: TestTokenRejectsInvalidClaimsAndAlgorithms/fractional_excess_lifetime (0.00s)
+    --- FAIL: TestTokenRejectsInvalidClaimsAndAlgorithms/null_nbf (0.00s)
+    --- FAIL: TestTokenRejectsInvalidClaimsAndAlgorithms/string_iat (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/missing_sub (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/missing_iss (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/missing_aud (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/missing_iat (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/missing_exp (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_issuer (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_audience (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/numeric_subject (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/zero_subject (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/negative_subject (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/noncanonical_subject (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/overflow_subject (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_key (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_algorithm (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/unsigned (0.00s)
+=== RUN   TestAcceptedTokenConfigurationCanVerifyItsOwnOutput
+    token_test.go:126: accepted configuration issued a token its own verifier rejected
+--- FAIL: TestAcceptedTokenConfigurationCanVerifyItsOwnOutput (0.00s)
+=== RUN   TestTokenRejectsOversizedButCorrectlySignedClaims
+--- PASS: TestTokenRejectsOversizedButCorrectlySignedClaims (0.00s)
+FAIL
+FAIL	github.com/pengfeifei6/NexusDesk/internal/auth	0.019s
+FAIL

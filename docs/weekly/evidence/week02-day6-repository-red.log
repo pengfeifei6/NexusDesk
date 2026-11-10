@@ -1,0 +1,7 @@
+# github.com/pengfeifei6/NexusDesk/tests/integration [github.com/pengfeifei6/NexusDesk/tests/integration.test]
+tests/integration/members_test.go:33:222: cannot use target (variable of type *organization.PostgresRepository) as organization.MemberStore value in argument to organization.NewMemberService: *organization.PostgresRepository does not implement organization.MemberStore (missing method AddMember)
+tests/integration/members_test.go:96:21: repo.AddMember undefined (type *organization.PostgresRepository has no field or method AddMember)
+tests/integration/members_test.go:100:85: repo.AddMember undefined (type *organization.PostgresRepository has no field or method AddMember)
+tests/integration/members_test.go:101:18: repo.AddMember undefined (type *organization.PostgresRepository has no field or method AddMember)
+FAIL	github.com/pengfeifei6/NexusDesk/tests/integration [build failed]
+FAIL

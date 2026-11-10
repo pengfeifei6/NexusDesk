@@ -1,0 +1,495 @@
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/unknown_field
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/wrong_case_field
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/duplicate_field
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/multiple_objects
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/array
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/null_object
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/missing_fields
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/null_field
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/wrong_type
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/empty_password
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/invalid_utf8
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/unpaired_high_surrogate
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/different_unpaired_surrogate
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/unpaired_low_surrogate
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/two_high_surrogates
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/display_name_nul
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/malformed_json
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/bad_email
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/short_password
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/oversize
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/wrong_media
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/missing_media
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+--- PASS: TestRegisterHandlerRejectsUnsafeInputs (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/unknown_field (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/wrong_case_field (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/duplicate_field (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/multiple_objects (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/array (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/null_object (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/missing_fields (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/null_field (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/wrong_type (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/empty_password (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/invalid_utf8 (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/unpaired_high_surrogate (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/different_unpaired_surrogate (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/unpaired_low_surrogate (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/two_high_surrogates (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/display_name_nul (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/malformed_json (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/bad_email (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/short_password (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/oversize (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/wrong_media (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/missing_media (0.00s)
+=== RUN   TestRegisterPreservesValidJSONUnicodeEscapes
+=== RUN   TestRegisterPreservesValidJSONUnicodeEscapes/valid_surrogate_pair
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterPreservesValidJSONUnicodeEscapes/explicit_replacement_character
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterPreservesValidJSONUnicodeEscapes/literal_backslash_u
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterPreservesValidJSONUnicodeEscapes/password_nul
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+--- PASS: TestRegisterPreservesValidJSONUnicodeEscapes (0.00s)
+    --- PASS: TestRegisterPreservesValidJSONUnicodeEscapes/valid_surrogate_pair (0.00s)
+    --- PASS: TestRegisterPreservesValidJSONUnicodeEscapes/explicit_replacement_character (0.00s)
+    --- PASS: TestRegisterPreservesValidJSONUnicodeEscapes/literal_backslash_u (0.00s)
+    --- PASS: TestRegisterPreservesValidJSONUnicodeEscapes/password_nul (0.00s)
+=== RUN   TestRegisterHandlerReturnsOnlyPublicFieldsAtSizeBoundary
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+--- PASS: TestRegisterHandlerReturnsOnlyPublicFieldsAtSizeBoundary (0.00s)
+=== RUN   TestRegisterHandlerMapsFailuresSafely
+=== RUN   TestRegisterHandlerMapsFailuresSafely/duplicate
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerMapsFailuresSafely/storage
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerMapsFailuresSafely/hash
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+=== RUN   TestRegisterHandlerMapsFailuresSafely/busy
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/auth/register     --> github.com/pengfeifei6/NexusDesk/internal/auth.(*Handler).register-fm (1 handlers)
+--- PASS: TestRegisterHandlerMapsFailuresSafely (0.00s)
+    --- PASS: TestRegisterHandlerMapsFailuresSafely/duplicate (0.00s)
+    --- PASS: TestRegisterHandlerMapsFailuresSafely/storage (0.00s)
+    --- PASS: TestRegisterHandlerMapsFailuresSafely/hash (0.00s)
+    --- PASS: TestRegisterHandlerMapsFailuresSafely/busy (0.00s)
+=== RUN   TestPasswordSaltAndVerification
+--- PASS: TestPasswordSaltAndVerification (0.23s)
+=== RUN   TestPasswordPreservesWhitespaceAndUnicode
+--- PASS: TestPasswordPreservesWhitespaceAndUnicode (0.11s)
+=== RUN   TestPasswordPolicyBoundaries
+=== RUN   TestPasswordPolicyBoundaries/empty
+=== RUN   TestPasswordPolicyBoundaries/too_short
+=== RUN   TestPasswordPolicyBoundaries/whitespace
+=== RUN   TestPasswordPolicyBoundaries/invalid_utf8
+=== RUN   TestPasswordPolicyBoundaries/too_many_characters
+=== RUN   TestPasswordPolicyBoundaries/too_many_bytes
+=== RUN   TestPasswordPolicyBoundaries/minimum
+=== RUN   TestPasswordPolicyBoundaries/maximum_unicode
+--- PASS: TestPasswordPolicyBoundaries (0.07s)
+    --- PASS: TestPasswordPolicyBoundaries/empty (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/too_short (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/whitespace (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/invalid_utf8 (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/too_many_characters (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/too_many_bytes (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/minimum (0.03s)
+    --- PASS: TestPasswordPolicyBoundaries/maximum_unicode (0.04s)
+=== RUN   TestPasswordPreservesEmbeddedNUL
+--- PASS: TestPasswordPreservesEmbeddedNUL (0.09s)
+=== RUN   TestPasswordRejectsUntrustedHashParameters
+=== RUN   TestPasswordRejectsUntrustedHashParameters/empty
+=== RUN   TestPasswordRejectsUntrustedHashParameters/plaintext
+=== RUN   TestPasswordRejectsUntrustedHashParameters/huge_input
+=== RUN   TestPasswordRejectsUntrustedHashParameters/unbounded_memory
+=== RUN   TestPasswordRejectsUntrustedHashParameters/unbounded_iterations
+=== RUN   TestPasswordRejectsUntrustedHashParameters/zero_parallelism
+=== RUN   TestPasswordRejectsUntrustedHashParameters/wrong_version
+=== RUN   TestPasswordRejectsUntrustedHashParameters/wrong_variant
+=== RUN   TestPasswordRejectsUntrustedHashParameters/invalid_encoding
+=== RUN   TestPasswordRejectsUntrustedHashParameters/short_salt_key
+--- PASS: TestPasswordRejectsUntrustedHashParameters (0.04s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/empty (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/plaintext (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/huge_input (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/unbounded_memory (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/unbounded_iterations (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/zero_parallelism (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/wrong_version (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/wrong_variant (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/invalid_encoding (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/short_salt_key (0.00s)
+=== RUN   TestPasswordBudgetAndCancellation
+--- PASS: TestPasswordBudgetAndCancellation (0.06s)
+=== RUN   TestUserStorageErrorsAreClassifiedAndRedacted
+=== RUN   TestUserStorageErrorsAreClassifiedAndRedacted/email_unique
+=== RUN   TestUserStorageErrorsAreClassifiedAndRedacted/other_unique
+=== RUN   TestUserStorageErrorsAreClassifiedAndRedacted/check
+=== RUN   TestUserStorageErrorsAreClassifiedAndRedacted/missing
+=== RUN   TestUserStorageErrorsAreClassifiedAndRedacted/unavailable
+=== RUN   TestUserStorageErrorsAreClassifiedAndRedacted/canceled
+=== RUN   TestUserStorageErrorsAreClassifiedAndRedacted/deadline
+--- PASS: TestUserStorageErrorsAreClassifiedAndRedacted (0.00s)
+    --- PASS: TestUserStorageErrorsAreClassifiedAndRedacted/email_unique (0.00s)
+    --- PASS: TestUserStorageErrorsAreClassifiedAndRedacted/other_unique (0.00s)
+    --- PASS: TestUserStorageErrorsAreClassifiedAndRedacted/check (0.00s)
+    --- PASS: TestUserStorageErrorsAreClassifiedAndRedacted/missing (0.00s)
+    --- PASS: TestUserStorageErrorsAreClassifiedAndRedacted/unavailable (0.00s)
+    --- PASS: TestUserStorageErrorsAreClassifiedAndRedacted/canceled (0.00s)
+    --- PASS: TestUserStorageErrorsAreClassifiedAndRedacted/deadline (0.00s)
+=== RUN   TestRegisterNormalizesAndHashes
+--- PASS: TestRegisterNormalizesAndHashes (0.06s)
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/empty_email
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/invalid_email
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/display_address
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/unicode_email
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/email_whitespace
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/email_too_long
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/blank_display
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/long_display
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/invalid_display_utf8
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/display_name_nul
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/short_password
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/blank_password
+--- PASS: TestRegisterRejectsInvalidInputBeforeHashing (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/empty_email (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/invalid_email (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/display_address (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/unicode_email (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/email_whitespace (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/email_too_long (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/blank_display (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/long_display (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/invalid_display_utf8 (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/display_name_nul (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/short_password (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/blank_password (0.00s)
+=== RUN   TestRegisterStopsOnHashAndStorageFailures
+--- PASS: TestRegisterStopsOnHashAndStorageFailures (0.00s)
+=== RUN   TestRegisterDoesNotPersistAfterCancellation
+--- PASS: TestRegisterDoesNotPersistAfterCancellation (0.00s)
+=== RUN   TestTokenRoundTripAndPublicClaims
+--- PASS: TestTokenRoundTripAndPublicClaims (0.00s)
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/expired
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/future_iat
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/excessive_lifetime
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/future_nbf
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/missing_sub
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/missing_iss
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/missing_aud
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/missing_iat
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/missing_exp
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_issuer
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_audience
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/numeric_subject
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/zero_subject
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/negative_subject
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/noncanonical_subject
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/overflow_subject
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_key
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_algorithm
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/unsigned
+--- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/expired (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/future_iat (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/excessive_lifetime (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/future_nbf (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/missing_sub (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/missing_iss (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/missing_aud (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/missing_iat (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/missing_exp (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_issuer (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_audience (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/numeric_subject (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/zero_subject (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/negative_subject (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/noncanonical_subject (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/overflow_subject (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_key (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_algorithm (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/unsigned (0.00s)
+=== RUN   TestTokenRejectsMalformedAndTamperedInput
+--- PASS: TestTokenRejectsMalformedAndTamperedInput (0.00s)
+=== RUN   TestTokenConfigurationAndKeyOwnership
+--- PASS: TestTokenConfigurationAndKeyOwnership (0.00s)
+=== RUN   FuzzDecodeRegister
+=== RUN   FuzzDecodeRegister/seed#0
+=== RUN   FuzzDecodeRegister/seed#1
+=== RUN   FuzzDecodeRegister/seed#2
+=== RUN   FuzzDecodeRegister/seed#3
+=== RUN   FuzzDecodeRegister/seed#4
+=== RUN   FuzzDecodeRegister/seed#5
+--- PASS: FuzzDecodeRegister (0.00s)
+    --- PASS: FuzzDecodeRegister/seed#0 (0.00s)
+    --- PASS: FuzzDecodeRegister/seed#1 (0.00s)
+    --- PASS: FuzzDecodeRegister/seed#2 (0.00s)
+    --- PASS: FuzzDecodeRegister/seed#3 (0.00s)
+    --- PASS: FuzzDecodeRegister/seed#4 (0.00s)
+    --- PASS: FuzzDecodeRegister/seed#5 (0.00s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/internal/auth	0.696s
+=== RUN   TestLoadValidEnvironment
+--- PASS: TestLoadValidEnvironment (0.00s)
+=== RUN   TestLoadRejectsMissingVariables
+=== RUN   TestLoadRejectsMissingVariables/APP_ENV
+=== RUN   TestLoadRejectsMissingVariables/HTTP_ADDR
+=== RUN   TestLoadRejectsMissingVariables/DB_HOST
+=== RUN   TestLoadRejectsMissingVariables/DB_PORT
+=== RUN   TestLoadRejectsMissingVariables/DB_USER
+=== RUN   TestLoadRejectsMissingVariables/DB_PASSWORD
+=== RUN   TestLoadRejectsMissingVariables/DB_NAME
+=== RUN   TestLoadRejectsMissingVariables/DB_SSLMODE
+=== RUN   TestLoadRejectsMissingVariables/JWT_ISSUER
+=== RUN   TestLoadRejectsMissingVariables/JWT_AUDIENCE
+=== RUN   TestLoadRejectsMissingVariables/JWT_TTL_MINUTES
+=== RUN   TestLoadRejectsMissingVariables/JWT_SECRET_BASE64
+--- PASS: TestLoadRejectsMissingVariables (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/APP_ENV (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/HTTP_ADDR (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_HOST (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_PORT (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_USER (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_PASSWORD (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_NAME (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_SSLMODE (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/JWT_ISSUER (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/JWT_AUDIENCE (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/JWT_TTL_MINUTES (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/JWT_SECRET_BASE64 (0.00s)
+=== RUN   TestLoadJWTConfiguration
+--- PASS: TestLoadJWTConfiguration (0.00s)
+=== RUN   TestLoadRejectsInvalidJWTConfiguration
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/invalid_base64
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/short_key
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/leading_key_space
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/key_newline
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/placeholder
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/wrong_ttl
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/nonpositive_ttl
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/invalid_ttl
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/invalid_issuer_encoding
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/long_audience
+--- PASS: TestLoadRejectsInvalidJWTConfiguration (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/invalid_base64 (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/short_key (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/leading_key_space (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/key_newline (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/placeholder (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/wrong_ttl (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/nonpositive_ttl (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/invalid_ttl (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/invalid_issuer_encoding (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/long_audience (0.00s)
+=== RUN   TestLoadRejectsInvalidConfiguration
+=== RUN   TestLoadRejectsInvalidConfiguration/blank_environment
+=== RUN   TestLoadRejectsInvalidConfiguration/missing_HTTP_port
+=== RUN   TestLoadRejectsInvalidConfiguration/named_HTTP_port
+=== RUN   TestLoadRejectsInvalidConfiguration/negative_HTTP_port
+=== RUN   TestLoadRejectsInvalidConfiguration/HTTP_port_too_large
+=== RUN   TestLoadRejectsInvalidConfiguration/invalid_DB_port
+=== RUN   TestLoadRejectsInvalidConfiguration/zero_DB_port
+=== RUN   TestLoadRejectsInvalidConfiguration/DB_port_too_large
+=== RUN   TestLoadRejectsInvalidConfiguration/invalid_SSL_mode
+=== RUN   TestLoadRejectsInvalidConfiguration/blank_password
+=== RUN   TestLoadRejectsInvalidConfiguration/placeholder_password
+--- PASS: TestLoadRejectsInvalidConfiguration (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/blank_environment (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/missing_HTTP_port (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/named_HTTP_port (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/negative_HTTP_port (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/HTTP_port_too_large (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/invalid_DB_port (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/zero_DB_port (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/DB_port_too_large (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/invalid_SSL_mode (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/blank_password (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/placeholder_password (0.00s)
+=== RUN   TestLoadAllowsIPv6AndEphemeralHTTPPort
+--- PASS: TestLoadAllowsIPv6AndEphemeralHTTPPort (0.00s)
+=== RUN   TestLoadRejectsNonLoopbackRegistrationListener
+=== RUN   TestLoadRejectsNonLoopbackRegistrationListener/:8080
+=== RUN   TestLoadRejectsNonLoopbackRegistrationListener/0.0.0.0:8080
+=== RUN   TestLoadRejectsNonLoopbackRegistrationListener/[::]:8080
+=== RUN   TestLoadRejectsNonLoopbackRegistrationListener/192.0.2.10:8080
+=== RUN   TestLoadRejectsNonLoopbackRegistrationListener/localhost:8080
+--- PASS: TestLoadRejectsNonLoopbackRegistrationListener (0.00s)
+    --- PASS: TestLoadRejectsNonLoopbackRegistrationListener/:8080 (0.00s)
+    --- PASS: TestLoadRejectsNonLoopbackRegistrationListener/0.0.0.0:8080 (0.00s)
+    --- PASS: TestLoadRejectsNonLoopbackRegistrationListener/[::]:8080 (0.00s)
+    --- PASS: TestLoadRejectsNonLoopbackRegistrationListener/192.0.2.10:8080 (0.00s)
+    --- PASS: TestLoadRejectsNonLoopbackRegistrationListener/localhost:8080 (0.00s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/config	0.033s
+=== RUN   TestRunRejectsMissingConfiguration
+--- PASS: TestRunRejectsMissingConfiguration (0.00s)
+=== RUN   TestRunRejectsUnavailableDatabase
+--- PASS: TestRunRejectsUnavailableDatabase (0.00s)
+=== RUN   TestRunReportsOccupiedPort
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /healthz                  --> github.com/pengfeifei6/NexusDesk/internal/platform/httpserver.NewRouter.func1 (2 handlers)
+--- PASS: TestRunReportsOccupiedPort (0.00s)
+=== RUN   TestRunStopsOnCancellation
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /healthz                  --> github.com/pengfeifei6/NexusDesk/internal/platform/httpserver.NewRouter.func1 (2 handlers)
+2026/11/10 15:37:36 INFO HTTP server started addr=127.0.0.1:37287
+2026/11/10 15:37:36 INFO HTTP server stopped
+--- PASS: TestRunStopsOnCancellation (0.00s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/cmd/api	0.035s

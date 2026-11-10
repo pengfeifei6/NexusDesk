@@ -1,0 +1,44 @@
+{
+  "recorded_date": "2026-11-10",
+  "timezone": "Asia/Shanghai",
+  "default_race_suite": {
+    "packages_passed": 6,
+    "top_level": {
+      "pass": 32,
+      "fail": 0,
+      "skip": 3
+    },
+    "all_test_nodes": {
+      "pass": 129,
+      "fail": 0,
+      "skip": 3
+    },
+    "skipped_tests": [
+      "TestWeek02Registration",
+      "TestWeek02Schema",
+      "TestOpenPostgresIntegration"
+    ]
+  },
+  "isolated_postgres_race_suite": {
+    "packages_passed": 6,
+    "top_level": {
+      "pass": 35,
+      "fail": 0,
+      "skip": 0
+    },
+    "all_test_nodes": {
+      "pass": 155,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "default_race_exit": 0,
+  "postgres_smoke_exit": 0,
+  "week01_smoke_exit": 0,
+  "fuzz": {
+    "command": "go test -run ^$ -fuzz ^FuzzDecodeRegister$ -fuzztime=5s -parallel=2 ./internal/auth",
+    "executions": 18137,
+    "exit_code": 0
+  },
+  "note": "Counts include fuzz seed executions as named test nodes; subtests are not counted again in top_level. Registration and user storage only; JWT/organization authorization not implemented."
+}

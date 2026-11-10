@@ -1,14 +1,14 @@
 # NexusDesk 核心数据库设计
 
-- 版本：v0.2
-- 日期：2026-11-10（W02 Day 1 增量更新）
+- 版本：v0.3
+- 日期：2026-11-10（W02 Day 2 增量更新）
 - 用途：第一周 Day 2 六张核心表的关系与约束设计。
 - 依据：[需求说明](requirements.md)、[架构说明](architecture.md)。
-- 状态：六表设计稿；`organizations` 已在 Day 5 转为首条 migration，并在独立测试库验证，其余五张表留到对应周次实现。实际证据见周报。
+- 状态：organizations、users、organization_members 的三条迁移已在专用测试库验证；其余三张工单表仍为设计。实际证据见第二周周报；日常开发库未由 AI 操作。
 
 > 先看第 1、2 节理解关系，再看各表字段。第 4、5 节解释数据库约束与业务授权的区别。W1 只实际建立 `organizations`，其余表分周实现。
 
-W02 契约已与第二周手册统一，见 [ADR-0002](decisions/0002-auth-security.md)。本周成员 role 只允许 admin/member，status 只允许 active/disabled；support 和角色变更是后续设计。下文新字段和约束仍未执行迁移，Day 1 没有新增表。
+W02 契约已与第二周手册统一，见 [ADR-0002](decisions/0002-auth-security.md)。本周成员 role 只允许 admin/member，status 只允许 active/disabled；support 和角色变更是后续设计。Day 1 仅设计，Day 2 已创建 00002/00003 并在隔离测试库执行，日志见 [第二周记录](weekly/week02.md)。
 
 ## 1. 实现顺序与共同约定
 
@@ -60,9 +60,9 @@ erDiagram
 | `name` | VARCHAR(100) | 非空 | 组织显示名称 |
 | `created_at` | TIMESTAMPTZ | 非空，当前时间 | 创建时间 |
 
-W1 首条 migration 与手册保持一致，只有以上三个字段。此时先验证建表和版本管理；名称去空白、非空白检查在后续组织业务实现时补齐。组织名称不作为身份标识，P0 不要求全局唯一。
+W1 首条 migration 与手册保持一致，只有以上三个字段。此时先验证建表和版本管理；Day 5 已在组织 Service 实现名称去空白、1..100码点、有效UTF-8且无NUL检查。组织名称不作为身份标识，P0 不要求全局唯一。
 
-W1 尚未建立成员表，不实施“组织必须有管理员”的业务规则。W2 登录用户主动创建组织时，在同一事务中创建组织与首名 admin/active 成员；不自动认领第一周已有的无成员测试组织，也不通过注册自动创建组织。
+W1 尚未建立成员表，不实施“组织必须有管理员”的业务规则。W2 Day 5 已实现登录用户主动创建组织，在同一事务中创建组织与首名 admin/active 成员；不自动认领第一周已有的无成员测试组织，也不通过注册自动创建组织。
 
 ### 3.2 `users`：用户账号
 
@@ -76,6 +76,8 @@ W1 尚未建立成员表，不实施“组织必须有管理员”的业务规�
 | `updated_at` | TIMESTAMPTZ | 非空，当前时间 | 账号信息修改时间 |
 
 W02 邮箱采用普通 ASCII 邮箱标识，去首尾空白并统一小写后存储和登录查询，通过 `CREATE UNIQUE INDEX users_email_ci_unique ON users (lower(email))` 保证大小写不敏感唯一。这是本项目的登录标识规则，不能只用“先查再插”处理并发；格式限制见 [API 契约](api/auth-organization.md)。密码采用带随机盐的 Argon2id 编码散列，参数见 [认证设计](auth-design.md)，不存储或返回原始密码。
+
+Day 2 的 00002 已落实上述字段、非空与默认时间，以及 email/display_name/password_hash 的 btrim 非空 CHECK。这些 CHECK 只拒绝空串和普通空格等基础无效输入，不能代替应用完整的 Unicode 空白、邮箱和密码策略。数据库不强制散列算法前缀；Day 3 已实现注册并验证真实 Argon2id 写入，schema 测试仍使用非凭据占位散列，与注册集成区分。显示名 U+0000 在 Service 中拒绝，避免 PostgreSQL 文本编码错误变成 500。
 
 `users` 不保存组织内 `role`，也不设置单一的所属 `org_id`。注册账号不自动获得任意组织成员资格。
 
@@ -93,7 +95,11 @@ W02 邮箱采用普通 ASCII 邮箱标识，去首尾空白并统一小写后存
 
 后续工单需要 support 时，用新 migration 扩展 role CHECK，并同步权限与测试；不能直接重写已经执行的 00003。角色变更若需要 updated_at，也应新增迁移明确维护机制。
 
+Day 2 的 00003 已落实联合主键、两条默认 NO ACTION 外键、两个 CHECK、active/created_at 默认值与 `(user_id, org_id)` 索引；没有级联删除，也没有额外的全局成员 ID。
+
 只允许 `active` 成员执行组织内业务。关联到成员表的外键只能保证关系存在，不能保证其当前有效或具有某种角色。
+
+Day 6 已实现成员读取/添加与组织授权：读取查询限定org_id，添加只INSERT并由联合主键处理并发重复；disabled重复也409，不用UPSERT恢复。目标显示名读取和关系写入使用同一事务，COMMIT后返回。实测两名admin并发添加一201一409、旧Token在关系禁用后404，见 [week02](weekly/week02.md)。角色/状态UPDATE仅用于专用库测试夹具，不代表已有修改API。
 
 未来角色管理要求组织最后一名有效管理员不能降级、仍负责 `IN_PROGRESS` 或 `RESOLVED` 工单的支持人员不能降为其他角色。这两条是跨记录业务不变量，按第 5 节评审实现，不列为 W02 已支持接口。
 
@@ -249,7 +255,7 @@ P0 采用 `READ COMMITTED` 隔离级别。等待并取得组织锁后，再通�
 ### 7.1 迁移原则
 
 - 使用 Goose SQL migration 管理结构变化，W1 首条为 `00001_create_organizations.sql`。
-- W2 新增 `00002_create_users.sql` 与 `00003_create_organization_members.sql`，W3 再创建工单、评论、事件及相关约束。Day 1 仅设计，尚未创建这两个文件。
+- W2 已新增 `00002_create_users.sql` 与 `00003_create_organization_members.sql`，Day 2 在隔离库验证版本 1 → 3；W3 再创建工单、评论、事件及相关约束。
 - 修改已被使用的结构时新增迁移，不改写已经执行并共享的历史迁移。
 - Up / Down 的实验仅在可丢弃的本地测试库进行；Down 可能删除数据，不作为生产修复的默认方法。
 - 本稿不包含可直接执行的完整建表脚本；后续 migration 需要单独审查和实际验证。
@@ -283,3 +289,11 @@ P0 采用 `READ COMMITTED` 隔离级别。等待并取得组织锁后，再通�
 阅读时优先掌握：角色为何属于成员关系，评论为何携带 `org_id`，外键为何不能替代授权，状态和事件为何必须一起提交。具体字段和索引可在对应周次对照代码逐项落实。
 
 相关文档：[架构](architecture.md) · [需求](requirements.md) · [ADR-0001](decisions/0001-modular-monolith.md)。
+
+## 9. W02 Day 2 已落地项与存储交接
+
+迁移文件：[00002](../migrations/00002_create_users.sql)、[00003](../migrations/00003_create_organization_members.sql)；执行脚本：[week02-day2-smoke.py](../scripts/week02-day2-smoke.py)；真实约束测试：[schema_test.go](../tests/integration/schema_test.go)。第一周 00001 保持不变。
+
+已实际验证字段类型、默认值、非空/长度、邮箱大小写唯一、成员联合唯一、外键、角色/状态 CHECK、多组织成员、禁止级联删除，以及并发重复邮箱与成员只有一条成功。反向 Down 在本次可丢弃库按 3 → 2 → 1 执行，再升级到 3，原组织保留；不据此建议回滚日常数据。
+
+八个 Repository 方法的参数、返回、错误映射与事务归属见 [Repository 契约](repository-contracts.md)。本日没有实现 Service 或 Repository，不能把数据库约束测试计为 API 注册、组织授权或业务事务已通过。

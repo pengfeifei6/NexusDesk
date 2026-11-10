@@ -2,6 +2,7 @@
 """Verify Day 5 against a disposable database; never load the developer's .env."""
 
 import json
+import base64
 import os
 from pathlib import Path
 import secrets
@@ -31,13 +32,16 @@ def main():
         raise RuntimeError("goose is not in PATH; see README for its pinned install command")
     subprocess.run(["docker", "compose", "version"], check=True, cwd=ROOT)
     # Remove inherited PostgreSQL / Goose options so the test uses only its fixture.
-    env = {key: value for key, value in os.environ.items() if not key.startswith(("PG", "GOOSE_"))}
+    env = {key: value for key, value in os.environ.items()
+           if not key.startswith(("PG", "GOOSE_", "NEXUSDESK_TEST_"))}
     password = secrets.token_hex(16) + " spaces ' \\ test"
     env.update(
         APP_ENV="test", HTTP_ADDR="127.0.0.1:0", DB_HOST="127.0.0.1",
         DB_PORT=str(free_port()), DB_USER="nexusdesk_test", DB_PASSWORD=password,
         DB_NAME="nexusdesk_day5_test", DB_SSLMODE="disable", GIN_MODE="release",
         NEXUSDESK_TEST_POSTGRES="1", NO_COLOR="1",
+        JWT_ISSUER="nexusdesk", JWT_AUDIENCE="nexusdesk-api", JWT_TTL_MINUTES="15",
+        JWT_SECRET_BASE64=base64.b64encode(secrets.token_bytes(32)).decode("ascii"),
     )
     connection_url = (
         "postgres://" + urllib.parse.quote(env["DB_USER"], safe="") + ":"
@@ -51,7 +55,7 @@ def main():
                "-f", str(ROOT / "deploy/compose.yaml")]
 
     def redacted(text):
-        return text.replace(connection_url, "[test database URL]").replace(
+        return text.replace(env["JWT_SECRET_BASE64"], "[test JWT key]").replace(connection_url, "[test database URL]").replace(
             urllib.parse.quote(password, safe=""), "[test password]"
         ).replace(password, "[test password]")
 
@@ -68,7 +72,9 @@ def main():
                                   "-d", env["DB_NAME"], "-Atqc", statement]).stdout.strip()
 
     def migrate(action):
-        result = command([goose, "-env=none", "-dir", str(ROOT / "migrations"), action])
+        # Keep this historical W1 smoke independent of later schema additions.
+        migration_args = ["up-to", "1"] if action == "up" else [action]
+        result = command([goose, "-env=none", "-dir", str(ROOT / "migrations")] + migration_args)
         print(redacted(result.stdout + result.stderr).strip(), flush=True)
 
     existing = command(["docker", "volume", "inspect", "--format", "{{.Name}}", volume], check=False)

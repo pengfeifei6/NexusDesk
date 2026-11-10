@@ -12,6 +12,9 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/gin-gonic/gin"
+	"github.com/pengfeifei6/NexusDesk/internal/auth"
+	"github.com/pengfeifei6/NexusDesk/internal/organization"
 	"github.com/pengfeifei6/NexusDesk/internal/platform/config"
 	"github.com/pengfeifei6/NexusDesk/internal/platform/database"
 	"github.com/pengfeifei6/NexusDesk/internal/platform/httpserver"
@@ -38,10 +41,30 @@ func run(ctx context.Context) error {
 	}
 	defer pool.Close()
 	slog.Info("PostgreSQL connection verified")
-	return runHTTP(ctx, cfg.HTTPAddr)
+	users := auth.NewPostgresRepository(pool)
+	passwords := auth.NewPasswordHasher()
+	registration := auth.NewHandler(auth.NewService(users, passwords))
+	tokens, err := auth.NewTokenManager(auth.TokenConfig{Issuer: cfg.JWT.Issuer, Audience: cfg.JWT.Audience, TTL: cfg.JWT.TTL, Secret: cfg.JWT.Secret})
+	if err != nil {
+		return err
+	}
+	loginService, err := auth.NewLoginService(ctx, users, passwords, tokens)
+	if err != nil {
+		return err
+	}
+	login := auth.NewLoginHandler(loginService)
+	me := auth.NewMeHandler(users)
+	organizations := organization.NewHandler(organization.NewService(organization.NewPostgresRepository(pool)))
+	return runHTTP(ctx, cfg.HTTPAddr, httpserver.NewRouter(registration.RegisterRoutes, login.RegisterRoutes, func(group *gin.RouterGroup) {
+		protected := group.Group("")
+		protected.Use(auth.RequireUser(tokens, users))
+		me.RegisterRoutes(protected)
+		organizations.RegisterRoutes(protected)
+		organization.NewMemberHandler(organization.NewMemberService(organization.NewPostgresRepository(pool))).RegisterRoutes(protected)
+	}))
 }
 
-func runHTTP(ctx context.Context, addr string) error {
+func runHTTP(ctx context.Context, addr string, handler http.Handler) error {
 	listener, err := net.Listen("tcp", addr)
 	if err != nil {
 		return fmt.Errorf("listen HTTP server: %w", err)
@@ -49,8 +72,10 @@ func runHTTP(ctx context.Context, addr string) error {
 	defer listener.Close()
 
 	server := &http.Server{
-		Handler:           httpserver.NewRouter(),
+		Handler:           handler,
 		ReadHeaderTimeout: 5 * time.Second,
+		ReadTimeout:       5 * time.Second,
+		WriteTimeout:      10 * time.Second,
 		IdleTimeout:       60 * time.Second,
 	}
 	serveResult := make(chan error, 1)

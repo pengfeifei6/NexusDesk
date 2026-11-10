@@ -1,0 +1,76 @@
+{
+  "recorded_date": "2026-11-10",
+  "timezone": "Asia/Shanghai",
+  "default_race_suite": {
+    "packages_passed": 7,
+    "top_level": {
+      "pass": 58,
+      "fail": 0,
+      "skip": 6
+    },
+    "all_test_nodes": {
+      "pass": 318,
+      "fail": 0,
+      "skip": 6
+    },
+    "skipped_tests": [
+      "TestWeek02Login",
+      "TestWeek02Members",
+      "TestWeek02Organizations",
+      "TestWeek02Registration",
+      "TestWeek02Schema",
+      "TestOpenPostgresIntegration"
+    ]
+  },
+  "isolated_postgres_race_suite": {
+    "packages_passed": 7,
+    "top_level": {
+      "pass": 64,
+      "fail": 0,
+      "skip": 0
+    },
+    "all_test_nodes": {
+      "pass": 371,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "default_race_exit": 0,
+  "clean_reproduction_exit": 0,
+  "week01_smoke_exit": 0,
+  "demo_steps": [
+    {
+      "step": 1,
+      "result": "Alice registered 201 and logged in 200; identity and HS256 claims verified"
+    },
+    {
+      "step": 2,
+      "result": "Alice created organization A 201; database creator relation is admin/active"
+    },
+    {
+      "step": 3,
+      "result": "Bob registered 201 and logged in 200"
+    },
+    {
+      "step": 4,
+      "result": "Bob created organization B 201; database creator relation is admin/active"
+    },
+    {
+      "step": 5,
+      "result": "Bob reading A members returned 404; no membership in A exists"
+    },
+    {
+      "step": 6,
+      "result": "Alice added Bob to A 201; database relation is member/active"
+    },
+    {
+      "step": 7,
+      "result": "Bob read A members 200 but adding a member returned 403"
+    },
+    {
+      "step": 8,
+      "result": "Expired HS256 credential rejected with 401 on /me and A members; no production clock change"
+    }
+  ],
+  "note": "Day7 fresh full regression and ordered eight-step TCP demo from /var/tmp snapshot. Existing host tools/cache/local image reused; no real .env/.git copied. No new fuzz run today; Day6 fuzz evidence remains historical. Personal independent learning/Git save/remote CI not performed by AI."
+}

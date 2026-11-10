@@ -1,6 +1,6 @@
 # ADR-0002：W02 认证、短期 JWT 与组织授权
 
-- 日期：2026-11-10；状态：本次受托设计采用，待后续实现验证。
+- 日期：2026-11-10；状态：Day 6 已验证七个身份/组织/成员接口及当前范围RBAC；Day 7整周审查与工程收尾已完成，个人复述另行记录。
 - 决策主体：AI 在开发者明确委托 Day 1 全部任务后，按第二周手册补齐；不冒充开发者个人技术结论。
 - 相关：[认证设计](../auth-design.md)、[API 契约](../api/auth-organization.md)、[权限矩阵](../authorization-matrix.md)、[ADR-0001](0001-modular-monolith.md)。
 
@@ -57,4 +57,52 @@ HS256 的验签方也能签发 Token；将来出现独立外部验签方时评�
 
 后续需覆盖手册 A01～A18，包括随机盐、大小写重复邮箱、未知邮箱与错密码、JWT 篡改/过期/缺 Claim、跨组织拒绝、member 禁止添加、disabled 访问、重复成员和组织创建回滚。
 
-补充边界：严格 JSON、输入与分页上限、密码计算并发、异常散列编码、回环监听限制、日志与响应脱敏。第一周回归保持。当前完成的是设计与文档审查，不是注册、JWT、事务或安全测试通过。
+补充边界：严格 JSON、输入与分页上限、密码计算并发、异常散列编码、回环监听限制、日志与响应脱敏。Day 6 注册/登录、JWT、受保护HTTP、组织事务/列表、成员接口及当前范围RBAC已有真实验证；Day 7已完成整周静态审查和真实回归，不能把本日审查当作完整 W02 安全验收。
+
+## 7. Day 3 实现与本机成本记录
+
+封装库固定 github.com/alexedwards/argon2id v1.0.0；已阅读其 CreateHash / DecodeHash / ComparePasswordAndHash 实现，显式传入固定成本并在验证前限制编码长度与参数。沿用已有 x/crypto v0.48.0，没有升级 Go、Gin、pgx 或其他既有模块。
+
+2026-11-10，Linux/amd64、Go 1.26.1，基准报告 CPU 为 AMD EPYC 7542，GOMAXPROCS=64。每项 3 个样本、每样本 5 次操作，无 race，单独执行本次基准时未启动其他测试负载。
+
+| 基准 | 中位值 | 解释 |
+| --- | --- | --- |
+| HashPassword | 32.89 ms/op，约 19 MiB 分配/op | 随机盐和固定 Argon2id 参数的本机小样本成本 |
+| VerifyPassword | 30.61 ms/op，约 19 MiB 分配/op | 已编码散列的验证成本 |
+| 两个并发散列 | 摊销 20.17 ms/op，约 19 MiB 分配/op | 两工作协程的整体墙钟时间除操作数，不是单请求延迟 |
+
+整个基准进程峰值 RSS 为 93,204 KiB（约 91 MiB），包含所有基准、Go 堆与运行时，不能等同于单次请求内存，也不能声称并发上限使进程总内存严格限制在 38 MiB。共享主机与少量样本不支持生产容量或 P95 结论。
+
+证据：[基准摘要](../weekly/evidence/week02-day3-password-benchmark.json)、[原始输出](../weekly/evidence/week02-day3-password-benchmark.log)、[资源观察](../weekly/evidence/week02-day3-password-resources.log)。当前参数在本地演示可接受，因此保持 19 MiB/2/1，不为降低数字而弱化成本；公开部署前仍须按实际资源和负载重新测量。
+
+本次还将回环监听限制提前到 Day 3，因为注册已经处理凭据；可靠频率限制仍未实现。独立审查指出未配对 Unicode 转义和显示名 NUL 两项输入问题，已补失败复现并修正：非法转义在解码前拒绝，显示名 U+0000 在散列前拒绝，合法代理对与密码中的 NUL 保留。
+
+## 8. Day 4 JWT 实现与审查决定
+
+固定新增 golang-jwt/jwt/v5 v5.3.1，不升级既有模块。TokenManager 复制解码后的密钥，只允许 HS256；库选项与显式检查共同要求五个 Claim、规范正 int64 sub 和最长 900 秒。LoginService 启动时计算一次 dummy hash，复用注册的两名额 PasswordHasher；未知邮箱即使匹配 dummy 原文也不能登录。
+
+独立静态审查发现并修复两项 P2：NumericDate 默认秒精度截断小数会放宽时间边界；合法长标签转义后可能超过原 4096 字节预算。当前在 Claims 解码前要求时间为 int64 十进制整数秒，不改全局精度；输入预算增为 8 KiB，签发也检查长度，保留两个 256 字节标签的完整合同。代价是解析最大输入增加一倍，未来扩展 Claim 时须重新核对预算。
+
+已补红绿复现与最终 race、真实 PostgreSQL/HTTP 和 W1 回归。Token 只在测试内存中处理，不入归档；真实 .env 未读取或修改，四个新增变量由开发者本机配置。结构解释见 [JWT 说明](../jwt-guide.md)，发现与处置见 [Day 4 审查](../reviews/week02-day4-review.md)，测试证据见 [week02](../weekly/week02.md)。Day 4 当时未实现的认证中间件与用户存在性检查现已随 Day 5 完成。
+
+## 9. Day 5 可信身份与事务落地
+
+RequireUser 在验签后查询用户，只有仍存在的用户才能访问 /me 和组织创建/本人列表；上下文只存 ID。严格单Bearer使用一个ASCII空格，scheme大小写不敏感，拒绝多头/多凭据。删除用户401，数据库故障500，公开路由不受保护Group影响。
+
+组织创建在单个pgx.Tx中写组织和admin/active成员，提交后返回；事务最多5秒，独立清理Context最多3秒。名称同显示名一样拒绝NUL，保持15～128码点密码中的NUL不变。本人列表只读当前用户active关系，过滤早于分页，my_role来自数据库。
+
+真实隔离库通过成员写入失败、延迟提交失败和锁等待取消，均没有孤立组织；独立只读审查未发现需修复的实质问题。没有新增迁移/依赖、读取本地秘密或操作日常库。详见 [事务说明](../organization-transaction-guide.md) 与 [Day 5 审查](../reviews/week02-day5-review.md)。成员读取/添加及完整RBAC仍是Day6工作。
+
+## 10. Day 6 组织成员RBAC落地
+
+MemberService通过FindActiveMembership查询目标组织当前关系，policy只接受admin/member与active；非成员/disabled统一404，member写403。Handler先授权保护错误顺序，Service入口再次授权保护直接调用；合法HTTP多一次成员查询。目标用户查询只在admin通过后进行，不用错误响应帮助未授权者探测账号。
+
+成员列表限定org_id并只返回五字段DTO。AddMember同tx读目标显示名、INSERT/RETURNING关系、COMMIT后返回；重复关系（含disabled）统一409，绝不UPSERT。只有指定唯一/FK约束按SQLSTATE分类，未知数据库异常安全500。
+
+真实库/TCP验证跨组织、同人不同组织角色、禁用旧Token、并发重复和提交/取消失败。另补受保护HTTP的错误算法/签名/issuer/audience及缺Claim401。没有新增依赖或迁移；七个业务接口已实现，Day 7仍需整周审查/演示与复盘。本方案按每请求查询当前权限，不承诺撤权与在途写入完全线性化；未来修改角色/状态接口须重新设计事务语义。见 [权限说明](../member-authorization-guide.md) 与 [week02](../weekly/week02.md)。
+
+## 11. Day 7 整周工程验收
+
+完成一次 [整周独立只读审查](../reviews/week02-security-review.md)，未发现需修复的实质问题；主代理在新目录和专用PostgreSQL中重新验证全部测试及Alice/Bob八步TCP演示，包括过期Token401。没有修改业务Go源码、迁移、依赖或真实配置，运行器只增加--closeout与安全摘要。
+
+本周四项历史边界Bug和红绿证据保留；未完成安全债务、并发撤权语义及第三周工单/对象授权风险写入 [week02交接](../weekly/week02.md)。[参考回答](../weekly/week02-answers.md) 解释取舍，不代表开发者已经独立掌握，也不将静态审查等同漏洞扫描或生产安全认证。

@@ -1,0 +1,34 @@
+{
+  "recorded_date": "2026-11-10",
+  "timezone": "Asia/Shanghai",
+  "isolated_database_suite": {
+    "packages_passed": 5,
+    "top_level": {
+      "pass": 16,
+      "fail": 0,
+      "skip": 0
+    },
+    "all_test_nodes": {
+      "pass": 51,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "default_quality_suite": {
+    "packages_passed": 5,
+    "top_level": {
+      "pass": 14,
+      "fail": 0,
+      "skip": 2
+    },
+    "all_test_nodes": {
+      "pass": 33,
+      "fail": 0,
+      "skip": 2
+    }
+  },
+  "baseline_expected_exit": 1,
+  "database_suite_exit": 0,
+  "quality_exit": 0,
+  "note": "Database constraints only; business Repository, HTTP auth and authorization unimplemented."
+}

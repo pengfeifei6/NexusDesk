@@ -1,0 +1,52 @@
+{
+  "recorded_date": "2026-11-10",
+  "timezone": "Asia/Shanghai",
+  "default_race_suite": {
+    "packages_passed": 7,
+    "top_level": {
+      "pass": 58,
+      "fail": 0,
+      "skip": 6
+    },
+    "all_test_nodes": {
+      "pass": 318,
+      "fail": 0,
+      "skip": 6
+    },
+    "skipped_tests": [
+      "TestWeek02Login",
+      "TestWeek02Members",
+      "TestWeek02Organizations",
+      "TestWeek02Registration",
+      "TestWeek02Schema",
+      "TestOpenPostgresIntegration"
+    ]
+  },
+  "isolated_postgres_race_suite": {
+    "packages_passed": 7,
+    "top_level": {
+      "pass": 64,
+      "fail": 0,
+      "skip": 0
+    },
+    "all_test_nodes": {
+      "pass": 371,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "default_race_exit": 0,
+  "postgres_smoke_exit": 0,
+  "week01_smoke_exit": 0,
+  "fuzz": {
+    "command": "go test -run '^$' -fuzz '^FuzzAddMemberJSON$' -fuzztime=5s -parallel=2 ./internal/organization",
+    "executions": 13074,
+    "exit_code": 0
+  },
+  "note": "Top-level counts exclude subtest duplicates; all nodes include fuzz seeds. Day6 seven business endpoints and scoped RBAC implemented; Day7 whole-week review/demo/learning handoff remains. No production deployment claim.",
+  "register_fuzz_regression": {
+    "command": "go test -run '^$' -fuzz '^FuzzDecodeRegister$' -fuzztime=5s -parallel=2 ./internal/auth",
+    "executions": 16067,
+    "exit_code": 0
+  }
+}

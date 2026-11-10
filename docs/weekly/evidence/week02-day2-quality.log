@@ -1,0 +1,109 @@
+COMMAND: go test -race -count=1 -v ./...
+=== RUN   TestRunRejectsMissingConfiguration
+--- PASS: TestRunRejectsMissingConfiguration (0.00s)
+=== RUN   TestRunRejectsUnavailableDatabase
+--- PASS: TestRunRejectsUnavailableDatabase (0.00s)
+=== RUN   TestRunReportsOccupiedPort
+--- PASS: TestRunReportsOccupiedPort (0.00s)
+=== RUN   TestRunStopsOnCancellation
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /healthz                  --> github.com/pengfeifei6/NexusDesk/internal/platform/httpserver.NewRouter.func1 (2 handlers)
+2026/11/10 10:50:14 INFO HTTP server started addr=127.0.0.1:35741
+2026/11/10 10:50:14 INFO HTTP server stopped
+--- PASS: TestRunStopsOnCancellation (0.00s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/cmd/api	1.042s
+=== RUN   TestLoadValidEnvironment
+--- PASS: TestLoadValidEnvironment (0.00s)
+=== RUN   TestLoadRejectsMissingVariables
+=== RUN   TestLoadRejectsMissingVariables/APP_ENV
+=== RUN   TestLoadRejectsMissingVariables/HTTP_ADDR
+=== RUN   TestLoadRejectsMissingVariables/DB_HOST
+=== RUN   TestLoadRejectsMissingVariables/DB_PORT
+=== RUN   TestLoadRejectsMissingVariables/DB_USER
+=== RUN   TestLoadRejectsMissingVariables/DB_PASSWORD
+=== RUN   TestLoadRejectsMissingVariables/DB_NAME
+=== RUN   TestLoadRejectsMissingVariables/DB_SSLMODE
+--- PASS: TestLoadRejectsMissingVariables (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/APP_ENV (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/HTTP_ADDR (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_HOST (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_PORT (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_USER (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_PASSWORD (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_NAME (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_SSLMODE (0.00s)
+=== RUN   TestLoadRejectsInvalidConfiguration
+=== RUN   TestLoadRejectsInvalidConfiguration/blank_environment
+=== RUN   TestLoadRejectsInvalidConfiguration/missing_HTTP_port
+=== RUN   TestLoadRejectsInvalidConfiguration/named_HTTP_port
+=== RUN   TestLoadRejectsInvalidConfiguration/negative_HTTP_port
+=== RUN   TestLoadRejectsInvalidConfiguration/HTTP_port_too_large
+=== RUN   TestLoadRejectsInvalidConfiguration/invalid_DB_port
+=== RUN   TestLoadRejectsInvalidConfiguration/zero_DB_port
+=== RUN   TestLoadRejectsInvalidConfiguration/DB_port_too_large
+=== RUN   TestLoadRejectsInvalidConfiguration/invalid_SSL_mode
+=== RUN   TestLoadRejectsInvalidConfiguration/blank_password
+=== RUN   TestLoadRejectsInvalidConfiguration/placeholder_password
+--- PASS: TestLoadRejectsInvalidConfiguration (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/blank_environment (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/missing_HTTP_port (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/named_HTTP_port (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/negative_HTTP_port (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/HTTP_port_too_large (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/invalid_DB_port (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/zero_DB_port (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/DB_port_too_large (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/invalid_SSL_mode (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/blank_password (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/placeholder_password (0.00s)
+=== RUN   TestLoadAllowsIPv6AndEphemeralHTTPPort
+--- PASS: TestLoadAllowsIPv6AndEphemeralHTTPPort (0.00s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/config	1.043s
+=== RUN   TestOpenRejectsCanceledContext
+--- PASS: TestOpenRejectsCanceledContext (0.00s)
+=== RUN   TestOpenRejectsUnavailableDatabaseWithoutLeakingPassword
+--- PASS: TestOpenRejectsUnavailableDatabaseWithoutLeakingPassword (0.00s)
+=== RUN   TestOpenRejectsInvalidSSLModeWithoutLeakingPassword
+--- PASS: TestOpenRejectsInvalidSSLModeWithoutLeakingPassword (0.00s)
+=== RUN   TestOpenBoundsUnresponsiveDatabaseStartup
+--- PASS: TestOpenBoundsUnresponsiveDatabaseStartup (5.00s)
+=== RUN   TestOpenCancelsPendingConnection
+--- PASS: TestOpenCancelsPendingConnection (0.00s)
+=== RUN   TestOpenPostgresIntegration
+    postgres_test.go:153: requires the disposable database created by scripts/day5-smoke.py
+--- SKIP: TestOpenPostgresIntegration (0.00s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/database	6.032s
+=== RUN   TestHealthz
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /healthz                  --> github.com/pengfeifei6/NexusDesk/internal/platform/httpserver.NewRouter.func1 (2 handlers)
+--- PASS: TestHealthz (0.00s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/httpserver	1.042s
+=== RUN   TestWeek02Schema
+    schema_test.go:23: requires the disposable database from scripts/week02-day2-smoke.py
+--- SKIP: TestWeek02Schema (0.00s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/tests/integration	1.025s
+EXIT: 0
+
+COMMAND: go vet ./...
+EXIT: 0
+
+COMMAND: go build ./...
+EXIT: 0
+
+COMMAND: gofmt -l cmd internal tests
+EXIT: 0
+
+COMMAND: git diff --check
+EXIT: 0
+

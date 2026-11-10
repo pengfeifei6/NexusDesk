@@ -1,0 +1,14 @@
+# github.com/pengfeifei6/NexusDesk/internal/organization [github.com/pengfeifei6/NexusDesk/internal/organization.test]
+internal/organization/service_test.go:11:93: undefined: PageQuery
+internal/organization/service_test.go:12:89: undefined: OrganizationView
+internal/organization/service_test.go:12:161: undefined: OrganizationView
+internal/organization/service_test.go:12:191: undefined: Organization
+internal/organization/service_test.go:13:74: undefined: PageQuery
+internal/organization/service_test.go:13:87: undefined: OrganizationView
+internal/organization/handler_test.go:21:102: undefined: NewHandler
+internal/organization/handler_test.go:21:113: undefined: NewService
+internal/organization/handler_test.go:58:27: undefined: ErrStorage
+internal/organization/handler_test.go:58:38: undefined: ErrUserNotFound
+internal/organization/service_test.go:12:191: too many errors
+FAIL	github.com/pengfeifei6/NexusDesk/internal/organization [build failed]
+FAIL

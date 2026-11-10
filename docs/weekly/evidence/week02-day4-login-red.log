@@ -1,0 +1,11 @@
+# github.com/pengfeifei6/NexusDesk/internal/auth [github.com/pengfeifei6/NexusDesk/internal/auth.test]
+internal/auth/login_handler_test.go:16:45: undefined: LoginService
+internal/auth/login_handler_test.go:19:2: undefined: NewLoginHandler
+internal/auth/login_handler_test.go:24:18: undefined: NewLoginService
+internal/auth/login_handler_test.go:69:17: undefined: NewLoginService
+internal/auth/login_test.go:34:18: undefined: NewLoginService
+internal/auth/login_test.go:74:20: undefined: NewLoginService
+internal/auth/login_test.go:126:20: undefined: NewLoginService
+internal/auth/login_test.go:145:18: undefined: NewLoginService
+FAIL	github.com/pengfeifei6/NexusDesk/internal/auth [build failed]
+FAIL

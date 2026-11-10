@@ -1,6 +1,6 @@
 # NexusDesk W02 授权与错误矩阵
 
-- 日期：2026-11-10；状态：Day 1 已冻结本周设计，代码待实现。
+- 日期：2026-11-10；状态：Day 6已实现全部七个业务接口及本矩阵的组织成员RBAC，真实库/HTTP验证通过；角色修改、停用等仍无接口。
 - 依据：[认证设计](auth-design.md)、[API 契约](api/auth-organization.md)、[第二周手册](../项目开发文件/每周开发手册/05_NexusDesk_第二周详细开发手册.md)。
 - 编写方式：AI 受托补齐。本周只存在 admin/member、active/disabled；后续 support 与角色变更不在本矩阵范围。
 

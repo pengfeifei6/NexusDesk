@@ -1,0 +1,28 @@
+# github.com/pengfeifei6/NexusDesk/internal/auth [github.com/pengfeifei6/NexusDesk/internal/auth.test]
+internal/auth/handler_test.go:19:2: undefined: NewHandler
+internal/auth/handler_test.go:19:13: undefined: NewService
+internal/auth/service_test.go:36:15: undefined: NewService
+internal/auth/service_test.go:62:15: undefined: NewService
+internal/auth/service_test.go:79:14: undefined: NewService
+internal/auth/service_test.go:89:14: undefined: NewService
+internal/auth/service_test.go:101:13: undefined: NewService
+FAIL	github.com/pengfeifei6/NexusDesk/internal/auth [build failed]
+# github.com/pengfeifei6/NexusDesk/internal/platform/httpserver [github.com/pengfeifei6/NexusDesk/internal/platform/httpserver.test]
+internal/platform/httpserver/router_test.go:34:22: too many arguments in call to NewRouter
+	have (func(group *gin.RouterGroup))
+	want ()
+FAIL	github.com/pengfeifei6/NexusDesk/internal/platform/httpserver [build failed]
+--- FAIL: TestLoadRejectsNonLoopbackRegistrationListener (0.00s)
+    --- FAIL: TestLoadRejectsNonLoopbackRegistrationListener/:8080 (0.00s)
+        config_test.go:95: credential endpoint accepted a non-explicit-loopback listener
+    --- FAIL: TestLoadRejectsNonLoopbackRegistrationListener/0.0.0.0:8080 (0.00s)
+        config_test.go:95: credential endpoint accepted a non-explicit-loopback listener
+    --- FAIL: TestLoadRejectsNonLoopbackRegistrationListener/[::]:8080 (0.00s)
+        config_test.go:95: credential endpoint accepted a non-explicit-loopback listener
+    --- FAIL: TestLoadRejectsNonLoopbackRegistrationListener/192.0.2.10:8080 (0.00s)
+        config_test.go:95: credential endpoint accepted a non-explicit-loopback listener
+    --- FAIL: TestLoadRejectsNonLoopbackRegistrationListener/localhost:8080 (0.00s)
+        config_test.go:95: credential endpoint accepted a non-explicit-loopback listener
+FAIL
+FAIL	github.com/pengfeifei6/NexusDesk/internal/platform/config	0.008s
+FAIL

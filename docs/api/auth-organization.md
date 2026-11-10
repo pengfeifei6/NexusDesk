@@ -1,13 +1,13 @@
 # NexusDesk W02 身份与组织 API 契约
 
-- 日期：2026-11-10；版本：v0.1；状态：Day 1 冻结设计，尚未实现。
+- 日期：2026-11-10；版本：v0.2；状态：Day 7工程收尾完成，全部七个业务接口与GET /healthz已回归，整周审查和演示见week02。
 - 本周业务接口：下面列出的 7 个；统一前缀 `/api/v1`。原有 `GET /healthz` 保持不变。
 - 编写方式：AI 根据开发者委托补齐手册中的输入、响应、错误和边界。
 - 配套：[认证设计](../auth-design.md)、[权限矩阵](../authorization-matrix.md)、[数据库设计](../database.md)。
 
 ## 1. 公共约定
 
-写接口使用 `Content-Type: application/json`，允许 charset 参数；只接收一个 JSON 对象，拒绝未知字段、尾随第二个 JSON 值、类型错误和缺失必填项。请求体最多 16 KiB，超过返回 413。GET 无请求体，列表只接受 page/page_size 两个可选查询参数，其他参数返回 400。
+写接口使用 `Content-Type: application/json`，允许 charset 参数；只接收一个 JSON 对象，拒绝未知或重复字段、尾随第二个 JSON 值、类型错误和缺失必填项。拒绝原始非法 UTF-8 和未配对 UTF-16 转义，不能静默替换输入；合法代理对正常解码。请求体最多 16 KiB，超过返回 413。GET 无请求体，列表只接受 page/page_size 两个可选查询参数，其他参数返回 400。
 
 所有 API 响应为 JSON，带 `Cache-Control: no-store`。成功统一 `{"data":...}`；错误统一以下结构，request_id 当前允许空字符串，不为此增加观测平台。
 
@@ -21,7 +21,7 @@
 
 ### 1.1 身份与错误顺序
 
-受保护接口只从 `Authorization: Bearer <ACCESS_TOKEN>` 获取凭据，不从请求体取操作者。scheme 大小写不敏感，只允许一个非空 Token；缺失、畸形和重复 Authorization 返回 401。受保护接口的 401 响应带 `WWW-Authenticate: Bearer`，不暴露验签细节。
+受保护接口只从 `Authorization: Bearer <ACCESS_TOKEN>` 获取凭据，不从请求体取操作者。scheme 大小写不敏感，与 Token 间固定一个 ASCII 空格，只允许一个非空 Token，拒绝逗号及其他空白；缺失、畸形和重复 Authorization 返回 401。受保护接口的 401 响应带 `WWW-Authenticate: Bearer`，不暴露验签细节。Day 5 已在三个受保护接口接入。
 
 除入口请求体大小保护外，校验顺序为：认证及用户存在性 → orgID 格式 → active 成员关系 → 操作角色 → 业务输入与目标用户 → SQL / 事务。公开注册和登录不依赖 Authorization。具体分支见 [权限矩阵](../authorization-matrix.md)。
 
@@ -30,9 +30,9 @@
 | 字段 | 契约 |
 | --- | --- |
 | email | 去首尾空白后 3～254 ASCII 字节；使用普通 local@domain 地址，不含显示名、列表、内部空白或国际化字符；以 net/mail 解析且解析后的 Address 必须等于原输入；ASCII 小写存储与查找；不改写点号或 +tag |
-| display_name | 去首尾空白后 1～80 个 Unicode 码点 |
+| display_name | 去首尾空白后 1～80 个 Unicode 码点，有效 UTF-8 且不含 U+0000；非法时 INVALID_REQUEST |
 | password | 有效 UTF-8，15～128 个 Unicode 码点，最多 512 UTF-8 字节，非全空白；保持原文，不裁剪或截断；注册与登录边界相同 |
-| name | 去首尾空白后 1～100 个 Unicode 码点；组织名不要求全局唯一 |
+| name | 去首尾空白后 1～100 个 Unicode 码点，有效 UTF-8 且无 U+0000；组织名不要求全局唯一 |
 | role | 精确小写 member 或 admin，添加成员时必填；不接受 support 和大小写别名 |
 | status | 服务端设置 active；本周任何写接口均不接收此字段 |
 | page / page_size | 正十进制整数，默认 1 / 20；page_size 最大 100；不接受重复参数、非数字、溢出，分页偏移计算也必须检查溢出 |
@@ -76,6 +76,8 @@
 
 `POST /api/v1/auth/register`，请求体仅允许 email、display_name、password。
 
+此接口已在 Day 3 实现。密码的 NUL 可以按原文参与散列；禁止显示名 NUL 是数据库文本字段的边界，不应错误套用到密码。
+
 ```json
 {"email":"Alice@example.test","display_name":"Alice","password":"ExampleOnly-ChooseYourOwnLongPassword"}
 ```
@@ -92,6 +94,8 @@
 
 ## 4. 登录
 
+Day 4 已实现；单元、专用 PostgreSQL 与真实进程 HTTP 验证通过。示例见 [week02.http](../../requests/week02.http)，JWT 结构见 [学习说明](../jwt-guide.md)。
+
 `POST /api/v1/auth/login`，仅允许 email、password。
 
 ```json
@@ -106,9 +110,13 @@
 
 邮箱规范化与注册一致。验证密码后才签发 Token；不因成功登录而自动加入组织。Token 固定 HS256、15 分钟，必需 sub/iss/aud/iat/exp，无组织或角色；完整规则见 [认证设计](../auth-design.md)。
 
+sub 是规范正十进制 int64 字符串；iat/exp/可选 nbf 是 int64 范围的 JSON 整数秒，不接受小数、指数、字符串或 null。issuer/audience 各最多 256 UTF-8 字节；签发和验证 Token 长度上限为 8 KiB。Day 5 已接入 HTTP Bearer 解析、用户存在性与 /me。
+
 失败：400 非法或缺失输入；401 INVALID_CREDENTIALS（邮箱不存在与密码错误完全相同）；413 / 415；503 AUTH_BUSY；500 查询、散列编码或签发错误。不存在账号时做同成本 dummy 验证，不能声称时序绝对相同。
 
 ## 5. 当前用户
+
+Day 5 已实现；拒绝任何查询参数与非空请求体，认证优先于业务输入校验。
 
 `GET /api/v1/me`，必须通过认证，不接收 user_id 查询参数或请求体身份。
 
@@ -121,6 +129,8 @@
 仅返回当前用户公开 DTO，不包含其他用户、散列和组织角色。用户不存在或 Token 无效 → 401 UNAUTHENTICATED；查询异常 → 500。用户没有组织或在某组织 disabled，不影响其访问本人资料。
 
 ## 6. 创建组织
+
+Day 5 已实现；同事务、第二步失败/提交失败/取消回滚均已在专用库验证。解释见 [事务学习说明](../organization-transaction-guide.md)。
 
 `POST /api/v1/organizations`，仅允许 name。
 
@@ -140,6 +150,8 @@
 
 ## 7. 本人组织列表
 
+Day 5 已实现；真实库验证他人和 disabled 过滤、先过滤后分页、数据库角色变更反映在 my_role。成员内资源授权已随 Day 6 接入。
+
 `GET /api/v1/organizations?page=1&page_size=20`，必须认证，无请求体。
 
 成功 200：
@@ -154,6 +166,8 @@
 
 ## 8. 组织成员列表
 
+Day 6 已实现并验证；授权先于分页解析，Handler与Service入口均查询当前成员关系。解释见 [成员权限说明](../member-authorization-guide.md)。
+
 `GET /api/v1/organizations/:orgID/members?page=1&page_size=20`。
 
 成功 200：
@@ -167,6 +181,8 @@
 失败：401；orgID 或已授权后的分页格式错误为 400；组织不存在、非成员、disabled 均为相同 404 NOT_FOUND；数据库异常为 500。不得先查询全局成员再用前端过滤。
 
 ## 9. 添加已注册成员
+
+Day 6 已实现；真实库与进程覆盖admin成功、member禁止、跨组织/disabled隐藏、重复/并发409，以及提交失败和取消回滚。
 
 `POST /api/v1/organizations/:orgID/members`，仅允许目标 user_id 与 role，二者必填。
 
@@ -199,4 +215,4 @@
 
 本周不新增角色修改、停用、组织详情/删除、用户搜索、邀请、刷新或撤销接口。第一周健康检查不纳入上述七个接口计数。
 
-上述设计对应手册 A01～A18；Day 3～Day 6 还需覆盖严格输入、大小与长度边界、JWT 必需 Claim、密码计算门限、分页过滤和空列表。所有示例当前只作为合同，不是 curl 结果。设计调整须同步认证、权限、数据库文档与周报，并增加对应验证。
+上述设计对应手册 A01～A18；Day 6 已验证注册/登录、严格输入、Token/受保护身份、组织事务/分页、成员读取/添加和当前范围RBAC。A01～A18自动化证据见week02，Day 7已完成整周审查、真实演示与工程复盘，个人复述另行记录。所有示例仍作为合同，不冒充特定 curl 输出。设计调整须同步认证、权限、数据库文档与周报，并增加对应验证。
