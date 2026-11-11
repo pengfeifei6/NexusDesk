@@ -1,0 +1,5 @@
+# github.com/pengfeifei6/NexusDesk/internal/knowledge [github.com/pengfeifei6/NexusDesk/internal/knowledge.test]
+internal/knowledge/handler_test.go:49:5: undefined: NewHandler
+internal/knowledge/handler_test.go:75:3: undefined: NewHandler
+FAIL	github.com/pengfeifei6/NexusDesk/internal/knowledge [build failed]
+FAIL

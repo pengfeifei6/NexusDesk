@@ -1,0 +1,14 @@
+# github.com/pengfeifei6/NexusDesk/internal/knowledge [github.com/pengfeifei6/NexusDesk/internal/knowledge.test]
+internal/knowledge/service_test.go:16:30: undefined: Document
+internal/knowledge/service_test.go:16:44: undefined: DocumentText
+internal/knowledge/service_test.go:17:48: undefined: Document
+internal/knowledge/service_test.go:18:57: undefined: Document
+internal/knowledge/service_test.go:19:48: undefined: Filter
+internal/knowledge/service_test.go:19:58: undefined: Document
+internal/knowledge/service_test.go:20:68: undefined: Document
+internal/knowledge/service_test.go:21:59: undefined: Document
+internal/knowledge/service_test.go:24:63: undefined: DocumentText
+internal/knowledge/service_test.go:32:29: undefined: Service
+internal/knowledge/service_test.go:32:29: too many errors
+FAIL	github.com/pengfeifei6/NexusDesk/internal/knowledge [build failed]
+FAIL

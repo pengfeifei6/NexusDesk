@@ -1,0 +1,18 @@
+{
+  "suite": "W07 owned process fault contracts",
+  "status": "FAIL",
+  "fake_model": true,
+  "semantic_evidence": false,
+  "actual_signals": [],
+  "fixture_injection": [],
+  "cases": [
+    {
+      "case": "setup",
+      "status": "FAIL",
+      "failure": "AttributeError"
+    }
+  ],
+  "current_case": "setup",
+  "failed_case": "setup",
+  "cleanup_failures": []
+}

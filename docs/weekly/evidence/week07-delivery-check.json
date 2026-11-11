@@ -1,0 +1,15 @@
+{
+  "baseline_files": 522,
+  "missing_baseline": [],
+  "old_migrations_unchanged": true,
+  "historical_evidence_unchanged": true,
+  "existing_dependency_version_changes": {},
+  "broken_local_links": [],
+  "business_routes": 33,
+  "migrations": 11,
+  "manual_acceptance_rows": 36,
+  "questions": 20,
+  "source_branch": "feat/week07-async-ingestion",
+  "automatic_commit_push_merge": false,
+  "actual_env_or_private_backup_read": false
+}

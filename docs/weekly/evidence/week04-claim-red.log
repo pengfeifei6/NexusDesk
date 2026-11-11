@@ -1,0 +1,14 @@
+# github.com/pengfeifei6/NexusDesk/internal/ticket [github.com/pengfeifei6/NexusDesk/internal/ticket.test]
+internal/ticket/claim_test.go:30:32: NewService(s, s).Claim undefined (type *Service has no field or method Claim)
+internal/ticket/claim_test.go:35:32: NewService(s, s).Claim undefined (type *Service has no field or method Claim)
+internal/ticket/claim_test.go:35:86: undefined: ErrClaimConflict
+internal/ticket/claim_test.go:42:26: undefined: ErrClaimConflict
+internal/ticket/claim_test.go:43:80: undefined: ErrClaimConflict
+internal/ticket/claim_test.go:44:72: undefined: ErrClaimConflict
+internal/ticket/claim_test.go:45:67: undefined: ErrClaimConflict
+internal/ticket/claim_test.go:46:63: undefined: ErrClaimConflict
+internal/ticket/claim_test.go:55:88: undefined: ErrClaimConflict
+internal/ticket/claim_test.go:59:28: NewService(s, s).Claim undefined (type *Service has no field or method Claim)
+internal/ticket/claim_test.go:59:28: too many errors
+FAIL	github.com/pengfeifei6/NexusDesk/internal/ticket [build failed]
+FAIL

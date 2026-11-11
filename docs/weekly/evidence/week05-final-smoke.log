@@ -1,0 +1,1423 @@
+PASS isolated PostgreSQL 17 healthy; project=nexusdesk-w02d2-d4e55590a5fe
+2026/11/11 00:11:50 OK   00001_create_organizations.sql (15.32ms)
+2026/11/11 00:11:50 goose: successfully migrated database to version: 1
+2026/11/11 00:11:50 OK   00002_create_users.sql (13.78ms)
+2026/11/11 00:11:50 OK   00003_create_organization_members.sql (11.59ms)
+2026/11/11 00:11:50 goose: successfully migrated database to version: 3
+2026/11/11 00:11:50     Applied At                  Migration
+2026/11/11 00:11:50     =======================================
+2026/11/11 00:11:50     Tue Nov 10 16:11:50 2026 -- 00001_create_organizations.sql
+2026/11/11 00:11:50     Tue Nov 10 16:11:50 2026 -- 00002_create_users.sql
+2026/11/11 00:11:50     Tue Nov 10 16:11:50 2026 -- 00003_create_organization_members.sql
+2026/11/11 00:11:50     Pending                  -- 00004_create_tickets.sql
+2026/11/11 00:11:50     Pending                  -- 00005_create_ticket_comments.sql
+2026/11/11 00:11:50     Pending                  -- 00006_create_ticket_events.sql
+2026/11/11 00:11:50     Pending                  -- 00007_create_knowledge_documents.sql
+2026/11/11 00:11:50     Pending                  -- 00008_create_knowledge_document_texts.sql
+2026/11/11 00:11:51 goose: no migrations to run. current version: 3
+PASS W1 to W02 upgrade preserves existing organization; repeated Up is stable
+2026/11/11 00:11:51 OK   00003_create_organization_members.sql (16.7ms)
+2026/11/11 00:11:51 OK   00002_create_users.sql (12.32ms)
+2026/11/11 00:11:52 OK   00002_create_users.sql (17.66ms)
+2026/11/11 00:11:52 OK   00003_create_organization_members.sql (13.09ms)
+2026/11/11 00:11:52 goose: successfully migrated database to version: 3
+PASS reverse Down 3 to 2 to 1, then Up to 3; W1 data retained
+2026/11/11 00:11:52 OK   00004_create_tickets.sql (68.63ms)
+2026/11/11 00:11:52 OK   00005_create_ticket_comments.sql (22.28ms)
+2026/11/11 00:11:52 OK   00006_create_ticket_events.sql (17.82ms)
+2026/11/11 00:11:52 goose: successfully migrated database to version: 6
+2026/11/11 00:11:52     Applied At                  Migration
+2026/11/11 00:11:52     =======================================
+2026/11/11 00:11:52     Tue Nov 10 16:11:50 2026 -- 00001_create_organizations.sql
+2026/11/11 00:11:52     Tue Nov 10 16:11:52 2026 -- 00002_create_users.sql
+2026/11/11 00:11:52     Tue Nov 10 16:11:52 2026 -- 00003_create_organization_members.sql
+2026/11/11 00:11:52     Tue Nov 10 16:11:52 2026 -- 00004_create_tickets.sql
+2026/11/11 00:11:52     Tue Nov 10 16:11:52 2026 -- 00005_create_ticket_comments.sql
+2026/11/11 00:11:52     Tue Nov 10 16:11:52 2026 -- 00006_create_ticket_events.sql
+2026/11/11 00:11:52     Pending                  -- 00007_create_knowledge_documents.sql
+2026/11/11 00:11:52     Pending                  -- 00008_create_knowledge_document_texts.sql
+2026/11/11 00:11:52 goose: no migrations to run. current version: 6
+2026/11/11 00:11:53 OK   00006_create_ticket_events.sql (558.35ms)
+2026/11/11 00:11:53 OK   00005_create_ticket_comments.sql (13.7ms)
+2026/11/11 00:11:53 OK   00004_create_tickets.sql (17.14ms)
+2026/11/11 00:11:54 OK   00004_create_tickets.sql (67.7ms)
+2026/11/11 00:11:54 OK   00005_create_ticket_comments.sql (24.64ms)
+2026/11/11 00:11:54 OK   00006_create_ticket_events.sql (18.85ms)
+2026/11/11 00:11:54 goose: successfully migrated database to version: 6
+PASS W03 3 -> 6, repeated Up, reverse Down to 3, Up to 6; old organization retained
+2026/11/11 00:11:54 OK   00007_create_knowledge_documents.sql (17.22ms)
+2026/11/11 00:11:54 OK   00008_create_knowledge_document_texts.sql (18.29ms)
+2026/11/11 00:11:54 goose: successfully migrated database to version: 8
+2026/11/11 00:11:54 goose: no migrations to run. current version: 8
+2026/11/11 00:11:55 OK   00008_create_knowledge_document_texts.sql (14.39ms)
+2026/11/11 00:11:55 OK   00007_create_knowledge_documents.sql (12.67ms)
+2026/11/11 00:11:55 OK   00007_create_knowledge_documents.sql (15.58ms)
+2026/11/11 00:11:55 OK   00008_create_knowledge_document_texts.sql (3.06ms)
+2026/11/11 00:11:55 goose: successfully migrated database to version: 8
+2026/11/11 00:11:56     Applied At                  Migration
+2026/11/11 00:11:56     =======================================
+2026/11/11 00:11:56     Tue Nov 10 16:11:50 2026 -- 00001_create_organizations.sql
+2026/11/11 00:11:56     Tue Nov 10 16:11:52 2026 -- 00002_create_users.sql
+2026/11/11 00:11:56     Tue Nov 10 16:11:52 2026 -- 00003_create_organization_members.sql
+2026/11/11 00:11:56     Tue Nov 10 16:11:54 2026 -- 00004_create_tickets.sql
+2026/11/11 00:11:56     Tue Nov 10 16:11:54 2026 -- 00005_create_ticket_comments.sql
+2026/11/11 00:11:56     Tue Nov 10 16:11:54 2026 -- 00006_create_ticket_events.sql
+2026/11/11 00:11:56     Tue Nov 10 16:11:55 2026 -- 00007_create_knowledge_documents.sql
+2026/11/11 00:11:56     Tue Nov 10 16:11:55 2026 -- 00008_create_knowledge_document_texts.sql
+PASS W05 6 -> 8, repeated Up, reverse Down to 6, Up to 8; old organization retained
+=== RUN   TestRunRejectsMissingConfiguration
+--- PASS: TestRunRejectsMissingConfiguration (0.00s)
+=== RUN   TestRunRejectsUnavailableDatabase
+--- PASS: TestRunRejectsUnavailableDatabase (0.01s)
+=== RUN   TestRunReportsOccupiedPort
+--- PASS: TestRunReportsOccupiedPort (0.00s)
+=== RUN   TestRunStopsOnCancellation
+2026/11/11 00:11:58 INFO HTTP server started addr=127.0.0.1:46793
+2026/11/11 00:11:58 INFO HTTP server stopped
+--- PASS: TestRunStopsOnCancellation (0.00s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/cmd/api	1.042s
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/unknown_field
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/wrong_case_field
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/duplicate_field
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/multiple_objects
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/array
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/null_object
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/missing_fields
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/null_field
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/wrong_type
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/empty_password
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/invalid_utf8
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/unpaired_high_surrogate
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/different_unpaired_surrogate
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/unpaired_low_surrogate
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/two_high_surrogates
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/display_name_nul
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/malformed_json
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/bad_email
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/short_password
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/oversize
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/wrong_media
+=== RUN   TestRegisterHandlerRejectsUnsafeInputs/missing_media
+--- PASS: TestRegisterHandlerRejectsUnsafeInputs (0.01s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/unknown_field (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/wrong_case_field (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/duplicate_field (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/multiple_objects (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/array (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/null_object (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/missing_fields (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/null_field (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/wrong_type (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/empty_password (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/invalid_utf8 (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/unpaired_high_surrogate (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/different_unpaired_surrogate (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/unpaired_low_surrogate (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/two_high_surrogates (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/display_name_nul (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/malformed_json (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/bad_email (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/short_password (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/oversize (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/wrong_media (0.00s)
+    --- PASS: TestRegisterHandlerRejectsUnsafeInputs/missing_media (0.00s)
+=== RUN   TestRegisterPreservesValidJSONUnicodeEscapes
+=== RUN   TestRegisterPreservesValidJSONUnicodeEscapes/valid_surrogate_pair
+=== RUN   TestRegisterPreservesValidJSONUnicodeEscapes/explicit_replacement_character
+=== RUN   TestRegisterPreservesValidJSONUnicodeEscapes/literal_backslash_u
+=== RUN   TestRegisterPreservesValidJSONUnicodeEscapes/password_nul
+--- PASS: TestRegisterPreservesValidJSONUnicodeEscapes (0.00s)
+    --- PASS: TestRegisterPreservesValidJSONUnicodeEscapes/valid_surrogate_pair (0.00s)
+    --- PASS: TestRegisterPreservesValidJSONUnicodeEscapes/explicit_replacement_character (0.00s)
+    --- PASS: TestRegisterPreservesValidJSONUnicodeEscapes/literal_backslash_u (0.00s)
+    --- PASS: TestRegisterPreservesValidJSONUnicodeEscapes/password_nul (0.00s)
+=== RUN   TestRegisterHandlerReturnsOnlyPublicFieldsAtSizeBoundary
+--- PASS: TestRegisterHandlerReturnsOnlyPublicFieldsAtSizeBoundary (0.00s)
+=== RUN   TestRegisterHandlerMapsFailuresSafely
+=== RUN   TestRegisterHandlerMapsFailuresSafely/duplicate
+=== RUN   TestRegisterHandlerMapsFailuresSafely/storage
+=== RUN   TestRegisterHandlerMapsFailuresSafely/hash
+=== RUN   TestRegisterHandlerMapsFailuresSafely/busy
+--- PASS: TestRegisterHandlerMapsFailuresSafely (0.00s)
+    --- PASS: TestRegisterHandlerMapsFailuresSafely/duplicate (0.00s)
+    --- PASS: TestRegisterHandlerMapsFailuresSafely/storage (0.00s)
+    --- PASS: TestRegisterHandlerMapsFailuresSafely/hash (0.00s)
+    --- PASS: TestRegisterHandlerMapsFailuresSafely/busy (0.00s)
+=== RUN   TestLoginHandlerRejectsStrictInput
+=== RUN   TestLoginHandlerRejectsStrictInput/missing
+=== RUN   TestLoginHandlerRejectsStrictInput/empty_password
+=== RUN   TestLoginHandlerRejectsStrictInput/null_password
+=== RUN   TestLoginHandlerRejectsStrictInput/unknown_field
+=== RUN   TestLoginHandlerRejectsStrictInput/duplicate
+=== RUN   TestLoginHandlerRejectsStrictInput/trailing_object
+=== RUN   TestLoginHandlerRejectsStrictInput/surrogate
+=== RUN   TestLoginHandlerRejectsStrictInput/bad_email
+=== RUN   TestLoginHandlerRejectsStrictInput/short_password
+=== RUN   TestLoginHandlerRejectsStrictInput/oversize
+=== RUN   TestLoginHandlerRejectsStrictInput/media
+--- PASS: TestLoginHandlerRejectsStrictInput (0.00s)
+    --- PASS: TestLoginHandlerRejectsStrictInput/missing (0.00s)
+    --- PASS: TestLoginHandlerRejectsStrictInput/empty_password (0.00s)
+    --- PASS: TestLoginHandlerRejectsStrictInput/null_password (0.00s)
+    --- PASS: TestLoginHandlerRejectsStrictInput/unknown_field (0.00s)
+    --- PASS: TestLoginHandlerRejectsStrictInput/duplicate (0.00s)
+    --- PASS: TestLoginHandlerRejectsStrictInput/trailing_object (0.00s)
+    --- PASS: TestLoginHandlerRejectsStrictInput/surrogate (0.00s)
+    --- PASS: TestLoginHandlerRejectsStrictInput/bad_email (0.00s)
+    --- PASS: TestLoginHandlerRejectsStrictInput/short_password (0.00s)
+    --- PASS: TestLoginHandlerRejectsStrictInput/oversize (0.00s)
+    --- PASS: TestLoginHandlerRejectsStrictInput/media (0.00s)
+=== RUN   TestLoginHandlerSuccessAndFailureResponses
+=== RUN   TestLoginHandlerSuccessAndFailureResponses/success
+=== RUN   TestLoginHandlerSuccessAndFailureResponses/wrong_password
+=== RUN   TestLoginHandlerSuccessAndFailureResponses/unknown
+=== RUN   TestLoginHandlerSuccessAndFailureResponses/database
+=== RUN   TestLoginHandlerSuccessAndFailureResponses/raw_database_error
+=== RUN   TestLoginHandlerSuccessAndFailureResponses/hash
+=== RUN   TestLoginHandlerSuccessAndFailureResponses/busy
+=== RUN   TestLoginHandlerSuccessAndFailureResponses/signing
+--- PASS: TestLoginHandlerSuccessAndFailureResponses (0.00s)
+    --- PASS: TestLoginHandlerSuccessAndFailureResponses/success (0.00s)
+    --- PASS: TestLoginHandlerSuccessAndFailureResponses/wrong_password (0.00s)
+    --- PASS: TestLoginHandlerSuccessAndFailureResponses/unknown (0.00s)
+    --- PASS: TestLoginHandlerSuccessAndFailureResponses/database (0.00s)
+    --- PASS: TestLoginHandlerSuccessAndFailureResponses/raw_database_error (0.00s)
+    --- PASS: TestLoginHandlerSuccessAndFailureResponses/hash (0.00s)
+    --- PASS: TestLoginHandlerSuccessAndFailureResponses/busy (0.00s)
+    --- PASS: TestLoginHandlerSuccessAndFailureResponses/signing (0.00s)
+=== RUN   TestLoginNormalizesIdentityAndPreservesPassword
+--- PASS: TestLoginNormalizesIdentityAndPreservesPassword (0.00s)
+=== RUN   TestLoginUnknownAndWrongPasswordHaveSameFailure
+=== RUN   TestLoginUnknownAndWrongPasswordHaveSameFailure/wrong_password
+=== RUN   TestLoginUnknownAndWrongPasswordHaveSameFailure/unknown_email
+=== RUN   TestLoginUnknownAndWrongPasswordHaveSameFailure/dummy_password_matches
+--- PASS: TestLoginUnknownAndWrongPasswordHaveSameFailure (0.00s)
+    --- PASS: TestLoginUnknownAndWrongPasswordHaveSameFailure/wrong_password (0.00s)
+    --- PASS: TestLoginUnknownAndWrongPasswordHaveSameFailure/unknown_email (0.00s)
+    --- PASS: TestLoginUnknownAndWrongPasswordHaveSameFailure/dummy_password_matches (0.00s)
+=== RUN   TestLoginRejectsInputsAndPropagatesFailures
+=== RUN   TestLoginRejectsInputsAndPropagatesFailures/empty_password
+=== RUN   TestLoginRejectsInputsAndPropagatesFailures/bad_email
+=== RUN   TestLoginRejectsInputsAndPropagatesFailures/short_password
+=== RUN   TestLoginRejectsInputsAndPropagatesFailures/database_failure
+=== RUN   TestLoginRejectsInputsAndPropagatesFailures/broken_hash
+=== RUN   TestLoginRejectsInputsAndPropagatesFailures/password_busy
+=== RUN   TestLoginRejectsInputsAndPropagatesFailures/signing_failure
+=== RUN   TestLoginRejectsInputsAndPropagatesFailures/canceled_verify
+--- PASS: TestLoginRejectsInputsAndPropagatesFailures (0.00s)
+    --- PASS: TestLoginRejectsInputsAndPropagatesFailures/empty_password (0.00s)
+    --- PASS: TestLoginRejectsInputsAndPropagatesFailures/bad_email (0.00s)
+    --- PASS: TestLoginRejectsInputsAndPropagatesFailures/short_password (0.00s)
+    --- PASS: TestLoginRejectsInputsAndPropagatesFailures/database_failure (0.00s)
+    --- PASS: TestLoginRejectsInputsAndPropagatesFailures/broken_hash (0.00s)
+    --- PASS: TestLoginRejectsInputsAndPropagatesFailures/password_busy (0.00s)
+    --- PASS: TestLoginRejectsInputsAndPropagatesFailures/signing_failure (0.00s)
+    --- PASS: TestLoginRejectsInputsAndPropagatesFailures/canceled_verify (0.00s)
+=== RUN   TestLoginSharesRegistrationPasswordBudget
+--- PASS: TestLoginSharesRegistrationPasswordBudget (0.10s)
+=== RUN   TestLoginRejectsStartupHashFailureAndPreCanceledRequest
+--- PASS: TestLoginRejectsStartupHashFailureAndPreCanceledRequest (0.00s)
+=== RUN   TestRequireUser
+=== RUN   TestRequireUser/valid
+=== RUN   TestRequireUser/case_insensitive
+=== RUN   TestRequireUser/absent
+=== RUN   TestRequireUser/empty
+=== RUN   TestRequireUser/basic
+=== RUN   TestRequireUser/duplicate
+=== RUN   TestRequireUser/comma
+=== RUN   TestRequireUser/double_space
+=== RUN   TestRequireUser/tab
+=== RUN   TestRequireUser/expired
+=== RUN   TestRequireUser/wrong_issuer
+=== RUN   TestRequireUser/tampered
+=== RUN   TestRequireUser/oversized
+=== RUN   TestRequireUser/deleted_user
+=== RUN   TestRequireUser/storage_fault
+=== RUN   TestRequireUser/invalid_record
+=== RUN   TestRequireUser/canceled
+--- PASS: TestRequireUser (0.01s)
+    --- PASS: TestRequireUser/valid (0.00s)
+    --- PASS: TestRequireUser/case_insensitive (0.00s)
+    --- PASS: TestRequireUser/absent (0.00s)
+    --- PASS: TestRequireUser/empty (0.00s)
+    --- PASS: TestRequireUser/basic (0.00s)
+    --- PASS: TestRequireUser/duplicate (0.00s)
+    --- PASS: TestRequireUser/comma (0.00s)
+    --- PASS: TestRequireUser/double_space (0.00s)
+    --- PASS: TestRequireUser/tab (0.00s)
+    --- PASS: TestRequireUser/expired (0.00s)
+    --- PASS: TestRequireUser/wrong_issuer (0.00s)
+    --- PASS: TestRequireUser/tampered (0.00s)
+    --- PASS: TestRequireUser/oversized (0.00s)
+    --- PASS: TestRequireUser/deleted_user (0.00s)
+    --- PASS: TestRequireUser/storage_fault (0.00s)
+    --- PASS: TestRequireUser/invalid_record (0.00s)
+    --- PASS: TestRequireUser/canceled (0.00s)
+=== RUN   TestMeUsesTrustedIdentityAndStrictGET
+--- PASS: TestMeUsesTrustedIdentityAndStrictGET (0.00s)
+=== RUN   TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims
+=== RUN   TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/HS384
+=== RUN   TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/none
+=== RUN   TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/wrong_key
+=== RUN   TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/issuer
+=== RUN   TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/audience
+=== RUN   TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/sub
+=== RUN   TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/iat
+=== RUN   TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/exp
+=== RUN   TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/expired
+--- PASS: TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims (0.00s)
+    --- PASS: TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/HS384 (0.00s)
+    --- PASS: TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/none (0.00s)
+    --- PASS: TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/wrong_key (0.00s)
+    --- PASS: TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/issuer (0.00s)
+    --- PASS: TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/audience (0.00s)
+    --- PASS: TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/sub (0.00s)
+    --- PASS: TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/iat (0.00s)
+    --- PASS: TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/exp (0.00s)
+    --- PASS: TestProtectedHTTPRejectsInvalidAlgorithmsAndClaims/expired (0.00s)
+=== RUN   TestPasswordSaltAndVerification
+--- PASS: TestPasswordSaltAndVerification (0.45s)
+=== RUN   TestPasswordPreservesWhitespaceAndUnicode
+--- PASS: TestPasswordPreservesWhitespaceAndUnicode (0.21s)
+=== RUN   TestPasswordPolicyBoundaries
+=== RUN   TestPasswordPolicyBoundaries/empty
+=== RUN   TestPasswordPolicyBoundaries/too_short
+=== RUN   TestPasswordPolicyBoundaries/whitespace
+=== RUN   TestPasswordPolicyBoundaries/invalid_utf8
+=== RUN   TestPasswordPolicyBoundaries/too_many_characters
+=== RUN   TestPasswordPolicyBoundaries/too_many_bytes
+=== RUN   TestPasswordPolicyBoundaries/minimum
+=== RUN   TestPasswordPolicyBoundaries/maximum_unicode
+--- PASS: TestPasswordPolicyBoundaries (0.14s)
+    --- PASS: TestPasswordPolicyBoundaries/empty (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/too_short (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/whitespace (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/invalid_utf8 (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/too_many_characters (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/too_many_bytes (0.00s)
+    --- PASS: TestPasswordPolicyBoundaries/minimum (0.07s)
+    --- PASS: TestPasswordPolicyBoundaries/maximum_unicode (0.07s)
+=== RUN   TestPasswordPreservesEmbeddedNUL
+--- PASS: TestPasswordPreservesEmbeddedNUL (0.22s)
+=== RUN   TestPasswordRejectsUntrustedHashParameters
+=== RUN   TestPasswordRejectsUntrustedHashParameters/empty
+=== RUN   TestPasswordRejectsUntrustedHashParameters/plaintext
+=== RUN   TestPasswordRejectsUntrustedHashParameters/huge_input
+=== RUN   TestPasswordRejectsUntrustedHashParameters/unbounded_memory
+=== RUN   TestPasswordRejectsUntrustedHashParameters/unbounded_iterations
+=== RUN   TestPasswordRejectsUntrustedHashParameters/zero_parallelism
+=== RUN   TestPasswordRejectsUntrustedHashParameters/wrong_version
+=== RUN   TestPasswordRejectsUntrustedHashParameters/wrong_variant
+=== RUN   TestPasswordRejectsUntrustedHashParameters/invalid_encoding
+=== RUN   TestPasswordRejectsUntrustedHashParameters/short_salt_key
+--- PASS: TestPasswordRejectsUntrustedHashParameters (0.07s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/empty (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/plaintext (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/huge_input (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/unbounded_memory (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/unbounded_iterations (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/zero_parallelism (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/wrong_version (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/wrong_variant (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/invalid_encoding (0.00s)
+    --- PASS: TestPasswordRejectsUntrustedHashParameters/short_salt_key (0.00s)
+=== RUN   TestPasswordBudgetAndCancellation
+--- PASS: TestPasswordBudgetAndCancellation (0.15s)
+=== RUN   TestUserStorageErrorsAreClassifiedAndRedacted
+=== RUN   TestUserStorageErrorsAreClassifiedAndRedacted/email_unique
+=== RUN   TestUserStorageErrorsAreClassifiedAndRedacted/other_unique
+=== RUN   TestUserStorageErrorsAreClassifiedAndRedacted/check
+=== RUN   TestUserStorageErrorsAreClassifiedAndRedacted/missing
+=== RUN   TestUserStorageErrorsAreClassifiedAndRedacted/unavailable
+=== RUN   TestUserStorageErrorsAreClassifiedAndRedacted/canceled
+=== RUN   TestUserStorageErrorsAreClassifiedAndRedacted/deadline
+--- PASS: TestUserStorageErrorsAreClassifiedAndRedacted (0.00s)
+    --- PASS: TestUserStorageErrorsAreClassifiedAndRedacted/email_unique (0.00s)
+    --- PASS: TestUserStorageErrorsAreClassifiedAndRedacted/other_unique (0.00s)
+    --- PASS: TestUserStorageErrorsAreClassifiedAndRedacted/check (0.00s)
+    --- PASS: TestUserStorageErrorsAreClassifiedAndRedacted/missing (0.00s)
+    --- PASS: TestUserStorageErrorsAreClassifiedAndRedacted/unavailable (0.00s)
+    --- PASS: TestUserStorageErrorsAreClassifiedAndRedacted/canceled (0.00s)
+    --- PASS: TestUserStorageErrorsAreClassifiedAndRedacted/deadline (0.00s)
+=== RUN   TestRegisterNormalizesAndHashes
+--- PASS: TestRegisterNormalizesAndHashes (0.15s)
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/empty_email
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/invalid_email
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/display_address
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/unicode_email
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/email_whitespace
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/email_too_long
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/blank_display
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/long_display
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/invalid_display_utf8
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/display_name_nul
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/short_password
+=== RUN   TestRegisterRejectsInvalidInputBeforeHashing/blank_password
+--- PASS: TestRegisterRejectsInvalidInputBeforeHashing (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/empty_email (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/invalid_email (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/display_address (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/unicode_email (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/email_whitespace (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/email_too_long (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/blank_display (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/long_display (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/invalid_display_utf8 (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/display_name_nul (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/short_password (0.00s)
+    --- PASS: TestRegisterRejectsInvalidInputBeforeHashing/blank_password (0.00s)
+=== RUN   TestRegisterStopsOnHashAndStorageFailures
+--- PASS: TestRegisterStopsOnHashAndStorageFailures (0.00s)
+=== RUN   TestRegisterDoesNotPersistAfterCancellation
+--- PASS: TestRegisterDoesNotPersistAfterCancellation (0.00s)
+=== RUN   TestTokenRoundTripAndPublicClaims
+--- PASS: TestTokenRoundTripAndPublicClaims (0.00s)
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/expired
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/future_iat
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/excessive_lifetime
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/future_nbf
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/fractional_future_iat
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/fractional_future_nbf
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/fractional_excess_lifetime
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/null_nbf
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/string_iat
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/overflow_exp
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/exponent_exp
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/missing_sub
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/missing_iss
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/missing_aud
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/missing_iat
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/missing_exp
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_issuer
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_audience
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/numeric_subject
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/zero_subject
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/negative_subject
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/noncanonical_subject
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/overflow_subject
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_key
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_algorithm
+=== RUN   TestTokenRejectsInvalidClaimsAndAlgorithms/unsigned
+--- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms (0.01s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/expired (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/future_iat (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/excessive_lifetime (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/future_nbf (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/fractional_future_iat (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/fractional_future_nbf (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/fractional_excess_lifetime (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/null_nbf (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/string_iat (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/overflow_exp (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/exponent_exp (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/missing_sub (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/missing_iss (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/missing_aud (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/missing_iat (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/missing_exp (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_issuer (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_audience (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/numeric_subject (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/zero_subject (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/negative_subject (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/noncanonical_subject (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/overflow_subject (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_key (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/wrong_algorithm (0.00s)
+    --- PASS: TestTokenRejectsInvalidClaimsAndAlgorithms/unsigned (0.00s)
+=== RUN   TestAcceptedTokenConfigurationCanVerifyItsOwnOutput
+--- PASS: TestAcceptedTokenConfigurationCanVerifyItsOwnOutput (0.01s)
+=== RUN   TestTokenRejectsOversizedButCorrectlySignedClaims
+--- PASS: TestTokenRejectsOversizedButCorrectlySignedClaims (0.00s)
+=== RUN   TestTokenRejectsMalformedAndTamperedInput
+--- PASS: TestTokenRejectsMalformedAndTamperedInput (0.00s)
+=== RUN   TestTokenConfigurationAndKeyOwnership
+--- PASS: TestTokenConfigurationAndKeyOwnership (0.00s)
+=== RUN   FuzzDecodeRegister
+=== RUN   FuzzDecodeRegister/seed#0
+=== RUN   FuzzDecodeRegister/seed#1
+=== RUN   FuzzDecodeRegister/seed#2
+=== RUN   FuzzDecodeRegister/seed#3
+=== RUN   FuzzDecodeRegister/seed#4
+=== RUN   FuzzDecodeRegister/seed#5
+--- PASS: FuzzDecodeRegister (0.00s)
+    --- PASS: FuzzDecodeRegister/seed#0 (0.00s)
+    --- PASS: FuzzDecodeRegister/seed#1 (0.00s)
+    --- PASS: FuzzDecodeRegister/seed#2 (0.00s)
+    --- PASS: FuzzDecodeRegister/seed#3 (0.00s)
+    --- PASS: FuzzDecodeRegister/seed#4 (0.00s)
+    --- PASS: FuzzDecodeRegister/seed#5 (0.00s)
+=== RUN   FuzzLoginJSON
+=== RUN   FuzzLoginJSON/seed#0
+=== RUN   FuzzLoginJSON/seed#1
+=== RUN   FuzzLoginJSON/seed#2
+=== RUN   FuzzLoginJSON/seed#3
+=== RUN   FuzzLoginJSON/seed#4
+=== RUN   FuzzLoginJSON/seed#5
+--- PASS: FuzzLoginJSON (0.00s)
+    --- PASS: FuzzLoginJSON/seed#0 (0.00s)
+    --- PASS: FuzzLoginJSON/seed#1 (0.00s)
+    --- PASS: FuzzLoginJSON/seed#2 (0.00s)
+    --- PASS: FuzzLoginJSON/seed#3 (0.00s)
+    --- PASS: FuzzLoginJSON/seed#4 (0.00s)
+    --- PASS: FuzzLoginJSON/seed#5 (0.00s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/internal/auth	2.605s
+=== RUN   TestTextExtractionNormalizesAndBounds
+=== RUN   TestTextExtractionNormalizesAndBounds/whitespace
+=== RUN   TestTextExtractionNormalizesAndBounds/invalid_utf8
+=== RUN   TestTextExtractionNormalizesAndBounds/nul
+=== RUN   TestTextExtractionNormalizesAndBounds/too_big
+=== RUN   TestTextExtractionNormalizesAndBounds/pdf
+--- PASS: TestTextExtractionNormalizesAndBounds (0.00s)
+    --- PASS: TestTextExtractionNormalizesAndBounds/whitespace (0.00s)
+    --- PASS: TestTextExtractionNormalizesAndBounds/invalid_utf8 (0.00s)
+    --- PASS: TestTextExtractionNormalizesAndBounds/nul (0.00s)
+    --- PASS: TestTextExtractionNormalizesAndBounds/too_big (0.00s)
+    --- PASS: TestTextExtractionNormalizesAndBounds/pdf (0.00s)
+=== RUN   TestKnowledgeHTTPMultipartAndSafeResponses
+=== RUN   TestKnowledgeHTTPMultipartAndSafeResponses/valid
+=== RUN   TestKnowledgeHTTPMultipartAndSafeResponses/duplicate
+=== RUN   TestKnowledgeHTTPMultipartAndSafeResponses/traversal
+=== RUN   TestKnowledgeHTTPMultipartAndSafeResponses/empty
+=== RUN   TestKnowledgeHTTPMultipartAndSafeResponses/binary
+=== RUN   TestKnowledgeHTTPMultipartAndSafeResponses/pdf
+--- PASS: TestKnowledgeHTTPMultipartAndSafeResponses (0.02s)
+    --- PASS: TestKnowledgeHTTPMultipartAndSafeResponses/valid (0.01s)
+    --- PASS: TestKnowledgeHTTPMultipartAndSafeResponses/duplicate (0.00s)
+    --- PASS: TestKnowledgeHTTPMultipartAndSafeResponses/traversal (0.00s)
+    --- PASS: TestKnowledgeHTTPMultipartAndSafeResponses/empty (0.00s)
+    --- PASS: TestKnowledgeHTTPMultipartAndSafeResponses/binary (0.00s)
+    --- PASS: TestKnowledgeHTTPMultipartAndSafeResponses/pdf (0.01s)
+=== RUN   TestKnowledgeHTTPRejectsOversizeTrailerAndInvalidQueries
+--- PASS: TestKnowledgeHTTPRejectsOversizeTrailerAndInvalidQueries (0.00s)
+=== RUN   TestUploadValidatesStreamsAndCompensates
+2026/11/11 00:11:58 WARN object pending reconciliation storage_key=afb1426cd60befc8a449e621fd07dd52cfb0951c91764a02a9c3f66f3a0c0054 reason=delete_failed
+2026/11/11 00:11:58 WARN object pending reconciliation storage_key=3f0784068977fcf597b5186f3127d1e26efb0a16aef2c271e06ce1034e133ad2 reason=metadata_outcome_unknown
+--- PASS: TestUploadValidatesStreamsAndCompensates (0.02s)
+=== RUN   TestUploadRejectsNamesContentAndUnauthorizedBeforeIO
+--- PASS: TestUploadRejectsNamesContentAndUnauthorizedBeforeIO (0.01s)
+=== RUN   TestProcessAndDeleteStateAndFailureCleanup
+--- PASS: TestProcessAndDeleteStateAndFailureCleanup (0.01s)
+=== RUN   TestProcessPreservesDeadlineAcrossDatabasePhases
+=== RUN   TestProcessPreservesDeadlineAcrossDatabasePhases/claim
+=== RUN   TestProcessPreservesDeadlineAcrossDatabasePhases/extract
+=== RUN   TestProcessPreservesDeadlineAcrossDatabasePhases/complete
+--- PASS: TestProcessPreservesDeadlineAcrossDatabasePhases (0.06s)
+    --- PASS: TestProcessPreservesDeadlineAcrossDatabasePhases/claim (0.02s)
+    --- PASS: TestProcessPreservesDeadlineAcrossDatabasePhases/extract (0.02s)
+    --- PASS: TestProcessPreservesDeadlineAcrossDatabasePhases/complete (0.02s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/internal/knowledge	1.157s
+=== RUN   TestOrganizationHTTP
+=== RUN   TestOrganizationHTTP/valid
+=== RUN   TestOrganizationHTTP/unknown_owner
+=== RUN   TestOrganizationHTTP/unknown_user
+=== RUN   TestOrganizationHTTP/unknown_admin
+=== RUN   TestOrganizationHTTP/role
+=== RUN   TestOrganizationHTTP/status
+=== RUN   TestOrganizationHTTP/duplicate
+=== RUN   TestOrganizationHTTP/escaped_duplicate
+=== RUN   TestOrganizationHTTP/trailing
+=== RUN   TestOrganizationHTTP/null
+=== RUN   TestOrganizationHTTP/wrong_type
+=== RUN   TestOrganizationHTTP/missing
+=== RUN   TestOrganizationHTTP/empty
+=== RUN   TestOrganizationHTTP/whitespace
+=== RUN   TestOrganizationHTTP/nul
+=== RUN   TestOrganizationHTTP/surrogate
+=== RUN   TestOrganizationHTTP/invalid_utf8
+=== RUN   TestOrganizationHTTP/oversized
+=== RUN   TestOrganizationHTTP/mime
+--- PASS: TestOrganizationHTTP (0.02s)
+    --- PASS: TestOrganizationHTTP/valid (0.00s)
+    --- PASS: TestOrganizationHTTP/unknown_owner (0.00s)
+    --- PASS: TestOrganizationHTTP/unknown_user (0.00s)
+    --- PASS: TestOrganizationHTTP/unknown_admin (0.00s)
+    --- PASS: TestOrganizationHTTP/role (0.00s)
+    --- PASS: TestOrganizationHTTP/status (0.00s)
+    --- PASS: TestOrganizationHTTP/duplicate (0.00s)
+    --- PASS: TestOrganizationHTTP/escaped_duplicate (0.00s)
+    --- PASS: TestOrganizationHTTP/trailing (0.00s)
+    --- PASS: TestOrganizationHTTP/null (0.00s)
+    --- PASS: TestOrganizationHTTP/wrong_type (0.00s)
+    --- PASS: TestOrganizationHTTP/missing (0.00s)
+    --- PASS: TestOrganizationHTTP/empty (0.00s)
+    --- PASS: TestOrganizationHTTP/whitespace (0.00s)
+    --- PASS: TestOrganizationHTTP/nul (0.00s)
+    --- PASS: TestOrganizationHTTP/surrogate (0.00s)
+    --- PASS: TestOrganizationHTTP/invalid_utf8 (0.00s)
+    --- PASS: TestOrganizationHTTP/oversized (0.00s)
+    --- PASS: TestOrganizationHTTP/mime (0.00s)
+=== RUN   TestMemberHTTPInputAndDTO
+=== RUN   TestMemberHTTPInputAndDTO/valid
+=== RUN   TestMemberHTTPInputAndDTO/admin
+=== RUN   TestMemberHTTPInputAndDTO/numeric_string
+=== RUN   TestMemberHTTPInputAndDTO/fraction
+=== RUN   TestMemberHTTPInputAndDTO/exponent
+=== RUN   TestMemberHTTPInputAndDTO/overflow
+=== RUN   TestMemberHTTPInputAndDTO/negative
+=== RUN   TestMemberHTTPInputAndDTO/zero
+=== RUN   TestMemberHTTPInputAndDTO/null
+=== RUN   TestMemberHTTPInputAndDTO/missing
+=== RUN   TestMemberHTTPInputAndDTO/support
+=== RUN   TestMemberHTTPInputAndDTO/role_case
+=== RUN   TestMemberHTTPInputAndDTO/role_null
+=== RUN   TestMemberHTTPInputAndDTO/surrogate
+=== RUN   TestMemberHTTPInputAndDTO/duplicate
+=== RUN   TestMemberHTTPInputAndDTO/escaped_duplicate
+=== RUN   TestMemberHTTPInputAndDTO/status
+=== RUN   TestMemberHTTPInputAndDTO/owner
+=== RUN   TestMemberHTTPInputAndDTO/org
+=== RUN   TestMemberHTTPInputAndDTO/actor
+=== RUN   TestMemberHTTPInputAndDTO/trailing
+=== RUN   TestMemberHTTPInputAndDTO/oversized
+=== RUN   TestMemberHTTPInputAndDTO/mime
+--- PASS: TestMemberHTTPInputAndDTO (0.02s)
+    --- PASS: TestMemberHTTPInputAndDTO/valid (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/admin (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/numeric_string (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/fraction (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/exponent (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/overflow (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/negative (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/zero (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/null (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/missing (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/support (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/role_case (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/role_null (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/surrogate (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/duplicate (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/escaped_duplicate (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/status (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/owner (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/org (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/actor (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/trailing (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/oversized (0.00s)
+    --- PASS: TestMemberHTTPInputAndDTO/mime (0.00s)
+=== RUN   TestMemberConstraintErrorsAreSpecificAndSafe
+--- PASS: TestMemberConstraintErrorsAreSpecificAndSafe (0.00s)
+=== RUN   TestMemberServicePolicyAndOrder
+=== RUN   TestMemberServicePolicyAndOrder/member_read
+=== RUN   TestMemberServicePolicyAndOrder/admin_read
+=== RUN   TestMemberServicePolicyAndOrder/admin_write
+=== RUN   TestMemberServicePolicyAndOrder/member_write
+=== RUN   TestMemberServicePolicyAndOrder/disabled_read
+=== RUN   TestMemberServicePolicyAndOrder/disabled_write
+=== RUN   TestMemberServicePolicyAndOrder/non_member
+=== RUN   TestMemberServicePolicyAndOrder/database_fault
+=== RUN   TestMemberServicePolicyAndOrder/invalid_db_role
+--- PASS: TestMemberServicePolicyAndOrder (0.00s)
+    --- PASS: TestMemberServicePolicyAndOrder/member_read (0.00s)
+    --- PASS: TestMemberServicePolicyAndOrder/admin_read (0.00s)
+    --- PASS: TestMemberServicePolicyAndOrder/admin_write (0.00s)
+    --- PASS: TestMemberServicePolicyAndOrder/member_write (0.00s)
+    --- PASS: TestMemberServicePolicyAndOrder/disabled_read (0.00s)
+    --- PASS: TestMemberServicePolicyAndOrder/disabled_write (0.00s)
+    --- PASS: TestMemberServicePolicyAndOrder/non_member (0.00s)
+    --- PASS: TestMemberServicePolicyAndOrder/database_fault (0.00s)
+    --- PASS: TestMemberServicePolicyAndOrder/invalid_db_role (0.00s)
+=== RUN   TestOrganizationService
+--- PASS: TestOrganizationService (0.00s)
+=== RUN   FuzzOrganizationJSON
+=== RUN   FuzzOrganizationJSON/seed#0
+=== RUN   FuzzOrganizationJSON/seed#1
+=== RUN   FuzzOrganizationJSON/seed#2
+=== RUN   FuzzOrganizationJSON/seed#3
+=== RUN   FuzzOrganizationJSON/seed#4
+--- PASS: FuzzOrganizationJSON (0.00s)
+    --- PASS: FuzzOrganizationJSON/seed#0 (0.00s)
+    --- PASS: FuzzOrganizationJSON/seed#1 (0.00s)
+    --- PASS: FuzzOrganizationJSON/seed#2 (0.00s)
+    --- PASS: FuzzOrganizationJSON/seed#3 (0.00s)
+    --- PASS: FuzzOrganizationJSON/seed#4 (0.00s)
+=== RUN   FuzzAddMemberJSON
+=== RUN   FuzzAddMemberJSON/seed#0
+=== RUN   FuzzAddMemberJSON/seed#1
+=== RUN   FuzzAddMemberJSON/seed#2
+=== RUN   FuzzAddMemberJSON/seed#3
+=== RUN   FuzzAddMemberJSON/seed#4
+--- PASS: FuzzAddMemberJSON (0.00s)
+    --- PASS: FuzzAddMemberJSON/seed#0 (0.00s)
+    --- PASS: FuzzAddMemberJSON/seed#1 (0.00s)
+    --- PASS: FuzzAddMemberJSON/seed#2 (0.00s)
+    --- PASS: FuzzAddMemberJSON/seed#3 (0.00s)
+    --- PASS: FuzzAddMemberJSON/seed#4 (0.00s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/internal/organization	1.088s
+=== RUN   TestLoadValidEnvironment
+--- PASS: TestLoadValidEnvironment (0.00s)
+=== RUN   TestLoadRejectsMissingVariables
+=== RUN   TestLoadRejectsMissingVariables/APP_ENV
+=== RUN   TestLoadRejectsMissingVariables/HTTP_ADDR
+=== RUN   TestLoadRejectsMissingVariables/DB_HOST
+=== RUN   TestLoadRejectsMissingVariables/DB_PORT
+=== RUN   TestLoadRejectsMissingVariables/DB_USER
+=== RUN   TestLoadRejectsMissingVariables/DB_PASSWORD
+=== RUN   TestLoadRejectsMissingVariables/DB_NAME
+=== RUN   TestLoadRejectsMissingVariables/DB_SSLMODE
+=== RUN   TestLoadRejectsMissingVariables/JWT_ISSUER
+=== RUN   TestLoadRejectsMissingVariables/JWT_AUDIENCE
+=== RUN   TestLoadRejectsMissingVariables/JWT_TTL_MINUTES
+=== RUN   TestLoadRejectsMissingVariables/JWT_SECRET_BASE64
+--- PASS: TestLoadRejectsMissingVariables (0.01s)
+    --- PASS: TestLoadRejectsMissingVariables/APP_ENV (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/HTTP_ADDR (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_HOST (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_PORT (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_USER (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_PASSWORD (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_NAME (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/DB_SSLMODE (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/JWT_ISSUER (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/JWT_AUDIENCE (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/JWT_TTL_MINUTES (0.00s)
+    --- PASS: TestLoadRejectsMissingVariables/JWT_SECRET_BASE64 (0.00s)
+=== RUN   TestLoadJWTConfiguration
+--- PASS: TestLoadJWTConfiguration (0.00s)
+=== RUN   TestLoadRejectsInvalidJWTConfiguration
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/invalid_base64
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/short_key
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/leading_key_space
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/key_newline
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/placeholder
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/wrong_ttl
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/nonpositive_ttl
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/invalid_ttl
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/invalid_issuer_encoding
+=== RUN   TestLoadRejectsInvalidJWTConfiguration/long_audience
+--- PASS: TestLoadRejectsInvalidJWTConfiguration (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/invalid_base64 (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/short_key (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/leading_key_space (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/key_newline (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/placeholder (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/wrong_ttl (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/nonpositive_ttl (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/invalid_ttl (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/invalid_issuer_encoding (0.00s)
+    --- PASS: TestLoadRejectsInvalidJWTConfiguration/long_audience (0.00s)
+=== RUN   TestLoadRejectsInvalidConfiguration
+=== RUN   TestLoadRejectsInvalidConfiguration/blank_environment
+=== RUN   TestLoadRejectsInvalidConfiguration/missing_HTTP_port
+=== RUN   TestLoadRejectsInvalidConfiguration/named_HTTP_port
+=== RUN   TestLoadRejectsInvalidConfiguration/negative_HTTP_port
+=== RUN   TestLoadRejectsInvalidConfiguration/HTTP_port_too_large
+=== RUN   TestLoadRejectsInvalidConfiguration/invalid_DB_port
+=== RUN   TestLoadRejectsInvalidConfiguration/zero_DB_port
+=== RUN   TestLoadRejectsInvalidConfiguration/DB_port_too_large
+=== RUN   TestLoadRejectsInvalidConfiguration/invalid_SSL_mode
+=== RUN   TestLoadRejectsInvalidConfiguration/blank_password
+=== RUN   TestLoadRejectsInvalidConfiguration/placeholder_password
+--- PASS: TestLoadRejectsInvalidConfiguration (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/blank_environment (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/missing_HTTP_port (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/named_HTTP_port (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/negative_HTTP_port (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/HTTP_port_too_large (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/invalid_DB_port (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/zero_DB_port (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/DB_port_too_large (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/invalid_SSL_mode (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/blank_password (0.00s)
+    --- PASS: TestLoadRejectsInvalidConfiguration/placeholder_password (0.00s)
+=== RUN   TestLoadAllowsIPv6AndEphemeralHTTPPort
+--- PASS: TestLoadAllowsIPv6AndEphemeralHTTPPort (0.00s)
+=== RUN   TestLoadRejectsNonLoopbackRegistrationListener
+=== RUN   TestLoadRejectsNonLoopbackRegistrationListener/:8080
+=== RUN   TestLoadRejectsNonLoopbackRegistrationListener/0.0.0.0:8080
+=== RUN   TestLoadRejectsNonLoopbackRegistrationListener/[::]:8080
+=== RUN   TestLoadRejectsNonLoopbackRegistrationListener/192.0.2.10:8080
+=== RUN   TestLoadRejectsNonLoopbackRegistrationListener/localhost:8080
+--- PASS: TestLoadRejectsNonLoopbackRegistrationListener (0.00s)
+    --- PASS: TestLoadRejectsNonLoopbackRegistrationListener/:8080 (0.00s)
+    --- PASS: TestLoadRejectsNonLoopbackRegistrationListener/0.0.0.0:8080 (0.00s)
+    --- PASS: TestLoadRejectsNonLoopbackRegistrationListener/[::]:8080 (0.00s)
+    --- PASS: TestLoadRejectsNonLoopbackRegistrationListener/192.0.2.10:8080 (0.00s)
+    --- PASS: TestLoadRejectsNonLoopbackRegistrationListener/localhost:8080 (0.00s)
+=== RUN   TestStorageDefaultsAndValidation
+=== RUN   TestStorageDefaultsAndValidation/UPLOAD_MAX_FILE_BYTES0
+=== RUN   TestStorageDefaultsAndValidation/UPLOAD_MAX_FILE_BYTES67108865
+=== RUN   TestStorageDefaultsAndValidation/UPLOAD_MAX_REQUEST_BYTES100
+=== RUN   TestStorageDefaultsAndValidation/TEXT_EXTRACT_MAX_BYTES0
+=== RUN   TestStorageDefaultsAndValidation/TEXT_EXTRACT_MAX_BYTES1048577
+=== RUN   TestStorageDefaultsAndValidation/TEXT_EXTRACT_TIMEOUT_SECONDS11
+=== RUN   TestStorageDefaultsAndValidation/TEXT_EXTRACT_TIMEOUT_SECONDS1.5
+=== RUN   TestStorageDefaultsAndValidation/STORAGE_ROOT
+=== RUN   TestStorageDefaultsAndValidation/STORAGE_ROOT.
+--- PASS: TestStorageDefaultsAndValidation (0.00s)
+    --- PASS: TestStorageDefaultsAndValidation/UPLOAD_MAX_FILE_BYTES0 (0.00s)
+    --- PASS: TestStorageDefaultsAndValidation/UPLOAD_MAX_FILE_BYTES67108865 (0.00s)
+    --- PASS: TestStorageDefaultsAndValidation/UPLOAD_MAX_REQUEST_BYTES100 (0.00s)
+    --- PASS: TestStorageDefaultsAndValidation/TEXT_EXTRACT_MAX_BYTES0 (0.00s)
+    --- PASS: TestStorageDefaultsAndValidation/TEXT_EXTRACT_MAX_BYTES1048577 (0.00s)
+    --- PASS: TestStorageDefaultsAndValidation/TEXT_EXTRACT_TIMEOUT_SECONDS11 (0.00s)
+    --- PASS: TestStorageDefaultsAndValidation/TEXT_EXTRACT_TIMEOUT_SECONDS1.5 (0.00s)
+    --- PASS: TestStorageDefaultsAndValidation/STORAGE_ROOT (0.00s)
+    --- PASS: TestStorageDefaultsAndValidation/STORAGE_ROOT. (0.00s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/config	1.044s
+=== RUN   TestOpenRejectsCanceledContext
+--- PASS: TestOpenRejectsCanceledContext (0.00s)
+=== RUN   TestOpenRejectsUnavailableDatabaseWithoutLeakingPassword
+--- PASS: TestOpenRejectsUnavailableDatabaseWithoutLeakingPassword (0.00s)
+=== RUN   TestOpenRejectsInvalidSSLModeWithoutLeakingPassword
+--- PASS: TestOpenRejectsInvalidSSLModeWithoutLeakingPassword (0.00s)
+=== RUN   TestOpenBoundsUnresponsiveDatabaseStartup
+--- PASS: TestOpenBoundsUnresponsiveDatabaseStartup (5.00s)
+=== RUN   TestOpenCancelsPendingConnection
+--- PASS: TestOpenCancelsPendingConnection (0.00s)
+=== RUN   TestOpenPostgresIntegration
+--- PASS: TestOpenPostgresIntegration (0.03s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/database	6.069s
+=== RUN   TestHealthz
+--- PASS: TestHealthz (0.00s)
+=== RUN   TestRouterMountsAPICallbackUnderVersionPrefix
+--- PASS: TestRouterMountsAPICallbackUnderVersionPrefix (0.00s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/httpserver	1.035s
+=== RUN   TestLocalStreamsHashAndNeverOverwrites
+--- PASS: TestLocalStreamsHashAndNeverOverwrites (0.01s)
+=== RUN   TestLocalLimitsCancellationAndReaderFailureLeaveNoFiles
+=== RUN   TestLocalLimitsCancellationAndReaderFailureLeaveNoFiles/exact
+=== RUN   TestLocalLimitsCancellationAndReaderFailureLeaveNoFiles/too_large
+=== RUN   TestLocalLimitsCancellationAndReaderFailureLeaveNoFiles/empty
+=== RUN   TestLocalLimitsCancellationAndReaderFailureLeaveNoFiles/canceled
+--- PASS: TestLocalLimitsCancellationAndReaderFailureLeaveNoFiles (0.01s)
+    --- PASS: TestLocalLimitsCancellationAndReaderFailureLeaveNoFiles/exact (0.01s)
+    --- PASS: TestLocalLimitsCancellationAndReaderFailureLeaveNoFiles/too_large (0.00s)
+    --- PASS: TestLocalLimitsCancellationAndReaderFailureLeaveNoFiles/empty (0.00s)
+    --- PASS: TestLocalLimitsCancellationAndReaderFailureLeaveNoFiles/canceled (0.00s)
+=== RUN   TestLocalRejectsTraversalSymlinksAndRecordsCleanup
+--- PASS: TestLocalRejectsTraversalSymlinksAndRecordsCleanup (0.01s)
+=== RUN   TestLocalRejectsPublicOrInsecureRoot
+--- PASS: TestLocalRejectsPublicOrInsecureRoot (0.00s)
+=== RUN   TestCleanupJournalRepairsInterruptedOrInvalidRecord
+=== RUN   TestCleanupJournalRepairsInterruptedOrInvalidRecord/#00
+=== RUN   TestCleanupJournalRepairsInterruptedOrInvalidRecord/{
+=== RUN   TestCleanupJournalRepairsInterruptedOrInvalidRecord/{"key":"wrong","reason":"delete_failed"}
+=== RUN   TestCleanupJournalRepairsInterruptedOrInvalidRecord/symlink
+--- PASS: TestCleanupJournalRepairsInterruptedOrInvalidRecord (0.02s)
+    --- PASS: TestCleanupJournalRepairsInterruptedOrInvalidRecord/#00 (0.00s)
+    --- PASS: TestCleanupJournalRepairsInterruptedOrInvalidRecord/{ (0.00s)
+    --- PASS: TestCleanupJournalRepairsInterruptedOrInvalidRecord/{"key":"wrong","reason":"delete_failed"} (0.00s)
+    --- PASS: TestCleanupJournalRepairsInterruptedOrInvalidRecord/symlink (0.00s)
+=== RUN   TestTemporaryRemovalFailureIsJournaled
+--- PASS: TestTemporaryRemovalFailureIsJournaled (0.01s)
+=== RUN   TestJournalPublicationFailureCanBeRetried
+--- PASS: TestJournalPublicationFailureCanBeRetried (0.01s)
+=== RUN   TestLocalRejectsRootWithinPublicDirectoryViaAncestorSymlink
+--- PASS: TestLocalRejectsRootWithinPublicDirectoryViaAncestorSymlink (0.00s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/storage	1.085s
+=== RUN   TestClaimCommitsActorVersionAndSingleEvent
+=== RUN   TestClaimCommitsActorVersionAndSingleEvent/admin
+=== RUN   TestClaimCommitsActorVersionAndSingleEvent/member
+--- PASS: TestClaimCommitsActorVersionAndSingleEvent (0.00s)
+    --- PASS: TestClaimCommitsActorVersionAndSingleEvent/admin (0.00s)
+    --- PASS: TestClaimCommitsActorVersionAndSingleEvent/member (0.00s)
+=== RUN   TestClaimRejectsUnavailableAndInvalid
+=== RUN   TestClaimRejectsUnavailableAndInvalid/stale
+=== RUN   TestClaimRejectsUnavailableAndInvalid/assigned
+=== RUN   TestClaimRejectsUnavailableAndInvalid/in_progress
+=== RUN   TestClaimRejectsUnavailableAndInvalid/resolved
+=== RUN   TestClaimRejectsUnavailableAndInvalid/closed
+=== RUN   TestClaimRejectsUnavailableAndInvalid/deleted
+=== RUN   TestClaimRejectsUnavailableAndInvalid/missing
+=== RUN   TestClaimRejectsUnavailableAndInvalid/other_org
+=== RUN   TestClaimRejectsUnavailableAndInvalid/nonmember
+=== RUN   TestClaimRejectsUnavailableAndInvalid/disabled
+=== RUN   TestClaimRejectsUnavailableAndInvalid/no_identity
+=== RUN   TestClaimRejectsUnavailableAndInvalid/negative_version
+=== RUN   TestClaimRejectsUnavailableAndInvalid/bad_id
+=== RUN   TestClaimRejectsUnavailableAndInvalid/max_version
+=== RUN   TestClaimRejectsUnavailableAndInvalid/lookup_failure
+--- PASS: TestClaimRejectsUnavailableAndInvalid (0.00s)
+    --- PASS: TestClaimRejectsUnavailableAndInvalid/stale (0.00s)
+    --- PASS: TestClaimRejectsUnavailableAndInvalid/assigned (0.00s)
+    --- PASS: TestClaimRejectsUnavailableAndInvalid/in_progress (0.00s)
+    --- PASS: TestClaimRejectsUnavailableAndInvalid/resolved (0.00s)
+    --- PASS: TestClaimRejectsUnavailableAndInvalid/closed (0.00s)
+    --- PASS: TestClaimRejectsUnavailableAndInvalid/deleted (0.00s)
+    --- PASS: TestClaimRejectsUnavailableAndInvalid/missing (0.00s)
+    --- PASS: TestClaimRejectsUnavailableAndInvalid/other_org (0.00s)
+    --- PASS: TestClaimRejectsUnavailableAndInvalid/nonmember (0.00s)
+    --- PASS: TestClaimRejectsUnavailableAndInvalid/disabled (0.00s)
+    --- PASS: TestClaimRejectsUnavailableAndInvalid/no_identity (0.00s)
+    --- PASS: TestClaimRejectsUnavailableAndInvalid/negative_version (0.00s)
+    --- PASS: TestClaimRejectsUnavailableAndInvalid/bad_id (0.00s)
+    --- PASS: TestClaimRejectsUnavailableAndInvalid/max_version (0.00s)
+    --- PASS: TestClaimRejectsUnavailableAndInvalid/lookup_failure (0.00s)
+=== RUN   TestClaimFailuresRollback
+=== RUN   TestClaimFailuresRollback/begin
+=== RUN   TestClaimFailuresRollback/write
+=== RUN   TestClaimFailuresRollback/event
+=== RUN   TestClaimFailuresRollback/commit
+=== RUN   TestClaimFailuresRollback/cancel
+--- PASS: TestClaimFailuresRollback (0.00s)
+    --- PASS: TestClaimFailuresRollback/begin (0.00s)
+    --- PASS: TestClaimFailuresRollback/write (0.00s)
+    --- PASS: TestClaimFailuresRollback/event (0.00s)
+    --- PASS: TestClaimFailuresRollback/commit (0.00s)
+    --- PASS: TestClaimFailuresRollback/cancel (0.00s)
+=== RUN   TestClaimHTTPContract
+=== RUN   TestClaimHTTPContract/success
+=== RUN   TestClaimHTTPContract/stale
+=== RUN   TestClaimHTTPContract/empty
+=== RUN   TestClaimHTTPContract/forged
+=== RUN   TestClaimHTTPContract/duplicate
+=== RUN   TestClaimHTTPContract/null
+=== RUN   TestClaimHTTPContract/string
+=== RUN   TestClaimHTTPContract/fraction
+=== RUN   TestClaimHTTPContract/exponent
+=== RUN   TestClaimHTTPContract/negative
+=== RUN   TestClaimHTTPContract/overflow
+=== RUN   TestClaimHTTPContract/query
+=== RUN   TestClaimHTTPContract/media
+=== RUN   TestClaimHTTPContract/too_large
+--- PASS: TestClaimHTTPContract (0.01s)
+    --- PASS: TestClaimHTTPContract/success (0.00s)
+    --- PASS: TestClaimHTTPContract/stale (0.00s)
+    --- PASS: TestClaimHTTPContract/empty (0.00s)
+    --- PASS: TestClaimHTTPContract/forged (0.00s)
+    --- PASS: TestClaimHTTPContract/duplicate (0.00s)
+    --- PASS: TestClaimHTTPContract/null (0.00s)
+    --- PASS: TestClaimHTTPContract/string (0.00s)
+    --- PASS: TestClaimHTTPContract/fraction (0.00s)
+    --- PASS: TestClaimHTTPContract/exponent (0.00s)
+    --- PASS: TestClaimHTTPContract/negative (0.00s)
+    --- PASS: TestClaimHTTPContract/overflow (0.00s)
+    --- PASS: TestClaimHTTPContract/query (0.00s)
+    --- PASS: TestClaimHTTPContract/media (0.00s)
+    --- PASS: TestClaimHTTPContract/too_large (0.00s)
+=== RUN   TestTicketHTTPStrictFieldsAndLimits
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/create
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/optional_priority
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/big_allowed_body
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/fake_creator
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/fake_org
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/duplicate
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/surrogate
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/nul
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/null
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/fraction
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/exponent
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/overflow
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/patch_status
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/patch_without_version
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/patch_no_fields
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/patch
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/comment
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/comment_forge
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/skip_state
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/oversize
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/media
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/write_query
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/list_body
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/detail_query
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/list_bad_page
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/list_bad_status
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/list_priority
+=== RUN   TestTicketHTTPStrictFieldsAndLimits/duplicate_query
+--- PASS: TestTicketHTTPStrictFieldsAndLimits (0.03s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/create (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/optional_priority (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/big_allowed_body (0.01s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/fake_creator (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/fake_org (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/duplicate (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/surrogate (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/nul (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/null (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/fraction (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/exponent (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/overflow (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/patch_status (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/patch_without_version (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/patch_no_fields (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/patch (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/comment (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/comment_forge (0.01s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/skip_state (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/oversize (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/media (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/write_query (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/list_body (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/detail_query (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/list_bad_page (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/list_bad_status (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/list_priority (0.00s)
+    --- PASS: TestTicketHTTPStrictFieldsAndLimits/duplicate_query (0.00s)
+=== RUN   TestServiceTransactionsAndVersions
+--- PASS: TestServiceTransactionsAndVersions (0.00s)
+=== RUN   TestServiceFailureNeverCommitsPartialWrite
+=== RUN   TestServiceFailureNeverCommitsPartialWrite/create/begin
+=== RUN   TestServiceFailureNeverCommitsPartialWrite/create/event
+=== RUN   TestServiceFailureNeverCommitsPartialWrite/create/commit
+=== RUN   TestServiceFailureNeverCommitsPartialWrite/patch/begin
+=== RUN   TestServiceFailureNeverCommitsPartialWrite/patch/event
+=== RUN   TestServiceFailureNeverCommitsPartialWrite/patch/commit
+=== RUN   TestServiceFailureNeverCommitsPartialWrite/transition/begin
+=== RUN   TestServiceFailureNeverCommitsPartialWrite/transition/event
+=== RUN   TestServiceFailureNeverCommitsPartialWrite/transition/commit
+=== RUN   TestServiceFailureNeverCommitsPartialWrite/comment/begin
+=== RUN   TestServiceFailureNeverCommitsPartialWrite/comment/event
+=== RUN   TestServiceFailureNeverCommitsPartialWrite/comment/commit
+=== RUN   TestServiceFailureNeverCommitsPartialWrite/delete/begin
+=== RUN   TestServiceFailureNeverCommitsPartialWrite/delete/event
+=== RUN   TestServiceFailureNeverCommitsPartialWrite/delete/commit
+--- PASS: TestServiceFailureNeverCommitsPartialWrite (0.00s)
+    --- PASS: TestServiceFailureNeverCommitsPartialWrite/create/begin (0.00s)
+    --- PASS: TestServiceFailureNeverCommitsPartialWrite/create/event (0.00s)
+    --- PASS: TestServiceFailureNeverCommitsPartialWrite/create/commit (0.00s)
+    --- PASS: TestServiceFailureNeverCommitsPartialWrite/patch/begin (0.00s)
+    --- PASS: TestServiceFailureNeverCommitsPartialWrite/patch/event (0.00s)
+    --- PASS: TestServiceFailureNeverCommitsPartialWrite/patch/commit (0.00s)
+    --- PASS: TestServiceFailureNeverCommitsPartialWrite/transition/begin (0.00s)
+    --- PASS: TestServiceFailureNeverCommitsPartialWrite/transition/event (0.00s)
+    --- PASS: TestServiceFailureNeverCommitsPartialWrite/transition/commit (0.00s)
+    --- PASS: TestServiceFailureNeverCommitsPartialWrite/comment/begin (0.00s)
+    --- PASS: TestServiceFailureNeverCommitsPartialWrite/comment/event (0.00s)
+    --- PASS: TestServiceFailureNeverCommitsPartialWrite/comment/commit (0.00s)
+    --- PASS: TestServiceFailureNeverCommitsPartialWrite/delete/begin (0.00s)
+    --- PASS: TestServiceFailureNeverCommitsPartialWrite/delete/event (0.00s)
+    --- PASS: TestServiceFailureNeverCommitsPartialWrite/delete/commit (0.00s)
+=== RUN   TestServiceValidationAndObjectPermissions
+--- PASS: TestServiceValidationAndObjectPermissions (0.00s)
+=== RUN   TestStateMachineAllEdges
+--- PASS: TestStateMachineAllEdges (0.00s)
+=== RUN   TestObjectPoliciesAndInputLimits
+--- PASS: TestObjectPoliciesAndInputLimits (0.00s)
+=== RUN   FuzzTicketJSON
+=== RUN   FuzzTicketJSON/seed#0
+=== RUN   FuzzTicketJSON/seed#1
+=== RUN   FuzzTicketJSON/seed#2
+=== RUN   FuzzTicketJSON/seed#3
+=== RUN   FuzzTicketJSON/seed#4
+--- PASS: FuzzTicketJSON (0.00s)
+    --- PASS: FuzzTicketJSON/seed#0 (0.00s)
+    --- PASS: FuzzTicketJSON/seed#1 (0.00s)
+    --- PASS: FuzzTicketJSON/seed#2 (0.00s)
+    --- PASS: FuzzTicketJSON/seed#3 (0.00s)
+    --- PASS: FuzzTicketJSON/seed#4 (0.00s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/internal/ticket	1.091s
+=== RUN   TestWeek05Schema
+=== RUN   TestWeek05Schema/defaults_and_scoped_parent
+=== RUN   TestWeek05Schema/CHECK_filename_empty
+=== RUN   TestWeek05Schema/CHECK_filename_byte_limit
+=== RUN   TestWeek05Schema/CHECK_storage_key_shape
+=== RUN   TestWeek05Schema/CHECK_media_type
+=== RUN   TestWeek05Schema/CHECK_empty_size
+=== RUN   TestWeek05Schema/CHECK_negative_size
+=== RUN   TestWeek05Schema/CHECK_size_ceiling
+=== RUN   TestWeek05Schema/CHECK_sha_shape
+=== RUN   TestWeek05Schema/CHECK_status_enum
+=== RUN   TestWeek05Schema/CHECK_failed_requires_code
+=== RUN   TestWeek05Schema/CHECK_failure_code_enum
+=== RUN   TestWeek05Schema/CHECK_code_requires_failed
+=== RUN   TestWeek05Schema/CHECK_ready_requires_chars
+=== RUN   TestWeek05Schema/CHECK_nonready_zero_chars
+=== RUN   TestWeek05Schema/CHECK_negative_chars
+=== RUN   TestWeek05Schema/CHECK_chars_ceiling
+=== RUN   TestWeek05Schema/FK_uploader_org
+=== RUN   TestWeek05Schema/FK_missing_org
+=== RUN   TestWeek05Schema/UNIQUE_storage_key
+=== RUN   TestWeek05Schema/FK_text_parent_org
+=== RUN   TestWeek05Schema/FK_text_missing_parent
+=== RUN   TestWeek05Schema/CHECK_text_empty
+=== RUN   TestWeek05Schema/CHECK_text_blank
+=== RUN   TestWeek05Schema/CHECK_text_too_large
+=== RUN   TestWeek05Schema/CHECK_text_hash
+=== RUN   TestWeek05Schema/CHECK_text_version
+=== RUN   TestWeek05Schema/UNIQUE_text_document
+=== RUN   TestWeek05Schema/partial_ordering_indexes
+--- PASS: TestWeek05Schema (0.14s)
+    --- PASS: TestWeek05Schema/defaults_and_scoped_parent (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_filename_empty (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_filename_byte_limit (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_storage_key_shape (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_media_type (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_empty_size (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_negative_size (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_size_ceiling (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_sha_shape (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_status_enum (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_failed_requires_code (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_failure_code_enum (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_code_requires_failed (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_ready_requires_chars (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_nonready_zero_chars (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_negative_chars (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_chars_ceiling (0.00s)
+    --- PASS: TestWeek05Schema/FK_uploader_org (0.00s)
+    --- PASS: TestWeek05Schema/FK_missing_org (0.00s)
+    --- PASS: TestWeek05Schema/UNIQUE_storage_key (0.00s)
+    --- PASS: TestWeek05Schema/FK_text_parent_org (0.00s)
+    --- PASS: TestWeek05Schema/FK_text_missing_parent (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_text_empty (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_text_blank (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_text_too_large (0.02s)
+    --- PASS: TestWeek05Schema/CHECK_text_hash (0.00s)
+    --- PASS: TestWeek05Schema/CHECK_text_version (0.00s)
+    --- PASS: TestWeek05Schema/UNIQUE_text_document (0.00s)
+    --- PASS: TestWeek05Schema/partial_ordering_indexes (0.00s)
+=== RUN   TestWeek05Knowledge
+=== RUN   TestWeek05Knowledge/B01_B02_upload_TXT_MD_real_private_bytes_hash
+=== RUN   TestWeek05Knowledge/B03_list_paging_status_and_stable_id_tiebreak
+=== RUN   TestWeek05Knowledge/B04_detail_and_list_DTO_never_expose_storage_or_text
+=== RUN   TestWeek05Knowledge/B05_all_cross_org_document_operations_404
+=== RUN   TestWeek05Knowledge/B06_disabled_membership_rechecks_preexisting_token_all_operations
+=== RUN   TestWeek05Knowledge/B07_B08_delete_policy_soft_delete_hides_all_operations_retains_objects_text
+=== RUN   TestWeek05Knowledge/S01_S02_exact_default_5MiB_and_plus_one
+=== RUN   TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files
+=== RUN   TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/exe
+=== RUN   TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/html
+=== RUN   TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/binary_md
+=== RUN   TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/nul_md
+=== RUN   TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/MIME_spoof_pdf
+=== RUN   TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/MIME_spoof_binary
+=== RUN   TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/invalid_UTF8
+=== RUN   TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/late_invalid_UTF8
+=== RUN   TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/traversal
+=== RUN   TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/backslash
+=== RUN   TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/empty
+=== RUN   TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/extra_part
+=== RUN   TestWeek05Knowledge/S05_Content_Transfer_Encoding_rejected_before_metadata_or_object
+=== RUN   TestWeek05Knowledge/S05_Content_Transfer_Encoding_rejected_before_metadata_or_object/encoding_quoted-printable
+=== RUN   TestWeek05Knowledge/S05_Content_Transfer_Encoding_rejected_before_metadata_or_object/encoding_base64
+=== RUN   TestWeek05Knowledge/S05_Content_Transfer_Encoding_rejected_before_metadata_or_object/encoding_binary
+=== RUN   TestWeek05Knowledge/S05_Content_Transfer_Encoding_rejected_before_metadata_or_object/encoding_
+=== RUN   TestWeek05Knowledge/S08_metadata_INSERT_and_deferred_COMMIT_failures_compensate_new_file
+=== RUN   TestWeek05Knowledge/S08_metadata_INSERT_and_deferred_COMMIT_failures_compensate_new_file/deferred_false
+=== RUN   TestWeek05Knowledge/S08_metadata_INSERT_and_deferred_COMMIT_failures_compensate_new_file/deferred_true
+=== RUN   TestWeek05Knowledge/authorized_download_original_bytes_attachment_nosniff_no_store
+=== RUN   TestWeek05Knowledge/strict_authenticated_input_and_missing_ids
+=== RUN   TestWeek05Knowledge/P01_P06_READY_normalization_hash_chars_and_duplicate_conflict
+=== RUN   TestWeek05Knowledge/P03_P04_blank_and_over_limit_extraction_are_422_without_publication
+=== RUN   TestWeek05Knowledge/P05_true_concurrent_claim_second_409_first_200_single_text
+=== RUN   TestWeek05Knowledge/process_delete_race_never_publishes_READY_or_text_after_delete
+=== RUN   TestWeek05Knowledge/P07_text_INSERT_and_deferred_COMMIT_failure_roll_back_READY_and_text
+=== RUN   TestWeek05Knowledge/P07_text_INSERT_and_deferred_COMMIT_failure_roll_back_READY_and_text/deferred_false
+=== RUN   TestWeek05Knowledge/P07_text_INSERT_and_deferred_COMMIT_failure_roll_back_READY_and_text/deferred_true
+=== RUN   TestWeek05Knowledge/P08_timeout_and_cancellation_persist_FAILED_independently
+=== RUN   TestWeek05Knowledge/P08_timeout_and_cancellation_persist_FAILED_independently/timeout_HTTP_504
+=== RUN   TestWeek05Knowledge/P08_timeout_and_cancellation_persist_FAILED_independently/cancellation_after_claim
+=== RUN   TestWeek05Knowledge/P08_real_PostgreSQL_claim_lock_deadline_HTTP_504_no_publication
+=== RUN   TestWeek05Knowledge/P08_real_PostgreSQL_text_INSERT_deadline_rolls_back_READY_and_text
+=== RUN   TestWeek05Knowledge/missing_or_tampered_source_safe_500_and_no_text
+=== RUN   TestWeek05Knowledge/missing_or_tampered_source_safe_500_and_no_text/tamper_false
+=== RUN   TestWeek05Knowledge/missing_or_tampered_source_safe_500_and_no_text/tamper_true
+=== RUN   TestWeek05Knowledge/changed_source_size_download_safe_500
+--- PASS: TestWeek05Knowledge (2.70s)
+    --- PASS: TestWeek05Knowledge/B01_B02_upload_TXT_MD_real_private_bytes_hash (0.02s)
+    --- PASS: TestWeek05Knowledge/B03_list_paging_status_and_stable_id_tiebreak (0.05s)
+    --- PASS: TestWeek05Knowledge/B04_detail_and_list_DTO_never_expose_storage_or_text (0.02s)
+    --- PASS: TestWeek05Knowledge/B05_all_cross_org_document_operations_404 (0.02s)
+    --- PASS: TestWeek05Knowledge/B06_disabled_membership_rechecks_preexisting_token_all_operations (0.02s)
+    --- PASS: TestWeek05Knowledge/B07_B08_delete_policy_soft_delete_hides_all_operations_retains_objects_text (0.07s)
+    --- PASS: TestWeek05Knowledge/S01_S02_exact_default_5MiB_and_plus_one (0.69s)
+    --- PASS: TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files (0.04s)
+        --- PASS: TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/exe (0.00s)
+        --- PASS: TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/html (0.00s)
+        --- PASS: TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/binary_md (0.00s)
+        --- PASS: TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/nul_md (0.00s)
+        --- PASS: TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/MIME_spoof_pdf (0.00s)
+        --- PASS: TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/MIME_spoof_binary (0.00s)
+        --- PASS: TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/invalid_UTF8 (0.00s)
+        --- PASS: TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/late_invalid_UTF8 (0.01s)
+        --- PASS: TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/traversal (0.00s)
+        --- PASS: TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/backslash (0.00s)
+        --- PASS: TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/empty (0.00s)
+        --- PASS: TestWeek05Knowledge/S03_S04_S05_S06_S07_P02_invalid_uploads_leave_no_rows_or_files/extra_part (0.00s)
+    --- PASS: TestWeek05Knowledge/S05_Content_Transfer_Encoding_rejected_before_metadata_or_object (0.01s)
+        --- PASS: TestWeek05Knowledge/S05_Content_Transfer_Encoding_rejected_before_metadata_or_object/encoding_quoted-printable (0.00s)
+        --- PASS: TestWeek05Knowledge/S05_Content_Transfer_Encoding_rejected_before_metadata_or_object/encoding_base64 (0.00s)
+        --- PASS: TestWeek05Knowledge/S05_Content_Transfer_Encoding_rejected_before_metadata_or_object/encoding_binary (0.00s)
+        --- PASS: TestWeek05Knowledge/S05_Content_Transfer_Encoding_rejected_before_metadata_or_object/encoding_ (0.00s)
+    --- PASS: TestWeek05Knowledge/S08_metadata_INSERT_and_deferred_COMMIT_failures_compensate_new_file (0.03s)
+        --- PASS: TestWeek05Knowledge/S08_metadata_INSERT_and_deferred_COMMIT_failures_compensate_new_file/deferred_false (0.02s)
+        --- PASS: TestWeek05Knowledge/S08_metadata_INSERT_and_deferred_COMMIT_failures_compensate_new_file/deferred_true (0.01s)
+    --- PASS: TestWeek05Knowledge/authorized_download_original_bytes_attachment_nosniff_no_store (0.01s)
+    --- PASS: TestWeek05Knowledge/strict_authenticated_input_and_missing_ids (0.03s)
+    --- PASS: TestWeek05Knowledge/P01_P06_READY_normalization_hash_chars_and_duplicate_conflict (0.03s)
+    --- PASS: TestWeek05Knowledge/P03_P04_blank_and_over_limit_extraction_are_422_without_publication (0.47s)
+    --- PASS: TestWeek05Knowledge/P05_true_concurrent_claim_second_409_first_200_single_text (0.02s)
+    --- PASS: TestWeek05Knowledge/process_delete_race_never_publishes_READY_or_text_after_delete (0.02s)
+    --- PASS: TestWeek05Knowledge/P07_text_INSERT_and_deferred_COMMIT_failure_roll_back_READY_and_text (0.05s)
+        --- PASS: TestWeek05Knowledge/P07_text_INSERT_and_deferred_COMMIT_failure_roll_back_READY_and_text/deferred_false (0.02s)
+        --- PASS: TestWeek05Knowledge/P07_text_INSERT_and_deferred_COMMIT_failure_roll_back_READY_and_text/deferred_true (0.03s)
+    --- PASS: TestWeek05Knowledge/P08_timeout_and_cancellation_persist_FAILED_independently (0.33s)
+        --- PASS: TestWeek05Knowledge/P08_timeout_and_cancellation_persist_FAILED_independently/timeout_HTTP_504 (0.31s)
+        --- PASS: TestWeek05Knowledge/P08_timeout_and_cancellation_persist_FAILED_independently/cancellation_after_claim (0.01s)
+    --- PASS: TestWeek05Knowledge/P08_real_PostgreSQL_claim_lock_deadline_HTTP_504_no_publication (0.34s)
+    --- PASS: TestWeek05Knowledge/P08_real_PostgreSQL_text_INSERT_deadline_rolls_back_READY_and_text (0.35s)
+    --- PASS: TestWeek05Knowledge/missing_or_tampered_source_safe_500_and_no_text (0.04s)
+        --- PASS: TestWeek05Knowledge/missing_or_tampered_source_safe_500_and_no_text/tamper_false (0.02s)
+        --- PASS: TestWeek05Knowledge/missing_or_tampered_source_safe_500_and_no_text/tamper_true (0.01s)
+    --- PASS: TestWeek05Knowledge/changed_source_size_download_safe_500 (0.01s)
+=== RUN   TestWeek02Login
+=== RUN   TestWeek02Login/registered_user_logs_in_with_original_password
+=== RUN   TestWeek02Login/wrong_password_and_missing_user_are_indistinguishable
+=== RUN   TestWeek02Login/empty_password_is_input_error
+=== RUN   TestWeek02Login/corrupt_hash_is_safe_internal_error
+=== RUN   TestWeek02Login/database_unavailable_is_not_credential_failure
+=== RUN   TestWeek02Login/lookup_propagates_request_deadline
+=== RUN   TestWeek02Login/login_has_no_database_write_side_effects
+--- PASS: TestWeek02Login (0.78s)
+    --- PASS: TestWeek02Login/registered_user_logs_in_with_original_password (0.09s)
+    --- PASS: TestWeek02Login/wrong_password_and_missing_user_are_indistinguishable (0.23s)
+    --- PASS: TestWeek02Login/empty_password_is_input_error (0.00s)
+    --- PASS: TestWeek02Login/corrupt_hash_is_safe_internal_error (0.01s)
+    --- PASS: TestWeek02Login/database_unavailable_is_not_credential_failure (0.09s)
+    --- PASS: TestWeek02Login/lookup_propagates_request_deadline (0.15s)
+    --- PASS: TestWeek02Login/login_has_no_database_write_side_effects (0.00s)
+=== RUN   TestWeek02Members
+=== RUN   TestWeek02Members/non_member_disabled_missing_org_are_identical_and_precede_input
+=== RUN   TestWeek02Members/active_member_reads_only_current_org_and_safe_DTO
+=== RUN   TestWeek02Members/member_cannot_probe_targets_or_forge_admin
+=== RUN   TestWeek02Members/admin_adds_registered_member_or_admin_and_duplicate_is_409
+=== RUN   TestWeek02Members/concurrent_add_has_one_success_one_conflict
+=== RUN   TestWeek02Members/old_tokens_observe_current_role_and_disabled_state
+=== RUN   TestWeek02Members/invalid_input_and_missing_auth_never_write
+=== RUN   TestWeek02Members/transaction_commit_failure_and_cancel_do_not_add_relationship
+=== RUN   TestWeek02Members/database_errors_are_500_and_not_404
+--- PASS: TestWeek02Members (0.88s)
+    --- PASS: TestWeek02Members/non_member_disabled_missing_org_are_identical_and_precede_input (0.01s)
+    --- PASS: TestWeek02Members/active_member_reads_only_current_org_and_safe_DTO (0.01s)
+    --- PASS: TestWeek02Members/member_cannot_probe_targets_or_forge_admin (0.00s)
+    --- PASS: TestWeek02Members/admin_adds_registered_member_or_admin_and_duplicate_is_409 (0.02s)
+    --- PASS: TestWeek02Members/concurrent_add_has_one_success_one_conflict (0.03s)
+    --- PASS: TestWeek02Members/old_tokens_observe_current_role_and_disabled_state (0.01s)
+    --- PASS: TestWeek02Members/invalid_input_and_missing_auth_never_write (0.01s)
+    --- PASS: TestWeek02Members/transaction_commit_failure_and_cancel_do_not_add_relationship (0.24s)
+    --- PASS: TestWeek02Members/database_errors_are_500_and_not_404 (0.03s)
+=== RUN   TestWeek02Organizations
+=== RUN   TestWeek02Organizations/registered_user_has_no_organization_and_me_is_public_DTO
+=== RUN   TestWeek02Organizations/creator_is_admin_and_only_current_active_relations_are_paginated
+=== RUN   TestWeek02Organizations/forged_identity_and_malformed_inputs_never_write
+=== RUN   TestWeek02Organizations/second_insert_and_deferred_commit_failure_roll_back
+=== RUN   TestWeek02Organizations/missing_creator_rolls_back_and_is_unauthenticated
+=== RUN   TestWeek02Organizations/invalid_or_missing_token_rejected_on_all_protected_routes
+=== RUN   TestWeek02Organizations/canceled_second_insert_rolls_back_and_releases_connection
+=== RUN   TestWeek02Organizations/database_fault_is_safe_500
+--- PASS: TestWeek02Organizations (0.79s)
+    --- PASS: TestWeek02Organizations/registered_user_has_no_organization_and_me_is_public_DTO (0.00s)
+    --- PASS: TestWeek02Organizations/creator_is_admin_and_only_current_active_relations_are_paginated (0.01s)
+    --- PASS: TestWeek02Organizations/forged_identity_and_malformed_inputs_never_write (0.01s)
+    --- PASS: TestWeek02Organizations/second_insert_and_deferred_commit_failure_roll_back (0.02s)
+    --- PASS: TestWeek02Organizations/missing_creator_rolls_back_and_is_unauthenticated (0.15s)
+    --- PASS: TestWeek02Organizations/invalid_or_missing_token_rejected_on_all_protected_routes (0.00s)
+    --- PASS: TestWeek02Organizations/canceled_second_insert_rolls_back_and_releases_connection (0.15s)
+    --- PASS: TestWeek02Organizations/database_fault_is_safe_500 (0.03s)
+=== RUN   TestWeek02Registration
+=== RUN   TestWeek02Registration/register_persists_hash_without_organization_side_effect
+=== RUN   TestWeek02Registration/concurrent_registration_has_one_success_and_one_conflict
+=== RUN   TestWeek02Registration/display_name_nul_is_rejected_before_persistence
+=== RUN   TestWeek02Registration/invalid_password_leaves_no_user
+=== RUN   TestWeek02Registration/repository_missing_and_parameterized_lookups
+=== RUN   TestWeek02Registration/repository_propagates_inflight_cancellation
+=== RUN   TestWeek02Registration/database_failure_does_not_return_success
+--- PASS: TestWeek02Registration (0.80s)
+    --- PASS: TestWeek02Registration/register_persists_hash_without_organization_side_effect (0.34s)
+    --- PASS: TestWeek02Registration/concurrent_registration_has_one_success_and_one_conflict (0.12s)
+    --- PASS: TestWeek02Registration/display_name_nul_is_rejected_before_persistence (0.00s)
+    --- PASS: TestWeek02Registration/invalid_password_leaves_no_user (0.00s)
+    --- PASS: TestWeek02Registration/repository_missing_and_parameterized_lookups (0.00s)
+    --- PASS: TestWeek02Registration/repository_propagates_inflight_cancellation (0.22s)
+    --- PASS: TestWeek02Registration/database_failure_does_not_return_success (0.09s)
+=== RUN   TestWeek02Schema
+=== RUN   TestWeek02Schema/columns_and_types
+=== RUN   TestWeek02Schema/identity_timestamp_and_active_defaults
+=== RUN   TestWeek02Schema/case_insensitive_email_unique
+=== RUN   TestWeek02Schema/user_required_fields_and_lengths
+=== RUN   TestWeek02Schema/user_required_fields_and_lengths/email_null
+=== RUN   TestWeek02Schema/user_required_fields_and_lengths/display_name_null
+=== RUN   TestWeek02Schema/user_required_fields_and_lengths/hash_null
+=== RUN   TestWeek02Schema/user_required_fields_and_lengths/email_empty
+=== RUN   TestWeek02Schema/user_required_fields_and_lengths/display_name_empty
+=== RUN   TestWeek02Schema/user_required_fields_and_lengths/hash_empty
+=== RUN   TestWeek02Schema/user_required_fields_and_lengths/email_too_long
+=== RUN   TestWeek02Schema/user_required_fields_and_lengths/display_name_too_long
+=== RUN   TestWeek02Schema/membership_constraints_and_multi_organization
+=== RUN   TestWeek02Schema/user_organization_lookup_index
+=== RUN   TestWeek02Schema/concurrent_email_unique
+=== RUN   TestWeek02Schema/concurrent_membership_unique
+--- PASS: TestWeek02Schema (0.12s)
+    --- PASS: TestWeek02Schema/columns_and_types (0.02s)
+    --- PASS: TestWeek02Schema/identity_timestamp_and_active_defaults (0.01s)
+    --- PASS: TestWeek02Schema/case_insensitive_email_unique (0.00s)
+    --- PASS: TestWeek02Schema/user_required_fields_and_lengths (0.01s)
+        --- PASS: TestWeek02Schema/user_required_fields_and_lengths/email_null (0.00s)
+        --- PASS: TestWeek02Schema/user_required_fields_and_lengths/display_name_null (0.00s)
+        --- PASS: TestWeek02Schema/user_required_fields_and_lengths/hash_null (0.00s)
+        --- PASS: TestWeek02Schema/user_required_fields_and_lengths/email_empty (0.00s)
+        --- PASS: TestWeek02Schema/user_required_fields_and_lengths/display_name_empty (0.00s)
+        --- PASS: TestWeek02Schema/user_required_fields_and_lengths/hash_empty (0.00s)
+        --- PASS: TestWeek02Schema/user_required_fields_and_lengths/email_too_long (0.00s)
+        --- PASS: TestWeek02Schema/user_required_fields_and_lengths/display_name_too_long (0.00s)
+    --- PASS: TestWeek02Schema/membership_constraints_and_multi_organization (0.02s)
+    --- PASS: TestWeek02Schema/user_organization_lookup_index (0.00s)
+    --- PASS: TestWeek02Schema/concurrent_email_unique (0.03s)
+    --- PASS: TestWeek02Schema/concurrent_membership_unique (0.01s)
+=== RUN   TestWeek04Claim
+=== RUN   TestWeek04Claim/C01_C09_C15_C16_member_claim_repeat_and_start
+=== RUN   TestWeek04Claim/C02_C03_C05_C08_isolation_identity_and_input
+=== RUN   TestWeek04Claim/C04_C06_C07_nonopen_assigned_stale_and_max
+=== RUN   TestWeek04Claim/C10_C11_C12_C13_simultaneous_claims
+    ticket_claim_test.go:310: round 00: requests=2 success=1 conflicts=1 version=1 assignment_events=1
+    ticket_claim_test.go:269: observed 7 concurrent PostgreSQL UPDATE lock waiters
+    ticket_claim_test.go:310: round 01: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 02: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 03: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 04: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 05: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 06: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 07: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 08: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 09: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 10: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 11: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 12: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 13: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 14: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 15: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 16: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 17: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 18: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 19: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+    ticket_claim_test.go:310: round 20: requests=20 success=1 conflicts=19 version=1 assignment_events=1
+=== RUN   TestWeek04Claim/C14_event_and_deferred_commit_failure_roll_back
+=== RUN   TestWeek04Claim/C14_event_and_deferred_commit_failure_roll_back/deferred=false
+=== RUN   TestWeek04Claim/C14_event_and_deferred_commit_failure_roll_back/deferred=true
+=== RUN   TestWeek04Claim/lock_cancellation_leaves_no_assignment
+=== RUN   TestWeek04Claim/unsafe_read_then_unconditional_write_counterexample
+    ticket_claim_test.go:391: counterexample: both readers saw NULL, both unsafe writes committed; final assignee overwritten, version=2 (isolated experiment only)
+--- PASS: TestWeek04Claim (1.47s)
+    --- PASS: TestWeek04Claim/C01_C09_C15_C16_member_claim_repeat_and_start (0.03s)
+    --- PASS: TestWeek04Claim/C02_C03_C05_C08_isolation_identity_and_input (0.02s)
+    --- PASS: TestWeek04Claim/C04_C06_C07_nonopen_assigned_stale_and_max (0.04s)
+    --- PASS: TestWeek04Claim/C10_C11_C12_C13_simultaneous_claims (0.66s)
+    --- PASS: TestWeek04Claim/C14_event_and_deferred_commit_failure_roll_back (0.02s)
+        --- PASS: TestWeek04Claim/C14_event_and_deferred_commit_failure_roll_back/deferred=false (0.01s)
+        --- PASS: TestWeek04Claim/C14_event_and_deferred_commit_failure_roll_back/deferred=true (0.01s)
+    --- PASS: TestWeek04Claim/lock_cancellation_leaves_no_assignment (0.16s)
+    --- PASS: TestWeek04Claim/unsafe_read_then_unconditional_write_counterexample (0.01s)
+=== RUN   TestWeek03Schema
+=== RUN   TestWeek03Schema/priority0
+=== RUN   TestWeek03Schema/priority4
+=== RUN   TestWeek03Schema/status
+=== RUN   TestWeek03Schema/negative_version
+=== RUN   TestWeek03Schema/blank_title
+=== RUN   TestWeek03Schema/long_title
+=== RUN   TestWeek03Schema/blank_body
+=== RUN   TestWeek03Schema/status_requires_assignee
+=== RUN   TestWeek03Schema/cross_org_assignee
+=== RUN   TestWeek03Schema/missing_org
+=== RUN   TestWeek03Schema/comment_parent_org
+=== RUN   TestWeek03Schema/comment_author_org
+=== RUN   TestWeek03Schema/comment_blank
+=== RUN   TestWeek03Schema/event_parent_org
+=== RUN   TestWeek03Schema/event_actor_org
+=== RUN   TestWeek03Schema/event_type
+=== RUN   TestWeek03Schema/event_json_object
+=== NAME  TestWeek03Schema
+    ticket_schema_test.go:108: EXPLAIN first node: Limit
+--- PASS: TestWeek03Schema (0.07s)
+    --- PASS: TestWeek03Schema/priority0 (0.00s)
+    --- PASS: TestWeek03Schema/priority4 (0.00s)
+    --- PASS: TestWeek03Schema/status (0.00s)
+    --- PASS: TestWeek03Schema/negative_version (0.00s)
+    --- PASS: TestWeek03Schema/blank_title (0.00s)
+    --- PASS: TestWeek03Schema/long_title (0.00s)
+    --- PASS: TestWeek03Schema/blank_body (0.00s)
+    --- PASS: TestWeek03Schema/status_requires_assignee (0.00s)
+    --- PASS: TestWeek03Schema/cross_org_assignee (0.00s)
+    --- PASS: TestWeek03Schema/missing_org (0.00s)
+    --- PASS: TestWeek03Schema/comment_parent_org (0.00s)
+    --- PASS: TestWeek03Schema/comment_author_org (0.00s)
+    --- PASS: TestWeek03Schema/comment_blank (0.00s)
+    --- PASS: TestWeek03Schema/event_parent_org (0.00s)
+    --- PASS: TestWeek03Schema/event_actor_org (0.00s)
+    --- PASS: TestWeek03Schema/event_type (0.00s)
+    --- PASS: TestWeek03Schema/event_json_object (0.00s)
+=== RUN   TestWeek03Tickets
+=== RUN   TestWeek03Tickets/T01_create_identity_and_initial_event
+=== RUN   TestWeek03Tickets/T02_T03_T04_input_membership_and_JWT
+=== RUN   TestWeek03Tickets/T05_T06_T07_T08_filters_and_scope
+=== RUN   TestWeek03Tickets/T10_T11_T12_T13_T14_edit_assignment_versions
+=== RUN   TestWeek03Tickets/T15_T16_T17_T18_T19_state_machine
+=== RUN   TestWeek03Tickets/T21_T23_comments_events_scope_and_version
+=== RUN   TestWeek03Tickets/T09_T20_T22_all_write_event_and_commit_failures_rollback
+=== RUN   TestWeek03Tickets/T24_T25_soft_delete_hides_every_child_and_write
+=== RUN   TestWeek03Tickets/concurrent_old_version_only_one_update
+=== RUN   TestWeek03Tickets/assignee_disabled_unassign_and_version_overflow
+=== RUN   TestWeek03Tickets/real_lock_cancellation_and_comment_close_order
+=== RUN   TestWeek03Tickets/older_transaction_writes_later_audit_time
+=== RUN   TestWeek03Tickets/T26_closed_storage_safe_500
+--- PASS: TestWeek03Tickets (0.97s)
+    --- PASS: TestWeek03Tickets/T01_create_identity_and_initial_event (0.01s)
+    --- PASS: TestWeek03Tickets/T02_T03_T04_input_membership_and_JWT (0.01s)
+    --- PASS: TestWeek03Tickets/T05_T06_T07_T08_filters_and_scope (0.03s)
+    --- PASS: TestWeek03Tickets/T10_T11_T12_T13_T14_edit_assignment_versions (0.02s)
+    --- PASS: TestWeek03Tickets/T15_T16_T17_T18_T19_state_machine (0.04s)
+    --- PASS: TestWeek03Tickets/T21_T23_comments_events_scope_and_version (0.02s)
+    --- PASS: TestWeek03Tickets/T09_T20_T22_all_write_event_and_commit_failures_rollback (0.06s)
+    --- PASS: TestWeek03Tickets/T24_T25_soft_delete_hides_every_child_and_write (0.03s)
+    --- PASS: TestWeek03Tickets/concurrent_old_version_only_one_update (0.04s)
+    --- PASS: TestWeek03Tickets/assignee_disabled_unassign_and_version_overflow (0.02s)
+    --- PASS: TestWeek03Tickets/real_lock_cancellation_and_comment_close_order (0.20s)
+    --- PASS: TestWeek03Tickets/older_transaction_writes_later_audit_time (0.05s)
+    --- PASS: TestWeek03Tickets/T26_closed_storage_safe_500 (0.01s)
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/tests/integration	9.795s
+
+PASS full race suite including enabled real PostgreSQL gates
+PASS real API login 200, independently verified HS256/claims, uniform credential 401 and empty-password 400; Token kept in memory only
+DEMO step 1: Alice registered 201 and logged in 200; identity and HS256 claims verified
+DEMO step 2: Alice created organization A 201; database creator relation is admin/active
+PASS real TCP /me, empty list, atomic organization/admin creation, own list, forged fields 400 and protected routes 401
+DEMO step 3: Bob registered 201 and logged in 200
+DEMO step 4: Bob created organization B 201; database creator relation is admin/active
+DEMO step 5: Bob reading A members returned 404; no membership in A exists
+DEMO step 6: Alice added Bob to A 201; database relation is member/active
+DEMO step 7: Bob read A members 200 but adding a member returned 403
+DEMO step 8: Expired HS256 credential rejected with 401 on /me and A members; no production clock change
+PASS real TCP Alice/Bob member read/add, cross-org 404, member 403, admin 201, duplicate 409, disabled old-token 404 and other-org access retained
+W03 DEMO 1: create/detail/initial event and scoped filtered list
+W03 DEMO 2: admin update and assignment, two audited changes
+W03 DEMO 3: Bob starts/comments/resolves, admin closes, CLOSED reopen rejected
+W03 DEMO 4: organization B visitor cannot read/write A ticket or children
+W03 DEMO 5: soft delete 204, ordinary parent/children hidden, database audit retained
+W03 DEMO 6: real event failure rolls back state/version/comment; restored database usable
+PASS review-recovery-session: initial organization network failure stays visible; Retry fetches real organizations; authenticated Back to login is guarded
+PASS filter-pagination: real 21-row data: page2/previous work; priority and status filters use backend results and reset to page1
+PASS C20: Alice browser login → /me → select A → real list → POST ticket 201 → detail OPEN
+PASS browser-concurrency-409: Bob/Charlie each sent version 0; one 200 and one 409; loser refreshed, final OPEN/version1/one matching assignment event
+PASS transition-comment-events: winner starts IN_PROGRESS, posts real comment, reads actual audit events
+PASS C18-network: offline fetch shows network error; recovery retries explicitly, no silent write retry
+PASS C19: refresh redirects login, no protected requests with old token, local/session storage and cookies empty
+PASS cross-organization: David direct A URL and B-org/A-ticket URL both 404; forged claim also 404; no A title rendered
+PASS C17: switch A→B clears A rows immediately; delayed prior request cannot replace B content
+PASS C18-401: real backend 401 clears session and returns login
+PASS G1-artifacts: real browser screenshots and g1-demo.webm captured; no password/token/connection string in rendered pages
+
+PASS onboarding: real UI register201, login200, first organization201/admin, automatic ticket entry and ticket creation
+PASS upload: binary masquerading as Markdown rejected415; valid real multipart saved201 with SHA256 and UPLOADED metadata
+PASS process-preview-download: real process200/READY, normalized source preview escaped as text, original download hash matches
+PASS samples: 10 original TXT/MD files uploaded and processed READY in two isolated organization scopes; actual manifest saved
+PASS filter-pagination: real page2 and READY filter work and reset page, with server-side metadata only
+PASS failure-status: whitespace yields422/FAILED with retry; PDF stores/downloads but extraction honestly returns422 PDF_UNSUPPORTED
+PASS authorization: same-org member reads but cannot delete uploader document; other organization gets404 and no preview
+PASS switch-delete: organization switch shows correct scope; uploader/admin deletes204; subsequent preview/download404
+PASS memory-session: new knowledge flows retain memory-only credentials; refresh requires login
+
+PASS real API registration 201, duplicate 409, forged role 400, no organization side effects, clean logs and SIGTERM
+CLEANUP only this run's test containers and labeled volume

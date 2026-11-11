@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-11-11T01:34:14.570Z",
+  "browser": "143.0.7499.4",
+  "real_api": true,
+  "mock_responses": false,
+  "results": [
+    {
+      "id": "unicode-onboarding",
+      "detail": "supplementary-plane input follows API code-point limits; short password blocked, valid registration/login and 100-character organization succeed"
+    },
+    {
+      "id": "onboarding",
+      "detail": "real UI register201, login200, first organization201/admin, automatic ticket entry and ticket creation"
+    },
+    {
+      "id": "upload",
+      "detail": "binary masquerading as Markdown rejected415; valid real multipart saved201 with SHA256 and UPLOADED metadata"
+    },
+    {
+      "id": "process-preview-download",
+      "detail": "real process200/READY, normalized source preview escaped as text, original download hash matches"
+    },
+    {
+      "id": "samples",
+      "detail": "10 original TXT/MD files uploaded and processed READY in two isolated organization scopes; actual manifest saved"
+    },
+    {
+      "id": "filter-pagination",
+      "detail": "real page2 and READY filter work and reset page, with server-side metadata only"
+    },
+    {
+      "id": "failure-status",
+      "detail": "whitespace yields422/FAILED with retry; PDF stores/downloads but extraction honestly returns422 PDF_UNSUPPORTED"
+    },
+    {
+      "id": "authorization",
+      "detail": "same-org member reads but cannot delete uploader document; other organization gets404 and no preview"
+    },
+    {
+      "id": "switch-delete",
+      "detail": "organization switch shows correct scope; uploader/admin deletes204; subsequent preview/download404"
+    },
+    {
+      "id": "memory-session",
+      "detail": "new knowledge flows retain memory-only credentials; refresh requires login"
+    }
+  ]
+}

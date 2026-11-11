@@ -1,0 +1,52 @@
+{
+  "generated_at": "2026-11-10T17:31:01.612Z",
+  "browser": "143.0.7499.4",
+  "real_api": true,
+  "mock_responses": false,
+  "results": [
+    {
+      "id": "review-recovery-session",
+      "detail": "initial organization network failure stays visible; Retry fetches real organizations; authenticated Back to login is guarded"
+    },
+    {
+      "id": "filter-pagination",
+      "detail": "real 21-row data: page2/previous work; priority and status filters use backend results and reset to page1"
+    },
+    {
+      "id": "C20",
+      "detail": "Alice browser login → /me → select A → real list → POST ticket 201 → detail OPEN"
+    },
+    {
+      "id": "browser-concurrency-409",
+      "detail": "Bob/Charlie each sent version 0; one 200 and one 409; loser refreshed, final OPEN/version1/one matching assignment event"
+    },
+    {
+      "id": "transition-comment-events",
+      "detail": "winner starts IN_PROGRESS, posts real comment, reads actual audit events"
+    },
+    {
+      "id": "C18-network",
+      "detail": "offline fetch shows network error; recovery retries explicitly, no silent write retry"
+    },
+    {
+      "id": "C19",
+      "detail": "refresh redirects login, no protected requests with old token, local/session storage and cookies empty"
+    },
+    {
+      "id": "cross-organization",
+      "detail": "David direct A URL and B-org/A-ticket URL both 404; forged claim also 404; no A title rendered"
+    },
+    {
+      "id": "C17",
+      "detail": "switch A→B clears A rows immediately; delayed prior request cannot replace B content"
+    },
+    {
+      "id": "C18-401",
+      "detail": "real backend 401 clears session and returns login"
+    },
+    {
+      "id": "G1-artifacts",
+      "detail": "real browser screenshots and g1-demo.webm captured; no password/token/connection string in rendered pages"
+    }
+  ]
+}

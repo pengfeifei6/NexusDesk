@@ -1,0 +1,73 @@
+PASS isolated PostgreSQL 17 healthy; project=nexusdesk-w02d2-6a1ba2a32205
+2026/11/10 22:35:28 OK   00001_create_organizations.sql (2.36ms)
+2026/11/10 22:35:28 goose: successfully migrated database to version: 1
+2026/11/10 22:35:28 OK   00002_create_users.sql (9.43ms)
+2026/11/10 22:35:29 OK   00003_create_organization_members.sql (166.07ms)
+2026/11/10 22:35:29 goose: successfully migrated database to version: 3
+2026/11/10 22:35:29     Applied At                  Migration
+2026/11/10 22:35:29     =======================================
+2026/11/10 22:35:29     Tue Nov 10 14:35:28 2026 -- 00001_create_organizations.sql
+2026/11/10 22:35:29     Tue Nov 10 14:35:28 2026 -- 00002_create_users.sql
+2026/11/10 22:35:29     Tue Nov 10 14:35:28 2026 -- 00003_create_organization_members.sql
+2026/11/10 22:35:29     Pending                  -- 00004_create_tickets.sql
+2026/11/10 22:35:29     Pending                  -- 00005_create_ticket_comments.sql
+2026/11/10 22:35:29     Pending                  -- 00006_create_ticket_events.sql
+2026/11/10 22:35:29 goose: no migrations to run. current version: 3
+PASS W1 to W02 upgrade preserves existing organization; repeated Up is stable
+2026/11/10 22:35:29 OK   00003_create_organization_members.sql (8.44ms)
+2026/11/10 22:35:30 OK   00002_create_users.sql (8.42ms)
+2026/11/10 22:35:30 OK   00002_create_users.sql (10.17ms)
+2026/11/10 22:35:30 OK   00003_create_organization_members.sql (6.79ms)
+2026/11/10 22:35:30 goose: successfully migrated database to version: 3
+PASS reverse Down 3 to 2 to 1, then Up to 3; W1 data retained
+2026/11/10 22:35:31 OK   00004_create_tickets.sql (11.2ms)
+2026/11/10 22:35:31 OK   00005_create_ticket_comments.sql (8.34ms)
+2026/11/10 22:35:31 OK   00006_create_ticket_events.sql (4.8ms)
+2026/11/10 22:35:31 goose: successfully migrated database to version: 6
+2026/11/10 22:35:31     Applied At                  Migration
+2026/11/10 22:35:31     =======================================
+2026/11/10 22:35:31     Tue Nov 10 14:35:28 2026 -- 00001_create_organizations.sql
+2026/11/10 22:35:31     Tue Nov 10 14:35:30 2026 -- 00002_create_users.sql
+2026/11/10 22:35:31     Tue Nov 10 14:35:30 2026 -- 00003_create_organization_members.sql
+2026/11/10 22:35:31     Tue Nov 10 14:35:31 2026 -- 00004_create_tickets.sql
+2026/11/10 22:35:31     Tue Nov 10 14:35:31 2026 -- 00005_create_ticket_comments.sql
+2026/11/10 22:35:31     Tue Nov 10 14:35:31 2026 -- 00006_create_ticket_events.sql
+2026/11/10 22:35:31 goose: no migrations to run. current version: 6
+2026/11/10 22:35:31 OK   00006_create_ticket_events.sql (8.86ms)
+2026/11/10 22:35:31 OK   00005_create_ticket_comments.sql (5.27ms)
+2026/11/10 22:35:31 OK   00004_create_tickets.sql (10.41ms)
+2026/11/10 22:35:32 OK   00004_create_tickets.sql (11.49ms)
+2026/11/10 22:35:32 OK   00005_create_ticket_comments.sql (4.26ms)
+2026/11/10 22:35:32 OK   00006_create_ticket_events.sql (5.12ms)
+2026/11/10 22:35:32 goose: successfully migrated database to version: 6
+PASS W03 3 -> 6, repeated Up, reverse Down to 3, Up to 6; old organization retained
+PASS real API login 200, independently verified HS256/claims, uniform credential 401 and empty-password 400; Token kept in memory only
+DEMO step 1: Alice registered 201 and logged in 200; identity and HS256 claims verified
+DEMO step 2: Alice created organization A 201; database creator relation is admin/active
+PASS real TCP /me, empty list, atomic organization/admin creation, own list, forged fields 400 and protected routes 401
+DEMO step 3: Bob registered 201 and logged in 200
+DEMO step 4: Bob created organization B 201; database creator relation is admin/active
+DEMO step 5: Bob reading A members returned 404; no membership in A exists
+DEMO step 6: Alice added Bob to A 201; database relation is member/active
+DEMO step 7: Bob read A members 200 but adding a member returned 403
+DEMO step 8: Expired HS256 credential rejected with 401 on /me and A members; no production clock change
+PASS real TCP Alice/Bob member read/add, cross-org 404, member 403, admin 201, duplicate 409, disabled old-token 404 and other-org access retained
+W03 DEMO 1: create/detail/initial event and scoped filtered list
+W03 DEMO 2: admin update and assignment, two audited changes
+W03 DEMO 3: Bob starts/comments/resolves, admin closes, CLOSED reopen rejected
+W03 DEMO 4: organization B visitor cannot read/write A ticket or children
+W03 DEMO 5: soft delete 204, ordinary parent/children hidden, database audit retained
+W03 DEMO 6: real event failure rolls back state/version/comment; restored database usable
+PASS review-recovery-session: initial organization network failure stays visible; Retry fetches real organizations; authenticated Back to login is guarded
+PASS C20: Alice browser login → /me → select A → real list → POST ticket 201 → detail OPEN
+PASS browser-concurrency-409: Bob/Charlie each sent version 0; one 200 and one 409; loser refreshed, final OPEN/version1/one matching assignment event
+PASS transition-comment-events: winner starts IN_PROGRESS, posts real comment, reads actual audit events
+PASS C18-network: offline fetch shows network error; recovery retries explicitly, no silent write retry
+PASS C19: refresh redirects login, no protected requests with old token, local/session storage and cookies empty
+PASS cross-organization: David direct A URL and B-org/A-ticket URL both 404; forged claim also 404; no A title rendered
+PASS C17: switch A→B clears A rows immediately; delayed prior request cannot replace B content
+PASS C18-401: real backend 401 clears session and returns login
+PASS G1-artifacts: real browser screenshots and g1-demo.webm captured; no password/token/connection string in rendered pages
+
+PASS real API registration 201, duplicate 409, forged role 400, no organization side effects, clean logs and SIGTERM
+CLEANUP only this run's test containers and labeled volume

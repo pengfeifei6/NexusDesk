@@ -1,0 +1,42 @@
+
+> nexusdesk-web@0.4.0 test:unit
+> vitest --run src/lib/__tests__/client.spec.ts
+
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/web
+
+ ❯ src/lib/__tests__/client.spec.ts (31 tests | 1 failed) 37ms
+     × keeps cancellation classification while reading an HTTP error body 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/__tests__/client.spec.ts > binary body cancellation > keeps cancellation classification while reading an HTTP error body
+AssertionError: expected Error: 服务暂时不可用，请稍后重试 { …(2) } to match object { status: +0, message: '请求已取消' }
+(1 matching property omitted from actual)
+
+- Expected
++ Received
+
+- {
+-   "message": "请求已取消",
+-   "status": 0,
++ ApiError {
++   "status": 422,
+  }
+
+ ❯ src/lib/__tests__/client.spec.ts:320:27
+    318|     await ready
+    319|     caller.abort()
+    320|     expect(await pending).toMatchObject({ status: 0, message: '请求已取消' …
+       |                           ^
+    321|     vi.unstubAllGlobals()
+    322|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 30 passed (31)
+   Start at  23:51:39
+   Duration  648ms (transform 58ms, setup 0ms, import 88ms, tests 37ms, environment 374ms)
+

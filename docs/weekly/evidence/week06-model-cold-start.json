@@ -1,0 +1,12 @@
+{
+  "elapsed_seconds": 118.407,
+  "model": "qwen3.5:35b",
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 118404620285,
+  "load_duration": 118168361846,
+  "prompt_eval_count": 23,
+  "prompt_eval_duration": 66750687,
+  "eval_count": 2,
+  "eval_duration": 33585463
+}

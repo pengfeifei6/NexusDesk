@@ -1,0 +1,43 @@
+@baseUrl = http://127.0.0.1:8080/api/v1
+@token = REPLACE_WITH_YOUR_LOCAL_TOKEN
+@orgID = 1
+@documentID = 1
+
+# 先登录并在本机填写变量；不要把真实Token提交到仓库。
+# orgID/documentID使用自己响应中的ID，不使用隔离样例清单ID。
+
+### 上传原创 Markdown；REST Client 的相对文件路径相对于本文件
+POST {{baseUrl}}/organizations/{{orgID}}/knowledge/documents
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=nexusdesk-week05-fixture
+
+--nexusdesk-week05-fixture
+Content-Disposition: form-data; name="file"; filename="01-onboarding.md"
+Content-Type: text/markdown
+
+< ../docs/knowledge/samples/01-onboarding.md
+--nexusdesk-week05-fixture--
+
+### 列表；可加 &status=READY
+GET {{baseUrl}}/organizations/{{orgID}}/knowledge/documents?page=1&page_size=20
+Authorization: Bearer {{token}}
+
+### 元数据
+GET {{baseUrl}}/organizations/{{orgID}}/knowledge/documents/{{documentID}}
+Authorization: Bearer {{token}}
+
+### 显式解析；无请求体，READY重复调用409
+POST {{baseUrl}}/organizations/{{orgID}}/knowledge/documents/{{documentID}}/process
+Authorization: Bearer {{token}}
+
+### READY纯文本
+GET {{baseUrl}}/organizations/{{orgID}}/knowledge/documents/{{documentID}}/text
+Authorization: Bearer {{token}}
+
+### 授权原文件下载
+GET {{baseUrl}}/organizations/{{orgID}}/knowledge/documents/{{documentID}}/download
+Authorization: Bearer {{token}}
+
+### 上传者或admin软删除；之后详情/text/download均404
+DELETE {{baseUrl}}/organizations/{{orgID}}/knowledge/documents/{{documentID}}
+Authorization: Bearer {{token}}

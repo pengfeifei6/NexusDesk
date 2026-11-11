@@ -1,0 +1,75 @@
+{
+  "purpose": "W06 input samples; assigned and processed only in owned W05 acceptance database",
+  "samples": [
+    {
+      "file": "01-onboarding.md",
+      "title": "新成员入门",
+      "organization_slot": "A",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture"
+    },
+    {
+      "file": "02-ticket-flow.md",
+      "title": "工单处理流程",
+      "organization_slot": "A",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture"
+    },
+    {
+      "file": "03-organizations.md",
+      "title": "组织数据边界",
+      "organization_slot": "A",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture"
+    },
+    {
+      "file": "04-upload-checklist.md",
+      "title": "上传前检查",
+      "organization_slot": "A",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture"
+    },
+    {
+      "file": "05-processing.md",
+      "title": "文档处理状态",
+      "organization_slot": "A",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture"
+    },
+    {
+      "file": "06-download.txt",
+      "title": "下载完整性",
+      "organization_slot": "A",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture"
+    },
+    {
+      "file": "07-database.txt",
+      "title": "迁移与运行",
+      "organization_slot": "A",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture"
+    },
+    {
+      "file": "08-incidents.md",
+      "title": "演示故障处理",
+      "organization_slot": "A",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture"
+    },
+    {
+      "file": "09-team-b.md",
+      "title": "B 组内部操作约定",
+      "organization_slot": "B",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture"
+    },
+    {
+      "file": "10-team-b-review.txt",
+      "title": "B 组发布复核",
+      "organization_slot": "B",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture"
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+
+> nexusdesk-web@0.4.0 test:unit
+> vitest --run src/lib/__tests__/client.spec.ts
+
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/web
+
+ ❯ src/lib/__tests__/client.spec.ts (28 tests | 8 failed) 36ms
+     × decodes uploader IDs losslessly while preserving safe measurements 4ms
+     × sends multipart unchanged without a Content-Type so the browser supplies the boundary 5ms
+     × returns authorized raw bytes for binary responses 1ms
+     × maps allowlisted binary error 413/DOCUMENT_TOO_LARGE safely 3ms
+     × maps allowlisted binary error 415/UNSUPPORTED_DOCUMENT_TYPE safely 1ms
+     × maps allowlisted binary error 422/PDF_UNSUPPORTED safely 1ms
+     × maps allowlisted binary error 422/EMPTY_TEXT safely 1ms
+     × maps allowlisted binary error 504/PROCESS_TIMEOUT safely 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/__tests__/client.spec.ts > knowledge transport > decodes uploader IDs losslessly while preserving safe measurements
+Error: unsafe numeric response
+ ❯ Object.<anonymous> src/lib/client.ts:8:46
+      6|     if (intKeys.test(key)) return value.value
+      7|     const number = Number(value.value)
+      8|     if (!Number.isSafeInteger(number)) throw new Error('unsafe numeric…
+       |                                              ^
+      9|     return number
+     10|   }) as T
+ ❯ reviveValue node_modules/lossless-json/src/revive.ts:37:17
+ ❯ reviveObject node_modules/lossless-json/src/revive.ts:45:18
+ ❯ reviveValue node_modules/lossless-json/src/revive.ts:34:38
+ ❯ revive node_modules/lossless-json/src/revive.ts:15:9
+ ❯ parse node_modules/lossless-json/src/parse.ts:41:19
+ ❯ decode src/lib/client.ts:4:10
+ ❯ src/lib/__tests__/client.spec.ts:210:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  src/lib/__tests__/client.spec.ts > knowledge transport > sends multipart unchanged without a Content-Type so the browser supplies the boundary
+AssertionError: expected '{}' to be FormData{ …(1) } // Object.is equality
+
+- Expected:
+FormData {}
+
++ Received:
+"{}"
+
+ ❯ src/lib/__tests__/client.spec.ts:224:24
+    222|     client.token = 'fixture-token'
+    223|     await expect(client.request('/documents', { method: 'POST', body: …
+    224|     expect(sent?.body).toBe(form)
+       |                        ^
+    225|     expect(new Headers(sent?.headers).has('Content-Type')).toBe(false)
+    226|     expect(new Headers(sent?.headers).get('Authorization')).toBe('Bear…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  src/lib/__tests__/client.spec.ts > knowledge transport > returns authorized raw bytes for binary responses
+Error: 响应格式异常，请稍后重试
+ ❯ Client.request src/lib/client.ts:107:15
+    105|         return envelope.data
+    106|       } catch {
+    107|         throw new ApiError(0, '响应格式异常，请稍后重试')
+       |               ^
+    108|       }
+    109|     } catch (error) {
+ ❯ src/lib/__tests__/client.spec.ts:238:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  src/lib/__tests__/client.spec.ts > knowledge transport > maps allowlisted binary error 413/DOCUMENT_TOO_LARGE safely
+AssertionError: expected [Function] to throw error including '文档超过大小限制' but got '服务暂时不可用，请稍后重试'
+
+Expected: "文档超过大小限制"
+Received: "服务暂时不可用，请稍后重试"
+
+ ❯ src/lib/__tests__/client.spec.ts:252:78
+    250|   ])('maps allowlisted binary error %s/%s safely', async (status, code…
+    251|     vi.stubGlobal('fetch', async () => new Response(JSON.stringify({ e…
+    252|     await expect(new Client().request('/download', { responseType: 'bl…
+       |                                                                              ^
+    253|     vi.unstubAllGlobals()
+    254|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  src/lib/__tests__/client.spec.ts > knowledge transport > maps allowlisted binary error 415/UNSUPPORTED_DOCUMENT_TYPE safely
+AssertionError: expected [Function] to throw error including '文档类型不支持' but got '服务暂时不可用，请稍后重试'
+
+Expected: "文档类型不支持"
+Received: "服务暂时不可用，请稍后重试"
+
+ ❯ src/lib/__tests__/client.spec.ts:252:78
+    250|   ])('maps allowlisted binary error %s/%s safely', async (status, code…
+    251|     vi.stubGlobal('fetch', async () => new Response(JSON.stringify({ e…
+    252|     await expect(new Client().request('/download', { responseType: 'bl…
+       |                                                                              ^
+    253|     vi.unstubAllGlobals()
+    254|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  src/lib/__tests__/client.spec.ts > knowledge transport > maps allowlisted binary error 422/PDF_UNSUPPORTED safely
+AssertionError: expected [Function] to throw error including 'PDF 暂不支持文本提取' but got '服务暂时不可用，请稍后重试'
+
+Expected: "PDF 暂不支持文本提取"
+Received: "服务暂时不可用，请稍后重试"
+
+ ❯ src/lib/__tests__/client.spec.ts:252:78
+    250|   ])('maps allowlisted binary error %s/%s safely', async (status, code…
+    251|     vi.stubGlobal('fetch', async () => new Response(JSON.stringify({ e…
+    252|     await expect(new Client().request('/download', { responseType: 'bl…
+       |                                                                              ^
+    253|     vi.unstubAllGlobals()
+    254|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  src/lib/__tests__/client.spec.ts > knowledge transport > maps allowlisted binary error 422/EMPTY_TEXT safely
+AssertionError: expected [Function] to throw error including '文档没有可提取的正文' but got '服务暂时不可用，请稍后重试'
+
+Expected: "文档没有可提取的正文"
+Received: "服务暂时不可用，请稍后重试"
+
+ ❯ src/lib/__tests__/client.spec.ts:252:78
+    250|   ])('maps allowlisted binary error %s/%s safely', async (status, code…
+    251|     vi.stubGlobal('fetch', async () => new Response(JSON.stringify({ e…
+    252|     await expect(new Client().request('/download', { responseType: 'bl…
+       |                                                                              ^
+    253|     vi.unstubAllGlobals()
+    254|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  src/lib/__tests__/client.spec.ts > knowledge transport > maps allowlisted binary error 504/PROCESS_TIMEOUT safely
+AssertionError: expected [Function] to throw error including '文档处理超时' but got '服务暂时不可用，请稍后重试'
+
+Expected: "文档处理超时"
+Received: "服务暂时不可用，请稍后重试"
+
+ ❯ src/lib/__tests__/client.spec.ts:252:78
+    250|   ])('maps allowlisted binary error %s/%s safely', async (status, code…
+    251|     vi.stubGlobal('fetch', async () => new Response(JSON.stringify({ e…
+    252|     await expect(new Client().request('/download', { responseType: 'bl…
+       |                                                                              ^
+    253|     vi.unstubAllGlobals()
+    254|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  8 failed | 20 passed (28)
+   Start at  23:46:25
+   Duration  648ms (transform 51ms, setup 0ms, import 72ms, tests 36ms, environment 378ms)
+

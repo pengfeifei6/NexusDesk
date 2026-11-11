@@ -6,20 +6,27 @@
 
 ## 当前进度
 
-**2026-11-10：Week 3 工单核心工程已完成**。新增九个工单API，包含状态机、指派、软删除、评论、事件及事务/版本校验；W02七个业务API与健康检查保留。阅读入口见 [第三周工作记录](docs/weekly/week03.md)，历史见[第二周](docs/weekly/week02.md)。
+先了解可用功能和维护方式，可阅读[第七周阶段介绍](docs/project-stage-overview-week07.md)。
 
-Day 1 已形成认证、API 与权限设计；Day 2 已增加 users / organization_members 迁移；Day 3 实现了用户存储、Argon2id、注册与严格输入；Day 4 增加登录、dummy 与 JWT；Day 5 接入可信身份、本人资料、组织/admin原子创建与本人列表；Day 6完成成员列表、添加与组织RBAC；Day 7完成整周审查、新目录复现和复习材料。验证使用独立可丢弃数据库，日常配置由开发者本地维护。
+**2026-11-11：第七周异步文档任务已完成工程实现和本机真实验收。** 知识库新增“上传并异步处理”、任务状态、重试/取消；独立 Worker 使用 Redis/Asynq 执行提取与索引，并用 PostgreSQL 任务、租约与所有权恢复故障。原 W06 Search/Ask 和真实来源校验保留。当前33个业务API、1个健康检查、11张业务表、11条迁移、8个主页面。PDF仍仅上传/下载；SSE、对话和工具调用留到W08。
 
-**Week 1 工程基础继续保留**：API 先验证数据库可连接，再启动 HTTP，已有迁移、连接池、测试与复现证据。当前已有第二周提交da47b6c；本次第三周成果未由AI自动提交，个人复习与远程 CI 仍按实际记录。
+入口：[第七周手册](项目开发文件/每周开发手册/10_NexusDesk_第七周详细开发手册.md) · [第七周记录](docs/weekly/week07.md) · [20道参考回答](docs/weekly/week07-answers.md) · [怎么启动](docs/demo/g3-jobs-demo.md) · [任务API](docs/api/knowledge-jobs.md) · [验收矩阵](docs/testing/week07-jobs.md)。独立Redis默认6380，避免本机已占用6379；API和Worker使用同一DB/私有存储，旧API要先重启。
 
-前端、claim抢单、support、角色修改与停用接口尚未实现；W03权限按[ticket API](docs/api/ticket.md)和[状态机](docs/ticket-state-machine.md)，组织active成员可读全部本组织未删除工单。`/healthz` 是固定响应的存活检查，不在每次请求查询数据库；数据库启动与迁移是独立步骤，启动 API 不会自动建表。
+W06固定本地BGE-M3 1024维/Qwen3.5:35b与pgvector精确搜索；大模型冷启动先运行 `python3 scripts/week06-model-warmup.py`。本周隔离验收用 `python3 scripts/week07-smoke.py`。原20题指标、AI预标注与人工复核待办保留在[第六周记录](docs/weekly/week06.md)，不代表生产准确率。
+
+W1～W6记录保留：[第一周](docs/weekly/week01.md) · [第二周](docs/weekly/week02.md) · [第三周](docs/weekly/week03.md) · [第四周/G1](docs/weekly/week04.md) · [第五周](docs/weekly/week05.md) · [第六周](docs/weekly/week06.md)。当前分支feat/week07-async-ingestion，保留之前未提交工作；AI未自动commit/push/merge。历史成员管理、工单PATCH编辑/指派/删除的完整UI仍待补齐；本周任务能力在页面提供提交、状态查看、重试和取消；面板轮询文档任务列表，单任务GET还可供脚本客户端使用。
+
+组织active admin/member可读本组织全部未删除工单，也可领取未指派OPEN；领取保持OPEN，再调用transition开始处理。[领取契约](docs/api/ticket-claim.md)与[状态机](docs/ticket-state-machine.md)为准。`/healthz`仅为存活检查，启动API不自动迁移。
 
 | 阶段 | 计划成果 |
 | --- | --- |
 | W1 | 最小 API、`GET /healthz`、PostgreSQL 连接、组织表迁移和测试 |
 | W2 | 身份认证、组织成员和角色权限 |
 | W3～W4 | 工单、评论、事件、并发领取和最简前端 |
-| W5 以后 | 文档上传、RAG、异步任务、SSE 与受控工具调用 |
+| W5 | 私有文档、TXT/MD提取与知识库页面（已验收） |
+| W6 | 分块、真实Embedding、组织内检索、非流式带来源问答（已验收） |
+| W7 | 异步文档任务、独立Worker、租约/重试/恢复和任务UI（已验收） |
+| W8以后 | SSE、对话和受控工具调用（待实现） |
 
 完整功能以实际代码、测试和演示结果为准。
 
@@ -30,11 +37,12 @@ Day 1 已形成认证、API 与权限设计；Day 2 已增加 users / organizati
 - 当前开发环境：Linux / Bash。
 - `go.mod` 声明：`go 1.26.1`；Module 为 `github.com/pengfeifei6/NexusDesk`。
 - Git 用于版本管理。
-- Docker Engine 与 Compose 插件；PostgreSQL 镜像固定主版本 `postgres:17`。
+- Docker Engine 与 Compose 插件；PostgreSQL固定主版本17；W06使用 `deploy/compose.pgvector.yaml` 覆盖为 `pgvector/pgvector:0.8.7-pg17-trixie`，重建现有容器也必须带此文件。
 - Goose CLI 固定 `v3.29.0`，当前已安装。
 - Gin 固定为 [v1.12.0](https://github.com/gin-gonic/gin/releases/tag/v1.12.0)，pgx 固定 `v5.12.0`，依赖由 `go.mod` / `go.sum` 记录。
 - 密码封装使用 alexedwards/argon2id `v1.0.0`，参数与本机成本见 [ADR-0002](docs/decisions/0002-auth-security.md)。
 - JWT 使用 golang-jwt/jwt/v5 `v5.3.1`，只接受 HS256，详见 [JWT 说明](docs/jwt-guide.md)。
+- Asynq固定v0.26.0，Redis镜像固定摘要（实际7.4.9）；独立本地compose见 deploy/compose.redis.yaml。
 - Python 3.8 及以上用于迁移 URL 编码示例和独立数据库烟测。
 
 可在本机检查：
@@ -67,19 +75,28 @@ NexusDesk/
 ├── README.md
 ├── go.mod
 ├── go.sum
-├── cmd/api/                  # main.go 启动与信号退出，main_test.go
+├── cmd/api/                  # HTTP入口、配置与信号退出
+├── cmd/worker/               # W07独立任务执行/扫描/关停
+├── internal/jobs/            # 持久任务、权限、租约、重试与恢复
+├── internal/platform/taskguard/ # 跨领域写入所有权校验
+├── internal/platform/taskqueue/ # Asynq/Redis传输适配
 ├── internal/platform/
 │   ├── config/               # 已实现环境配置读取与测试
 │   ├── httpserver/           # 已实现 Gin 健康检查与测试
 │   └── database/             # pgxpool 创建、启动 Ping、失败脱敏与测试
 ├── internal/auth/            # 注册/登录、JWT、可信身份中间件、/me 与测试
-├── internal/ticket/          # W03九接口、状态机、同tx事件、软删除与测试
+├── internal/ticket/          # W03九接口 + W04原子领取、状态机、同tx事件与测试
+├── internal/knowledge/       # W05七接口、组织隔离、正文事务和提取器
+├── internal/platform/storage/ # 私有本地文件、受限流、hash与清理记录
 ├── internal/organization/    # 组织/成员事务、列表、RBAC、严格输入与测试
 ├── deploy/compose.yaml       # 本机 PostgreSQL 17
-├── migrations/               # 六条增量Goose migration（组织/用户/成员/工单/评论/事件）
+├── migrations/               # 十一条增量Goose migration（含pgvector/索引/任务）
 ├── scripts/day5-smoke.py     # 独立可丢弃数据库的完整验证
 ├── scripts/week02-day2-smoke.py # W02验收；--closeout含全量测试与八步TCP演示
-├── tests/integration/        # 显式启用的真实 schema / 注册 / 登录 / 组织 / 成员测试
+├── scripts/week05-smoke.py  # W05真实库/文件/浏览器，包含W02～W04回归
+├── scripts/week04-smoke.py  # W04真实库并发 + 浏览器/录屏，包含历史回归
+├── web/                     # Vue3/TypeScript工作台、锁定依赖与单元测试
+├── tests/integration/        # 显式启用的真实schema/认证/组织/工单/并发测试
 ├── requests/week02.http     # 虚构输入的本地请求示例
 ├── .github/workflows/ci.yml  # Go 格式、race、vet、build（远程待运行）
 ├── docs/
@@ -179,7 +196,7 @@ for action in ("up", "status"):
 PY
 ```
 
-`-env=none` 禁止 Goose 自动重新读取默认 `.env`，这里统一使用当前终端已经加载的变量。Up应用到当前最新版本6，包含organizations/users/organization_members/tickets/ticket_comments/ticket_events和Goose版本记录；首条组织迁移仍为版本 1，不改写历史文件。
+`-env=none` 禁止 Goose 自动重新读取默认 `.env`，这里统一使用当前终端已经加载的变量。Up应用到当前最新版本8，包含原六张业务表、knowledge_documents、knowledge_document_texts和Goose版本记录；首条组织迁移仍为版本 1，不改写历史文件。
 
 查询组织表结构：
 
@@ -188,7 +205,7 @@ docker compose --env-file .env -f deploy/compose.yaml exec db \
   psql -U "$DB_USER" -d "$DB_NAME" -c '\d organizations'
 ```
 
-Down 每次撤销最新一条迁移：当前从6开始依次撤销事件/评论/工单，再向下才涉及成员/用户/组织表。所有 Down 都可能丢失对应表数据；回滚实验只在烟测创建的可丢弃测试库执行，不在已有开发数据上自动运行。
+Down 每次撤销最新一条迁移：当前从8开始先撤销知识库正文和元数据，再撤销事件/评论/工单，继续向下才涉及成员/用户/组织表。所有 Down 都可能丢失对应表数据；回滚实验只在烟测创建的可丢弃测试库执行，不在已有开发数据上自动运行。
 
 ### 3. 启动 Go API
 
@@ -214,7 +231,7 @@ curl -i http://127.0.0.1:8080/healthz
 3. [postgres.go](internal/platform/database/postgres.go)：安全编码连接参数，创建连接池，用不超过 5 秒的启动 Context 执行 Ping；失败关闭连接池并返回脱敏错误。
 4. [main.go](cmd/api/main.go)：先确认数据库连接，组装用户存储、共享密码预算与注册 Handler，再监听 HTTP；收到 Ctrl+C 或 SIGTERM 后停止 HTTP，最后关闭连接池。
 
-缺少配置时返回带变量名的错误并退出；监听失败时返回错误并以非零状态退出。HTTP_ADDR 可采用显式回环 IPv4 或带方括号的回环 IPv6 地址，端口范围为 0～65535；端口 0 用于临时测试，启动日志显示实际地址。HTTP 读取头/请求的上限为 5 秒，写响应上限 10 秒。
+缺少配置时返回带变量名的错误并退出；监听失败时返回错误并以非零状态退出。HTTP_ADDR 可采用显式回环 IPv4 或带方括号的回环 IPv6 地址，端口范围为 0～65535；端口 0 用于临时测试，启动日志显示实际地址。HTTP 读头上限5秒、读请求15秒、写响应30秒；W05同步提取默认10秒，独立失败收尾最多3秒。
 
 可在已加载配置的终端验证一次错误地址，不修改配置文件：
 
@@ -400,10 +417,10 @@ Day 7 已在不含真实 `.env`、`.git` 和生成缓存的新项目目录中执
 - [第一周源码基线校验清单（W02 已有增量修改）](docs/weekly/evidence/week01-source-baseline.json)
 - [第一周详细开发手册](项目开发文件/每周开发手册/04_NexusDesk_第一周详细开发手册.md)
 
-下一步：按 [第二周记录](docs/weekly/week02.md) 阅读[第三周回答](docs/weekly/week03-answers.md)和[W04交接](docs/weekly/week03.md)，再实现数据库原子claim与Vue联调。实现与工程验证由 AI 按开发者委托完成，不代替个人理解记录。
+下一步：自己按[G1演示](docs/demo/g1-demo-script.md)操作，再读[第四周回答](docs/weekly/week04-answers.md)复述并发SQL与前端请求流。工程由AI按委托完成；个人理解由你后续记录，第五周再进入文档上传与知识库。
 
 
-## W03 当前运行与维护
+## W03 历史验收与维护基础
 
 [工单设计](docs/ticket-design.md) · [API](docs/api/ticket.md) · [状态机](docs/ticket-state-machine.md) · [T01～T26](docs/testing/ticket-test-matrix.md) · [演示](docs/weekly/week03-demo.md) · [参考回答](docs/weekly/week03-answers.md)。九个端点统一为/api/v1/organizations/:orgID/tickets，要求现有Bearer身份；当前本组织active member/admin均可读，member仅编辑本人OPEN，admin可编辑/指派OPEN及软删除。
 
@@ -413,8 +430,67 @@ Day 7 已在不含真实 `.env`、`.git` 和生成缓存的新项目目录中执
 python3 scripts/week03-smoke.py
 ```
 
-默认Go检查8包，顶层65通过、8个数据库入口跳过；最终新目录真实库顶层73通过、无失败/跳过。单独-tags=integration不会自动启用环境开关，不作为真实DB已执行的证据。最新结果见[统计](docs/weekly/evidence/week03-test-summary.json)。W02 --closeout仍固定迁移3，W1仍固定1，W03模式升6；脚本均不加载真实.env，只清理自己的测试资源。
+W03归档时默认Go检查8包，顶层65通过、8个数据库入口跳过；最终新目录真实库顶层73通过、无失败/跳过。单独-tags=integration不会自动启用环境开关，不作为真实DB已执行的证据。最新结果见[统计](docs/weekly/evidence/week03-test-summary.json)。W02 --closeout仍固定迁移3，W1仍固定1，W03模式升6；脚本均不加载真实.env，只清理自己的测试资源。
 
-PATCH/transition必须用详情中的expected_version，旧版本409。JSON严格64KiB，title/body/comment有长度/Unicode限制，PATCH不能写status。CLOSED不可评论，评论不加工单version但有事件；软删后普通详情/评论/事件和写入均404。重复POST无请求级幂等，claim留W04，当前仅本地回环演示。
+PATCH/transition必须用详情中的expected_version，旧版本409。JSON严格64KiB，title/body/comment有长度/Unicode限制，PATCH不能写status。CLOSED不可评论，评论不加工单version但有事件；软删后普通详情/评论/事件和写入均404。重复POST无请求级幂等，W03当时尚无claim，W04已增加；当前仍仅本地回环演示。
 
-每次小改跑相关包测试，提交前race/vet/build/diff；结构变化追加迁移，不改已执行的00001～00006；接口与权限变化同步契约和测试，进展记week03及后续周。真实.env仍由开发者本地维护，源码/测试不代替数据库备份或远程Git保存。
+每次小改跑相关包测试，提交前race/vet/build/diff；结构变化追加迁移，不改已执行的00001～00008；接口与权限变化同步契约和测试，进展记week03及后续周。真实.env仍由开发者本地维护，源码/测试不代替数据库备份或远程Git保存。
+
+
+## W04 历史启动与验收（统计为当周记录）
+
+当前后端按上文配置环境、启动数据库并迁移到8，再`go run ./cmd/api`；W04历史隔离模式仍固定迁移6。前端需Node `^22.18.0 || >=24.12.0`，实际验证Node24.12.0；在第二个终端：
+
+```bash
+cd web
+npm ci --no-audit --no-fund
+npm run dev
+```
+
+打开Vite给出的127.0.0.1地址，默认代理至Go的127.0.0.1:8080；非默认端口使用`NEXUSDESK_API_TARGET=http://127.0.0.1:端口 npm run dev`。前端不读取任何.env，不需要配置JWT密钥；W05已提供注册和创建组织页面；添加成员仍使用已有W02 API。刷新页面会退出登录，这是内存Token的明确取舍。`npm run preview`仅预览静态构建，不能替代开发代理或生产部署配置。
+
+本机已有被忽略的独立Node工具，可从仓库根目录执行`export PATH="$PWD/.local/week04-tools/node_modules/node/bin:$PATH"`后进入web。系统Node未被替换；其他机器自行准备兼容Node/npm，完整依赖锁见package-lock.json。
+
+不碰日常配置的全量验收：
+
+```bash
+python3 scripts/week04-smoke.py --backend-only
+# 安装Playwright浏览器后，包含真实页面及截图/视频
+python3 scripts/week04-smoke.py
+```
+
+浏览器安装及本机Ubuntu20.04兼容说明见[G1演示](docs/demo/g1-demo-script.md)。当前W04统计：普通Go顶层69通过/9个DB入口跳过；真实库顶层78通过/无跳过；前端28项通过，build/lint/format通过。普通-tags=integration不会自动启用数据库。CI已增加web检查，远程执行结果尚未产生。
+
+每次修改先跑相关测试，提交前执行Go race/vet/build、前端unit/build/lint/format，以及涉及数据库/联调时的W04隔离脚本。看`git diff`和未跟踪文件后自己决定commit；migration保持追加，API变化同步DTO/契约/测试。[当前源码清单](docs/weekly/evidence/week04-source-baseline.json)用于比对交付内容，不包含真实.env或node_modules。
+
+依赖审计记录12项moderate、0 high/critical，均在开发工具链，详见[W04记录](docs/weekly/week04.md)；未用强制跨主版本升级掩盖结果。公开部署所需限流、HTTPS、会话撤销、备份仍属后续工作。
+
+
+## W05 启动、配置与维护
+
+若已运行W04，先停止原Go进程并重新 `go run ./cmd/api`，前端刷新后登录。无组织时直接“创建组织”，进入工单区后顶部切“知识库”。详细流程见[演示说明](docs/demo/g2-ingestion-demo.md)；不需要用curl完成首次注册或建组织。
+
+五个新变量均可省略，默认如下；显式填写非法值会启动失败：
+
+| 变量 | 默认值 | 边界 |
+| --- | --- | --- |
+| STORAGE_ROOT | ./var/storage | 私有目录0700，不置于web/.git或公开静态目录 |
+| UPLOAD_MAX_FILE_BYTES | 5242880 | 1..64MiB；前端当前固定提示5MiB |
+| UPLOAD_MAX_REQUEST_BYTES | 8388608 | 最多65MiB，至少比文件上限多65536字节 |
+| TEXT_EXTRACT_MAX_BYTES | 1048576 | 1..1MiB，UTF-8字节 |
+| TEXT_EXTRACT_TIMEOUT_SECONDS | 10 | 1..10秒 |
+
+私有原文件不进入Git，软删除不会立即释放空间。备份要同时覆盖数据库和私有存储；待清理记录先核对数据库引用，禁止直接按文件名批量删除。详见[ADR-0005](docs/decisions/0005-private-object-storage.md)。
+
+```bash
+# 完整真实数据库、文件系统、旧工单和新知识库浏览器验收
+python3 scripts/week05-smoke.py
+# 仅后端验收
+python3 scripts/week05-smoke.py --backend-only
+# 历史W1回归
+python3 scripts/day5-smoke.py
+```
+
+普通Go测试有11个数据库入口Skip，不能当作真实库验收。修改web后运行unit/build/lint/format，修改Go后运行相关测试及vet/build；涉及权限、SQL、上传、状态变化时再跑上述隔离脚本。十份[原创样例](docs/knowledge/samples/README.md)已在隔离测试库全部解析READY，该库已清理，日常库需自行上传。
+
+已保留W04依赖锁和历史测试证据；远程CI尚未执行，公开部署的HTTPS、可靠限流、备份恢复演练和容量治理仍需后续完成。当前完成的是本地知识库入库，不是G2/RAG上线。

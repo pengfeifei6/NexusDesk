@@ -19,6 +19,7 @@
 /tmp/
 /.local/
 /deploy/pgdata/
+/var/storage/
 *.log
 # 保留经过脱敏、用于交付审查的第一周验证记录。
 !/docs/weekly/evidence/*.log

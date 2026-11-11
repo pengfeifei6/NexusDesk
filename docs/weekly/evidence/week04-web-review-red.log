@@ -1,0 +1,102 @@
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/web
+
+ ❯ src/lib/__tests__/client.spec.ts (18 tests | 3 failed) 35ms
+     × classifies body stream network failures as network errors 7ms
+     × classifies cancellation while waiting for response body 4ms
+     × classifies timeout while waiting for response body 1ms
+ ❯ src/lib/__tests__/app.spec.ts (9 tests | 3 failed) 145ms
+   × keeps organization load failure visible and retries the organization request 10ms
+   × retries a failed organization page instead of reloading tickets 16ms
+   × redirects authenticated history Back away from the login form 15ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/__tests__/app.spec.ts > keeps organization load failure visible and retries the organization request
+AssertionError: expected 'NexusDesk组织工单工作台甲 退出登录组织选择请选择组织上一页组织第…' to contain '网络连接失败'
+
+Expected: "网络连接失败"
+Received: "NexusDesk组织工单工作台甲 退出登录组织选择请选择组织上一页组织第 1 页 下一页组织 选择组织，开始协作仅显示你当前有效加入的组织。没有组织时，请联系组织管理员。本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录"
+
+ ❯ src/lib/__tests__/app.spec.ts:175:25
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  src/lib/__tests__/app.spec.ts > retries a failed organization page instead of reloading tickets
+AssertionError: expected 'NexusDesk组织工单工作台甲 退出登录组织选择请选择组织组织0 · …' to contain '第二页恢复组织'
+
+Expected: "第二页恢复组织"
+Received: "NexusDesk组织工单工作台甲 退出登录组织选择请选择组织组织0 · member组织1 · member组织2 · member组织3 · member组织4 · member组织5 · member组织6 · member组织7 · member组织8 · member组织9 · member组织10 · member组织11 · member组织12 · member组织13 · member组织14 · member组织15 · member组织16 · member组织17 · member组织18 · member组织19 · member上一页组织第 2 页 下一页组织 工单刷新列表状态筛选全部状态OPENIN_PROGRESSRESOLVEDCLOSED优先级筛选全部优先级低普通高暂无工单上一页工单第 1 页 下一页工单 创建工单工单标题工单描述优先级低普通高创建工单本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录"
+
+ ❯ src/lib/__tests__/app.spec.ts:180:460
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  src/lib/__tests__/app.spec.ts > redirects authenticated history Back away from the login form
+AssertionError: expected '/login' to be '/desk' // Object.is equality
+
+Expected: "/desk"
+Received: "/login"
+
+ ❯ src/lib/__tests__/app.spec.ts:184:330
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  src/lib/__tests__/client.spec.ts > response body transport failures > classifies body stream network failures as network errors
+AssertionError: expected [Function] to throw error including '网络连接失败' but got '响应格式异常，请稍后重试'
+
+Expected: "网络连接失败"
+Received: "响应格式异常，请稍后重试"
+
+ ❯ src/lib/__tests__/client.spec.ts:143:263
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  src/lib/__tests__/client.spec.ts > response body transport failures > classifies cancellation while waiting for response body
+AssertionError: expected Error: 响应格式异常，请稍后重试 { status: +0 } to match object { message: '请求已取消' }
+(1 matching property omitted from actual)
+
+- Expected
++ Received
+
+- {
+-   "message": "请求已取消",
++ ApiError {
++   "message": "响应格式异常，请稍后重试",
++   "status": 0,
+  }
+
+ ❯ src/lib/__tests__/client.spec.ts:144:581
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  src/lib/__tests__/client.spec.ts > response body transport failures > classifies timeout while waiting for response body
+AssertionError: expected Error: 响应格式异常，请稍后重试 { status: +0 } to match object { message: '请求超时，请重试' }
+(1 matching property omitted from actual)
+
+- Expected
++ Received
+
+- {
+-   "message": "请求超时，请重试",
++ ApiError {
++   "message": "响应格式异常，请稍后重试",
++   "status": 0,
+  }
+
+ ❯ src/lib/__tests__/client.spec.ts:145:543
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  2 failed | 1 passed (3)
+      Tests  6 failed | 22 passed (28)
+   Start at  22:31:42
+   Duration  985ms (transform 381ms, setup 0ms, import 740ms, tests 216ms, environment 1.09s)
+

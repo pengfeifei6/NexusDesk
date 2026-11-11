@@ -1,0 +1,51 @@
+
+> nexusdesk-web@0.4.0 test:unit
+> vitest --run
+
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/web
+
+ ❯ src/lib/__tests__/rag.spec.ts (13 tests | 2 failed) 231ms
+     × clears protected preview when failed indexing refresh reports revoked access 17ms
+     × clears protected preview immediately on denied POST without waiting for another GET 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/__tests__/rag.spec.ts > RAG front-end contracts > clears protected preview when failed indexing refresh reports revoked access
+AssertionError: expected 'NexusDesk组织工单工作台fixture 退出登录组织选择请选择组织…' not to contain 'fixture body'
+
+Expected: "fixture body"
+Received: "NexusDesk组织工单工作台fixture 退出登录组织选择请选择组织A · adminB · member上一页组织第 1 页 下一页组织 工单知识库检索问答创建组织← 返回知识库列表guide.mdREADY 文档 #12 · 上传者 1 · text/markdown · 20 字节  上传 now · 更新 now · 已提取 20 字符 下载原文件删除文档刷新文档检索索引正文提取完成后，还需建立索引才能参与检索和问答。尚未索引 · 0 块 · 版本 0bge-m3:567m · 1024 维 · rune-500-80-v1模型暂时不可用 建立索引刷新索引正文预览utf8-v1 · nowfixture body本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录"
+
+ ❯ src/lib/__tests__/rag.spec.ts:276:32
+    274|     expect(wrapper.text()).toContain('fixture body')
+    275|     await button(wrapper, '建立索引').trigger('click'); await flushPromise…
+    276|     expect(wrapper.text()).not.toContain('fixture body')
+       |                                ^
+    277|     expect(wrapper.text()).not.toContain('guide.md')
+    278|     expect(wrapper.text()).toContain('资源不存在或无法访问')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/lib/__tests__/rag.spec.ts > RAG front-end contracts > clears protected preview immediately on denied POST without waiting for another GET
+AssertionError: expected 'NexusDesk组织工单工作台fixture 退出登录组织选择请选择组织…' not to contain 'fixture body'
+
+Expected: "fixture body"
+Received: "NexusDesk组织工单工作台fixture 退出登录组织选择请选择组织A · adminB · member上一页组织第 1 页 下一页组织 工单知识库检索问答创建组织← 返回知识库列表guide.mdREADY 文档 #12 · 上传者 1 · text/markdown · 20 字节  上传 now · 更新 now · 已提取 20 字符 下载原文件删除文档刷新文档检索索引正文提取完成后，还需建立索引才能参与检索和问答。尚未索引 · 0 块 · 版本 0bge-m3:567m · 1024 维 · rune-500-80-v1正在处理索引请求… 建立索引刷新索引正文预览utf8-v1 · nowfixture body本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录"
+
+ ❯ src/lib/__tests__/rag.spec.ts:290:32
+    288|     const { wrapper } = await open('/organizations/10/knowledge/12')
+    289|     await button(wrapper, '建立索引').trigger('click'); await flushPromise…
+    290|     expect(wrapper.text()).not.toContain('fixture body')
+       |                                ^
+    291|     expect(wrapper.text()).toContain('资源不存在或无法访问')
+    292|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 4 passed (5)
+      Tests  2 failed | 81 passed (83)
+   Start at  01:28:40
+   Duration  1.59s (transform 1.55s, setup 0ms, import 2.63s, tests 980ms, environment 1.82s)
+

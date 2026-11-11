@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-11 Asia/Shanghai",
+  "baseline_files": 260,
+  "intentional_baseline_changes": [
+    ".env.example",
+    "AGENTS.md",
+    "README.md",
+    "cmd/api/main.go",
+    "docs/architecture.md",
+    "docs/authorization-matrix.md",
+    "docs/database.md",
+    "internal/platform/config/config.go",
+    "scripts/week02-day2-smoke.py",
+    "scripts/week05-browser.mjs",
+    "web/src/App.vue",
+    "web/src/composables/desk.ts",
+    "web/src/composables/knowledge.ts",
+    "web/src/lib/client.ts",
+    "web/src/lib/types.ts",
+    "web/src/router/index.ts",
+    "web/src/views/KnowledgeDetailView.vue"
+  ],
+  "old_migrations_dependencies_historical_evidence_unchanged": true,
+  "source_doc_files_checked": 97,
+  "missing_relative_links": [],
+  "trailing_whitespace": [],
+  "git_diff_check": "pass",
+  "gofmt": "pass",
+  "private_backup_gitignored": true,
+  "real_env_private_uploads_unrelated_root_files_read": false,
+  "full_race_top_level_pass": 153,
+  "full_race_subtests_pass": 713,
+  "full_race_skip": 0,
+  "frontend_unit_pass": 83,
+  "browser_pass": 29,
+  "committed": false,
+  "pending_human_actions": [
+    "review20reference labels",
+    "independentcoding/selfassessment",
+    "reviewandcommit if desired"
+  ]
+}

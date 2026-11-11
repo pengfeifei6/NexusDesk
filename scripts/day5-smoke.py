@@ -120,7 +120,8 @@ def main():
             command(["go", "build", "-o", binary, "./cmd/api"])
             http = urllib.request.build_opener(urllib.request.ProxyHandler({}))
             for stop_signal in (signal.SIGTERM, signal.SIGINT):
-                api_env = dict(env, HTTP_ADDR="127.0.0.1:" + str(free_port()))
+                api_env = dict(env, HTTP_ADDR="127.0.0.1:" + str(free_port()),
+                               STORAGE_ROOT=str(Path(directory) / "storage"))
                 process = subprocess.Popen([binary], cwd=ROOT, env=api_env,
                                            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
                 try:

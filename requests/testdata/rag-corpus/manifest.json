@@ -1,0 +1,33 @@
+{
+  "version": "w06-corpus-v1",
+  "author": "AI generated original fictional training material under user delegation",
+  "human_label_review": "pending",
+  "fixed_before_model_run": true,
+  "documents": [
+    {
+      "file": "org-a-db-playbook.md",
+      "organization_slot": "A",
+      "sha256": "45c691df06086eb2853de430c355620d4971351e3c8f3ed939a8f6f5994751df"
+    },
+    {
+      "file": "org-a-incident-process.md",
+      "organization_slot": "A",
+      "sha256": "df449483dbeefc2b78a6264a1e917f10d6809e6f4f1868a9b1f08e01b9be31b1"
+    },
+    {
+      "file": "org-a-release-checklist.md",
+      "organization_slot": "A",
+      "sha256": "54f0350e05060692fba784ec2cd0b70c9718fe4fedb090ea8162783836d722fb"
+    },
+    {
+      "file": "org-a-upload-policy.md",
+      "organization_slot": "A",
+      "sha256": "0ced8b9517d00b02133263451a3ffff1e650554c51111c9502453cc47d261dbb"
+    },
+    {
+      "file": "org-b-private-guide.md",
+      "organization_slot": "B",
+      "sha256": "bee4ac8903fbcb807d887e6add930f2bf22ba88155f301e1a4b6e3769f34b039"
+    }
+  ]
+}

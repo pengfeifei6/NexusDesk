@@ -1,0 +1,77 @@
+{
+  "suite": "W07 owned process fault contracts",
+  "status": "PASS",
+  "fake_model": true,
+  "semantic_evidence": false,
+  "actual_signals": [
+    "SIGTERM",
+    "SIGKILL"
+  ],
+  "fixture_injection": [
+    "expired lease time after embedding SIGKILL",
+    "attempts=2 before actual third attempt",
+    "scoped acknowledgement delay trigger",
+    "expired lease time after postpublication SIGKILL"
+  ],
+  "cases": [
+    {
+      "case": "accepted_without_worker_then_independent_no_jwt_worker",
+      "status": "PASS",
+      "seconds": 2.348,
+      "attempts": 1,
+      "model_calls": 1
+    },
+    {
+      "case": "sigkill_during_embedding_restart",
+      "status": "PASS",
+      "seconds": 8.07,
+      "attempts": 2,
+      "model_calls": 2,
+      "published_chunks": 1
+    },
+    {
+      "case": "sigterm_bounded_then_restart",
+      "status": "PASS",
+      "seconds": 37.678,
+      "shutdown_seconds": 0.015,
+      "attempts": 2,
+      "model_calls": 2
+    },
+    {
+      "case": "transient_model_real_5s_30s_backoff",
+      "status": "PASS",
+      "seconds": 38.822,
+      "attempts": 3,
+      "model_calls": 3,
+      "intercall_seconds": [
+        6.028,
+        31.322
+      ],
+      "timing_tolerance_seconds": 0.2
+    },
+    {
+      "case": "redis_outage_api_202_business_alive_restart",
+      "status": "PASS",
+      "seconds": 2.404,
+      "attempts": 1,
+      "model_calls": 1
+    },
+    {
+      "case": "sigkill_after_ready_attempt3_reconciles_without_fourth",
+      "status": "PASS",
+      "seconds": 2.563,
+      "attempts": 3,
+      "model_calls": 1,
+      "published_chunks": 1
+    },
+    {
+      "case": "worker_logs_no_credentials_or_document_text",
+      "status": "PASS",
+      "seconds": 0.0,
+      "checked_workers": 9
+    }
+  ],
+  "current_case": null,
+  "failed_case": null,
+  "cleanup_failures": []
+}

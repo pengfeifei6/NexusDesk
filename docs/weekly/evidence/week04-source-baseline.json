@@ -1,0 +1,462 @@
+{
+  "recorded_at": "2026-11-10T14:46:13.303662+00:00",
+  "git_head": "7f1d7d23902d16102de6f35966e6cf59b76662c3",
+  "branch": "feat/week04-claim-web-mvp",
+  "kind": "uncommitted W04 runtime/config/test baseline",
+  "previous_manifest_sha256": "58916b5d792a14271abfc3f8abc4004959ca822c144958403d4593d80486b233",
+  "note": "No real .env, secrets, node_modules or build artifacts. web/go.mod is traversal boundary only. No automatic stage/commit/push/deploy.",
+  "files": [
+    {
+      "path": ".env.example",
+      "sha256": "5f6d9eb3beb41b5fd4c9c83d9126b8dded65d3988d4e30fbe9618fba93c29091"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "033a813ffeebb901d9db289bb8158bbbf4e31d890f85d4e1609fbff708a2678e"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "cc7fe433335ee457d6ea6ea87be9fa0f9d41408ede7f66109dd40c2bd799be7f"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "65e12eab79c9647b759281862c6a42fa98a4825600fe9b64c9a78c3833a62e57"
+    },
+    {
+      "path": "cmd/api/main.go",
+      "sha256": "fe60727d74edd8d2ff0ebee8ab4cc0595cb458c5a142fdd4e200538b7a99de6c"
+    },
+    {
+      "path": "cmd/api/main_test.go",
+      "sha256": "3930db197b7cdea8cdce6f6b67ab95ba2fe52ead008b2a48576151a5d98b886f"
+    },
+    {
+      "path": "deploy/compose.yaml",
+      "sha256": "6a61b690453971bd10a1ef37562db43d6a2f32d3547f365a159bdc5133ce08dd"
+    },
+    {
+      "path": "go.mod",
+      "sha256": "8091ded00f83ae72ec820267337d3882b84b42b90bda2954da3a20c131d74078"
+    },
+    {
+      "path": "go.sum",
+      "sha256": "209e05405870fb50365e60f335c8182c76f2d7c882c3a31cbcce50d8f8922958"
+    },
+    {
+      "path": "internal/auth/errors.go",
+      "sha256": "935a7b097ad66da1207d9b95e20619b26cd8d01b523699705f1c832e4c0ea692"
+    },
+    {
+      "path": "internal/auth/handler.go",
+      "sha256": "b29d48a3d7c3b9b08addd757910362a732e1f0617e5c1e5b062476e93fadf480"
+    },
+    {
+      "path": "internal/auth/handler_test.go",
+      "sha256": "72bf77a55bfb37538d7d6f795bbfd0821fea243d5ae4e5e2b1226bd7c6b85774"
+    },
+    {
+      "path": "internal/auth/json_input.go",
+      "sha256": "a5cb7052decf08945461e32b78a30e1a05fa193bba89635524f45ef548c8a9fb"
+    },
+    {
+      "path": "internal/auth/login_handler_test.go",
+      "sha256": "d3a528fa7523eb2805a495c6a8b7d1a7ba03a5d963c1d28c7d4105c5d62510d1"
+    },
+    {
+      "path": "internal/auth/login_test.go",
+      "sha256": "958774f793a9edd7ae4193910815d035452e7e065c4d47d9c908ef60c74d381d"
+    },
+    {
+      "path": "internal/auth/me.go",
+      "sha256": "ace84f5165b9808e60988125568f8fb1b4a11caffa846ea9d2100e4e700a65af"
+    },
+    {
+      "path": "internal/auth/middleware.go",
+      "sha256": "4d4dedf8ae5d3cf01daedeb67dd07217e5bfae5d902cf04241ab3724b72d4291"
+    },
+    {
+      "path": "internal/auth/middleware_test.go",
+      "sha256": "21ff53ce878857e219e8e71dd12a6b4ed76754745a5daab8e4a78e60703c9280"
+    },
+    {
+      "path": "internal/auth/middleware_token_test.go",
+      "sha256": "1a305a0e9824efdb865cf935ad1770c38b5b885e47994c52480756c60878938d"
+    },
+    {
+      "path": "internal/auth/model.go",
+      "sha256": "b5c094adf3f3c01e85d14d815b622a781cfe81c026ac83c0ed3cf3e0380b91b6"
+    },
+    {
+      "path": "internal/auth/password.go",
+      "sha256": "c56c716720afe14ded4ace38dc68eb11fd58eb48cfec405e96a407ae068d1e39"
+    },
+    {
+      "path": "internal/auth/password_test.go",
+      "sha256": "9fd1bdf89ca2972393cc6260df94bd5fa513137c3fedc7fd89eea61df4e7020c"
+    },
+    {
+      "path": "internal/auth/repository.go",
+      "sha256": "baeca80a8824343adde97ba41a0a163ea0ca9ff3c80c82fcf5d272186fb48c62"
+    },
+    {
+      "path": "internal/auth/repository_test.go",
+      "sha256": "9628ed60c7675f94dcfcae7af554db54ad9927c013f6dd928727b4e961ad71cc"
+    },
+    {
+      "path": "internal/auth/service.go",
+      "sha256": "5620c5600b57f0a08db789af8c71ac6e3d4b31ebeec03c37218e8848a965a508"
+    },
+    {
+      "path": "internal/auth/service_test.go",
+      "sha256": "54298c80dca5f5c741bb56ab9083dc5a7659836f8d07008f0d0813d337a1a93f"
+    },
+    {
+      "path": "internal/auth/token.go",
+      "sha256": "bb582b166d3c7fb97a7b235f63655cf93c327bd33b1c0fd146b7b9d2303309f6"
+    },
+    {
+      "path": "internal/auth/token_test.go",
+      "sha256": "077a335daee5a17052add2aea9b7f539780374d29042a987fc7c2d34475cc2e3"
+    },
+    {
+      "path": "internal/organization/errors.go",
+      "sha256": "86703f70a2871b0a59c852beda54da502bd5dcfab64bbd6bb609ba623d71fd33"
+    },
+    {
+      "path": "internal/organization/handler.go",
+      "sha256": "13283d6eeb66f4fd93303090f0381cc3776f4647ec8b68b475f91f6b496602c6"
+    },
+    {
+      "path": "internal/organization/handler_test.go",
+      "sha256": "421a4a776cf73bd6c36b5c582736212acc89bd68ab39645c5eb2b96dfea1ddf7"
+    },
+    {
+      "path": "internal/organization/member_handler.go",
+      "sha256": "6481c2a098ff9e73dad0df85bc52181d29cee0cc6bd68fe69e9781ed0502943b"
+    },
+    {
+      "path": "internal/organization/member_handler_test.go",
+      "sha256": "0b52cd391372b04478b94e5d4ffb5ed37bc92d04d13679c14cf4ebdc7608676e"
+    },
+    {
+      "path": "internal/organization/member_repository.go",
+      "sha256": "085eaa3906c401cd9a329a518132c0116544854c17deed84648487183227c1ad"
+    },
+    {
+      "path": "internal/organization/member_repository_test.go",
+      "sha256": "0a734535943202bb0910fbb33cc29ac1f594371fce15ab34ae05eabf6c12a67b"
+    },
+    {
+      "path": "internal/organization/member_service.go",
+      "sha256": "f0e519717d1c53893e7a302453921ff246d2a7b8044a98a773af26167890c78a"
+    },
+    {
+      "path": "internal/organization/members_test.go",
+      "sha256": "daf53d1759a40d4aa56549277dcc95191568b2091bf0abdeec9b867844cb46cf"
+    },
+    {
+      "path": "internal/organization/model.go",
+      "sha256": "f7593f63b2e6cf9af6637bb17b992e76a7c50e174c21a93448f58eeb6993e342"
+    },
+    {
+      "path": "internal/organization/policy.go",
+      "sha256": "2b72d28c1ea81bf47cbced54357665e4a459d6596d5afbacf388842e59c02f66"
+    },
+    {
+      "path": "internal/organization/repository.go",
+      "sha256": "319ee1679173d9becbf97b48f805e339ad6581769ecf11cada4dfa69f2b73012"
+    },
+    {
+      "path": "internal/organization/service.go",
+      "sha256": "fb2441c3435aff44587f5f350c412fe643f60d5bb1cbc0bbd68ca0d368ea049a"
+    },
+    {
+      "path": "internal/organization/service_test.go",
+      "sha256": "25cd6682b1fb093d396fc80463739b5e82dece29908ba6e1caad2f2ae447ecf1"
+    },
+    {
+      "path": "internal/platform/config/config.go",
+      "sha256": "449e325850d8d28052cc993e43ec41563db7b0478c23e09348def62cf45bd6b2"
+    },
+    {
+      "path": "internal/platform/config/config_test.go",
+      "sha256": "9e0a2d4340b6de50b00a25b4ec9b3271f65c3d642ccc705a926fedcf1aec2103"
+    },
+    {
+      "path": "internal/platform/database/postgres.go",
+      "sha256": "7d9123350cb0abc68dd81aa04d5aac637ca7e540888c66c6fc250abea03050e5"
+    },
+    {
+      "path": "internal/platform/database/postgres_test.go",
+      "sha256": "84b5359e824fe519834b50cc79d9fe6d222a307fdeb70fecab0d969cb4502685"
+    },
+    {
+      "path": "internal/platform/httpserver/router.go",
+      "sha256": "c44812525994ddc3fb51619def074de2a48aa7ab8993963692517b95c6cdf3d1"
+    },
+    {
+      "path": "internal/platform/httpserver/router_test.go",
+      "sha256": "fb7580804bf7da6f66400a7f93a685f9a311716fbcc4f84170d488e72b05b4ee"
+    },
+    {
+      "path": "internal/ticket/claim_test.go",
+      "sha256": "73d953ec7ae75e806b3728a277e7d8152fa031e2d675bfded680ff1d8e83b0ce"
+    },
+    {
+      "path": "internal/ticket/errors.go",
+      "sha256": "89b69792bbd4e8dbd07f10a8d04633fc838c2d1d19d56373c4c0b988b612c55d"
+    },
+    {
+      "path": "internal/ticket/handler.go",
+      "sha256": "c62f088e3a0e60c3a9f36cce02ba9842fda319d3d6a29511f4963dc385d3773a"
+    },
+    {
+      "path": "internal/ticket/handler_test.go",
+      "sha256": "017927b360bfcacf73dc5ddaf8fb9f8c9eab5cc332a35bb280d9e05acd88b71d"
+    },
+    {
+      "path": "internal/ticket/model.go",
+      "sha256": "6a6ec397364e2f53684f1d70cc4d4197323e35238d0f5b3917c2f7edeb90decd"
+    },
+    {
+      "path": "internal/ticket/policy.go",
+      "sha256": "320425c08d2e1b0e7d49fd89078c2df6afd74f80c9362e432bc3445731a1ab16"
+    },
+    {
+      "path": "internal/ticket/repository.go",
+      "sha256": "c0b151b2a7711d5d12d6002a55cd0dda3f9e3841d9c48f39a6fcd1f35356cc4e"
+    },
+    {
+      "path": "internal/ticket/service.go",
+      "sha256": "f22c7fbaaa963b74e952a59ab6d87a2727babf0d4f922d741346b4efa4738872"
+    },
+    {
+      "path": "internal/ticket/service_test.go",
+      "sha256": "cf57571b23c25d11047d42577da07e9fe083096f8b294848a7d59290885a168e"
+    },
+    {
+      "path": "internal/ticket/state_machine.go",
+      "sha256": "69d9ae45bb2ff251faf5a11c75d8d419732d7486d18ff294c7b3c8986e57a8dd"
+    },
+    {
+      "path": "internal/ticket/state_machine_test.go",
+      "sha256": "411c41a66ce04c893fc0962f9c07c0de2c693556c88d949e8d44e92b959ea053"
+    },
+    {
+      "path": "migrations/00001_create_organizations.sql",
+      "sha256": "89124652aa238e36a3049c0469801f947f6d1873c2edcb87620977045aedb00b"
+    },
+    {
+      "path": "migrations/00002_create_users.sql",
+      "sha256": "ed4668091f82dc5f55e7ef6f893879117508487e855a8c2b90bc2e020d97af8c"
+    },
+    {
+      "path": "migrations/00003_create_organization_members.sql",
+      "sha256": "44dd2acb37d7963a57eb4a5fd8cd41b139c5c5cc5850d42a00ed8e0862fb638b"
+    },
+    {
+      "path": "migrations/00004_create_tickets.sql",
+      "sha256": "9dfa5235a98938c6c2c5cbf69f424829cfe40c5d3fbdb3fb7870dcf2b2393505"
+    },
+    {
+      "path": "migrations/00005_create_ticket_comments.sql",
+      "sha256": "d97a4ea64fb0266dd55f8242c6090b88b5f519d42974282ae407f87d4509b268"
+    },
+    {
+      "path": "migrations/00006_create_ticket_events.sql",
+      "sha256": "abc17c1d4359a76717972d17c6d711676e9a0ffb527df4a614f23ddc72ac324c"
+    },
+    {
+      "path": "scripts/day5-smoke.py",
+      "sha256": "b07c6e1fd57cfc0678208455b4cce28175c7d4c533f7df31b0efaa86f9540343"
+    },
+    {
+      "path": "scripts/week02-day2-smoke.py",
+      "sha256": "fee31ddf01fdbc921bf02555e4292e0a5669037d7cc88f63983602d7e44d2200"
+    },
+    {
+      "path": "scripts/week03-smoke.py",
+      "sha256": "3fc379530ff7e748d8657f26df2c93a24366f4640916cbfe04432db60c59dea5"
+    },
+    {
+      "path": "scripts/week04-browser.mjs",
+      "sha256": "10250fcdf31523e84921d380c771580549f29380ad7c838b782f43ee127f5915"
+    },
+    {
+      "path": "scripts/week04-smoke.py",
+      "sha256": "07c48d9f1ad4fa53e02048918bafd8607f4f3746c3437c89cfb93e7facf5f630"
+    },
+    {
+      "path": "tests/integration/login_test.go",
+      "sha256": "0e3d658d588b4e64fac2bc9b2bcddaf3003836bc204665a315327f62779d5877"
+    },
+    {
+      "path": "tests/integration/members_test.go",
+      "sha256": "f17fee9c377fc25c698405ff80b76874a90763287cefe69dbb268b0e6bdc6454"
+    },
+    {
+      "path": "tests/integration/organization_test.go",
+      "sha256": "ee57ef1a4dd796b79097336053f209f3dd083249b0584e0176789675d21889bd"
+    },
+    {
+      "path": "tests/integration/register_test.go",
+      "sha256": "be24c83cee05cbbc37e0e034ece948499d0ca6a391167b89ace98ef1a72b49b5"
+    },
+    {
+      "path": "tests/integration/schema_test.go",
+      "sha256": "84456ec7cca2a03862a529eff8408515d36aca76c466d66fd9f14f9ea257f986"
+    },
+    {
+      "path": "tests/integration/ticket_claim_test.go",
+      "sha256": "37a9220392f2dbdc1749aeb95a026243434141a491f828e2dd5b3ad3dccc136f"
+    },
+    {
+      "path": "tests/integration/ticket_schema_test.go",
+      "sha256": "995ad6e4d8f2ea7bf26bf081bbb3520f9ebf7339199dcf58d81dbab93de89827"
+    },
+    {
+      "path": "tests/integration/ticket_test.go",
+      "sha256": "b7c377dfee21fa2967ae42a2d7ddb706334afd1c73e2695986fa821fcefd6155"
+    },
+    {
+      "path": "web/.editorconfig",
+      "sha256": "140a3af47b162217409f8e635fc70d0b01caf0ee81612d8904412366e83a1063"
+    },
+    {
+      "path": "web/.gitattributes",
+      "sha256": "d60f352d0db1404c70afb4bb8b2ca3fd1c610572aa40720e8a0b7baa7885418c"
+    },
+    {
+      "path": "web/.gitignore",
+      "sha256": "aaf850032ebd5ba963ab779a087807f817e1bcb5d49350d2087f12f591ca82ef"
+    },
+    {
+      "path": "web/.prettierrc.json",
+      "sha256": "f676d50058f1d9c72b54328a9a44c0f0df5ad31be3252849ab910ce83123cca6"
+    },
+    {
+      "path": "web/.vscode/extensions.json",
+      "sha256": "0a6fe9ff9cd34e75c4b745d554f1f5c10ce501a599b8491889e5ca46ddc678a1"
+    },
+    {
+      "path": "web/.vscode/settings.json",
+      "sha256": "113835cbf7b00922892fc33299f5ede47d66310bc1b2c371f600b8c7d7209075"
+    },
+    {
+      "path": "web/README.md",
+      "sha256": "e2a399948ee45bdf0624b2308933a0b349018f305c793a0d89a8d11fdeaff016"
+    },
+    {
+      "path": "web/env.d.ts",
+      "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+    },
+    {
+      "path": "web/eslint.config.ts",
+      "sha256": "ff35a9e69fc542f4eef90f83b6562ba8ba36972addf8600973967ba6e4b5dc8e"
+    },
+    {
+      "path": "web/go.mod",
+      "sha256": "f9dbabbf40f45bc019fb3c876188153daa65349e014c873c32392b0c6d72dde5"
+    },
+    {
+      "path": "web/index.html",
+      "sha256": "0a3b28f65d9a78890b427cd640f52b99417c2e1f7eb27bb8cbabb9f5845f06a9"
+    },
+    {
+      "path": "web/package-lock.json",
+      "sha256": "f1463e828755bf8899a6e669e7921ecebbd7b72341c03ea68b394c6719b74887"
+    },
+    {
+      "path": "web/package.json",
+      "sha256": "95f4dfbcbfd02a7f909dc101d14001d7f048f4a5959a46565c299709bb7ee954"
+    },
+    {
+      "path": "web/src/App.vue",
+      "sha256": "8e4b27185e77919fe78e51456815ba09a42c3a2ebc63c7076b90a4edfac30460"
+    },
+    {
+      "path": "web/src/__tests__/App.spec.ts",
+      "sha256": "dcd037647226a720e78a4272f7afe0f86584d897ec405d65ce099c231a7d6b86"
+    },
+    {
+      "path": "web/src/assets/main.css",
+      "sha256": "e0fdaf851d2dda0c96a6302b0bc406907ffb5f1fc0e60a8f5c96710571518af2"
+    },
+    {
+      "path": "web/src/components/TicketForm.vue",
+      "sha256": "897cdc1a42220231daa89708d4e429b602b7b56434d424aa84895b7586aa3054"
+    },
+    {
+      "path": "web/src/composables/desk.ts",
+      "sha256": "53534b46c55efd5135c07496ef8f97ed2428e010ac23396fcd66e64be5c56059"
+    },
+    {
+      "path": "web/src/lib/__tests__/app.spec.ts",
+      "sha256": "b87c8b2707dbd65e6bc000ae73cda97320ed6389b4a6ebfba089526851b899bf"
+    },
+    {
+      "path": "web/src/lib/__tests__/client.spec.ts",
+      "sha256": "13b673c22c9f7a107c115f4e9647d220541fbd863e52e59aa760728e358c994d"
+    },
+    {
+      "path": "web/src/lib/client.ts",
+      "sha256": "6c3aeb5c203d57ac2bf7d901026b0ec42544b27a75a961bb784c9e880857d137"
+    },
+    {
+      "path": "web/src/lib/types.ts",
+      "sha256": "ff29def20a37cdd573e417ec1fbff702555c48fad6228610eed51bfb7c78f969"
+    },
+    {
+      "path": "web/src/main.ts",
+      "sha256": "14db93eb7d5eb98cb15e73595d0af03ca78d0b548ec96521894955bb5814689c"
+    },
+    {
+      "path": "web/src/router/index.ts",
+      "sha256": "d05d09b0b35114d5f1d3b4b285a9d1ce4bcb4969496d8195fc5f75b1c8a8796c"
+    },
+    {
+      "path": "web/src/stores/session.ts",
+      "sha256": "8eb892c5e48d185f48ad2a96363479e8bb348e108dda99d80886a65a62ba7273"
+    },
+    {
+      "path": "web/src/views/DeskView.vue",
+      "sha256": "37de84565829806fbb88622b3b14515f07b19401886cd6f65a614c798b9455f5"
+    },
+    {
+      "path": "web/src/views/LoginView.vue",
+      "sha256": "c3b21bcc392437bf4e46252b2caae84111329c71dc13166fe6501a434ba0342b"
+    },
+    {
+      "path": "web/src/views/TicketDetailView.vue",
+      "sha256": "212f52efa468c8a538fc5248d4d717c19f2254d6de6d598691b75b1827cb468a"
+    },
+    {
+      "path": "web/src/views/TicketListView.vue",
+      "sha256": "8bbeb38852c6d88cca9f98b72390ebcde91e77e0790990b6e4152a2315c1be32"
+    },
+    {
+      "path": "web/tsconfig.app.json",
+      "sha256": "92496d0db20bb707be8b697a9dc316c7ded1011f8a9998a472c89f3e612822f2"
+    },
+    {
+      "path": "web/tsconfig.json",
+      "sha256": "9c4d36d79809ab9835a9e674b60dd208f3c15958eb9f2dea1afb218f6d0e483b"
+    },
+    {
+      "path": "web/tsconfig.node.json",
+      "sha256": "f3d48b85104c3b01aa68ee8758762eb6e90cb09677251f6b7b4b53360e37bde1"
+    },
+    {
+      "path": "web/tsconfig.vitest.json",
+      "sha256": "6aed91cc02f169d58a4757b98c7a69c4c80ba55c5692f62eba97335de0059302"
+    },
+    {
+      "path": "web/vite.config.ts",
+      "sha256": "e43cf8093b2c15cced803cb16cb757a1f8cbef18a2e9217d31fdc54716660c7a"
+    },
+    {
+      "path": "web/vitest.config.ts",
+      "sha256": "d7364f879e1e5fff342aff834176bbe550279c880c10b1e6468d08fe1d479fdc"
+    }
+  ]
+}

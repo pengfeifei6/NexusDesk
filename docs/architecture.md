@@ -1,14 +1,16 @@
 # NexusDesk 架构说明
 
+> 2026-11-11当前阶段：API + 独立cmd/worker、PostgreSQL业务任务、专用Redis/Asynq、本地Ollama；设计见[异步任务](jobs-design.md)，实际验收见[第七周记录](weekly/week07.md)。旧段落保留历史。
+
 - 版本：v0.2
 - 日期：2026-11-10（W02 Day 1 增量更新）
 - 用途：第一周 Day 2 架构设计产出。
 - 依据：[需求说明](requirements.md)、[原始项目设计](../项目开发文件/01_NexusDesk_完整项目设计文档.md)。
-- 状态：由 AI 按开发者要求整理；W1/W2基础与W03工单九接口、状态机、软删除和同tx事件已实现验证；claim、前端和角色修改仍待后续，实际证据见周报。
+- 状态：由 AI 按开发者要求整理；W1/W2基础与W03工单九接口、状态机、软删除和同tx事件已实现验证；W04已增加条件UPDATE领取与Vue/TS本地前端，角色修改仍待后续，实际证据见[第四周](weekly/week04.md)。
 
 > 阅读顺序建议：先看第 1～4 节理解系统与分层，再看第 5～7 节理解权限、事务和启动。除明确标记已实现的内容外，文中的目录、流程和测试均为设计；运行证据以周报为准。
 
-W02 Day 1 已形成 [认证设计](auth-design.md)、[权限矩阵](authorization-matrix.md)、[API 契约](api/auth-organization.md) 与 [ADR-0002](decisions/0002-auth-security.md)。本周只落地 admin/member、active/disabled；support、角色变更与下面的工单并发锁方案均为后续设计，不是本周已实现能力。
+W02 Day 1 已形成 [认证设计](auth-design.md)、[权限矩阵](authorization-matrix.md)、[API 契约](api/auth-organization.md) 与 [ADR-0002](decisions/0002-auth-security.md)。本周只落地 admin/member、active/disabled；support、角色变更与第6.3节成员撤权锁方案仍为后续设计；W04领取方案以ADR-0004为准。
 
 W02 Day 2 已添加 users 与 organization_members 增量迁移，并在专用测试库验证；[Repository 契约](repository-contracts.md) 定义了八个方法。Day 3 落实三个用户存储方法与注册，Day 4 增加 LoginService/Handler、TokenManager 与四个 JWT 配置。启动入口注入同一个 PasswordHasher、预建 dummy hash；Token 不携带角色。Day 5 已接通 RequireUser 与 /me，落实组织创建和本人列表两个存储方法，Day 6已落实成员三方法与MemberService/Handler/policy。组织创建采用 Service 定义原子动作、专用 Repository 方法内部持有同一 tx 的方式；W03工单已按第6节由Service显式管理小事务接口，Repository只执行SQL。
 
@@ -22,7 +24,7 @@ W02 Day 2 已添加 users 与 organization_members 增量迁移，并在专用�
 | W2 | Day 6已完成注册/登录、密码/JWT、认证中间件、本人信息、组织/admin事务、本人组织列表、成员读取/添加和RBAC | Day 7工程收尾已归档；角色修改、停用接口、support 和工单留后续阶段 |
 | W3 | 工单创建、查询、编辑、评论、状态机和操作事件 | 前端与完整并发验收 |
 | W4 / G1 | 并发领取验证、最简 Vue 前端、业务端到端演示 | 知识库和 AI |
-| W5 以后 | 按周计划加入文档、RAG、Worker、SSE 和受控工具调用 | 不提前创建无用途模块 |
+| W5 | 私有文档、组织隔离、TXT/MD提取、知识库和首次使用页面 | RAG、Worker、SSE 和受控工具调用仍待后续 |
 
 设计六张表和未来业务分层，是为了提前明确边界；W1 只实际创建 `organizations` 表。
 
@@ -128,7 +130,7 @@ Day 2 仅新增设计文档。目录表中的 Go 文件、Compose 和 migration 
 | 身份或角色 | 工单可见范围 | 关键业务限制 |
 | --- | --- | --- |
 | 未登录 | 无 | 业务接口返回 `401` |
-| `member` | 本组织全部未删除工单/评论/事件 | 仅编辑本人OPEN，active assignee可启动/解决，无claim |
+| `member` | 本组织全部未删除工单/评论/事件 | 仅编辑本人OPEN，active assignee可启动/解决，W04可领取未指派OPEN |
 | `support` | 尚无此角色取值 | 未来扩展需增量迁移 |
 | `admin` | 本组织全部未删除工单/评论/事件 | 编辑/指派OPEN、按状态机操作、软删除；无角色修改API |
 
@@ -159,7 +161,7 @@ Service 开始事务，并让相关 Repository 使用同一个事务对象。禁
 
 ### 6.2 领取与状态变更
 
-- 领取使用带 `org_id`、当前状态和未领取条件的数据库更新；多请求竞争同一条记录时只允许一个满足条件。
+- W04领取使用带org_id/id/OPEN/assignee IS NULL/deleted_at IS NULL/expected_version/版本防溢出的单条UPDATE RETURNING，竞争最多一成功；保持OPEN、version+1，同tx写一条TICKET_ASSIGNED。零行按范围读区分404/409。见[ADR-0004](decisions/0004-atomic-ticket-claim.md)。
 - 状态变更使用明确源状态条件或行锁；影响记录为零时，结合已验证的可见性判断是否返回冲突。
 - 业务修改递增 `version`，事件保存该次版本；评论不修改工单状态，不递增工单版本。
 - 工单变更和事件在同一事务提交。Go 进程内 Mutex 不能替代数据库对多个应用实例的协调。
@@ -236,3 +238,28 @@ Redis、模型服务和知识库故障不能成为普通工单业务的必经依
 本文补齐了 Day 2 的架构说明。实现、测试与独立解释能力分别在后续验证；本次没有执行应用测试或创建业务代码。
 
 相关文档：[需求](requirements.md) · [数据库](database.md) · [ADR-0001](decisions/0001-modular-monolith.md)。
+
+## W04浏览器边界
+
+Vue以相对/api/v1调用，开发Vite回环代理至Go；内存Token和会话代次、取消/请求序号防旧数据回写，ID/version无损字符串。职责/启动/真实浏览器验收见[前端说明](frontend/web-mvp.md)和[G1](demo/g1-demo-script.md)。开发代理不等于生产网关或后端授权。
+
+## W05 当前入库模块
+
+启动入口将pgx仓库、既有MemberRepository、私有Local Storage和UTF-8 Extractor注入knowledge.Service。Handler在RequireUser保护组注册七接口；服务每次核对成员与对象范围。Vue新增注册、组织创建入口、知识库列表和详情，复用内存Token与请求作用域。
+
+上传先流式保存原文件，再提交元数据，失败用补偿/journal处理；解析先条件UPDATE取得PROCESSING，事务外读文件，再由Repository短事务锁父行、写正文与READY。失败状态用独立短Context且条件更新；不存在跨文件/数据库原子承诺。下载经鉴权Handler流式返回，没有静态目录挂载。
+
+本周HTTP读头5秒、读请求15秒、写响应30秒，操作Context仍限定默认10秒。读取源是本地常规文件，context无法强制打断任意未来远程阻塞reader；更换存储实现需重新验证。PDF只附件模式，无解析器依赖。W06/RAG及W07任务租约尚未实现。
+
+详见[入库设计](knowledge/ingestion-design.md)、[ADR-0005](decisions/0005-private-object-storage.md)、[W05验收](weekly/week05.md)。
+
+
+## W06增量
+
+同一个Go API注入共享的本地llm.Client和rag.Service，四个接口挂在RequireUser保护组；API启动不依赖模型在线。knowledge负责原文件/正文与授权，rag负责索引编排、版本一致性、检索与引用；llm只负责有界的本地HTTP协议。SQL模型请求分离，写事务5秒/读3秒/独立回滚3秒，生成前后复查来源。
+
+Vue知识库详情加索引面板，新检索问答页走组织作用域，所有来源为纯文本+鉴权文档链接。HTTP服务WriteTimeout75秒以覆盖有界同步流程；预热大模型是独立操作。无Redis/Worker/SSE/工具执行，状态恢复局限与后续方向见[ADR-0006](decisions/0006-local-rag-baseline.md)。
+
+## W07 当前执行结构
+
+浏览器→API→PostgreSQL持久任务；独立Worker扫描任务→Redis/Asynq→Worker执行。Worker复用knowledge/rag Service，在事务外处理文件/模型，用短事务和taskguard发布。API启动不连Redis；Worker没有HTTP/JWT依赖。API和Worker共享同一数据库和私有文件根目录。W06同步端点保留，但与活动异步任务互斥。详见[任务设计](jobs-design.md)和[ADR0007](decisions/0007-durable-asynq-jobs.md)。

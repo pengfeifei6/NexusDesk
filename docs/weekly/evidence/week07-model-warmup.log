@@ -1,0 +1,2 @@
+{"model": "bge-m3:567m", "elapsed_seconds": 3.545, "load_duration_ns": 3304213720, "prompt_eval_count": 12, "eval_count": null, "warmup_excluded_from_retrieval_metrics": true}
+{"model": "qwen3.5:35b", "elapsed_seconds": 9.041, "load_duration_ns": 8749046232, "prompt_eval_count": 20, "eval_count": 2, "warmup_excluded_from_retrieval_metrics": true}

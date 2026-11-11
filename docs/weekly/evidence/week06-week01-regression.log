@@ -1,0 +1,30 @@
+Docker Compose version v5.6.0
+PASS PostgreSQL container is healthy
+NAME                               IMAGE         COMMAND                  SERVICE   CREATED         STATUS                   PORTS
+nexusdesk-day5-617c93f74598-db-1   postgres:17   "docker-entrypoint.s…"   db        6 seconds ago   Up 5 seconds (healthy)   127.0.0.1:44975->5432/tcp
+2026/11/11 01:31:37 OK   00001_create_organizations.sql (4.47ms)
+2026/11/11 01:31:37 goose: successfully migrated database to version: 1
+2026/11/11 01:31:37     Applied At                  Migration
+2026/11/11 01:31:37     =======================================
+2026/11/11 01:31:37     Tue Nov 10 17:31:37 2026 -- 00001_create_organizations.sql
+2026/11/11 01:31:37     Pending                  -- 00002_create_users.sql
+2026/11/11 01:31:37     Pending                  -- 00003_create_organization_members.sql
+2026/11/11 01:31:37     Pending                  -- 00004_create_tickets.sql
+2026/11/11 01:31:37     Pending                  -- 00005_create_ticket_comments.sql
+2026/11/11 01:31:37     Pending                  -- 00006_create_ticket_events.sql
+2026/11/11 01:31:37     Pending                  -- 00007_create_knowledge_documents.sql
+2026/11/11 01:31:37     Pending                  -- 00008_create_knowledge_document_texts.sql
+2026/11/11 01:31:37     Pending                  -- 00009_enable_pgvector_and_create_chunks.sql
+2026/11/11 01:31:37     Pending                  -- 00010_create_knowledge_document_indexes.sql
+2026/11/11 01:31:37 OK   00001_create_organizations.sql (7.46ms)
+2026/11/11 01:31:38 OK   00001_create_organizations.sql (8.66ms)
+2026/11/11 01:31:38 goose: successfully migrated database to version: 1
+PASS Goose Up / Status / Down / Up and version 1
+2026/11/11 01:31:45 goose: no migrations to run. current version: 1
+PASS README restart preserves the volume, organizations table and migration version
+PASS full race suite including PostgreSQL integration and SQL defaults
+PASS organizations name NOT NULL constraint
+PASS database-backed API /healthz and SIGTERM exit 0
+PASS database-backed API /healthz and SIGINT exit 0
+PASS authentication / missing database / unreachable database fail before HTTP
+Cleaned up only this run's test containers and labeled volume

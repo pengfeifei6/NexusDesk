@@ -1,0 +1,15 @@
+2026-11-10 Asia/Shanghai W04 final delivery verification
+PASS 59 Markdown files: 607 local links/anchors, fences/tables and 16 JSON examples
+PASS requests/week04.http: 4 fictional JSON request bodies
+PASS all four Python smoke entry points parse
+PASS CI YAML structure and embedded Bash syntax
+PASS 12-variable example retains placeholders; Bash syntax valid; real .env ignored/untracked; contents never read
+PASS W03 baseline: 67 of 74 runtime files unchanged; only 7 intended source/config paths changed; all six migrations, root Go deps, auth and organization logic retained
+PASS 113-path current source manifest matches; HEAD7f1d7d2 and uncommitted W04 branch retained
+PASS clean web reproduction manifest matches final files
+PASS 69 ordinary Go pass/9 DB skip; 78 real-DB pass/no skips; 28 web tests; 11 browser checkpoints; 7 screenshots and actual 00:01:08.56 recording
+PASS 20 sequential learning answers and C01-C20 coverage rows present
+PASS evidence and source are trackable; no raw JWT-shaped credential in W04 logs; node_modules/local tools excluded
+PASS 8 observed owned test projects: no remaining containers or labeled volumes
+PASS Go formatting and final git diff --check
+No real .env read; no automatic stage/commit/push/merge/deploy.

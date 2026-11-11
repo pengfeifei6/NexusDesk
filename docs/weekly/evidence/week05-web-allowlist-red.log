@@ -1,0 +1,86 @@
+
+> nexusdesk-web@0.4.0 test:unit
+> vitest --run
+
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/web
+
+ ❯ src/lib/__tests__/client.spec.ts (34 tests | 3 failed) 47ms
+   × rejects inherited error code constructor from the message allowlist 7ms
+   × rejects inherited error code __proto__ from the message allowlist 1ms
+   × rejects inherited error code toString from the message allowlist 1ms
+ ❯ src/lib/__tests__/knowledge.spec.ts (23 tests | 1 failed) 314ms
+   × uses a generic failure message for an inherited property name rather than rendering it 12ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/__tests__/client.spec.ts > rejects inherited error code constructor from the message allowlist
+AssertionError: expected [Function] to throw error including '服务暂时不可用' but got 'function Object() { [native code] }'
+
+Expected: "服务暂时不可用"
+Received: "function Object() { [native code] }"
+
+ ❯ src/lib/__tests__/client.spec.ts:357:76
+    355| it.each(['constructor', '__proto__', 'toString'])('rejects inherited e…
+    356|   vi.stubGlobal('fetch', async () => new Response(JSON.stringify({ err…
+    357|   await expect(new Client().request('/download', { responseType: 'blob…
+       |                                                                            ^
+    358|   vi.unstubAllGlobals()
+    359| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  src/lib/__tests__/client.spec.ts > rejects inherited error code __proto__ from the message allowlist
+AssertionError: expected [Function] to throw error including '服务暂时不可用' but got '[object Object]'
+
+Expected: "服务暂时不可用"
+Received: "[object Object]"
+
+ ❯ src/lib/__tests__/client.spec.ts:357:76
+    355| it.each(['constructor', '__proto__', 'toString'])('rejects inherited e…
+    356|   vi.stubGlobal('fetch', async () => new Response(JSON.stringify({ err…
+    357|   await expect(new Client().request('/download', { responseType: 'blob…
+       |                                                                            ^
+    358|   vi.unstubAllGlobals()
+    359| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  src/lib/__tests__/client.spec.ts > rejects inherited error code toString from the message allowlist
+AssertionError: expected [Function] to throw error including '服务暂时不可用' but got 'function toString() { [native code] }'
+
+Expected: "服务暂时不可用"
+Received: "function toString() { [native code] }"
+
+ ❯ src/lib/__tests__/client.spec.ts:357:76
+    355| it.each(['constructor', '__proto__', 'toString'])('rejects inherited e…
+    356|   vi.stubGlobal('fetch', async () => new Response(JSON.stringify({ err…
+    357|   await expect(new Client().request('/download', { responseType: 'blob…
+       |                                                                            ^
+    358|   vi.unstubAllGlobals()
+    359| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > uses a generic failure message for an inherited property name rather than rendering it
+AssertionError: expected 'function Object() { [native code] }' to be '文档处理失败，请重试' // Object.is equality
+
+Expected: "文档处理失败，请重试"
+Received: "function Object() { [native code] }"
+
+ ❯ src/lib/__tests__/knowledge.spec.ts:467:41
+    465|     : { ...document, status: 'FAILED', failure_code: 'constructor' })
+    466|   const { wrapper } = await open(`/organizations/10/knowledge/${docume…
+    467|   expect(wrapper.get('.notice').text()).toBe('文档处理失败，请重试')
+       |                                         ^
+    468|   expect(wrapper.text()).not.toContain('function Object')
+    469| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  2 failed | 2 passed (4)
+      Tests  4 failed | 63 passed (67)
+   Start at  23:54:11
+   Duration  1.28s (transform 525ms, setup 0ms, import 1.21s, tests 591ms, environment 1.69s)
+

@@ -1,0 +1,8 @@
+github.com/pengfeifei6/NexusDesk/cmd/api
+github.com/pengfeifei6/NexusDesk/internal/auth
+github.com/pengfeifei6/NexusDesk/internal/organization
+github.com/pengfeifei6/NexusDesk/internal/platform/config
+github.com/pengfeifei6/NexusDesk/internal/platform/database
+github.com/pengfeifei6/NexusDesk/internal/platform/httpserver
+github.com/pengfeifei6/NexusDesk/internal/ticket
+github.com/pengfeifei6/NexusDesk/tests/integration

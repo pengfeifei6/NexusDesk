@@ -1,0 +1,46 @@
+COMMAND npm ci --no-audit --no-fund
+npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+
+added 341 packages in 3s
+COMMAND npm run lint
+
+> nexusdesk-web@0.4.0 lint
+> eslint .
+
+COMMAND npm run format:check
+
+> nexusdesk-web@0.4.0 format:check
+> prettier --check src/ vite.config.ts vitest.config.ts eslint.config.ts
+
+Checking formatting...
+All matched files use Prettier code style!
+COMMAND npm run test:unit -- --run
+
+> nexusdesk-web@0.4.0 test:unit
+> vitest --run
+
+
+ RUN  v4.1.12 /var/tmp/nexusdesk-w04-web-repro-0ww9zf1o
+
+
+ Test Files  3 passed (3)
+      Tests  28 passed (28)
+   Start at  22:47:47
+   Duration  1.10s (transform 294ms, setup 0ms, import 782ms, tests 236ms, environment 1.25s)
+
+COMMAND npm run build
+
+> nexusdesk-web@0.4.0 build
+> vue-tsc --build && vite build
+
+vite v8.3.7 building client environment for production...
+transforming...
+✓ 47 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.41 kB │ gzip:  0.31 kB
+dist/assets/index-DFbyONcz.css    2.31 kB │ gzip:  0.95 kB
+dist/assets/index-CzWvTRJ-.js   122.63 kB │ gzip: 46.61 kB
+
+✓ built in 221ms

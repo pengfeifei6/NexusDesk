@@ -1,0 +1,6 @@
+# github.com/pengfeifei6/NexusDesk/internal/platform/config [github.com/pengfeifei6/NexusDesk/internal/platform/config.test]
+internal/platform/config/rag_test.go:10:11: undefined: loadRAG
+internal/platform/config/rag_test.go:15:82: undefined: loadRAG
+internal/platform/config/rag_test.go:17:10: undefined: loadRAG
+FAIL	github.com/pengfeifei6/NexusDesk/internal/platform/config [build failed]
+FAIL

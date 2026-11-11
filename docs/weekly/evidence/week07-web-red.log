@@ -1,0 +1,97 @@
+
+> nexusdesk-web@0.4.0 test:unit
+> vitest --run src/lib/__tests__/jobs.spec.ts
+
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/web
+
+ ❯ src/lib/__tests__/jobs.spec.ts (7 tests | 6 failed) 104ms
+   × preserves requester and run version as lossless integers 6ms
+   × shows submitted pending status without claiming completion and permits creator cancellation 45ms
+   × polls without overlapping and aborts old results when organization changes 14ms
+   × removes protected document content on forbidden polling response 11ms
+   × retries only failed or canceled jobs owned by current member and sends no body 9ms
+   × stops automatic polling after five minutes and leaves manual refresh available 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/__tests__/jobs.spec.ts > preserves requester and run version as lossless integers
+Error: unsafe numeric response
+ ❯ Object.<anonymous> src/lib/client.ts:16:46
+     14|       return number
+     15|     }
+     16|     if (!Number.isSafeInteger(number)) throw new Error('unsafe numeric…
+       |                                              ^
+     17|     return number
+     18|   }) as T
+ ❯ reviveValue node_modules/lossless-json/src/revive.ts:37:17
+ ❯ reviveObject node_modules/lossless-json/src/revive.ts:45:18
+ ❯ reviveValue node_modules/lossless-json/src/revive.ts:34:38
+ ❯ revive node_modules/lossless-json/src/revive.ts:15:9
+ ❯ parse node_modules/lossless-json/src/parse.ts:41:19
+ ❯ decode src/lib/client.ts:4:10
+ ❯ src/lib/__tests__/jobs.spec.ts:18:75
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  src/lib/__tests__/jobs.spec.ts > shows submitted pending status without claiming completion and permits creator cancellation
+AssertionError: expected 'NexusDesk组织工单工作台fixture 退出登录组织选择请选择组织…' to contain '等待执行'
+
+Expected: "等待执行"
+Received: "NexusDesk组织工单工作台fixture 退出登录组织选择请选择组织A · memberB · member上一页组织第 1 页 下一页组织 工单知识库检索问答创建组织← 返回知识库列表async.mdUPLOADED 文档 #12 · 上传者 1 · text/markdown · 20 字节  上传  · 更新  · 已提取 0 字符 提取正文下载原文件删除文档刷新文档检索索引正文提取完成后，还需建立索引才能参与检索和问答。尚未索引 · 0 块 · 版本  ·  维 · 请先完成正文提取。 建立索引刷新索引本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录"
+
+ ❯ src/lib/__tests__/jobs.spec.ts:19:156
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  src/lib/__tests__/jobs.spec.ts > polls without overlapping and aborts old results when organization changes
+AssertionError: expected +0 to be 2 // Object.is equality
+
+- Expected
++ Received
+
+- 2
++ 0
+
+ ❯ src/lib/__tests__/jobs.spec.ts:20:442
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  src/lib/__tests__/jobs.spec.ts > removes protected document content on forbidden polling response
+AssertionError: expected 'NexusDesk组织工单工作台fixture 退出登录组织选择请选择组织…' not to contain 'async.md'
+
+Expected: "async.md"
+Received: "NexusDesk组织工单工作台fixture 退出登录组织选择请选择组织A · memberB · member上一页组织第 1 页 下一页组织 工单知识库检索问答创建组织← 返回知识库列表async.mdUPLOADED 文档 #12 · 上传者 1 · text/markdown · 20 字节  上传  · 更新  · 已提取 0 字符 提取正文下载原文件删除文档刷新文档检索索引正文提取完成后，还需建立索引才能参与检索和问答。尚未索引 · 0 块 · 版本  ·  维 · 请先完成正文提取。 建立索引刷新索引本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录"
+
+ ❯ src/lib/__tests__/jobs.spec.ts:21:333
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  src/lib/__tests__/jobs.spec.ts > retries only failed or canceled jobs owned by current member and sends no body
+AssertionError: expected undefined to be defined
+ ❯ button src/lib/__tests__/jobs.spec.ts:16:120
+
+ ❯ src/lib/__tests__/jobs.spec.ts:22:339
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  src/lib/__tests__/jobs.spec.ts > stops automatic polling after five minutes and leaves manual refresh available
+AssertionError: expected 'NexusDesk组织工单工作台fixture 退出登录组织选择请选择组织…' to contain '自动刷新已暂停'
+
+Expected: "自动刷新已暂停"
+Received: "NexusDesk组织工单工作台fixture 退出登录组织选择请选择组织A · memberB · member上一页组织第 1 页 下一页组织 工单知识库检索问答创建组织← 返回知识库列表async.mdUPLOADED 文档 #12 · 上传者 1 · text/markdown · 20 字节  上传  · 更新  · 已提取 0 字符 提取正文下载原文件删除文档刷新文档检索索引正文提取完成后，还需建立索引才能参与检索和问答。尚未索引 · 0 块 · 版本  ·  维 · 请先完成正文提取。 建立索引刷新索引本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录"
+
+ ❯ src/lib/__tests__/jobs.spec.ts:24:331
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  6 failed | 1 passed (7)
+   Start at  09:03:47
+   Duration  1.31s (transform 526ms, setup 0ms, import 687ms, tests 104ms, environment 370ms)
+

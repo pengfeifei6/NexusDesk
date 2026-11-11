@@ -1,0 +1,39 @@
+{
+  "generated_at": "2026-11-11T01:34:43.933Z",
+  "browser": "143.0.7499.4",
+  "real_api": true,
+  "real_redis": true,
+  "independent_worker": true,
+  "real_embedding_model": "bge-m3:567m",
+  "mock_responses": false,
+  "results": [
+    {
+      "id": "upload-202-pending",
+      "detail": "Upload201 followed by Submit202 retains document and shows waiting, no fabricated completion"
+    },
+    {
+      "id": "worker-real-bge",
+      "detail": "Independent Worker without JWT completes extraction and real BGE1024 indexing; poll refreshes document and index"
+    },
+    {
+      "id": "dedup-terminal",
+      "detail": "Repeated submit returns identical successful job and unchanged index version/count"
+    },
+    {
+      "id": "async-search-ask",
+      "detail": "Real BGE search and Qwen answer cite the document indexed by the independent Worker"
+    },
+    {
+      "id": "permanent-retry-ui",
+      "detail": "Unsupported PDF fails without automatic retry; manual retry increments run version and remains explicit failure"
+    },
+    {
+      "id": "cancel-retry",
+      "detail": "Pending cancel is terminal; retry creates new run and worker completes it"
+    },
+    {
+      "id": "scope-session-mobile",
+      "detail": "Organization switch clears old task; no browser persistence; mobile page has no horizontal overflow"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/web
+
+
+ Test Files  3 passed (3)
+      Tests  28 passed (28)
+   Start at  22:32:15
+   Duration  1.11s (transform 366ms, setup 0ms, import 782ms, tests 251ms, environment 1.25s)
+

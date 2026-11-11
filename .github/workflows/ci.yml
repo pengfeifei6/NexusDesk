@@ -1,4 +1,4 @@
-name: Go checks
+name: Go and web checks
 
 on:
   push:
@@ -34,3 +34,29 @@ jobs:
         run: go vet ./...
       - name: Build
         run: go build ./...
+
+  web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24.12.0'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Lint
+        run: npm run lint
+      - name: Format
+        run: npm run format:check
+      - name: Unit tests
+        run: npm run test:unit -- --run
+      - name: Type check and build
+        run: npm run build

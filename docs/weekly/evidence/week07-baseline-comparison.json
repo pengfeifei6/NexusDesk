@@ -1,0 +1,31 @@
+{
+  "baseline_files": 522,
+  "changed": [
+    ".env.example",
+    "AGENTS.md",
+    "README.md",
+    "cmd/api/main.go",
+    "docs/architecture.md",
+    "docs/authorization-matrix.md",
+    "docs/database.md",
+    "go.mod",
+    "go.sum",
+    "internal/knowledge/errors.go",
+    "internal/knowledge/repository.go",
+    "internal/knowledge/service.go",
+    "internal/knowledge/service_test.go",
+    "internal/platform/config/config.go",
+    "internal/rag/index_repository.go",
+    "internal/rag/index_service.go",
+    "scripts/week02-day2-smoke.py",
+    "web/src/components/RAGIndexPanel.vue",
+    "web/src/composables/knowledge.ts",
+    "web/src/lib/client.ts",
+    "web/src/lib/types.ts",
+    "web/src/views/KnowledgeDetailView.vue",
+    "web/src/views/KnowledgeListView.vue"
+  ],
+  "missing": [],
+  "old_migrations_unchanged": true,
+  "historical_evidence_unchanged": true
+}

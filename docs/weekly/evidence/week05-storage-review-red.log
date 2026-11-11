@@ -1,0 +1,5 @@
+--- FAIL: TestLocalRejectsRootWithinPublicDirectoryViaAncestorSymlink (0.00s)
+    local_test.go:305: public root accepted through ancestor symlink
+FAIL
+FAIL	github.com/pengfeifei6/NexusDesk/internal/platform/storage	0.017s
+FAIL

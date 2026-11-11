@@ -1,5 +1,7 @@
 # NexusDesk 核心数据库设计
 
+> 2026-11-11当前阶段：W07追加knowledge_jobs及文档/索引task_token，共11张业务表、11条迁移；状态和日常升级证据以[第七周记录](weekly/week07.md)为准。旧段落保留当周历史。
+
 - 版本：v0.3
 - 日期：2026-11-10（W02 Day 2 增量更新）
 - 用途：第一周 Day 2 六张核心表的关系与约束设计。
@@ -20,6 +22,8 @@ W02 契约已与第二周手册统一，见 [ADR-0002](decisions/0002-auth-secur
 | `tickets` | W3 | 工单当前状态 |
 | `ticket_comments` | W3 | 工单沟通内容 |
 | `ticket_events` | W3 | 工单变化历史 |
+| `knowledge_documents` | W5 | 组织内私有附件元数据、状态和软删除 |
+| `knowledge_document_texts` | W5 | 一文档一份提取正文、hash和版本 |
 
 共同约定：
 
@@ -303,3 +307,31 @@ P0 采用 `READ COMMITTED` 隔离级别。等待并取得组织锁后，再通�
 事务由ticket.Service显式管理，Repository兼容只读pool和写tx，所有SQL带组织/父软删过滤。详情/更新父锁、版本和状态条件、审计回滚证据见[week03](weekly/week03.md)与[ADR-0003](decisions/0003-ticket-transaction.md)。
 
 W03当前六表已经落地，字段细节与最新状态以00001～00006和[ticket-design](ticket-design.md)为准。旧W1中的每版本单一事件、member只读本人、OPEN不可指派等蓝图规则已被W03明确覆盖；下周不应恢复这些旧约束。
+
+## W04增量
+
+没有新增或改写migration，最新仍6；tickets已有字段/约束即可支撑领取。条件UPDATE限定组织、OPEN、未分配、未删除和版本，返回行后同tx写TICKET_ASSIGNED；使用clock_timestamp，版本防溢出。真实多连接竞争及事件/COMMIT失败回滚见[验收](testing/claim-concurrency.md)。没有增加全局唯一事件版本约束，保持W03组合修改/评论事件语义。
+
+## W05 知识库增量
+
+- `00007_create_knowledge_documents.sql`：BIGINT ALWAYS identity；org_id组织外键；(org_id,uploaded_by)成员外键；(org_id,id)唯一键。随机storage_key唯一且64位小写hex；media_type、大小、hash、四状态、失败码和extracted_chars均有约束；deleted_at软删除。
+- `00008_create_knowledge_document_texts.sql`：document_id主键，一文档一正文；(org_id,document_id)复合父外键；正文1..1MiB、hash64hex、extractor_version=utf8-v1、extracted_at。不能用正文外键替代active授权。
+- 元数据有(org_id,created_at DESC,id DESC)与(org_id,status,created_at DESC,id DESC)两条未软删partial索引，服务只查所需字段。列表不连接正文表。
+- 条件UPDATE领取PROCESSING；提取不持事务；完成同tx锁父行、插入正文和更新READY。删除与完成共享父行锁，因此先删除就拒绝发布，先完成后删除则统一隐藏。失败更新不覆盖READY或删除状态。
+- 元数据外键和正文CHECK不能独立强制跨表READY关系；这由应用事务保证，真实触发器故障和并发测试验证。所有访问带组织/父对象可见性范围。
+- 仅专用测试库执行8→7→6→8并验证旧哨兵保留。日常库只Up到8，未Down。后续迁移从00009追加；原文件不由数据库事务自动回滚，补偿与备份见ADR-0005。
+
+
+## W06 pgvector增量
+
+00009启用vector并建立knowledge_chunks；00010建立knowledge_document_indexes，共10张业务表。chunk包含(org_id,document_id)复合父外键、document+chunk_index唯一键、rune偏移/长度/全文hash/固定model/chunker/version检查、非零vector(1024)。索引行按document_id唯一，包含org_id、INDEXING/READY/FAILED、version/hash/model/dim/chunker/count/failure/times；READY必须有正块数和indexed_at，FAILED必须有允许失败码。ABSENT不入库。
+
+chunks.content_sha256存全文hash用于当前正文快照过滤；片段内容另以[start_rune,end_rune)核对。没有HNSW/IVFFlat，仅有组织/文档/版本等普通索引。Search按精确余弦距离与chunkID排序，所有父子JOIN都限定组织与当前可见快照，详见[RAG设计](rag-design.md)。
+
+迁移9/10 Down仅在专用库验证，删除新增表但保留共享vector扩展；原1～8未改。日常库备份后只Up8→10，证据见[迁移记录](weekly/evidence/week06-development-migration.log)。现有容器的vector二进制位于容器层，未来重建务必使用compose.pgvector.yaml并保留原数据卷。新迁移从00011开始。
+
+## W07 增量：任务与所有权
+
+迁移00011创建knowledge_jobs：org/document/requested_by/actor联合外键，原文件hash+提取器+模型+切块版本业务唯一键；状态、阶段、三次预算、run_version、lease_token/lease_until、投递seq/时间及安全失败码。lease仅RUNNING，completed_at仅终态，SUCCEEDED必须DONE且无失败码。文档/索引新增nullable task_token(lowerhex32)。索引覆盖待投递、过期租约、组织文档最近任务。
+
+完整字段见[迁移](../migrations/00011_create_knowledge_jobs.sql)；这张表是任务记录，不是执行日志或对话表。Down仅专用库执行；日常保留备份后只Up。恢复先核对当前权限/原文件依据，再核验正文hash与索引版本，不能仅看status。

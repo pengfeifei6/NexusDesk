@@ -1,0 +1,58 @@
+{
+  "recorded_at": "2026-11-10T16:24:54.835215+00:00",
+  "counting": "top-level Go Tests, no double-counting subtests",
+  "ordinary_go": {
+    "pass": 85,
+    "skip": 11
+  },
+  "real_postgres_race": {
+    "pass": 96
+  },
+  "go_packages": 10,
+  "frontend": {
+    "files": 4,
+    "tests_passed": 70,
+    "unit_exit": 0,
+    "build_exit": 0,
+    "lint_exit": 0,
+    "format_exit": 0
+  },
+  "browser": {
+    "week04_scenarios": 11,
+    "week05_scenarios": 10,
+    "real_api": true,
+    "latest_web_only_exit": 0
+  },
+  "commands": [
+    {
+      "command": "python3 scripts/week05-smoke.py",
+      "exit_code": 0,
+      "log": "week05-final-smoke.log",
+      "note": "Final backend code; initial frontend67 and W05browser9 at this point."
+    },
+    {
+      "command": "python3 scripts/week05-smoke.py --web-only",
+      "exit_code": 0,
+      "log": "week05-web-review-smoke.log",
+      "note": "After only frontend Unicode + initial router fixes: W04browser11 and W05browser10. Does not rerun Go suite."
+    },
+    {
+      "command": "python3 scripts/day5-smoke.py",
+      "exit_code": 0,
+      "log": "week05-week01-regression.log"
+    },
+    {
+      "command": "go vet ./... && go build ./... && go mod verify; gofmt check",
+      "exit_code": 0,
+      "log": "week05-go-quality.log"
+    }
+  ],
+  "sample_documents_ready": 10,
+  "development_schema_version": 8,
+  "limits": [
+    "Remote CI not executed",
+    "No fresh-machine dependency/browser installation claimed",
+    "PDF extraction and RAG not implemented",
+    "No real power-loss simulation"
+  ]
+}

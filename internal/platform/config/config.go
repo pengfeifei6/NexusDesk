@@ -18,6 +18,9 @@ type Config struct {
 	HTTPAddr string
 	Database DatabaseConfig
 	JWT      JWTConfig
+	Storage  StorageConfig
+	RAG      RAGConfig
+	Async    AsyncConfig
 }
 
 type JWTConfig struct {
@@ -41,7 +44,6 @@ type DatabaseConfig struct {
 // Load reads and validates the environment. It does not read a .env file.
 func Load() (Config, error) {
 	var cfg Config
-	var dbPort string
 	var jwtTTL, jwtSecret string
 	variables := []struct {
 		name   string
@@ -49,12 +51,6 @@ func Load() (Config, error) {
 	}{
 		{"APP_ENV", &cfg.AppEnv},
 		{"HTTP_ADDR", &cfg.HTTPAddr},
-		{"DB_HOST", &cfg.Database.Host},
-		{"DB_PORT", &dbPort},
-		{"DB_USER", &cfg.Database.User},
-		{"DB_PASSWORD", &cfg.Database.Password},
-		{"DB_NAME", &cfg.Database.Name},
-		{"DB_SSLMODE", &cfg.Database.SSLMode},
 		{"JWT_ISSUER", &cfg.JWT.Issuer},
 		{"JWT_AUDIENCE", &cfg.JWT.Audience},
 		{"JWT_TTL_MINUTES", &jwtTTL},
@@ -82,17 +78,9 @@ func Load() (Config, error) {
 	if ip := net.ParseIP(host); ip == nil || !ip.IsLoopback() {
 		return Config{}, fmt.Errorf("HTTP_ADDR must use an explicit loopback IP for local authentication")
 	}
-	cfg.Database.Port, err = strconv.Atoi(dbPort)
-	if err != nil || cfg.Database.Port < 1 || cfg.Database.Port > 65535 {
-		return Config{}, fmt.Errorf("DB_PORT must be an integer between 1 and 65535")
-	}
-	if cfg.Database.Password == "REPLACE_WITH_LOCAL_PASSWORD" {
-		return Config{}, fmt.Errorf("DB_PASSWORD must be configured locally")
-	}
-	switch cfg.Database.SSLMode {
-	case "disable", "allow", "prefer", "require", "verify-ca", "verify-full":
-	default:
-		return Config{}, fmt.Errorf("DB_SSLMODE is not a supported PostgreSQL SSL mode")
+	cfg.Database, err = loadDatabase()
+	if err != nil {
+		return Config{}, err
 	}
 	for _, field := range []struct{ name, value string }{{"JWT_ISSUER", cfg.JWT.Issuer}, {"JWT_AUDIENCE", cfg.JWT.Audience}} {
 		if !utf8.ValidString(field.value) || len(field.value) > 256 {
@@ -107,6 +95,18 @@ func Load() (Config, error) {
 	cfg.JWT.Secret, err = base64.StdEncoding.Strict().DecodeString(jwtSecret)
 	if err != nil || len(cfg.JWT.Secret) < 32 || base64.StdEncoding.EncodeToString(cfg.JWT.Secret) != jwtSecret {
 		return Config{}, fmt.Errorf("JWT_SECRET_BASE64 must be canonical standard Base64 encoding of at least 32 bytes")
+	}
+	cfg.Storage, err = loadStorage()
+	if err != nil {
+		return Config{}, err
+	}
+	cfg.RAG, err = loadRAG()
+	if err != nil {
+		return Config{}, err
+	}
+	cfg.Async, err = loadAsync()
+	if err != nil {
+		return Config{}, err
 	}
 	return cfg, nil
 }

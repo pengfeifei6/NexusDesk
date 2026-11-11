@@ -1,0 +1,2 @@
+PASS opaque0600 backup under ignored .local/week07-backups; contents never inspected
+PASS existing PostgreSQL17.11 additive migration10→11; no Down/no data deletion/no volume replacement/no original file reads

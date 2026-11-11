@@ -160,6 +160,20 @@ func (t *postgresTx) UpdateTicket(ctx context.Context, row Ticket, expected int6
 	}
 	return result, err
 }
+func (t *postgresTx) ClaimTicket(ctx context.Context, org, id, actor, expected int64) (Ticket, error) {
+	if org <= 0 || id <= 0 || actor <= 0 || expected < 0 {
+		return Ticket{}, ErrInvalidRequest
+	}
+	row, err := scanTicket(ctx, t.tx.QueryRow(ctx, `UPDATE tickets
+		SET assignee_id=$3, version=version+1, updated_at=clock_timestamp()
+		WHERE org_id=$1 AND id=$2 AND status='OPEN' AND assignee_id IS NULL
+		AND deleted_at IS NULL AND version=$4 AND version<9223372036854775807
+		RETURNING `+ticketColumns, org, id, actor, expected))
+	if errors.Is(err, ErrNotFound) {
+		return Ticket{}, ErrConflict
+	}
+	return row, err
+}
 func (t *postgresTx) InsertComment(ctx context.Context, c Comment) (Comment, error) {
 	err := t.tx.QueryRow(ctx, `INSERT INTO ticket_comments(org_id,ticket_id,author_id,content,created_at) VALUES($1,$2,$3,$4,clock_timestamp()) RETURNING id,created_at`, c.OrgID, c.TicketID, c.AuthorID, c.Content).Scan(&c.ID, &c.CreatedAt)
 	if err != nil {

@@ -1,0 +1,116 @@
+{
+  "generated_at": "2026-11-11T01:34:12.657Z",
+  "database_scope": "owned disposable test database, removed after acceptance",
+  "documents": [
+    {
+      "file": "01-onboarding.md",
+      "title": "新成员入门",
+      "organization_slot": "A",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture",
+      "org_id": 8,
+      "document_id": 8,
+      "status": "READY",
+      "sha256_hex": "7ffe75049270451bb2e6573161943c85524a542a4773537b898e68caa4a88c84"
+    },
+    {
+      "file": "02-ticket-flow.md",
+      "title": "工单处理流程",
+      "organization_slot": "A",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture",
+      "org_id": 8,
+      "document_id": 9,
+      "status": "READY",
+      "sha256_hex": "0cbcf5923a0c6af2dd6dc10d04dd20e8adb9029daee8344ebd3b35330b06aaeb"
+    },
+    {
+      "file": "03-organizations.md",
+      "title": "组织数据边界",
+      "organization_slot": "A",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture",
+      "org_id": 8,
+      "document_id": 10,
+      "status": "READY",
+      "sha256_hex": "7f760e0ebb1e48d4775a65ee4c2a889762acfc3fb8cc8bfef4ebfe846877b498"
+    },
+    {
+      "file": "04-upload-checklist.md",
+      "title": "上传前检查",
+      "organization_slot": "A",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture",
+      "org_id": 8,
+      "document_id": 11,
+      "status": "READY",
+      "sha256_hex": "9e58fb800f7b97ab353d095a3b8ca4c3e8d82b74db2d2c20b35e680e51d06d41"
+    },
+    {
+      "file": "05-processing.md",
+      "title": "文档处理状态",
+      "organization_slot": "A",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture",
+      "org_id": 8,
+      "document_id": 12,
+      "status": "READY",
+      "sha256_hex": "2a3d955c6d27b3c8a6a01fac3d4307f564c7aa7e4e93d275e09ef499c1d5fab2"
+    },
+    {
+      "file": "06-download.txt",
+      "title": "下载完整性",
+      "organization_slot": "A",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture",
+      "org_id": 8,
+      "document_id": 13,
+      "status": "READY",
+      "sha256_hex": "93b3325e570ce1f16145153b7afe3412ac812536f06566f31557c9c6be458986"
+    },
+    {
+      "file": "07-database.txt",
+      "title": "迁移与运行",
+      "organization_slot": "A",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture",
+      "org_id": 8,
+      "document_id": 14,
+      "status": "READY",
+      "sha256_hex": "7412e95d77a315a916653b30c97c3d53800164d0cd1b3e66dc712f92acf3aa19"
+    },
+    {
+      "file": "08-incidents.md",
+      "title": "演示故障处理",
+      "organization_slot": "A",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture",
+      "org_id": 8,
+      "document_id": 15,
+      "status": "READY",
+      "sha256_hex": "646c76b01c211da1dbd1f9e88fb750334d3eeb66290d695dafe0c66bbe482b78"
+    },
+    {
+      "file": "09-team-b.md",
+      "title": "B 组内部操作约定",
+      "organization_slot": "B",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture",
+      "org_id": 9,
+      "document_id": 16,
+      "status": "READY",
+      "sha256_hex": "dae4829d386bc4a88299d18735e60daa45b0fe5b4fd5bfddadb0ee70030d66fe"
+    },
+    {
+      "file": "10-team-b-review.txt",
+      "title": "B 组发布复核",
+      "organization_slot": "B",
+      "expected_status": "READY",
+      "author": "AI-generated fictional NexusDesk learning fixture",
+      "org_id": 9,
+      "document_id": 17,
+      "status": "READY",
+      "sha256_hex": "7b26479e69e9a04abde96681ba5b6c9c546098c473010dfc7a7950d50b523098"
+    }
+  ]
+}

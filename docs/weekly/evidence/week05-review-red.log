@@ -1,0 +1,21 @@
+--- FAIL: TestProcessPreservesDeadlineAcrossDatabasePhases (0.06s)
+    --- FAIL: TestProcessPreservesDeadlineAcrossDatabasePhases/claim (0.02s)
+        service_test.go:264: lost deadline: document operation failed
+    --- FAIL: TestProcessPreservesDeadlineAcrossDatabasePhases/extract (0.02s)
+        service_test.go:268: incorrect independent failure state: {ID:1 OrgID:20 UploadedBy:10 OriginalFilename:deadline.md StorageKey:c771a771e8b0d6617f531bd42b9231ed8d6503349a18cbdfd0bce751916dac2c MediaType:text/markdown SizeBytes:5 SHA256Hex:2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824 Status:FAILED FailureCode:0x244c5bdcf640 ExtractedChars:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC DeletedAt:<nil>}
+    --- FAIL: TestProcessPreservesDeadlineAcrossDatabasePhases/complete (0.02s)
+        service_test.go:264: lost deadline: document operation failed
+FAIL
+FAIL	github.com/pengfeifei6/NexusDesk/internal/knowledge	0.069s
+--- FAIL: TestCleanupJournalRepairsInterruptedOrInvalidRecord (0.00s)
+    --- FAIL: TestCleanupJournalRepairsInterruptedOrInvalidRecord/#00 (0.00s)
+        local_test.go:187: incomplete or incorrect journal accepted
+    --- FAIL: TestCleanupJournalRepairsInterruptedOrInvalidRecord/{ (0.00s)
+        local_test.go:187: incomplete or incorrect journal accepted
+    --- FAIL: TestCleanupJournalRepairsInterruptedOrInvalidRecord/{"key":"wrong","reason":"delete_failed"} (0.00s)
+        local_test.go:187: incomplete or incorrect journal accepted
+    --- FAIL: TestCleanupJournalRepairsInterruptedOrInvalidRecord/symlink (0.00s)
+        local_test.go:187: incomplete or incorrect journal accepted
+FAIL
+FAIL	github.com/pengfeifei6/NexusDesk/internal/platform/storage	0.005s
+FAIL

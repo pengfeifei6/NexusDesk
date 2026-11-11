@@ -1,0 +1,11 @@
+# github.com/pengfeifei6/NexusDesk/internal/knowledge [github.com/pengfeifei6/NexusDesk/internal/knowledge.test]
+internal/knowledge/chunker_test.go:13:15: undefined: SplitText
+internal/knowledge/chunker_test.go:14:21: undefined: ErrChunkInvalid
+internal/knowledge/chunker_test.go:20:16: undefined: SplitText
+internal/knowledge/chunker_test.go:35:14: undefined: SplitText
+internal/knowledge/chunker_test.go:36:13: undefined: SplitText
+internal/knowledge/chunker_test.go:36:70: undefined: ErrChunkTooMany
+internal/knowledge/chunker_test.go:40:13: undefined: SplitText
+internal/knowledge/chunker_test.go:41:30: undefined: SplitText
+FAIL	github.com/pengfeifei6/NexusDesk/internal/knowledge [build failed]
+FAIL

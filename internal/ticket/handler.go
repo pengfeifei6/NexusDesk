@@ -22,6 +22,7 @@ func (h *Handler) RegisterRoutes(g *gin.RouterGroup) {
 	b.PATCH("/:ticketID", h.patch)
 	b.DELETE("/:ticketID", h.remove)
 	b.POST("/:ticketID/transition", h.transition)
+	b.POST("/:ticketID/claim", h.claim)
 	b.POST("/:ticketID/comments", h.comment)
 	b.GET("/:ticketID/comments", h.comments)
 	b.GET("/:ticketID/events", h.events)
@@ -38,6 +39,8 @@ func fail(c *gin.Context, err error) {
 		responseError(c, 404, "NOT_FOUND", "resource not found")
 	case errors.Is(err, ErrForbidden):
 		responseError(c, 403, "FORBIDDEN", "permission denied")
+	case errors.Is(err, ErrClaimConflict):
+		responseError(c, 409, "TICKET_CLAIM_CONFLICT", "ticket already assigned or version changed")
 	case errors.Is(err, ErrConflict):
 		responseError(c, 409, "CONFLICT", "state or version conflict")
 	case errors.Is(err, ErrInvalidRequest):
@@ -324,6 +327,27 @@ func (h *Handler) transition(c *gin.Context) {
 		return
 	}
 	t, err := h.service.Transition(c.Request.Context(), a, o, id, TransitionInput{ExpectedVersion: v, To: Status(to)})
+	if err != nil {
+		fail(c, err)
+		return
+	}
+	c.JSON(200, gin.H{"data": publicTicket(t)})
+}
+func (h *Handler) claim(c *gin.Context) {
+	a, o, id, ok := h.scope(c)
+	if !ok {
+		return
+	}
+	f, ok := readFields(c, []string{"expected_version"}, []string{"expected_version"})
+	if !ok {
+		return
+	}
+	v, err := integer(f["expected_version"], 0)
+	if err != nil {
+		fail(c, err)
+		return
+	}
+	t, err := h.service.Claim(c.Request.Context(), a, o, id, v)
 	if err != nil {
 		fail(c, err)
 		return

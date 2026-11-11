@@ -4,7 +4,7 @@
 - 日期：2026-11-10（W02 Day 1 衔接更新；W01 初稿为 2026-11-09）
 - 用途：第一周 Day 1 需求产出，作为后续架构、数据库和接口设计的依据。
 - 编写方式：根据开发者本次要求，由 AI 基于现有项目设计整理并补齐。
-- 当前状态：W03九个工单API、状态/版本/同tx事件/软删除已完成并验证，当前规则按第三周手册覆盖旧蓝图；证据见week03，前端/claim留W04，开发者个人理解与完整业务验收另行记录。
+- 当前状态：W04/G1已增加原子领取与Vue本地业务闭环，继承W03九接口/状态/版本/同tx事件/软删除；证据见[week04](weekly/week04.md)，个人理解与公开部署不代填。
 
 > W02 当前契约：角色仅 `admin/member`、状态 `active/disabled`；注册与创建组织分开，active 成员可看成员列表，只有 admin 可添加已注册用户，本周不修改角色。详细接口以 [API 契约](api/auth-organization.md) 和 [权限矩阵](authorization-matrix.md) 为准。W03工单规则以[ticket API](api/ticket.md)和[状态机](ticket-state-machine.md)为准，support仍是未来规划；W02变化依据见 [ADR-0002](decisions/0002-auth-security.md)。
 
@@ -196,3 +196,11 @@ W02 先完成组织创建、成员列表与添加已注册用户。下述角色�
 - [12 周开发周期与求职计划](../项目开发文件/02_NexusDesk_12周开发周期与求职计划.md)
 - [AI 协作开发与个人能力提升规范](../项目开发文件/03_NexusDesk_AI协作开发与个人能力提升规范.md)
 - [第一周详细开发手册](../项目开发文件/每周开发手册/04_NexusDesk_第一周详细开发手册.md)
+
+## W04当前边界
+
+[领取API](api/ticket-claim.md)、[ADR-0004](decisions/0004-atomic-ticket-claim.md)、[前端MVP](frontend/web-mvp.md)及[验收](testing/claim-concurrency.md)补充上述历史设计。active admin/member均可领取本组织未删除、未指派OPEN工单，version+1但保持OPEN；仍无support和角色变更。G1真实浏览器流程及视频见[演示](demo/g1-demo-script.md)，W05才开始文档上传。
+
+## W05 实际实现补充（2026-11-11）
+
+本地工单版本上已增加组织私有文档上传/列表/详情/下载/软删除，以及TXT/MD同步解析和纯文本预览。注册、创建组织页面同时补齐，解决此前新账号必须用API初始化的缺口。24业务API、8迁移；PDF仅附件保存下载，RAG/Worker/公开部署不在本次交付。工程验收及个人学习边界见[第五周](weekly/week05.md)，当前使用和维护见[阶段介绍](project-stage-overview-week05.md)。

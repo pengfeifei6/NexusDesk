@@ -74,6 +74,36 @@
 
 ## W03 工单当前权限衔接
 
-工单九接口统一继承RequireUser与目标组织active关系；所有active member/admin可读本组织未删除工单/评论/事件。member仅编辑本人OPEN基础字段，admin可编辑本组织任意OPEN并指派同组织active受理人、按状态机关闭/重开和软删除。与W1旧蓝图不同，不限制member仅看本人；没有support或claim。
+工单九接口统一继承RequireUser与目标组织active关系；所有active member/admin可读本组织未删除工单/评论/事件。member仅编辑本人OPEN基础字段，admin可编辑本组织任意OPEN并指派同组织active受理人、按状态机关闭/重开和软删除。与W1旧蓝图不同，不限制member仅看本人；W03当时没有claim；W04追加如下，仍没有support。
 
 正式规则见[状态机](ticket-state-machine.md)、[API](api/ticket.md)、[ADR-0003](decisions/0003-ticket-transaction.md)。角色不足403、不可见/disabled/软删404、版本或状态409，非成员不因请求中orgID而自动授权。以上不改变本表W02组织/成员动作规则。
+
+## W04领取增量
+
+active admin/member都可领取本组织未删除、未分配OPEN；身份来自JWT，角色/成员来自数据库，客户端不能指定受理人。成功保持OPEN/version+1；已指派/非OPEN/旧版本409 TICKET_CLAIM_CONFLICT；非成员/disabled/错组织/删除404。W03状态机与admin代办权限不变。契约见[ticket-claim](api/ticket-claim.md)。
+
+## W05 文档权限（已实现）
+
+| 操作 | active member | active admin | 非成员/disabled/跨组织 |
+| --- | --- | --- | --- |
+| 上传、列表、详情、下载 | 允许本组织可见对象 | 允许本组织可见对象 | 404 |
+| process | UPLOADED/FAILED可处理；其余409 | 相同状态规则 | 404 |
+| text | READY可读；其余409 | 相同状态规则 | 404 |
+| delete | 仅本人上传；否则403 | 可删除本组织任意可见文档 | 404 |
+
+以上请求都要求有效用户身份，无有效身份401。路径中的orgID只定位范围，不是权限凭证；后端查真实成员关系。软删/不存在统一404；文件和正文保留也不能绕过父对象过滤。成员撤权不承诺中断已授权且开始发送的下载。按钮隐藏不能替代后端检查，详见[知识库API](api/knowledge-documents.md)。
+
+
+## W06索引与RAG
+
+四个新接口POST/GET documents/:documentID/index、POST knowledge/search、POST knowledge/ask均允许本组织active admin/member；没有用户身份401，非成员/disabled/跨组织/软删404。不信任客户端org_id之外的任何身份/角色字段，orgID只是目标组织，仍需数据库成员关系。所有SQL限定org_id与可见父/当前正文hash/index version；Search/Ask在慢模型调用后再复查。模型不具备跨组织读取、写文件或创建工单工具权限。具体来源/返回规则见[API](api/rag.md)。
+
+## W07 任务授权增量
+
+| 动作 | active member | active admin | 非成员/disabled |
+| --- | --- | --- | --- |
+| 提交可见文档任务、读取任务列表/详情 | 允许 | 允许 | 404 |
+| 重试/取消自己的任务 | 按状态允许 | 按状态允许 | 404 |
+| 重试/取消他人任务 | 403 | 按状态允许 | 404 |
+
+无有效身份401；目标跨组织或文档软删除404。requested_by来自服务端身份；manualretry记录actor_user_id并实时检查权限。Worker执行与发布前再次核验，队列消息不携带角色。ASYNC_ENABLED=false时Submit/Retry503，Get/List/Cancel保留。见[任务API](api/knowledge-jobs.md)。

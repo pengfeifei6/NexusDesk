@@ -1,0 +1,6 @@
+
+> nexusdesk-web@0.4.0 format:check
+> prettier --check src/ vite.config.ts vitest.config.ts eslint.config.ts
+
+Checking formatting...
+All matched files use Prettier code style!

@@ -35,3 +35,7 @@ PATCH例：
 工单DTO为id/org_id/creator_id/assignee_id/title/body/priority/status/version/created_at/updated_at，未分配assignee_id为null；不返回deleted_at。评论DTO为id/ticket_id/author_id/content/created_at；事件为id/ticket_id/actor_id/event_type/ticket_version/before_data/after_data/created_at，仅结构化安全字段，评论事件只含comment_id。时间UTC RFC3339。
 
 成功统一data包裹，列表data含items/page/page_size。错误固定code/message/request_id空串；NOT_FOUND/UNAUTHENTICATED/FORBIDDEN/INVALID_REQUEST/INTERNAL_ERROR沿用W02，新增409 CONFLICT（state or version conflict），400 INVALID_ASSIGNEE（assignee must be active in organization）。无实际变化PATCH400。重复DELETE404。无请求级幂等去重；重复POST正常可创建多条，失败提交结果不确定时不自动重试。
+
+## W04增量接口
+
+在上述九接口上新增[POST /:ticketID/claim](ticket-claim.md)，使用相同可信身份、组织范围和工单DTO，冲突为专用TICKET_CLAIM_CONFLICT。原九接口含CONFLICT的错误码保持不变。

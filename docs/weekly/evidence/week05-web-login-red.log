@@ -1,0 +1,40 @@
+
+> nexusdesk-web@0.4.0 test:unit
+> vitest --run src/lib/__tests__/knowledge.spec.ts
+
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/web
+
+ ❯ src/lib/__tests__/knowledge.spec.ts (22 tests | 1 failed) 292ms
+   × preserves typed login credentials while resetting the previous memory session 13ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > preserves typed login credentials while resetting the previous memory session
+AssertionError: expected { email: 'test@example.test', …(1) } to deeply equal { email: 'test@example.test', …(1) }
+
+- Expected
++ Received
+
+  {
+    "email": "test@example.test",
+-   "password": "fixture-long-password",
++   "password": "",
+  }
+
+ ❯ src/lib/__tests__/knowledge.spec.ts:456:23
+    454|   await wrapper.get('form').trigger('submit')
+    455|   await flushPromises()
+    456|   expect(credentials).toEqual({ email: 'test@example.test', password: …
+       |                       ^
+    457|   expect(router.currentRoute.value.path).toBe('/desk')
+    458|   expect(wrapper.find('input[type=password]').exists()).toBe(false)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 21 passed (22)
+   Start at  23:53:24
+   Duration  1.20s (transform 249ms, setup 0ms, import 401ms, tests 292ms, environment 368ms)
+

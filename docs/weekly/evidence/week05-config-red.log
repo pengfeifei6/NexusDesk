@@ -1,0 +1,4 @@
+# github.com/pengfeifei6/NexusDesk/internal/platform/config [github.com/pengfeifei6/NexusDesk/internal/platform/config.test]
+internal/platform/config/storage_test.go:8:35: cfg.Storage undefined (type Config has no field or method Storage)
+FAIL	github.com/pengfeifei6/NexusDesk/internal/platform/config [build failed]
+FAIL

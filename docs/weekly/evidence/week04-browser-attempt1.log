@@ -1,0 +1,81 @@
+PASS isolated PostgreSQL 17 healthy; project=nexusdesk-w02d2-1e565953bba5
+2026/11/10 22:29:01 OK   00001_create_organizations.sql (2.19ms)
+2026/11/10 22:29:01 goose: successfully migrated database to version: 1
+2026/11/10 22:29:02 OK   00002_create_users.sql (4.81ms)
+2026/11/10 22:29:02 OK   00003_create_organization_members.sql (4.36ms)
+2026/11/10 22:29:02 goose: successfully migrated database to version: 3
+2026/11/10 22:29:02     Applied At                  Migration
+2026/11/10 22:29:02     =======================================
+2026/11/10 22:29:02     Tue Nov 10 14:29:01 2026 -- 00001_create_organizations.sql
+2026/11/10 22:29:02     Tue Nov 10 14:29:02 2026 -- 00002_create_users.sql
+2026/11/10 22:29:02     Tue Nov 10 14:29:02 2026 -- 00003_create_organization_members.sql
+2026/11/10 22:29:02     Pending                  -- 00004_create_tickets.sql
+2026/11/10 22:29:02     Pending                  -- 00005_create_ticket_comments.sql
+2026/11/10 22:29:02     Pending                  -- 00006_create_ticket_events.sql
+2026/11/10 22:29:02 goose: no migrations to run. current version: 3
+PASS W1 to W02 upgrade preserves existing organization; repeated Up is stable
+2026/11/10 22:29:02 OK   00003_create_organization_members.sql (6.26ms)
+2026/11/10 22:29:03 OK   00002_create_users.sql (5.6ms)
+2026/11/10 22:29:03 OK   00002_create_users.sql (7.71ms)
+2026/11/10 22:29:03 OK   00003_create_organization_members.sql (4.07ms)
+2026/11/10 22:29:03 goose: successfully migrated database to version: 3
+PASS reverse Down 3 to 2 to 1, then Up to 3; W1 data retained
+2026/11/10 22:29:03 OK   00004_create_tickets.sql (15.72ms)
+2026/11/10 22:29:03 OK   00005_create_ticket_comments.sql (4.16ms)
+2026/11/10 22:29:03 OK   00006_create_ticket_events.sql (4.85ms)
+2026/11/10 22:29:03 goose: successfully migrated database to version: 6
+2026/11/10 22:29:03     Applied At                  Migration
+2026/11/10 22:29:03     =======================================
+2026/11/10 22:29:03     Tue Nov 10 14:29:01 2026 -- 00001_create_organizations.sql
+2026/11/10 22:29:03     Tue Nov 10 14:29:03 2026 -- 00002_create_users.sql
+2026/11/10 22:29:03     Tue Nov 10 14:29:03 2026 -- 00003_create_organization_members.sql
+2026/11/10 22:29:03     Tue Nov 10 14:29:03 2026 -- 00004_create_tickets.sql
+2026/11/10 22:29:03     Tue Nov 10 14:29:03 2026 -- 00005_create_ticket_comments.sql
+2026/11/10 22:29:03     Tue Nov 10 14:29:03 2026 -- 00006_create_ticket_events.sql
+2026/11/10 22:29:04 goose: no migrations to run. current version: 6
+2026/11/10 22:29:04 OK   00006_create_ticket_events.sql (10.61ms)
+2026/11/10 22:29:04 OK   00005_create_ticket_comments.sql (5.58ms)
+2026/11/10 22:29:04 OK   00004_create_tickets.sql (7.89ms)
+2026/11/10 22:29:05 OK   00004_create_tickets.sql (13.24ms)
+2026/11/10 22:29:05 OK   00005_create_ticket_comments.sql (6.72ms)
+2026/11/10 22:29:05 OK   00006_create_ticket_events.sql (5.49ms)
+2026/11/10 22:29:05 goose: successfully migrated database to version: 6
+PASS W03 3 -> 6, repeated Up, reverse Down to 3, Up to 6; old organization retained
+PASS real API login 200, independently verified HS256/claims, uniform credential 401 and empty-password 400; Token kept in memory only
+DEMO step 1: Alice registered 201 and logged in 200; identity and HS256 claims verified
+DEMO step 2: Alice created organization A 201; database creator relation is admin/active
+PASS real TCP /me, empty list, atomic organization/admin creation, own list, forged fields 400 and protected routes 401
+DEMO step 3: Bob registered 201 and logged in 200
+DEMO step 4: Bob created organization B 201; database creator relation is admin/active
+DEMO step 5: Bob reading A members returned 404; no membership in A exists
+DEMO step 6: Alice added Bob to A 201; database relation is member/active
+DEMO step 7: Bob read A members 200 but adding a member returned 403
+DEMO step 8: Expired HS256 credential rejected with 401 on /me and A members; no production clock change
+PASS real TCP Alice/Bob member read/add, cross-org 404, member 403, admin 201, duplicate 409, disabled old-token 404 and other-org access retained
+W03 DEMO 1: create/detail/initial event and scoped filtered list
+W03 DEMO 2: admin update and assignment, two audited changes
+W03 DEMO 3: Bob starts/comments/resolves, admin closes, CLOSED reopen rejected
+W03 DEMO 4: organization B visitor cannot read/write A ticket or children
+W03 DEMO 5: soft delete 204, ordinary parent/children hidden, database audit retained
+W03 DEMO 6: real event failure rolls back state/version/comment; restored database usable
+FAIL browser stage: seed real API
+browserContext.newPage: Executable doesn't exist at /media/yjz/.cache/ms-playwright/ffmpeg-1013/ffmpeg-linux
+╔═════════════════════════════════════════════════════════════════╗
+║ Video rendering requires ffmpeg binary.                         ║
+║ Downloading it will not affect any of the system-wide settings. ║
+║ Please run the following command:                               ║
+║                                                                 ║
+║     npx playwright install ffmpeg                               ║
+║                                                                 ║
+║ <3 Playwright Team                                              ║
+╚═════════════════════════════════════════════════════════════════╝
+
+CLEANUP only this run's test containers and labeled volume
+Traceback (most recent call last):
+  File "scripts/week02-day2-smoke.py", line 467, in <module>
+    raise SystemExit(main())
+  File "scripts/week02-day2-smoke.py", line 452, in main
+    registration_process_smoke()
+  File "scripts/week02-day2-smoke.py", line 362, in registration_process_smoke
+    raise RuntimeError("W04 browser checks failed; see safe browser output")
+RuntimeError: W04 browser checks failed; see safe browser output

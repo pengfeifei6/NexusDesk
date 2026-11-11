@@ -1,0 +1,99 @@
+
+> nexusdesk-web@0.4.0 test:unit
+> vitest --run
+
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/web
+
+ ❯ src/lib/__tests__/knowledge.spec.ts (26 tests | 3 failed) 313ms
+     × rejects a supplementary-plane password shorter than 15 code points before sending it 12ms
+     × allows the API code-point limits without native UTF-16 truncation 4ms
+     × validates organization names by code points and sends the valid full name 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > onboarding Unicode length rules > rejects a supplementary-plane password shorter than 15 code points before sending it
+AssertionError: expected "request" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st request call:
+
+    Array [
+      "/auth/register",
+      Object {
+        "body": Object {
+          "display_name": "测试",
+          "email": "unicode@example.test",
+          "password": "🧪🧪🧪🧪🧪🧪🧪🧪",
+        },
+        "method": "POST",
+        "signal": AbortSignal {
+          Symbol(kEvents): Map {},
+          Symbol(events.maxEventTargetListeners): 0,
+          Symbol(events.maxEventTargetListenersWarned): false,
+          Symbol(kHandlers): Map {},
+          Symbol(kAborted): true,
+          Symbol(kReason): [AbortError: This operation was aborted],
+          Symbol(kComposite): false,
+        },
+      },
+    ]
+
+
+Number of calls: 1
+
+ ❯ src/lib/__tests__/knowledge.spec.ts:482:25
+    480|     await wrapper.get('form').trigger('submit')
+    481|     await flushPromises()
+    482|     expect(request).not.toHaveBeenCalled()
+       |                         ^
+    483|     expect(wrapper.text()).toContain('密码需 15～128 个字符')
+    484|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > onboarding Unicode length rules > allows the API code-point limits without native UTF-16 truncation
+AssertionError: expected '80' to be undefined
+
+- Expected:
+undefined
+
++ Received:
+"80"
+
+ ❯ src/lib/__tests__/knowledge.spec.ts:489:77
+    487|     const { wrapper, router } = await open('/register', false)
+    488|     const name = '🧪'.repeat(80), password = '🧪'.repeat(65)
+    489|     expect(wrapper.get('input[name=display_name]').attributes('maxleng…
+       |                                                                             ^
+    490|     expect(wrapper.get('input[type=password]').attributes('maxlength')…
+    491|     await wrapper.get('input[name=display_name]').setValue(name)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > onboarding Unicode length rules > validates organization names by code points and sends the valid full name
+AssertionError: expected '100' to be undefined
+
+- Expected:
+undefined
+
++ Received:
+"100"
+
+ ❯ src/lib/__tests__/knowledge.spec.ts:507:43
+    505|     const { wrapper } = await open('/desk')
+    506|     const input = wrapper.get('input[name=organization_name]')
+    507|     expect(input.attributes('maxlength')).toBeUndefined()
+       |                                           ^
+    508|     await input.setValue('🧪'.repeat(101))
+    509|     await wrapper.get('form').trigger('submit')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  3 failed | 67 passed (70)
+   Start at  00:20:29
+   Duration  1.25s (transform 543ms, setup 0ms, import 1.27s, tests 566ms, environment 1.52s)
+

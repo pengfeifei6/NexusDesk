@@ -1,0 +1,9 @@
+# github.com/pengfeifei6/NexusDesk/internal/platform/taskqueue [github.com/pengfeifei6/NexusDesk/internal/platform/taskqueue.test]
+internal/platform/taskqueue/asynq_test.go:14:5: undefined: handler
+internal/platform/taskqueue/asynq_test.go:16:60: undefined: TaskType
+internal/platform/taskqueue/asynq_test.go:19:56: undefined: TaskType
+internal/platform/taskqueue/asynq_test.go:24:5: undefined: retryDelay
+internal/platform/taskqueue/asynq_test.go:25:5: undefined: taskID
+internal/platform/taskqueue/asynq_test.go:26:8: undefined: taskID
+FAIL	github.com/pengfeifei6/NexusDesk/internal/platform/taskqueue [build failed]
+FAIL

@@ -1,0 +1,41 @@
+### 占位示例；Token/ID/version由开发者自行替换，禁止提交真实凭据。
+@base = http://127.0.0.1:8080/api/v1
+@token = <ACCESS_TOKEN>
+@org = 201
+@ticket = 301
+
+### 读取最新版本
+GET {{base}}/organizations/{{org}}/tickets/{{ticket}}
+Authorization: Bearer {{token}}
+
+### 领取；200，OPEN且version+1；相同请求再次提交409
+POST {{base}}/organizations/{{org}}/tickets/{{ticket}}/claim
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"expected_version":0}
+
+### 领取后单独开始处理；使用刚返回的版本
+POST {{base}}/organizations/{{org}}/tickets/{{ticket}}/transition
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"expected_version":1,"to_status":"IN_PROGRESS"}
+
+### 评论不增加工单版本
+POST {{base}}/organizations/{{org}}/tickets/{{ticket}}/comments
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"content":"已开始检查问题。"}
+
+### 查事件
+GET {{base}}/organizations/{{org}}/tickets/{{ticket}}/events?page=1&page_size=20
+Authorization: Bearer {{token}}
+
+### 伪造受理人必拒绝400
+POST {{base}}/organizations/{{org}}/tickets/{{ticket}}/claim
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"expected_version":0,"assignee_id":102}

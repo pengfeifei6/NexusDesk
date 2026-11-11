@@ -1,0 +1,12 @@
+{
+  "recorded_at": "2026-11-10T16:25:25.226652+00:00",
+  "changed_baseline_files": 24,
+  "new_source_doc_files": 52,
+  "missing_baseline_files": 0,
+  "protected_old_migrations_dependency_locks_unchanged": true,
+  "new_or_changed_markdown_links": "PASS",
+  "diff_check": "PASS",
+  "new_file_trailing_whitespace": "PASS",
+  "real_env_and_private_storage_ignored": true,
+  "no_auto_commit": true
+}

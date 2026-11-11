@@ -1,0 +1,26 @@
+### 仅虚构示例；自行填写内存 Token 和自己可见的 ID
+@base = http://127.0.0.1:8080/api/v1
+@org = 1
+@document = 1
+@job = 1
+@token = REPLACE_WITH_LOCAL_ACCESS_TOKEN
+
+### 提交（没有 JSON body）
+POST {{base}}/organizations/{{org}}/knowledge/documents/{{document}}/jobs
+Authorization: Bearer {{token}}
+
+### 文档最近20个任务
+GET {{base}}/organizations/{{org}}/knowledge/documents/{{document}}/jobs
+Authorization: Bearer {{token}}
+
+### 任务状态
+GET {{base}}/organizations/{{org}}/jobs/{{job}}
+Authorization: Bearer {{token}}
+
+### 仅 FAILED/CANCELED，由创建者或admin重试
+POST {{base}}/organizations/{{org}}/jobs/{{job}}/retry
+Authorization: Bearer {{token}}
+
+### 取消活动任务
+POST {{base}}/organizations/{{org}}/jobs/{{job}}/cancel
+Authorization: Bearer {{token}}

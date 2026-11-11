@@ -1,0 +1,5 @@
+# W06 optional overlay: same PostgreSQL17 major, existing volume name unchanged.
+# Use with deploy/compose.yaml after backing up the existing database.
+services:
+  db:
+    image: pgvector/pgvector:0.8.7-pg17-trixie

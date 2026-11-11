@@ -1,0 +1,311 @@
+
+> nexusdesk-web@0.4.0 test:unit
+> vitest --run
+
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/web
+
+ ❯ src/lib/__tests__/rag.spec.ts (10 tests | 10 failed) 153ms
+     × preserves chunk/index IDs while decoding finite fractional scores and timings 6ms
+     × shows extraction READY separately from absent index, then builds the index without a request body 44ms
+     × searches within the current organization and renders escaped source excerpts 23ms
+     × asks and displays only returned sources and the answer as plain text 14ms
+     × shows insufficient evidence without an invented source list 12ms
+     × ignores a late answer after organization change 12ms
+     × ignores a late answer after session change 11ms
+     × ignores a late answer after navigation change 10ms
+     × clears earlier results when the question changes and blocks invalid input 10ms
+     × refreshes index metadata after a model failure and preserves a safe error 10ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/__tests__/rag.spec.ts > RAG front-end contracts > preserves chunk/index IDs while decoding finite fractional scores and timings
+Error: unsafe numeric response
+ ❯ Object.<anonymous> src/lib/client.ts:8:46
+      6|     if (intKeys.test(key)) return value.value
+      7|     const number = Number(value.value)
+      8|     if (!Number.isSafeInteger(number)) throw new Error('unsafe numeric…
+       |                                              ^
+      9|     return number
+     10|   }) as T
+ ❯ reviveValue node_modules/lossless-json/src/revive.ts:37:17
+ ❯ reviveObject node_modules/lossless-json/src/revive.ts:45:18
+ ❯ reviveValue node_modules/lossless-json/src/revive.ts:34:38
+ ❯ revive node_modules/lossless-json/src/revive.ts:15:9
+ ❯ parse node_modules/lossless-json/src/parse.ts:41:19
+ ❯ decode src/lib/client.ts:4:10
+ ❯ src/lib/__tests__/rag.spec.ts:33:11
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯
+
+ FAIL  src/lib/__tests__/rag.spec.ts > RAG front-end contracts > shows extraction READY separately from absent index, then builds the index without a request body
+AssertionError: expected 'NexusDesk组织工单工作台fixture 退出登录组织选择请选择组织…' to contain '尚未索引'
+
+Expected: "尚未索引"
+Received: "NexusDesk组织工单工作台fixture 退出登录组织选择请选择组织A · adminB · member上一页组织第 1 页 下一页组织 工单知识库创建组织← 返回知识库列表guide.mdREADY 文档 #12 · 上传者 1 · text/markdown · 20 字节  上传 now · 更新 now · 已提取 20 字符 下载原文件删除文档刷新文档正文预览utf8-v1 · nowfixture body本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录"
+
+ ❯ src/lib/__tests__/rag.spec.ts:41:26
+     39|   setup((path,options)=>{if(path.endsWith('/index')&&options?.method==…
+     40|   const {wrapper}=await open('/organizations/10/knowledge/12')
+     41|   expect(wrapper.text()).toContain('尚未索引')
+       |                          ^
+     42|   await button(wrapper,'建立索引').trigger('click');await flushPromises()
+     43|   expect(sent).toEqual(expect.objectContaining({method:'POST',timeoutM…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯
+
+ FAIL  src/lib/__tests__/rag.spec.ts > RAG front-end contracts > searches within the current organization and renders escaped source excerpts
+Error: Unable to get textarea[aria-label="检索问题"] within: <header><a href="/desk" class="brand">NexusDesk</a><span>组织工单工作台</span>
+  <div class="account">fixture <button>退出登录</button></div>
+</header>
+<main>
+  <section class="toolbar panel"><label>组织选择<select value="10">
+        <option value="">请选择组织</option>
+        <!--v-if-->
+        <option value="10">A · admin</option>
+        <option value="20">B · member</option>
+      </select></label>
+    <div><button disabled="">上一页组织</button><span>第 1 页</span><button disabled=""> 下一页组织 </button></div>
+  </section>
+  <nav aria-label="组织工作区" class="actions"><a href="/organizations/10/tickets" class="">工单</a><a href="/organizations/10/knowledge" class="">知识库</a><a href="/desk" class="">创建组织</a></nav>
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if--><a href="/organizations/10/knowledge" class="">← 返回知识库列表</a>
+  <!--v-if-->
+  <!--v-if-->
+  <section class="panel detail">
+    <div class="row">
+      <h1></h1><span class="badge"></span>
+    </div>
+    <p class="meta"> 文档 # · 上传者 · · 字节 </p>
+    <p class="meta"> 上传 · 更新 · 已提取 字符 </p>
+    <!--v-if-->
+    <!--v-if-->
+    <div class="actions">
+      <!--v-if--><button>下载原文件</button><button>删除文档</button><button>刷新文档</button>
+    </div>
+  </section>
+  <!--v-if-->
+  <!--v-if-->
+</main>
+<footer>本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录</footer>
+ ❯ BaseWrapper.get node_modules/@vue/test-utils/dist/vue-test-utils.cjs.js:7279:15
+ ❯ src/lib/__tests__/rag.spec.ts:51:17
+     49|   setup((path,options)=>{if(path.endsWith('/search')){sent={path,optio…
+     50|   const {wrapper}=await open('/organizations/10/knowledge/search')
+     51|   await wrapper.get('textarea[aria-label="检索问题"]').setValue('数据库连接超时')
+       |                 ^
+     52|   await button(wrapper,'检索文档').trigger('click');await flushPromises()
+     53|   expect(sent).toEqual(expect.objectContaining({path:'/organizations/1…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯
+
+ FAIL  src/lib/__tests__/rag.spec.ts > RAG front-end contracts > asks and displays only returned sources and the answer as plain text
+Error: Unable to get textarea within: <header><a href="/desk" class="brand">NexusDesk</a><span>组织工单工作台</span>
+  <div class="account">fixture <button>退出登录</button></div>
+</header>
+<main>
+  <section class="toolbar panel"><label>组织选择<select value="10">
+        <option value="">请选择组织</option>
+        <!--v-if-->
+        <option value="10">A · admin</option>
+        <option value="20">B · member</option>
+      </select></label>
+    <div><button disabled="">上一页组织</button><span>第 1 页</span><button disabled=""> 下一页组织 </button></div>
+  </section>
+  <nav aria-label="组织工作区" class="actions"><a href="/organizations/10/tickets" class="">工单</a><a href="/organizations/10/knowledge" class="">知识库</a><a href="/desk" class="">创建组织</a></nav>
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if--><a href="/organizations/10/knowledge" class="">← 返回知识库列表</a>
+  <!--v-if-->
+  <!--v-if-->
+  <section class="panel detail">
+    <div class="row">
+      <h1>guide.md</h1><span class="badge">READY</span>
+    </div>
+    <p class="meta"> 文档 #12 · 上传者 1 · text/markdown · 20 字节 </p>
+    <p class="meta"> 上传 now · 更新 now · 已提取 20 字符 </p>
+    <!--v-if-->
+    <!--v-if-->
+    <div class="actions">
+      <!--v-if--><button>下载原文件</button><button>删除文档</button><button>刷新文档</button>
+    </div>
+  </section>
+  <section class="panel">
+    <h2>正文预览</h2>
+    <p class="meta">utf8-v1 · now</p><pre class="body">fixture body</pre>
+  </section>
+  <!--v-if-->
+</main>
+<footer>本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录</footer>
+ ❯ BaseWrapper.get node_modules/@vue/test-utils/dist/vue-test-utils.cjs.js:7279:15
+ ❯ src/lib/__tests__/rag.spec.ts:60:17
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯
+
+ FAIL  src/lib/__tests__/rag.spec.ts > RAG front-end contracts > shows insufficient evidence without an invented source list
+Error: Unable to get textarea within: <header><a href="/desk" class="brand">NexusDesk</a><span>组织工单工作台</span>
+  <div class="account">fixture <button>退出登录</button></div>
+</header>
+<main>
+  <section class="toolbar panel"><label>组织选择<select value="10">
+        <option value="">请选择组织</option>
+        <!--v-if-->
+        <option value="10">A · admin</option>
+        <option value="20">B · member</option>
+      </select></label>
+    <div><button disabled="">上一页组织</button><span>第 1 页</span><button disabled=""> 下一页组织 </button></div>
+  </section>
+  <nav aria-label="组织工作区" class="actions"><a href="/organizations/10/tickets" class="">工单</a><a href="/organizations/10/knowledge" class="">知识库</a><a href="/desk" class="">创建组织</a></nav>
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if--><a href="/organizations/10/knowledge" class="">← 返回知识库列表</a>
+  <!--v-if-->
+  <!--v-if-->
+  <section class="panel detail">
+    <div class="row">
+      <h1>guide.md</h1><span class="badge">READY</span>
+    </div>
+    <p class="meta"> 文档 #12 · 上传者 1 · text/markdown · 20 字节 </p>
+    <p class="meta"> 上传 now · 更新 now · 已提取 20 字符 </p>
+    <!--v-if-->
+    <!--v-if-->
+    <div class="actions">
+      <!--v-if--><button>下载原文件</button><button>删除文档</button><button>刷新文档</button>
+    </div>
+  </section>
+  <section class="panel">
+    <h2>正文预览</h2>
+    <p class="meta">utf8-v1 · now</p><pre class="body">fixture body</pre>
+  </section>
+  <!--v-if-->
+</main>
+<footer>本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录</footer>
+ ❯ BaseWrapper.get node_modules/@vue/test-utils/dist/vue-test-utils.cjs.js:7279:15
+ ❯ src/lib/__tests__/rag.spec.ts:66:82
+     64|  it('shows insufficient evidence without an invented source list',asyn…
+     65|   setup(path=>path.endsWith('/ask')?{answer:'知识库未检索到足够依据。',sources:[],…
+     66|   const {wrapper}=await open('/organizations/10/knowledge/search');awa…
+       |                                                                                  ^
+     67|   expect(wrapper.text()).toContain('知识库未检索到足够依据');expect(wrapper.find(…
+     68|  })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/10]⎯
+
+ FAIL  src/lib/__tests__/rag.spec.ts > RAG front-end contracts > ignores a late answer after organization change
+ FAIL  src/lib/__tests__/rag.spec.ts > RAG front-end contracts > ignores a late answer after session change
+ FAIL  src/lib/__tests__/rag.spec.ts > RAG front-end contracts > ignores a late answer after navigation change
+Error: Unable to get textarea within: <header><a href="/desk" class="brand">NexusDesk</a><span>组织工单工作台</span>
+  <div class="account">fixture <button>退出登录</button></div>
+</header>
+<main>
+  <section class="toolbar panel"><label>组织选择<select value="10">
+        <option value="">请选择组织</option>
+        <!--v-if-->
+        <option value="10">A · admin</option>
+        <option value="20">B · member</option>
+      </select></label>
+    <div><button disabled="">上一页组织</button><span>第 1 页</span><button disabled=""> 下一页组织 </button></div>
+  </section>
+  <nav aria-label="组织工作区" class="actions"><a href="/organizations/10/tickets" class="">工单</a><a href="/organizations/10/knowledge" class="">知识库</a><a href="/desk" class="">创建组织</a></nav>
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if--><a href="/organizations/10/knowledge" class="">← 返回知识库列表</a>
+  <!--v-if-->
+  <!--v-if-->
+  <section class="panel detail">
+    <div class="row">
+      <h1>guide.md</h1><span class="badge">READY</span>
+    </div>
+    <p class="meta"> 文档 #12 · 上传者 1 · text/markdown · 20 字节 </p>
+    <p class="meta"> 上传 now · 更新 now · 已提取 20 字符 </p>
+    <!--v-if-->
+    <!--v-if-->
+    <div class="actions">
+      <!--v-if--><button>下载原文件</button><button>删除文档</button><button>刷新文档</button>
+    </div>
+  </section>
+  <section class="panel">
+    <h2>正文预览</h2>
+    <p class="meta">utf8-v1 · now</p><pre class="body">fixture body</pre>
+  </section>
+  <!--v-if-->
+</main>
+<footer>本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录</footer>
+ ❯ BaseWrapper.get node_modules/@vue/test-utils/dist/vue-test-utils.cjs.js:7279:15
+ ❯ src/lib/__tests__/rag.spec.ts:72:97
+     70|   let resolve!:(v:unknown)=>void
+     71|   setup(path=>path.endsWith('/ask')?new Promise(r=>{resolve=r}):undefi…
+     72|   const {wrapper,router,session}=await open('/organizations/10/knowled…
+       |                                                                                                 ^
+     73|   if(change==='session')session.clear();else await router.push(change=…
+     74|   resolve({answer:'禁止显示的旧答案',sources:[source],insufficient_evidence:fa…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/10]⎯
+
+ FAIL  src/lib/__tests__/rag.spec.ts > RAG front-end contracts > clears earlier results when the question changes and blocks invalid input
+Error: Unable to get textarea within: <header><a href="/desk" class="brand">NexusDesk</a><span>组织工单工作台</span>
+  <div class="account">fixture <button>退出登录</button></div>
+</header>
+<main>
+  <section class="toolbar panel"><label>组织选择<select value="10">
+        <option value="">请选择组织</option>
+        <!--v-if-->
+        <option value="10">A · admin</option>
+        <option value="20">B · member</option>
+      </select></label>
+    <div><button disabled="">上一页组织</button><span>第 1 页</span><button disabled=""> 下一页组织 </button></div>
+  </section>
+  <nav aria-label="组织工作区" class="actions"><a href="/organizations/10/tickets" class="">工单</a><a href="/organizations/10/knowledge" class="">知识库</a><a href="/desk" class="">创建组织</a></nav>
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if--><a href="/organizations/10/knowledge" class="">← 返回知识库列表</a>
+  <!--v-if-->
+  <!--v-if-->
+  <section class="panel detail">
+    <div class="row">
+      <h1></h1><span class="badge"></span>
+    </div>
+    <p class="meta"> 文档 # · 上传者 · · 字节 </p>
+    <p class="meta"> 上传 · 更新 · 已提取 字符 </p>
+    <!--v-if-->
+    <!--v-if-->
+    <div class="actions">
+      <!--v-if--><button>下载原文件</button><button>删除文档</button><button>刷新文档</button>
+    </div>
+  </section>
+  <!--v-if-->
+  <!--v-if-->
+</main>
+<footer>本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录</footer>
+ ❯ BaseWrapper.get node_modules/@vue/test-utils/dist/vue-test-utils.cjs.js:7279:15
+ ❯ src/lib/__tests__/rag.spec.ts:79:82
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/10]⎯
+
+ FAIL  src/lib/__tests__/rag.spec.ts > RAG front-end contracts > refreshes index metadata after a model failure and preserves a safe error
+AssertionError: expected undefined to be defined
+ ❯ button src/lib/__tests__/rag.spec.ts:30:120
+     28|  })
+     29| }
+     30| function button(w:ReturnType<typeof mount>,name:string){const b=w.find…
+       |                                                                                                                        ^
+     31| describe('RAG front-end contracts',()=>{
+     32|  it('preserves chunk/index IDs while decoding finite fractional scores…
+ ❯ src/lib/__tests__/rag.spec.ts:86:70
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/10]⎯
+
+
+ Test Files  1 failed | 4 passed (5)
+      Tests  10 failed | 70 passed (80)
+   Start at  01:16:26
+   Duration  1.31s (transform 903ms, setup 0ms, import 1.92s, tests 759ms, environment 1.82s)
+

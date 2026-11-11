@@ -1,0 +1,6 @@
+# github.com/pengfeifei6/NexusDesk/internal/platform/config [github.com/pengfeifei6/NexusDesk/internal/platform/config.test]
+internal/platform/config/async_test.go:12:14: undefined: LoadWorker
+internal/platform/config/async_test.go:30:11: undefined: LoadWorker
+internal/platform/config/async_test.go:34:12: undefined: LoadWorker
+FAIL	github.com/pengfeifei6/NexusDesk/internal/platform/config [build failed]
+FAIL

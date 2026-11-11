@@ -1,0 +1,27 @@
+{
+  "source": "week07-integration-attempt3.log",
+  "go_race_exit": 0,
+  "go_top_level_pass": 182,
+  "go_subtest_pass": 779,
+  "go_failed": 0,
+  "go_skipped": 0,
+  "w07_top_level_pass": 12,
+  "w07_total_pass_nodes": 55,
+  "web_unit_pass": 101,
+  "web_evidence": "week07-ui-fix-green.log",
+  "process_status": "PASS",
+  "browser_status": "PASS",
+  "process_cases": 7,
+  "browser_cases": {
+    "week04": 11,
+    "week05": 10,
+    "week06": 8,
+    "week07": 7
+  },
+  "browser_total": 36,
+  "model_pipeline": "real bge-m3:567m + qwen3.5:35b on asynchronously indexed document",
+  "development_schema": 11,
+  "development_redis": "healthy 127.0.0.1:6380, PONG",
+  "opaque_backup": "0600 .local/week07-backups (unread)",
+  "existing_dependency_upgrades": 0
+}

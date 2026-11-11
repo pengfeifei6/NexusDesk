@@ -1,0 +1,15 @@
+2026-11-11: verified project-owned loopback PostgreSQL17 container; initial schema version 6. Additive Up only; no user data inspected.
+2026/11/10 16:15:52 OK   00007_create_knowledge_documents.sql (11.23ms)
+2026/11/10 16:15:52 OK   00008_create_knowledge_document_texts.sql (4.65ms)
+2026/11/10 16:15:52 goose: successfully migrated database to version: 8
+2026/11/10 16:15:52     Applied At                  Migration
+2026/11/10 16:15:52     =======================================
+2026/11/10 16:15:52     Tue Nov 10 15:27:04 2026 -- 00001_create_organizations.sql
+2026/11/10 16:15:52     Tue Nov 10 15:27:04 2026 -- 00002_create_users.sql
+2026/11/10 16:15:52     Tue Nov 10 15:27:04 2026 -- 00003_create_organization_members.sql
+2026/11/10 16:15:52     Tue Nov 10 15:27:04 2026 -- 00004_create_tickets.sql
+2026/11/10 16:15:52     Tue Nov 10 15:27:04 2026 -- 00005_create_ticket_comments.sql
+2026/11/10 16:15:52     Tue Nov 10 15:27:04 2026 -- 00006_create_ticket_events.sql
+2026/11/10 16:15:52     Tue Nov 10 16:15:52 2026 -- 00007_create_knowledge_documents.sql
+2026/11/10 16:15:52     Tue Nov 10 16:15:52 2026 -- 00008_create_knowledge_document_texts.sql
+Removed only owned temporary migration tools. API not restarted; real .env and private files were not read or changed.

@@ -1,0 +1,105 @@
+
+> nexusdesk-web@0.4.0 test:unit
+> vitest --run src/lib/__tests__/jobs.spec.ts
+
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/web
+
+ ❯ src/lib/__tests__/jobs.spec.ts (18 tests | 8 failed) 291ms
+   × refreshes stale UPLOADED document and INDEXING data once when the first job response has succeeded 16ms
+   × refreshes stale PROCESSING document and INDEXING data once when the first job response has succeeded 9ms
+   × refreshes success after a hidden initial job read was canceled 11ms
+   × refreshes each lossless successful run once while preserving its identity through manual detail reloads 9ms
+   × invalidates deferred READY text on jobs 403 denial and permits a fresh explicit retry 9ms
+   × invalidates deferred READY text on jobs 404 denial and permits a fresh explicit retry 13ms
+   × invalidates deferred READY text on index 403 denial and permits a fresh explicit retry 6ms
+   × invalidates deferred READY text on index 404 denial and permits a fresh explicit retry 7ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/__tests__/jobs.spec.ts > refreshes stale UPLOADED document and INDEXING data once when the first job response has succeeded
+ FAIL  src/lib/__tests__/jobs.spec.ts > refreshes stale PROCESSING document and INDEXING data once when the first job response has succeeded
+AssertionError: expected 1 to be 2 // Object.is equality
+
+- Expected
++ Received
+
+- 2
++ 1
+
+ ❯ src/lib/__tests__/jobs.spec.ts:260:27
+    258|     const { w } = await open()
+    259|     await flushPromises()
+    260|     expect(documentReads).toBe(2)
+       |                           ^
+    261|     expect(indexReads).toBe(2)
+    262|     expect(w.text()).toContain('fresh completed body')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  src/lib/__tests__/jobs.spec.ts > refreshes success after a hidden initial job read was canceled
+AssertionError: expected [ [ …(2) ] ] to have a length of 2 but got 1
+
+- Expected
++ Received
+
+- 2
++ 1
+
+ ❯ src/lib/__tests__/jobs.spec.ts:295:77
+    293|   resolve({ items: [job] })
+    294|   await flushPromises()
+    295|   expect(spy.mock.calls.filter(([path]) => path.endsWith('/documents/1…
+       |                                                                             ^
+    296|   expect(spy.mock.calls.filter(([path]) => path.endsWith('/index'))).t…
+    297|   const count = spy.mock.calls.length
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  src/lib/__tests__/jobs.spec.ts > refreshes each lossless successful run once while preserving its identity through manual detail reloads
+AssertionError: expected [ [ …(2) ] ] to have a length of 2 but got 1
+
+- Expected
++ Received
+
+- 2
++ 1
+
+ ❯ src/lib/__tests__/jobs.spec.ts:308:77
+    306|   const { w } = await open()
+    307|   await flushPromises()
+    308|   expect(spy.mock.calls.filter(([path]) => path.endsWith('/documents/1…
+       |                                                                             ^
+    309|   await button(w, '刷新文档').trigger('click')
+    310|   await flushPromises()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  src/lib/__tests__/jobs.spec.ts > invalidates deferred READY text on jobs 403 denial and permits a fresh explicit retry
+ FAIL  src/lib/__tests__/jobs.spec.ts > invalidates deferred READY text on jobs 404 denial and permits a fresh explicit retry
+ FAIL  src/lib/__tests__/jobs.spec.ts > invalidates deferred READY text on index 403 denial and permits a fresh explicit retry
+ FAIL  src/lib/__tests__/jobs.spec.ts > invalidates deferred READY text on index 404 denial and permits a fresh explicit retry
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/lib/__tests__/jobs.spec.ts:349:34
+    347|     expect(textReads).toBe(1)
+    348|     expect(staleSignal).toBeDefined()
+    349|     expect(staleSignal?.aborted).toBe(true)
+       |                                  ^
+    350|     expect(knowledge.detail.value).toBeNull()
+    351|     expect(knowledge.preview.value).toBeNull()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  8 failed | 10 passed (18)
+   Start at  09:26:57
+   Duration  1.51s (transform 540ms, setup 0ms, import 696ms, tests 291ms, environment 370ms)
+

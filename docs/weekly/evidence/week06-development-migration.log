@@ -1,0 +1,3 @@
+PASS opaque0600 backup saved under ignored .local/week06-backups; contents never inspected
+PASS existing PostgreSQL17.11 additive migration8→10; vector0.8.7; no Down, no volume replacement, no original file reads
+NOTICE extension binaries copied into current container; future recreation must include deploy/compose.pgvector.yaml

@@ -1,0 +1,23 @@
+{
+  "baseline_files": 260,
+  "changed": [
+    ".env.example",
+    "AGENTS.md",
+    "README.md",
+    "cmd/api/main.go",
+    "docs/architecture.md",
+    "docs/authorization-matrix.md",
+    "docs/database.md",
+    "internal/platform/config/config.go",
+    "scripts/week02-day2-smoke.py",
+    "scripts/week05-browser.mjs",
+    "web/src/App.vue",
+    "web/src/composables/desk.ts",
+    "web/src/composables/knowledge.ts",
+    "web/src/lib/client.ts",
+    "web/src/lib/types.ts",
+    "web/src/router/index.ts",
+    "web/src/views/KnowledgeDetailView.vue"
+  ],
+  "missing": []
+}

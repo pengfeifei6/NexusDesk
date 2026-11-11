@@ -1,0 +1,18 @@
+# github.com/pengfeifei6/NexusDesk/internal/knowledge [github.com/pengfeifei6/NexusDesk/internal/knowledge.test]
+internal/knowledge/extractor_test.go:6:5: undefined: NewTextExtractor
+internal/knowledge/extractor_test.go:15:124: undefined: ExtractionError
+# github.com/pengfeifei6/NexusDesk/internal/platform/storage [github.com/pengfeifei6/NexusDesk/internal/platform/storage.test]
+internal/platform/storage/local_test.go:17:9: undefined: NewLocal
+internal/platform/storage/local_test.go:22:96: undefined: ErrExists
+internal/platform/storage/local_test.go:32:54: undefined: ErrTooLarge
+internal/platform/storage/local_test.go:32:87: undefined: ErrEmpty
+internal/platform/storage/local_test.go:34:48: undefined: NewLocal
+internal/platform/storage/local_test.go:40:43: undefined: NewLocal
+internal/platform/storage/local_test.go:49:45: undefined: NewLocal
+internal/platform/storage/local_test.go:51:89: undefined: ErrInvalidKey
+internal/platform/storage/local_test.go:52:60: undefined: ErrInvalidKey
+internal/platform/storage/local_test.go:53:60: undefined: ErrInvalidKey
+internal/platform/storage/local_test.go:53:60: too many errors
+FAIL	github.com/pengfeifei6/NexusDesk/internal/platform/storage [build failed]
+FAIL	github.com/pengfeifei6/NexusDesk/internal/knowledge [build failed]
+FAIL

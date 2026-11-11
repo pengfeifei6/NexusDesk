@@ -1,0 +1,16 @@
+name: nexusdesk-queue
+services:
+  redis:
+    image: redis:7-alpine@sha256:286bd4264adb303147270bb2d735352497e950f7b73b2ca42364d63d7daf61ee
+    command: [redis-server, --appendonly, "yes", --appendfsync, everysec, --maxmemory-policy, noeviction]
+    ports:
+      - "127.0.0.1:${NEXUSDESK_REDIS_PORT:-6380}:6379"
+    volumes:
+      - queue-data:/data
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 5s
+      timeout: 2s
+      retries: 10
+volumes:
+  queue-data:

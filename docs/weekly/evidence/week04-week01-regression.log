@@ -1,0 +1,26 @@
+Docker Compose version v5.6.0
+PASS PostgreSQL container is healthy
+NAME                               IMAGE         COMMAND                  SERVICE   CREATED         STATUS                   PORTS
+nexusdesk-day5-876c9047be47-db-1   postgres:17   "docker-entrypoint.s…"   db        6 seconds ago   Up 5 seconds (healthy)   127.0.0.1:58337->5432/tcp
+2026/11/10 22:24:23 OK   00001_create_organizations.sql (2.81ms)
+2026/11/10 22:24:23 goose: successfully migrated database to version: 1
+2026/11/10 22:24:23     Applied At                  Migration
+2026/11/10 22:24:23     =======================================
+2026/11/10 22:24:23     Tue Nov 10 14:24:23 2026 -- 00001_create_organizations.sql
+2026/11/10 22:24:23     Pending                  -- 00002_create_users.sql
+2026/11/10 22:24:23     Pending                  -- 00003_create_organization_members.sql
+2026/11/10 22:24:23     Pending                  -- 00004_create_tickets.sql
+2026/11/10 22:24:23     Pending                  -- 00005_create_ticket_comments.sql
+2026/11/10 22:24:23     Pending                  -- 00006_create_ticket_events.sql
+2026/11/10 22:24:23 OK   00001_create_organizations.sql (5.61ms)
+2026/11/10 22:24:23 OK   00001_create_organizations.sql (7.7ms)
+2026/11/10 22:24:23 goose: successfully migrated database to version: 1
+PASS Goose Up / Status / Down / Up and version 1
+2026/11/10 22:24:31 goose: no migrations to run. current version: 1
+PASS README restart preserves the volume, organizations table and migration version
+PASS full race suite including PostgreSQL integration and SQL defaults
+PASS organizations name NOT NULL constraint
+PASS database-backed API /healthz and SIGTERM exit 0
+PASS database-backed API /healthz and SIGINT exit 0
+PASS authentication / missing database / unreachable database fail before HTTP
+Cleaned up only this run's test containers and labeled volume

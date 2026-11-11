@@ -1,0 +1,14 @@
+
+> nexusdesk-web@0.4.0 build
+> vue-tsc --build && vite build
+
+vite v8.3.7 building client environment for production...
+transforming...
+✓ 60 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.41 kB │ gzip:  0.31 kB
+dist/assets/index-DFbyONcz.css    2.31 kB │ gzip:  0.95 kB
+dist/assets/index-BsTSMuHX.js   144.22 kB │ gzip: 52.77 kB
+
+✓ built in 430ms

@@ -1,0 +1,311 @@
+
+> nexusdesk-web@0.4.0 test:unit
+> vitest --run src/lib/__tests__/knowledge.spec.ts
+
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/web
+
+ ❯ src/lib/__tests__/knowledge.spec.ts (16 tests | 16 failed) 155ms
+     × registers three fields, returns to login with notice, and creates no organization or session 46ms
+     × creates the first organization with only its name and enters the server-returned organization 12ms
+     × lists documents and sends filter and pagination parameters 10ms
+     × uploads a file as FormData and opens the returned detail 8ms
+     × blocks files above 5 MiB before sending them 7ms
+     × processes as an active member and displays escaped plain text 6ms
+     × allows delete button for admin uploader 2 and returns to list 5ms
+     × allows delete button for member uploader 1 and returns to list 4ms
+     × clears old detail and preview when refresh returns 404 8ms
+     × explains unsupported PDF extraction and keeps download available 5ms
+     × ignores late detail and text from the previous organization and preserves knowledge on organization switch 17ms
+     × ignores a late same-organization filter response 7ms
+     × does not save a late download after organization change 5ms
+     × does not save a late download after logout change 4ms
+     × does not save a late download after navigation change 4ms
+     × releases a successful download ObjectURL and uses its safe original filename 5ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 16 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > new user onboarding > registers three fields, returns to login with notice, and creates no organization or session
+Error: Unable to get input[name=display_name] within: <header><a href="/desk" class="brand">NexusDesk</a><span>组织工单工作台</span>
+  <!--v-if-->
+</header>
+<main>
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+  <section class="login panel">
+    <p class="eyebrow">欢迎回来</p>
+    <h1>登录工作台</h1>
+    <p>使用已注册账号访问你的组织工单。</p>
+    <form><label>邮箱<input type="email" required="" autocomplete="username"></label><label>密码<input type="password" required="" autocomplete="current-password"></label><button class="primary">登录</button></form>
+  </section>
+</main>
+<footer>本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录</footer>
+ ❯ BaseWrapper.get node_modules/@vue/test-utils/dist/vue-test-utils.cjs.js:7279:15
+ ❯ src/lib/__tests__/knowledge.spec.ts:66:19
+     64|     })
+     65|     const { wrapper, router, session } = await open('/register', false)
+     66|     await wrapper.get('input[name=display_name]').setValue('新用户')
+       |                   ^
+     67|     await wrapper.get('input[type=email]').setValue('new@example.test')
+     68|     await wrapper.get('input[type=password]').setValue('fixture-long-p…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/16]⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > new user onboarding > creates the first organization with only its name and enters the server-returned organization
+Error: Unable to get input[name=organization_name] within: <header><a aria-current="page" href="/desk" class="router-link-active router-link-exact-active brand">NexusDesk</a><span>组织工单工作台</span>
+  <div class="account">测试 <button>退出登录</button></div>
+</header>
+<main>
+  <section class="toolbar panel"><label>组织选择<select value="">
+        <option value="">请选择组织</option>
+      </select></label>
+    <div><button disabled="">上一页组织</button><span>第 1 页</span><button disabled=""> 下一页组织 </button></div>
+  </section>
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+  <section class="panel">
+    <h1>选择组织，开始协作</h1>
+    <p>仅显示你当前有效加入的组织。没有组织时，请联系组织管理员。</p>
+  </section>
+</main>
+<footer>本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录</footer>
+ ❯ BaseWrapper.get node_modules/@vue/test-utils/dist/vue-test-utils.cjs.js:7279:15
+ ❯ src/lib/__tests__/knowledge.spec.ts:85:19
+     83|     })
+     84|     const { wrapper, router } = await open('/desk')
+     85|     await wrapper.get('input[name=organization_name]').setValue('首个组织')
+       |                   ^
+     86|     await wrapper.get('form').trigger('submit')
+     87|     await flushPromises()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/16]⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > knowledge workflow > lists documents and sends filter and pagination parameters
+AssertionError: expected 'NexusDesk组织工单工作台测试 退出登录组织选择请选择组织甲组织 ·…' to contain 'guide.md'
+
+Expected: "guide.md"
+Received: "NexusDesk组织工单工作台测试 退出登录组织选择请选择组织甲组织 · member乙组织 · admin上一页组织第 1 页 下一页组织 选择组织，开始协作仅显示你当前有效加入的组织。没有组织时，请联系组织管理员。本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录"
+
+ ❯ src/lib/__tests__/knowledge.spec.ts:106:28
+    104|     })
+    105|     const { wrapper } = await open('/organizations/10/knowledge')
+    106|     expect(wrapper.text()).toContain('guide.md')
+       |                            ^
+    107|     await wrapper.get('select[aria-label="文档状态筛选"]').setValue('FAILED')
+    108|     await flushPromises()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/16]⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > knowledge workflow > uploads a file as FormData and opens the returned detail
+Error: Unable to get input[type=file] within: <header><a aria-current="page" href="/desk" class="router-link-active router-link-exact-active brand">NexusDesk</a><span>组织工单工作台</span>
+  <div class="account">测试 <button>退出登录</button></div>
+</header>
+<main>
+  <section class="toolbar panel"><label>组织选择<select value="">
+        <option value="">请选择组织</option>
+        <option value="10">甲组织 · member</option>
+        <option value="20">乙组织 · admin</option>
+      </select></label>
+    <div><button disabled="">上一页组织</button><span>第 1 页</span><button disabled=""> 下一页组织 </button></div>
+  </section>
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+  <section class="panel">
+    <h1>选择组织，开始协作</h1>
+    <p>仅显示你当前有效加入的组织。没有组织时，请联系组织管理员。</p>
+  </section>
+</main>
+<footer>本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录</footer>
+ ❯ BaseWrapper.get node_modules/@vue/test-utils/dist/vue-test-utils.cjs.js:7279:15
+ ❯ src/lib/__tests__/knowledge.spec.ts:124:35
+    122|     const { wrapper, router } = await open('/organizations/10/knowledg…
+    123|     const file = new File(['# 测试'], 'guide.md', { type: 'text/markdown…
+    124|     Object.defineProperty(wrapper.get('input[type=file]').element, 'fi…
+       |                                   ^
+    125|     await wrapper.get('input[type=file]').trigger('change')
+    126|     await wrapper.get('form').trigger('submit')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/16]⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > knowledge workflow > blocks files above 5 MiB before sending them
+Error: Unable to get input[type=file] within: <header><a aria-current="page" href="/desk" class="router-link-active router-link-exact-active brand">NexusDesk</a><span>组织工单工作台</span>
+  <div class="account">测试 <button>退出登录</button></div>
+</header>
+<main>
+  <section class="toolbar panel"><label>组织选择<select value="">
+        <option value="">请选择组织</option>
+        <option value="10">甲组织 · member</option>
+        <option value="20">乙组织 · admin</option>
+      </select></label>
+    <div><button disabled="">上一页组织</button><span>第 1 页</span><button disabled=""> 下一页组织 </button></div>
+  </section>
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+  <section class="panel">
+    <h1>选择组织，开始协作</h1>
+    <p>仅显示你当前有效加入的组织。没有组织时，请联系组织管理员。</p>
+  </section>
+</main>
+<footer>本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录</footer>
+ ❯ BaseWrapper.get node_modules/@vue/test-utils/dist/vue-test-utils.cjs.js:7279:15
+ ❯ src/lib/__tests__/knowledge.spec.ts:142:35
+    140|     const file = new File(['x'], 'large.txt')
+    141|     Object.defineProperty(file, 'size', { value: 5242881 })
+    142|     Object.defineProperty(wrapper.get('input[type=file]').element, 'fi…
+       |                                   ^
+    143|     await wrapper.get('input[type=file]').trigger('change')
+    144|     await wrapper.get('form').trigger('submit')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/16]⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > knowledge workflow > processes as an active member and displays escaped plain text
+AssertionError: button 提取正文: expected undefined to be defined
+ ❯ button src/lib/__tests__/knowledge.spec.ts:45:36
+     43| function button(wrapper: ReturnType<typeof mount>, label: string) {
+     44|   const found = wrapper.findAll('button').find((b) => b.text() === lab…
+     45|   expect(found, `button ${label}`).toBeDefined()
+       |                                    ^
+     46|   return found!
+     47| }
+ ❯ src/lib/__tests__/knowledge.spec.ts:153:11
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/16]⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > knowledge workflow > allows delete button for admin uploader 2 and returns to list
+ FAIL  src/lib/__tests__/knowledge.spec.ts > knowledge workflow > allows delete button for member uploader 1 and returns to list
+AssertionError: button 删除文档: expected undefined to be defined
+ ❯ button src/lib/__tests__/knowledge.spec.ts:45:36
+     43| function button(wrapper: ReturnType<typeof mount>, label: string) {
+     44|   const found = wrapper.findAll('button').find((b) => b.text() === lab…
+     45|   expect(found, `button ${label}`).toBeDefined()
+       |                                    ^
+     46|   return found!
+     47| }
+ ❯ src/lib/__tests__/knowledge.spec.ts:162:11
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/16]⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > knowledge workflow > clears old detail and preview when refresh returns 404
+AssertionError: expected 'NexusDesk组织工单工作台测试 退出登录组织选择请选择组织甲组织 ·…' to contain '<img src=x onerror=alert(1)>\n# 原始正文'
+
+- Expected
++ Received
+
+- <img src=x onerror=alert(1)>
+- # 原始正文
++ NexusDesk组织工单工作台测试 退出登录组织选择请选择组织甲组织 · member乙组织 · admin上一页组织第 1 页 下一页组织 选择组织，开始协作仅显示你当前有效加入的组织。没有组织时，请联系组织管理员。本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录
+
+ ❯ src/lib/__tests__/knowledge.spec.ts:175:28
+    173|     })
+    174|     const { wrapper } = await open(`/organizations/10/knowledge/${docu…
+    175|     expect(wrapper.text()).toContain(text.content_text)
+       |                            ^
+    176|     missing = true
+    177|     await button(wrapper, '刷新文档').trigger('click')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/16]⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > knowledge workflow > explains unsupported PDF extraction and keeps download available
+AssertionError: expected 'NexusDesk组织工单工作台测试 退出登录组织选择请选择组织甲组织 ·…' to contain 'PDF 暂不支持文本提取'
+
+Expected: "PDF 暂不支持文本提取"
+Received: "NexusDesk组织工单工作台测试 退出登录组织选择请选择组织甲组织 · member乙组织 · admin上一页组织第 1 页 下一页组织 选择组织，开始协作仅显示你当前有效加入的组织。没有组织时，请联系组织管理员。本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录"
+
+ ❯ src/lib/__tests__/knowledge.spec.ts:190:28
+    188|     })
+    189|     const { wrapper } = await open(`/organizations/10/knowledge/${docu…
+    190|     expect(wrapper.text()).toContain('PDF 暂不支持文本提取')
+       |                            ^
+    191|     expect(button(wrapper, '下载原文件').exists()).toBe(true)
+    192|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/16]⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > knowledge request isolation > ignores late detail and text from the previous organization and preserves knowledge on organization switch
+TypeError: finish is not a function
+ ❯ src/lib/__tests__/knowledge.spec.ts:207:5
+    205|     await wrapper.get('select').setValue('20')
+    206|     await flushPromises()
+    207|     finish(text)
+       |     ^
+    208|     await flushPromises()
+    209|     expect(router.currentRoute.value.path).toBe('/organizations/20/kno…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/16]⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > knowledge request isolation > ignores a late same-organization filter response
+Error: Unable to get select[aria-label="文档状态筛选"] within: <header><a aria-current="page" href="/desk" class="router-link-active router-link-exact-active brand">NexusDesk</a><span>组织工单工作台</span>
+  <div class="account">测试 <button>退出登录</button></div>
+</header>
+<main>
+  <section class="toolbar panel"><label>组织选择<select value="">
+        <option value="">请选择组织</option>
+        <option value="10">甲组织 · member</option>
+        <option value="20">乙组织 · admin</option>
+      </select></label>
+    <div><button disabled="">上一页组织</button><span>第 1 页</span><button disabled=""> 下一页组织 </button></div>
+  </section>
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+  <section class="panel">
+    <h1>选择组织，开始协作</h1>
+    <p>仅显示你当前有效加入的组织。没有组织时，请联系组织管理员。</p>
+  </section>
+</main>
+<footer>本地协作工作台 · 登录状态仅保存在内存，刷新后需重新登录</footer>
+ ❯ BaseWrapper.get node_modules/@vue/test-utils/dist/vue-test-utils.cjs.js:7279:15
+ ❯ src/lib/__tests__/knowledge.spec.ts:222:28
+    220|     })
+    221|     const { wrapper } = await open('/organizations/10/knowledge')
+    222|     const filter = wrapper.get('select[aria-label="文档状态筛选"]')
+       |                            ^
+    223|     await filter.setValue('UPLOADED')
+    224|     await filter.setValue('READY')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/16]⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > knowledge request isolation > does not save a late download after organization change
+ FAIL  src/lib/__tests__/knowledge.spec.ts > knowledge request isolation > does not save a late download after logout change
+ FAIL  src/lib/__tests__/knowledge.spec.ts > knowledge request isolation > does not save a late download after navigation change
+AssertionError: button 下载原文件: expected undefined to be defined
+ ❯ button src/lib/__tests__/knowledge.spec.ts:45:36
+     43| function button(wrapper: ReturnType<typeof mount>, label: string) {
+     44|   const found = wrapper.findAll('button').find((b) => b.text() === lab…
+     45|   expect(found, `button ${label}`).toBeDefined()
+       |                                    ^
+     46|   return found!
+     47| }
+ ❯ src/lib/__tests__/knowledge.spec.ts:245:11
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/16]⎯
+
+ FAIL  src/lib/__tests__/knowledge.spec.ts > knowledge request isolation > releases a successful download ObjectURL and uses its safe original filename
+AssertionError: button 下载原文件: expected undefined to be defined
+ ❯ button src/lib/__tests__/knowledge.spec.ts:45:36
+     43| function button(wrapper: ReturnType<typeof mount>, label: string) {
+     44|   const found = wrapper.findAll('button').find((b) => b.text() === lab…
+     45|   expect(found, `button ${label}`).toBeDefined()
+       |                                    ^
+     46|   return found!
+     47| }
+ ❯ src/lib/__tests__/knowledge.spec.ts:268:11
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/16]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  16 failed (16)
+   Start at  23:48:30
+   Duration  1.04s (transform 215ms, setup 0ms, import 365ms, tests 155ms, environment 367ms)
+

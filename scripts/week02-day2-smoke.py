@@ -36,8 +36,30 @@ def main():
     parser.add_argument("--closeout", action="store_true",
                         help="run full W02 suite and ordered Day 7 Alice/Bob/expired-token demo")
     parser.add_argument("--tickets", action="store_true", help="run W03 schema/business/TCP suite (includes W02 closeout)")
+    parser.add_argument("--claims", action="store_true", help="run W04 claim and concurrent PostgreSQL tests (includes W03)")
+    parser.add_argument("--knowledge", action="store_true", help="run W05 knowledge database/filesystem tests with migration 8")
+    parser.add_argument("--web", action="store_true", help="also run W04 real browser demo against this disposable API")
+    parser.add_argument("--web-only", action="store_true", help="repeat browser/process checks without rerunning Go tests")
     parser.add_argument("--ticket-schema-baseline", action="store_true", help="expected failure: W03 schema checks on W02 version 3")
+    parser.add_argument("--skip-go", action="store_true", help="skip Go tests during owned model/browser iteration")
+    parser.add_argument("--rag", action="store_true", help="W06 pgvector schema/index/search/RAG tests")
+    parser.add_argument("--rag-evaluation", action="store_true", help="real local model evaluation on owned fixtures")
+    parser.add_argument("--jobs", action="store_true", help="W07 durable jobs, owned Redis and Worker recovery")
+    parser.add_argument("--db-only", action="store_true", help="run owned schema/Go suite without API/process/browser steps")
     options = parser.parse_args()
+    if options.jobs:
+        options.rag = True
+    if options.rag or options.rag_evaluation:
+        options.rag = True
+        options.knowledge = True
+    if options.knowledge:
+        options.claims = True
+    if options.web_only:
+        options.web = True
+    if options.web:
+        options.claims = True
+    if options.claims:
+        options.tickets = True
     if options.ticket_schema_baseline:
         options.tickets = True
     if options.tickets:
@@ -72,6 +94,18 @@ def main():
                NEXUSDESK_TEST_W02_SCHEMA="1", NO_COLOR="1")
     env.update(JWT_ISSUER="nexusdesk", JWT_AUDIENCE="nexusdesk-api", JWT_TTL_MINUTES="15",
                JWT_SECRET_BASE64=base64.b64encode(secrets.token_bytes(32)).decode("ascii"))
+    env.update(UPLOAD_MAX_FILE_BYTES="5242880", UPLOAD_MAX_REQUEST_BYTES="8388608",
+               TEXT_EXTRACT_MAX_BYTES="1048576", TEXT_EXTRACT_TIMEOUT_SECONDS="10")
+    env.update(RAG_ENABLED="true", OLLAMA_BASE_URL="http://127.0.0.1:11434",
+               EMBEDDING_MODEL="bge-m3:567m", EMBEDDING_DIM="1024", CHAT_MODEL="qwen3.5:35b", RAG_MIN_SCORE="0.40")
+    env.update(ASYNC_ENABLED="true", REDIS_PASSWORD="", REDIS_DB="6", WORKER_CONCURRENCY="2")
+    if options.jobs:
+        with socket.socket() as listener:
+            listener.bind(("127.0.0.1", 0))
+            redis_port = listener.getsockname()[1]
+        env.update(NEXUSDESK_TEST_W07_JOBS="1", REDIS_ADDR="127.0.0.1:" + str(redis_port), NEXUSDESK_REDIS_PORT=str(redis_port))
+    if options.rag:
+        env["NEXUSDESK_TEST_W06_RAG"] = "1"
     if options.registration:
         env["NEXUSDESK_TEST_W02_REGISTER"] = "1"
     if options.login:
@@ -82,12 +116,20 @@ def main():
         env["NEXUSDESK_TEST_W02_MEMBERS"] = "1"
     if options.tickets:
         env["NEXUSDESK_TEST_W03_TICKETS"] = "1"
+    if options.claims:
+        env["NEXUSDESK_TEST_W04_CLAIM"] = "1"
+    if options.knowledge:
+        env["NEXUSDESK_TEST_W05_KNOWLEDGE"] = "1"
     connection_url = ("postgres://" + env["DB_USER"] + ":"
                       + urllib.parse.quote(password, safe="") + "@127.0.0.1:"
                       + str(port) + "/" + env["DB_NAME"] + "?sslmode=disable")
     env.update(GOOSE_DRIVER="postgres", GOOSE_DBSTRING=connection_url)
     compose = ["docker", "compose", "--env-file", "/dev/null", "-p", project,
                "-f", str(ROOT / "deploy/compose.yaml")]
+    if options.rag:
+        compose += ["-f", str(ROOT / "deploy/compose.pgvector.yaml")]
+    if options.jobs:
+        compose += ["-f", str(ROOT / "deploy/compose.redis.yaml")]
 
     def redacted(text):
         return text.replace(env["JWT_SECRET_BASE64"], "[fixture JWT key]").replace(connection_url, "[fixture database URL]").replace(
@@ -118,10 +160,13 @@ def main():
         with tempfile.TemporaryDirectory(prefix="nexusdesk-w02d3-api-", dir="/var/tmp") as directory:
             binary = str(Path(directory) / "api")
             run(["go", "build", "-o", binary, "./cmd/api"])
+            if options.jobs:
+                run(["go", "build", "-o", str(Path(directory) / "worker"), "./cmd/worker"])
             with socket.socket() as listener:
                 listener.bind(("127.0.0.1", 0))
                 api_port = listener.getsockname()[1]
-            process_env = dict(env, HTTP_ADDR="127.0.0.1:" + str(api_port))
+            process_env = dict(env, HTTP_ADDR="127.0.0.1:" + str(api_port),
+                               STORAGE_ROOT=str(Path(directory) / "storage"))
             process = subprocess.Popen([binary], cwd=ROOT, env=process_env,
                                        stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
             fixture_password = "ProcessFixture-Only-LongRegistrationPassword"
@@ -336,10 +381,123 @@ def main():
                             assert protected_request("GET", rollback_path + "/comments")["data"]["items"] == []
                             print("W03 DEMO 6: real event failure rolls back state/version/comment; restored database usable", flush=True)
 
+                if options.rag and (options.rag_evaluation or options.web):
+                    warmup = run([os.sys.executable, str(ROOT / "scripts/week06-model-warmup.py")], timeout=370)
+                    print(redacted(warmup.stdout + warmup.stderr), flush=True)
+                if options.rag_evaluation:
+                    evaluation_env = dict(env, NEXUSDESK_BROWSER_API=base)
+                    evaluation = subprocess.run([os.sys.executable, str(ROOT / "scripts/week06-evaluate.py")],
+                                                cwd=ROOT, env=evaluation_env, capture_output=True, text=True, timeout=600)
+                    print(redacted(evaluation.stdout + evaluation.stderr), flush=True)
+                    if evaluation.returncode:
+                        raise RuntimeError("W06 real model evaluation failed; see safe output")
+                if options.jobs:
+                    jobs_env = dict(process_env, NEXUSDESK_BROWSER_API=base, NEXUSDESK_TEST_COMPOSE_PROJECT=project)
+                    jobs_run = subprocess.run([os.sys.executable, str(ROOT / "scripts/week07-process.py")], cwd=ROOT, env=jobs_env, capture_output=True, text=True, timeout=400)
+                    print(redacted(jobs_run.stdout + jobs_run.stderr), flush=True)
+                    if jobs_run.returncode:
+                        raise RuntimeError("W07 Worker/process acceptance failed; see safe output")
+                if options.web:
+                    node = ROOT / ".local/week04-tools/node_modules/node/bin/node"
+                    if not node.exists():
+                        node = shutil.which("node")
+                    browser_scripts = ["week04-browser.mjs"]
+                    if options.knowledge:
+                        browser_scripts.append("week05-browser.mjs")
+                    if options.rag:
+                        browser_scripts.append("week06-browser.mjs")
+                    if options.jobs:
+                        browser_scripts.append("week07-browser.mjs")
+                    for browser_script in browser_scripts:
+                        browser_env = dict(env, NEXUSDESK_BROWSER_API=base)
+                        if options.jobs:
+                            browser_env.update(STORAGE_ROOT=process_env["STORAGE_ROOT"], NEXUSDESK_TEST_WORKER_BINARY=str(Path(directory) / "worker"))
+                            browser_env["NEXUSDESK_BROWSER_EVIDENCE"] = "week07-" + browser_script.replace(".mjs", "")
+                            browser_env["NEXUSDESK_SAMPLE_MANIFEST"] = "week07-week05-sample-manifest.json"
+                        elif options.rag:
+                            browser_env["NEXUSDESK_BROWSER_EVIDENCE"] = {"week04-browser.mjs": "week06-week04-browser", "week05-browser.mjs": "week06-week05-browser", "week06-browser.mjs": "week06-browser"}[browser_script]
+                            browser_env["NEXUSDESK_SAMPLE_MANIFEST"] = "week06-week05-sample-manifest.json"
+                        elif options.knowledge and browser_script == "week04-browser.mjs":
+                            browser_env["NEXUSDESK_BROWSER_EVIDENCE"] = "week05-week04-browser"
+                        browser = subprocess.Popen([str(node), str(ROOT / "scripts" / browser_script)],
+                                                   cwd=ROOT, env=browser_env, stdout=subprocess.PIPE,
+                                                   stderr=subprocess.PIPE, text=True, start_new_session=True)
+                        try:
+                            stdout, stderr = browser.communicate(timeout=360 if options.rag else 240)
+                            print(redacted(stdout + stderr), flush=True)
+                            if browser.returncode:
+                                raise RuntimeError(browser_script + " failed; see safe browser output")
+                        finally:
+                            # Also close this browser run's Vite descendants on timeout/interruption.
+                            try:
+                                os.killpg(browser.pid, signal.SIGTERM)
+                            except ProcessLookupError:
+                                pass
+                            try:
+                                browser.wait(timeout=5)
+                            except subprocess.TimeoutExpired:
+                                os.killpg(browser.pid, signal.SIGKILL)
+                                browser.wait(timeout=5)
+                if options.rag:
+                    # A second owned API proves model outages do not stop older business routes.
+                    # Never stop the developer's Ollama daemon to simulate failure.
+                    for enabled in ("true", "false"):
+                        with socket.socket() as unavailable:
+                            unavailable.bind(("127.0.0.1", 0))
+                            model_port = unavailable.getsockname()[1]
+                            with socket.socket() as listener:
+                                listener.bind(("127.0.0.1", 0))
+                                outage_port = listener.getsockname()[1]
+                            outage_env = dict(process_env, HTTP_ADDR="127.0.0.1:" + str(outage_port),
+                                              RAG_ENABLED=enabled, OLLAMA_BASE_URL="http://127.0.0.1:" + str(model_port))
+                            outage = subprocess.Popen([binary], cwd=ROOT, env=outage_env,
+                                                      stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                            outage_base = "http://" + outage_env["HTTP_ADDR"]
+                            try:
+                                ready_until = time.monotonic() + 12
+                                while True:
+                                    try:
+                                        with http.open(outage_base + "/healthz", timeout=.3) as response:
+                                            assert response.status == 200
+                                        break
+                                    except urllib.error.URLError:
+                                        if time.monotonic() >= ready_until:
+                                            raise RuntimeError("outage API failed startup")
+                                        time.sleep(.03)
+                                for suffix, body, expected in (("/me", None, 200),
+                                        ("/organizations/" + str(org["id"]) + "/tickets", None, 200),
+                                        ("/organizations/" + str(org["id"]) + "/knowledge/documents", None, 200),
+                                        ("/organizations/" + str(org["id"]) + "/knowledge/search", {"query": "W06_PRIVATE_LOG_SENTINEL", "top_k": 5}, 503)):
+                                    req = urllib.request.Request(outage_base + "/api/v1" + suffix,
+                                            data=json.dumps(body).encode() if body else None,
+                                            headers={"Authorization": "Bearer " + token, "Content-Type": "application/json"})
+                                    try:
+                                        response = http.open(req, timeout=8)
+                                    except urllib.error.HTTPError as failure:
+                                        response = failure
+                                    with response:
+                                        assert response.status == expected
+                                        if expected == 503:
+                                            assert json.load(response)["error"]["code"] == "MODEL_UNAVAILABLE"
+                                outage.send_signal(signal.SIGTERM)
+                                out, err = outage.communicate(timeout=8)
+                                assert outage.returncode == 0
+                                assert "W06_PRIVATE_LOG_SENTINEL" not in out + err and token not in out + err
+                                assert env["JWT_SECRET_BASE64"] not in out + err and password not in out + err
+                                print("PASS model outage RAG_ENABLED=" + enabled + ": API starts, identity/tickets/knowledge200, search503, no query/credential logs", flush=True)
+                            finally:
+                                if outage.poll() is None:
+                                    outage.kill()
+                                    outage.communicate()
                 process.send_signal(signal.SIGTERM)
                 stdout, stderr = process.communicate(timeout=8)
                 assert process.returncode == 0
                 assert password not in stdout + stderr and fixture_password not in stdout + stderr
+                if options.rag:
+                    assert "ORGB-ONLY-SAMPLE-GLASSHARBOR" not in stdout + stderr
+                    assert "数据库连接超时首先检查什么" not in stdout + stderr
+                    for fixture in (ROOT / "requests/testdata/rag-corpus").glob("*.md"):
+                        assert fixture.read_text().strip() not in stdout + stderr
                 assert "$argon2id$" not in stdout + stderr
                 assert env["JWT_SECRET_BASE64"] not in stdout + stderr
                 assert all(token not in stdout + stderr for token in observed_tokens)
@@ -359,7 +517,7 @@ def main():
     try:
         run(compose + ["config", "--quiet"])
         cleanup = True
-        run(compose + ["up", "-d", "--wait", "--wait-timeout", "90", "--pull", "never", "db"])
+        run(compose + ["up", "-d", "--wait", "--wait-timeout", "90", "--pull", "never", "db"] + (["redis"] if options.jobs else []))
         print("PASS isolated PostgreSQL 17 healthy; project=" + project, flush=True)
         migrate("up-to", "1")
         assert version() == "1"
@@ -409,10 +567,52 @@ def main():
             migrate("up-to", "6")
             assert version() == "6"
             print("PASS W03 3 -> 6, repeated Up, reverse Down to 3, Up to 6; old organization retained", flush=True)
-        result = run(["go", "test", "-race", "-count=1", "-v", "./..."], timeout=240)
-        print(redacted(result.stdout + result.stderr), flush=True)
-        print("PASS full race suite including real W1 connection and W02 schema tests", flush=True)
-        if options.registration:
+        if options.knowledge:
+            migrate("up-to", "8")
+            assert version() == "8"
+            assert sql("SELECT to_regclass('public.knowledge_documents'), to_regclass('public.knowledge_document_texts')") == "knowledge_documents|knowledge_document_texts"
+            migrate("up-to", "8")
+            for expected in ("7", "6"):
+                migrate("down")
+                assert version() == expected
+            assert sql("SELECT to_regclass('public.knowledge_documents') IS NULL, to_regclass('public.knowledge_document_texts') IS NULL") == "t|t"
+            assert sql("SELECT count(*) FROM organizations WHERE name='W1 upgrade sentinel'") == "1"
+            migrate("up-to", "8")
+            assert version() == "8"
+            migrate("status")
+            print("PASS W05 6 -> 8, repeated Up, reverse Down to 6, Up to 8; old organization retained", flush=True)
+        if options.rag:
+            assert sql("SELECT default_version FROM pg_available_extensions WHERE name='vector'") == "0.8.7"
+            migrate("up-to", "10")
+            assert version() == "10"
+            assert sql("SELECT extversion FROM pg_extension WHERE extname='vector'") == "0.8.7"
+            migrate("up-to", "10")
+            for expected in ("9", "8"):
+                migrate("down")
+                assert version() == expected
+            assert sql("SELECT to_regclass('public.knowledge_chunks') IS NULL, to_regclass('public.knowledge_document_indexes') IS NULL") == "t|t"
+            assert sql("SELECT count(*) FROM organizations WHERE name='W1 upgrade sentinel'") == "1"
+            migrate("up-to", "10")
+            assert version() == "10"
+            migrate("status")
+            print("PASS W06 pgvector0.8.7, 8 -> 10 repeatedUp, reverseDown8 and restore10; old data retained", flush=True)
+        if options.jobs:
+            migrate("up-to", "11")
+            assert version() == "11"
+            assert sql("SELECT to_regclass('public.knowledge_jobs')") == "knowledge_jobs"
+            migrate("up-to", "11")
+            migrate("down")
+            assert version() == "10"
+            assert sql("SELECT to_regclass('public.knowledge_jobs') IS NULL") == "t"
+            migrate("up-to", "11")
+            assert version() == "11"
+            assert sql("SELECT count(*) FROM organizations WHERE name='W1 upgrade sentinel'") == "1"
+            print("PASS W07 10 -> 11, repeated Up, reverse Down10/Up11, old data retained; owned Redis healthy", flush=True)
+        if not options.web_only and not options.skip_go:
+            result = run(["go", "test", "-race", "-count=1", "-v", "./..."], timeout=420 if options.jobs else 240)
+            print(redacted(result.stdout + result.stderr), flush=True)
+            print("PASS full race suite including enabled real PostgreSQL gates", flush=True)
+        if options.registration and not options.db_only:
             registration_process_smoke()
         return 0
     finally:
@@ -424,6 +624,13 @@ def main():
                 if label.stdout.strip() != project:
                     raise RuntimeError("refusing to remove a volume owned by another project")
                 run(["docker", "volume", "rm", volume])
+            if options.jobs:
+                queue_volume = project + "_queue-data"
+                owner = run(["docker", "volume", "inspect", "--format", '{{index .Labels "com.docker.compose.project"}}', queue_volume], check=False)
+                if owner.returncode == 0:
+                    if owner.stdout.strip() != project:
+                        raise RuntimeError("refusing another project's Redis volume")
+                    run(["docker", "volume", "rm", queue_volume])
             print("CLEANUP only this run's test containers and labeled volume", flush=True)
 
 

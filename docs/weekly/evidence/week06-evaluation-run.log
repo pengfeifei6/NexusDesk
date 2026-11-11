@@ -1,0 +1,136 @@
+PASS isolated PostgreSQL 17 healthy; project=nexusdesk-w02d2-ac485ed9ea3d
+2026/11/11 01:24:12 OK   00001_create_organizations.sql (3.03ms)
+2026/11/11 01:24:12 goose: successfully migrated database to version: 1
+2026/11/11 01:24:12 OK   00002_create_users.sql (6.08ms)
+2026/11/11 01:24:12 OK   00003_create_organization_members.sql (4.68ms)
+2026/11/11 01:24:12 goose: successfully migrated database to version: 3
+2026/11/11 01:24:12     Applied At                  Migration
+2026/11/11 01:24:12     =======================================
+2026/11/11 01:24:12     Tue Nov 10 17:24:12 2026 -- 00001_create_organizations.sql
+2026/11/11 01:24:12     Tue Nov 10 17:24:12 2026 -- 00002_create_users.sql
+2026/11/11 01:24:12     Tue Nov 10 17:24:12 2026 -- 00003_create_organization_members.sql
+2026/11/11 01:24:12     Pending                  -- 00004_create_tickets.sql
+2026/11/11 01:24:12     Pending                  -- 00005_create_ticket_comments.sql
+2026/11/11 01:24:12     Pending                  -- 00006_create_ticket_events.sql
+2026/11/11 01:24:12     Pending                  -- 00007_create_knowledge_documents.sql
+2026/11/11 01:24:12     Pending                  -- 00008_create_knowledge_document_texts.sql
+2026/11/11 01:24:12     Pending                  -- 00009_enable_pgvector_and_create_chunks.sql
+2026/11/11 01:24:12     Pending                  -- 00010_create_knowledge_document_indexes.sql
+2026/11/11 01:24:13 goose: no migrations to run. current version: 3
+PASS W1 to W02 upgrade preserves existing organization; repeated Up is stable
+2026/11/11 01:24:13 OK   00003_create_organization_members.sql (8.07ms)
+2026/11/11 01:24:13 OK   00002_create_users.sql (4.22ms)
+2026/11/11 01:24:14 OK   00002_create_users.sql (7.76ms)
+2026/11/11 01:24:14 OK   00003_create_organization_members.sql (4.7ms)
+2026/11/11 01:24:14 goose: successfully migrated database to version: 3
+PASS reverse Down 3 to 2 to 1, then Up to 3; W1 data retained
+2026/11/11 01:24:14 OK   00004_create_tickets.sql (10.01ms)
+2026/11/11 01:24:14 OK   00005_create_ticket_comments.sql (4.6ms)
+2026/11/11 01:24:14 OK   00006_create_ticket_events.sql (4.94ms)
+2026/11/11 01:24:14 goose: successfully migrated database to version: 6
+2026/11/11 01:24:14     Applied At                  Migration
+2026/11/11 01:24:14     =======================================
+2026/11/11 01:24:14     Tue Nov 10 17:24:12 2026 -- 00001_create_organizations.sql
+2026/11/11 01:24:14     Tue Nov 10 17:24:14 2026 -- 00002_create_users.sql
+2026/11/11 01:24:14     Tue Nov 10 17:24:14 2026 -- 00003_create_organization_members.sql
+2026/11/11 01:24:14     Tue Nov 10 17:24:14 2026 -- 00004_create_tickets.sql
+2026/11/11 01:24:14     Tue Nov 10 17:24:14 2026 -- 00005_create_ticket_comments.sql
+2026/11/11 01:24:14     Tue Nov 10 17:24:14 2026 -- 00006_create_ticket_events.sql
+2026/11/11 01:24:14     Pending                  -- 00007_create_knowledge_documents.sql
+2026/11/11 01:24:14     Pending                  -- 00008_create_knowledge_document_texts.sql
+2026/11/11 01:24:14     Pending                  -- 00009_enable_pgvector_and_create_chunks.sql
+2026/11/11 01:24:14     Pending                  -- 00010_create_knowledge_document_indexes.sql
+2026/11/11 01:24:15 goose: no migrations to run. current version: 6
+2026/11/11 01:24:15 OK   00006_create_ticket_events.sql (9.47ms)
+2026/11/11 01:24:15 OK   00005_create_ticket_comments.sql (9.15ms)
+2026/11/11 01:24:15 OK   00004_create_tickets.sql (10.47ms)
+2026/11/11 01:24:15 OK   00004_create_tickets.sql (10.85ms)
+2026/11/11 01:24:15 OK   00005_create_ticket_comments.sql (3.4ms)
+2026/11/11 01:24:15 OK   00006_create_ticket_events.sql (5.75ms)
+2026/11/11 01:24:15 goose: successfully migrated database to version: 6
+PASS W03 3 -> 6, repeated Up, reverse Down to 3, Up to 6; old organization retained
+2026/11/11 01:24:16 OK   00007_create_knowledge_documents.sql (13.96ms)
+2026/11/11 01:24:16 OK   00008_create_knowledge_document_texts.sql (5.91ms)
+2026/11/11 01:24:16 goose: successfully migrated database to version: 8
+2026/11/11 01:24:16 goose: no migrations to run. current version: 8
+2026/11/11 01:24:16 OK   00008_create_knowledge_document_texts.sql (8.59ms)
+2026/11/11 01:24:16 OK   00007_create_knowledge_documents.sql (8.99ms)
+2026/11/11 01:24:17 OK   00007_create_knowledge_documents.sql (16.91ms)
+2026/11/11 01:24:17 OK   00008_create_knowledge_document_texts.sql (5.99ms)
+2026/11/11 01:24:17 goose: successfully migrated database to version: 8
+2026/11/11 01:24:17     Applied At                  Migration
+2026/11/11 01:24:17     =======================================
+2026/11/11 01:24:17     Tue Nov 10 17:24:12 2026 -- 00001_create_organizations.sql
+2026/11/11 01:24:17     Tue Nov 10 17:24:14 2026 -- 00002_create_users.sql
+2026/11/11 01:24:17     Tue Nov 10 17:24:14 2026 -- 00003_create_organization_members.sql
+2026/11/11 01:24:17     Tue Nov 10 17:24:15 2026 -- 00004_create_tickets.sql
+2026/11/11 01:24:17     Tue Nov 10 17:24:15 2026 -- 00005_create_ticket_comments.sql
+2026/11/11 01:24:17     Tue Nov 10 17:24:15 2026 -- 00006_create_ticket_events.sql
+2026/11/11 01:24:17     Tue Nov 10 17:24:17 2026 -- 00007_create_knowledge_documents.sql
+2026/11/11 01:24:17     Tue Nov 10 17:24:17 2026 -- 00008_create_knowledge_document_texts.sql
+2026/11/11 01:24:17     Pending                  -- 00009_enable_pgvector_and_create_chunks.sql
+2026/11/11 01:24:17     Pending                  -- 00010_create_knowledge_document_indexes.sql
+PASS W05 6 -> 8, repeated Up, reverse Down to 6, Up to 8; old organization retained
+2026/11/11 01:24:17 OK   00009_enable_pgvector_and_create_chunks.sql (36.26ms)
+2026/11/11 01:24:18 OK   00010_create_knowledge_document_indexes.sql (6.25ms)
+2026/11/11 01:24:18 goose: successfully migrated database to version: 10
+2026/11/11 01:24:18 goose: no migrations to run. current version: 10
+2026/11/11 01:24:18 OK   00010_create_knowledge_document_indexes.sql (8.28ms)
+2026/11/11 01:24:18 OK   00009_enable_pgvector_and_create_chunks.sql (9.88ms)
+2026/11/11 01:24:19 OK   00009_enable_pgvector_and_create_chunks.sql (15.5ms)
+2026/11/11 01:24:19 OK   00010_create_knowledge_document_indexes.sql (8.6ms)
+2026/11/11 01:24:19 goose: successfully migrated database to version: 10
+2026/11/11 01:24:19     Applied At                  Migration
+2026/11/11 01:24:19     =======================================
+2026/11/11 01:24:19     Tue Nov 10 17:24:12 2026 -- 00001_create_organizations.sql
+2026/11/11 01:24:19     Tue Nov 10 17:24:14 2026 -- 00002_create_users.sql
+2026/11/11 01:24:19     Tue Nov 10 17:24:14 2026 -- 00003_create_organization_members.sql
+2026/11/11 01:24:19     Tue Nov 10 17:24:15 2026 -- 00004_create_tickets.sql
+2026/11/11 01:24:19     Tue Nov 10 17:24:15 2026 -- 00005_create_ticket_comments.sql
+2026/11/11 01:24:19     Tue Nov 10 17:24:15 2026 -- 00006_create_ticket_events.sql
+2026/11/11 01:24:19     Tue Nov 10 17:24:17 2026 -- 00007_create_knowledge_documents.sql
+2026/11/11 01:24:19     Tue Nov 10 17:24:17 2026 -- 00008_create_knowledge_document_texts.sql
+2026/11/11 01:24:19     Tue Nov 10 17:24:19 2026 -- 00009_enable_pgvector_and_create_chunks.sql
+2026/11/11 01:24:19     Tue Nov 10 17:24:19 2026 -- 00010_create_knowledge_document_indexes.sql
+PASS W06 pgvector0.8.7, 8 -> 10 repeatedUp, reverseDown8 and restore10; old data retained
+PASS real API login 200, independently verified HS256/claims, uniform credential 401 and empty-password 400; Token kept in memory only
+DEMO step 1: Alice registered 201 and logged in 200; identity and HS256 claims verified
+DEMO step 2: Alice created organization A 201; database creator relation is admin/active
+PASS real TCP /me, empty list, atomic organization/admin creation, own list, forged fields 400 and protected routes 401
+DEMO step 3: Bob registered 201 and logged in 200
+DEMO step 4: Bob created organization B 201; database creator relation is admin/active
+DEMO step 5: Bob reading A members returned 404; no membership in A exists
+DEMO step 6: Alice added Bob to A 201; database relation is member/active
+DEMO step 7: Bob read A members 200 but adding a member returned 403
+DEMO step 8: Expired HS256 credential rejected with 401 on /me and A members; no production clock change
+PASS real TCP Alice/Bob member read/add, cross-org 404, member 403, admin 201, duplicate 409, disabled old-token 404 and other-org access retained
+W03 DEMO 1: create/detail/initial event and scoped filtered list
+W03 DEMO 2: admin update and assignment, two audited changes
+W03 DEMO 3: Bob starts/comments/resolves, admin closes, CLOSED reopen rejected
+W03 DEMO 4: organization B visitor cannot read/write A ticket or children
+W03 DEMO 5: soft delete 204, ordinary parent/children hidden, database audit retained
+W03 DEMO 6: real event failure rolls back state/version/comment; restored database usable
+PASS real embedding/index/reuse org-a-db-playbook.md
+PASS real embedding/index/reuse org-a-incident-process.md
+PASS real embedding/index/reuse org-a-release-checklist.md
+PASS real embedding/index/reuse org-a-upload-policy.md
+PASS real embedding/index/reuse org-b-private-guide.md
+MEASURE F01 retrieved=5 evidence_hits=1/1
+Traceback (most recent call last):
+  File "/media/yjz/pzp/Go/projects/NexusDesk/scripts/week06-evaluate.py", line 138, in <module>
+    main()
+  File "/media/yjz/pzp/Go/projects/NexusDesk/scripts/week06-evaluate.py", line 109, in main
+    answer = request(endpoint + "/ask", "POST", {"query": label["query"], "top_k": 5}, tokens["A"])
+  File "/media/yjz/pzp/Go/projects/NexusDesk/scripts/week06-evaluate.py", line 41, in request
+    raise RuntimeError(f"fixture request {method} {path}: HTTP {response.status}, {code}")
+RuntimeError: fixture request POST /organizations/4/knowledge/ask: HTTP 504, MODEL_TIMEOUT
+
+CLEANUP only this run's test containers and labeled volume
+Traceback (most recent call last):
+  File "scripts/week02-day2-smoke.py", line 534, in <module>
+    raise SystemExit(main())
+  File "scripts/week02-day2-smoke.py", line 519, in main
+    registration_process_smoke()
+  File "scripts/week02-day2-smoke.py", line 376, in registration_process_smoke
+    raise RuntimeError("W06 real model evaluation failed; see safe output")
+RuntimeError: W06 real model evaluation failed; see safe output

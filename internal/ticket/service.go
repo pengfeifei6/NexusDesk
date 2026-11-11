@@ -25,6 +25,7 @@ type Transaction interface {
 	GetTicket(context.Context, int64, int64) (Ticket, error)
 	CreateTicket(context.Context, Ticket) (Ticket, error)
 	UpdateTicket(context.Context, Ticket, int64, Status) (Ticket, error)
+	ClaimTicket(context.Context, int64, int64, int64, int64) (Ticket, error)
 	InsertComment(context.Context, Comment) (Comment, error)
 	InsertEvent(context.Context, Event) error
 	Commit(context.Context) error
@@ -171,6 +172,37 @@ func checkVersion(t Ticket, expected int64) error {
 	}
 	return nil
 }
+
+// Claim relies on a single conditional UPDATE, rather than a read followed by
+// an unconditional assignment. Authorization and the audit share its transaction.
+func (s *Service) Claim(ctx context.Context, actor, org, id, expected int64) (Ticket, error) {
+	var result Ticket
+	err := s.write(ctx, actor, org, func(ctx context.Context, tx Transaction, _ organization.Membership) error {
+		if id <= 0 || expected < 0 {
+			return ErrInvalidRequest
+		}
+		var err error
+		result, err = tx.ClaimTicket(ctx, org, id, actor, expected)
+		if errors.Is(err, ErrConflict) {
+			// Only disclose a conflict when the object is visible in this org.
+			if _, lookupErr := tx.GetTicket(ctx, org, id); lookupErr != nil {
+				return lookupErr
+			}
+			return ErrClaimConflict
+		}
+		if err != nil {
+			return err
+		}
+		return audit(ctx, tx, result, actor, "TICKET_ASSIGNED",
+			map[string]any{"assignee_id": nil, "version": expected},
+			map[string]any{"assignee_id": result.AssigneeID, "version": result.Version})
+	})
+	if err != nil {
+		return Ticket{}, err
+	}
+	return result, nil
+}
+
 func (s *Service) Patch(ctx context.Context, actor, org, id int64, in PatchInput) (Ticket, error) {
 	var result Ticket
 	err := s.write(ctx, actor, org, func(ctx context.Context, tx Transaction, m organization.Membership) error {

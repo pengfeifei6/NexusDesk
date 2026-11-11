@@ -1,0 +1,4 @@
+ok  	github.com/pengfeifei6/NexusDesk/cmd/api	0.013s
+?   	github.com/pengfeifei6/NexusDesk/cmd/worker	[no test files]
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/config	(cached)
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/taskqueue	(cached)

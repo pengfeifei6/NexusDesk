@@ -1,0 +1,178 @@
+PASS isolated PostgreSQL 17 healthy; project=nexusdesk-w02d2-da9ba4994095
+2026/11/11 09:31:27 OK   00001_create_organizations.sql (3.84ms)
+2026/11/11 09:31:27 goose: successfully migrated database to version: 1
+2026/11/11 09:31:27 OK   00002_create_users.sql (4.81ms)
+2026/11/11 09:31:27 OK   00003_create_organization_members.sql (4.18ms)
+2026/11/11 09:31:27 goose: successfully migrated database to version: 3
+2026/11/11 09:31:27     Applied At                  Migration
+2026/11/11 09:31:27     =======================================
+2026/11/11 09:31:27     Wed Nov 11 01:31:27 2026 -- 00001_create_organizations.sql
+2026/11/11 09:31:27     Wed Nov 11 01:31:27 2026 -- 00002_create_users.sql
+2026/11/11 09:31:27     Wed Nov 11 01:31:27 2026 -- 00003_create_organization_members.sql
+2026/11/11 09:31:27     Pending                  -- 00004_create_tickets.sql
+2026/11/11 09:31:27     Pending                  -- 00005_create_ticket_comments.sql
+2026/11/11 09:31:27     Pending                  -- 00006_create_ticket_events.sql
+2026/11/11 09:31:27     Pending                  -- 00007_create_knowledge_documents.sql
+2026/11/11 09:31:27     Pending                  -- 00008_create_knowledge_document_texts.sql
+2026/11/11 09:31:27     Pending                  -- 00009_enable_pgvector_and_create_chunks.sql
+2026/11/11 09:31:27     Pending                  -- 00010_create_knowledge_document_indexes.sql
+2026/11/11 09:31:27     Pending                  -- 00011_create_knowledge_jobs.sql
+2026/11/11 09:31:27 goose: no migrations to run. current version: 3
+PASS W1 to W02 upgrade preserves existing organization; repeated Up is stable
+2026/11/11 09:31:27 OK   00003_create_organization_members.sql (3.8ms)
+2026/11/11 09:31:28 OK   00002_create_users.sql (6.59ms)
+2026/11/11 09:31:28 OK   00002_create_users.sql (8.58ms)
+2026/11/11 09:31:28 OK   00003_create_organization_members.sql (3.82ms)
+2026/11/11 09:31:28 goose: successfully migrated database to version: 3
+PASS reverse Down 3 to 2 to 1, then Up to 3; W1 data retained
+2026/11/11 09:31:29 OK   00004_create_tickets.sql (8.09ms)
+2026/11/11 09:31:29 OK   00005_create_ticket_comments.sql (4.37ms)
+2026/11/11 09:31:29 OK   00006_create_ticket_events.sql (5.05ms)
+2026/11/11 09:31:29 goose: successfully migrated database to version: 6
+2026/11/11 09:31:29     Applied At                  Migration
+2026/11/11 09:31:29     =======================================
+2026/11/11 09:31:29     Wed Nov 11 01:31:27 2026 -- 00001_create_organizations.sql
+2026/11/11 09:31:29     Wed Nov 11 01:31:28 2026 -- 00002_create_users.sql
+2026/11/11 09:31:29     Wed Nov 11 01:31:28 2026 -- 00003_create_organization_members.sql
+2026/11/11 09:31:29     Wed Nov 11 01:31:29 2026 -- 00004_create_tickets.sql
+2026/11/11 09:31:29     Wed Nov 11 01:31:29 2026 -- 00005_create_ticket_comments.sql
+2026/11/11 09:31:29     Wed Nov 11 01:31:29 2026 -- 00006_create_ticket_events.sql
+2026/11/11 09:31:29     Pending                  -- 00007_create_knowledge_documents.sql
+2026/11/11 09:31:29     Pending                  -- 00008_create_knowledge_document_texts.sql
+2026/11/11 09:31:29     Pending                  -- 00009_enable_pgvector_and_create_chunks.sql
+2026/11/11 09:31:29     Pending                  -- 00010_create_knowledge_document_indexes.sql
+2026/11/11 09:31:29     Pending                  -- 00011_create_knowledge_jobs.sql
+2026/11/11 09:31:29 goose: no migrations to run. current version: 6
+2026/11/11 09:31:29 OK   00006_create_ticket_events.sql (7.4ms)
+2026/11/11 09:31:29 OK   00005_create_ticket_comments.sql (6.35ms)
+2026/11/11 09:31:29 OK   00004_create_tickets.sql (8.08ms)
+2026/11/11 09:31:30 OK   00004_create_tickets.sql (11.64ms)
+2026/11/11 09:31:30 OK   00005_create_ticket_comments.sql (4.83ms)
+2026/11/11 09:31:30 OK   00006_create_ticket_events.sql (5.29ms)
+2026/11/11 09:31:30 goose: successfully migrated database to version: 6
+PASS W03 3 -> 6, repeated Up, reverse Down to 3, Up to 6; old organization retained
+2026/11/11 09:31:30 OK   00007_create_knowledge_documents.sql (11.69ms)
+2026/11/11 09:31:30 OK   00008_create_knowledge_document_texts.sql (2.86ms)
+2026/11/11 09:31:30 goose: successfully migrated database to version: 8
+2026/11/11 09:31:30 goose: no migrations to run. current version: 8
+2026/11/11 09:31:30 OK   00008_create_knowledge_document_texts.sql (5.72ms)
+2026/11/11 09:31:30 OK   00007_create_knowledge_documents.sql (4.72ms)
+2026/11/11 09:31:31 OK   00007_create_knowledge_documents.sql (9.55ms)
+2026/11/11 09:31:31 OK   00008_create_knowledge_document_texts.sql (2.54ms)
+2026/11/11 09:31:31 goose: successfully migrated database to version: 8
+2026/11/11 09:31:31     Applied At                  Migration
+2026/11/11 09:31:31     =======================================
+2026/11/11 09:31:31     Wed Nov 11 01:31:27 2026 -- 00001_create_organizations.sql
+2026/11/11 09:31:31     Wed Nov 11 01:31:28 2026 -- 00002_create_users.sql
+2026/11/11 09:31:31     Wed Nov 11 01:31:28 2026 -- 00003_create_organization_members.sql
+2026/11/11 09:31:31     Wed Nov 11 01:31:30 2026 -- 00004_create_tickets.sql
+2026/11/11 09:31:31     Wed Nov 11 01:31:30 2026 -- 00005_create_ticket_comments.sql
+2026/11/11 09:31:31     Wed Nov 11 01:31:30 2026 -- 00006_create_ticket_events.sql
+2026/11/11 09:31:31     Wed Nov 11 01:31:31 2026 -- 00007_create_knowledge_documents.sql
+2026/11/11 09:31:31     Wed Nov 11 01:31:31 2026 -- 00008_create_knowledge_document_texts.sql
+2026/11/11 09:31:31     Pending                  -- 00009_enable_pgvector_and_create_chunks.sql
+2026/11/11 09:31:31     Pending                  -- 00010_create_knowledge_document_indexes.sql
+2026/11/11 09:31:31     Pending                  -- 00011_create_knowledge_jobs.sql
+PASS W05 6 -> 8, repeated Up, reverse Down to 6, Up to 8; old organization retained
+2026/11/11 09:31:31 OK   00009_enable_pgvector_and_create_chunks.sql (32.85ms)
+2026/11/11 09:31:31 OK   00010_create_knowledge_document_indexes.sql (5.83ms)
+2026/11/11 09:31:31 goose: successfully migrated database to version: 10
+2026/11/11 09:31:32 goose: no migrations to run. current version: 10
+2026/11/11 09:31:32 OK   00010_create_knowledge_document_indexes.sql (6.27ms)
+2026/11/11 09:31:32 OK   00009_enable_pgvector_and_create_chunks.sql (8.1ms)
+2026/11/11 09:31:33 OK   00009_enable_pgvector_and_create_chunks.sql (9.51ms)
+2026/11/11 09:31:33 OK   00010_create_knowledge_document_indexes.sql (4.58ms)
+2026/11/11 09:31:33 goose: successfully migrated database to version: 10
+2026/11/11 09:31:33     Applied At                  Migration
+2026/11/11 09:31:33     =======================================
+2026/11/11 09:31:33     Wed Nov 11 01:31:27 2026 -- 00001_create_organizations.sql
+2026/11/11 09:31:33     Wed Nov 11 01:31:28 2026 -- 00002_create_users.sql
+2026/11/11 09:31:33     Wed Nov 11 01:31:28 2026 -- 00003_create_organization_members.sql
+2026/11/11 09:31:33     Wed Nov 11 01:31:30 2026 -- 00004_create_tickets.sql
+2026/11/11 09:31:33     Wed Nov 11 01:31:30 2026 -- 00005_create_ticket_comments.sql
+2026/11/11 09:31:33     Wed Nov 11 01:31:30 2026 -- 00006_create_ticket_events.sql
+2026/11/11 09:31:33     Wed Nov 11 01:31:31 2026 -- 00007_create_knowledge_documents.sql
+2026/11/11 09:31:33     Wed Nov 11 01:31:31 2026 -- 00008_create_knowledge_document_texts.sql
+2026/11/11 09:31:33     Wed Nov 11 01:31:33 2026 -- 00009_enable_pgvector_and_create_chunks.sql
+2026/11/11 09:31:33     Wed Nov 11 01:31:33 2026 -- 00010_create_knowledge_document_indexes.sql
+2026/11/11 09:31:33     Pending                  -- 00011_create_knowledge_jobs.sql
+PASS W06 pgvector0.8.7, 8 -> 10 repeatedUp, reverseDown8 and restore10; old data retained
+2026/11/11 09:31:33 OK   00011_create_knowledge_jobs.sql (16.9ms)
+2026/11/11 09:31:33 goose: successfully migrated database to version: 11
+2026/11/11 09:31:33 goose: no migrations to run. current version: 11
+2026/11/11 09:31:33 OK   00011_create_knowledge_jobs.sql (9.31ms)
+2026/11/11 09:31:34 OK   00011_create_knowledge_jobs.sql (13.86ms)
+2026/11/11 09:31:34 goose: successfully migrated database to version: 11
+PASS W07 10 -> 11, repeated Up, reverse Down10/Up11, old data retained; owned Redis healthy
+PASS real API login 200, independently verified HS256/claims, uniform credential 401 and empty-password 400; Token kept in memory only
+DEMO step 1: Alice registered 201 and logged in 200; identity and HS256 claims verified
+DEMO step 2: Alice created organization A 201; database creator relation is admin/active
+PASS real TCP /me, empty list, atomic organization/admin creation, own list, forged fields 400 and protected routes 401
+DEMO step 3: Bob registered 201 and logged in 200
+DEMO step 4: Bob created organization B 201; database creator relation is admin/active
+DEMO step 5: Bob reading A members returned 404; no membership in A exists
+DEMO step 6: Alice added Bob to A 201; database relation is member/active
+DEMO step 7: Bob read A members 200 but adding a member returned 403
+DEMO step 8: Expired HS256 credential rejected with 401 on /me and A members; no production clock change
+PASS real TCP Alice/Bob member read/add, cross-org 404, member 403, admin 201, duplicate 409, disabled old-token 404 and other-org access retained
+W03 DEMO 1: create/detail/initial event and scoped filtered list
+W03 DEMO 2: admin update and assignment, two audited changes
+W03 DEMO 3: Bob starts/comments/resolves, admin closes, CLOSED reopen rejected
+W03 DEMO 4: organization B visitor cannot read/write A ticket or children
+W03 DEMO 5: soft delete 204, ordinary parent/children hidden, database audit retained
+W03 DEMO 6: real event failure rolls back state/version/comment; restored database usable
+{"model": "bge-m3:567m", "elapsed_seconds": 0.206, "load_duration_ns": 149719244, "prompt_eval_count": 12, "eval_count": null, "warmup_excluded_from_retrieval_metrics": true}
+{"model": "qwen3.5:35b", "elapsed_seconds": 0.438, "load_duration_ns": 274637689, "prompt_eval_count": 20, "eval_count": 2, "warmup_excluded_from_retrieval_metrics": true}
+
+PASS W07 process accepted_without_worker_then_independent_no_jwt_worker
+PASS W07 process sigkill_during_embedding_restart
+PASS W07 process sigterm_bounded_then_restart
+PASS W07 process transient_model_real_5s_30s_backoff
+PASS W07 process redis_outage_api_202_business_alive_restart
+PASS W07 process sigkill_after_ready_attempt3_reconciles_without_fourth
+PASS W07 process worker_logs_no_credentials_or_document_text
+
+PASS review-recovery-session: initial organization network failure stays visible; Retry fetches real organizations; authenticated Back to login is guarded
+PASS filter-pagination: real 21-row data: page2/previous work; priority and status filters use backend results and reset to page1
+PASS C20: Alice browser login → /me → select A → real list → POST ticket 201 → detail OPEN
+PASS browser-concurrency-409: Bob/Charlie each sent version 0; one 200 and one 409; loser refreshed, final OPEN/version1/one matching assignment event
+PASS transition-comment-events: winner starts IN_PROGRESS, posts real comment, reads actual audit events
+PASS C18-network: offline fetch shows network error; recovery retries explicitly, no silent write retry
+PASS C19: refresh redirects login, no protected requests with old token, local/session storage and cookies empty
+PASS cross-organization: David direct A URL and B-org/A-ticket URL both 404; forged claim also 404; no A title rendered
+PASS C17: switch A→B clears A rows immediately; delayed prior request cannot replace B content
+PASS C18-401: real backend 401 clears session and returns login
+PASS G1-artifacts: real browser screenshots and g1-demo.webm captured; no password/token/connection string in rendered pages
+
+PASS unicode-onboarding: supplementary-plane input follows API code-point limits; short password blocked, valid registration/login and 100-character organization succeed
+PASS onboarding: real UI register201, login200, first organization201/admin, automatic ticket entry and ticket creation
+PASS upload: binary masquerading as Markdown rejected415; valid real multipart saved201 with SHA256 and UPLOADED metadata
+PASS process-preview-download: real process200/READY, normalized source preview escaped as text, original download hash matches
+PASS samples: 10 original TXT/MD files uploaded and processed READY in two isolated organization scopes; actual manifest saved
+PASS filter-pagination: real page2 and READY filter work and reset page, with server-side metadata only
+PASS failure-status: whitespace yields422/FAILED with retry; PDF stores/downloads but extraction honestly returns422 PDF_UNSUPPORTED
+PASS authorization: same-org member reads but cannot delete uploader document; other organization gets404 and no preview
+PASS switch-delete: organization switch shows correct scope; uploader/admin deletes204; subsequent preview/download404
+PASS memory-session: new knowledge flows retain memory-only credentials; refresh requires login
+
+PASS index-ui: READY extracted text starts ABSENT; real BGE index becomes READY with chunk count
+PASS index-reuse: repeat click reuses same version/timestamp/count
+PASS search-ui: real query embedding + exact pgvector search returns scoped source and timing
+PASS ask-ui: real Qwen answer contains checked configuration names and valid source; source opens authenticated document
+PASS scope-no-evidence: organization switch retains search view, clears old sources, empty organization refuses without invented evidence
+PASS four-route-isolation: other-organization user receives404 on index read/write, search and ask
+PASS deleted-index-hidden: soft-deleted document cannot be retrieved even when retained chunk rows exist
+PASS memory-session: RAG flows persist neither credentials nor protected sources in browser storage
+
+PASS upload-202-pending: Upload201 followed by Submit202 retains document and shows waiting, no fabricated completion
+PASS worker-real-bge: Independent Worker without JWT completes extraction and real BGE1024 indexing; poll refreshes document and index
+PASS dedup-terminal: Repeated submit returns identical successful job and unchanged index version/count
+PASS async-search-ask: Real BGE search and Qwen answer cite the document indexed by the independent Worker
+PASS permanent-retry-ui: Unsupported PDF fails without automatic retry; manual retry increments run version and remains explicit failure
+PASS cancel-retry: Pending cancel is terminal; retry creates new run and worker completes it
+PASS scope-session-mobile: Organization switch clears old task; no browser persistence; mobile page has no horizontal overflow
+
+PASS model outage RAG_ENABLED=true: API starts, identity/tickets/knowledge200, search503, no query/credential logs
+PASS model outage RAG_ENABLED=false: API starts, identity/tickets/knowledge200, search503, no query/credential logs
+PASS real API registration 201, duplicate 409, forged role 400, no organization side effects, clean logs and SIGTERM
+CLEANUP only this run's test containers and labeled volume

@@ -1,0 +1,7 @@
+src/components/AsyncJobPanel.vue 207ms
+src/composables/knowledge.ts 54ms
+src/views/KnowledgeDetailView.vue 38ms
+src/views/KnowledgeListView.vue 28ms (unchanged)
+src/lib/client.ts 34ms
+src/lib/types.ts 10ms (unchanged)
+src/lib/__tests__/jobs.spec.ts 39ms

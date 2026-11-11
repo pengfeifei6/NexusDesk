@@ -1,0 +1,41 @@
+{
+  "generated_at": "2026-11-11T01:34:24.358Z",
+  "browser": "143.0.7499.4",
+  "real_api": true,
+  "real_models": true,
+  "mock_responses": false,
+  "results": [
+    {
+      "id": "index-ui",
+      "detail": "READY extracted text starts ABSENT; real BGE index becomes READY with chunk count"
+    },
+    {
+      "id": "index-reuse",
+      "detail": "repeat click reuses same version/timestamp/count"
+    },
+    {
+      "id": "search-ui",
+      "detail": "real query embedding + exact pgvector search returns scoped source and timing"
+    },
+    {
+      "id": "ask-ui",
+      "detail": "real Qwen answer contains checked configuration names and valid source; source opens authenticated document"
+    },
+    {
+      "id": "scope-no-evidence",
+      "detail": "organization switch retains search view, clears old sources, empty organization refuses without invented evidence"
+    },
+    {
+      "id": "four-route-isolation",
+      "detail": "other-organization user receives404 on index read/write, search and ask"
+    },
+    {
+      "id": "deleted-index-hidden",
+      "detail": "soft-deleted document cannot be retrieved even when retained chunk rows exist"
+    },
+    {
+      "id": "memory-session",
+      "detail": "RAG flows persist neither credentials nor protected sources in browser storage"
+    }
+  ]
+}
