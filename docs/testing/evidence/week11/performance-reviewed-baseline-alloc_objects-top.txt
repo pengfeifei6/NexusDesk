@@ -1,0 +1,48 @@
+File: api
+Build ID: d8479883d58b6690f6c78442abbdae22cf493193
+Type: alloc_objects
+Time: 2026-11-11 19:26:53 CST
+Showing nodes accounting for 54443664, 94.92% of 57355841 total
+Dropped 234 nodes (cum <= 286779)
+Showing top 40 nodes out of 61
+      flat  flat%   sum%        cum   cum%
+  32080359 55.93% 55.93%   32080359 55.93%  reflect.unsafe_New
+  13444059 23.44% 79.37%   16284017 28.39%  github.com/pengfeifei6/NexusDesk/internal/ticket.publicTicket
+   3294737  5.74% 85.12%    3400326  5.93%  encoding/json.(*decodeState).literalStore
+   2839958  4.95% 90.07%    2839958  4.95%  time.Time.Format
+   1422301  2.48% 92.55%   33502066 58.41%  encoding/json.mapEncoder.encode
+    210660  0.37% 92.91%     356629  0.62%  context.WithDeadlineCause
+    150740  0.26% 93.18%     292737  0.51%  github.com/jackc/pgx/v5.(*baseRows).Scan
+    149801  0.26% 93.44%     318697  0.56%  context.AfterFunc
+    138370  0.24% 93.68%    4142807  7.22%  encoding/json.Unmarshal
+    135759  0.24% 93.92%     454456  0.79%  github.com/jackc/pgx/v5/pgconn/ctxwatch.(*ContextWatcher).Watch
+    112954   0.2% 94.11%   55163753 96.18%  github.com/pengfeifei6/NexusDesk/internal/ticket.(*Handler).list
+     87383  0.15% 94.27%    3821459  6.66%  encoding/json.(*decodeState).object
+     85200  0.15% 94.41%     815501  1.42%  github.com/pengfeifei6/NexusDesk/internal/organization.FindActiveMembershipWith
+     65537  0.11% 94.53%     343335   0.6%  github.com/pengfeifei6/NexusDesk/internal/platform/cache.(*Cache).Revision
+     61171  0.11% 94.64%     429619  0.75%  github.com/pengfeifei6/NexusDesk/internal/auth.(*PostgresRepository).FindUserByID
+     38229 0.067% 94.70%     878217  1.53%  github.com/pengfeifei6/NexusDesk/internal/auth.(*TokenManager).Verify
+     32768 0.057% 94.76%   33696749 58.75%  github.com/gin-gonic/gin.(*Context).JSON (inline)
+     22680  0.04% 94.80%   33573512 58.54%  encoding/json.Marshal
+     21845 0.038% 94.84%    4202299  7.33%  github.com/pengfeifei6/NexusDesk/internal/platform/cache.List[go.shape.struct { ID int64; OrgID int64; CreatorID int64; AssigneeID *int64; Title string; Body string; Priority int16; Status github.com/pengfeifei6/NexusDesk/internal/ticket.Status; Version int64; CreatedAt time.Time; UpdatedAt time.Time; DeletedAt *time.Time }]
+     16384 0.029% 94.87%    3740645  6.52%  github.com/pengfeifei6/NexusDesk/internal/platform/cache.(*Cache).get
+     10923 0.019% 94.88%     678051  1.18%  github.com/golang-jwt/jwt/v5.(*Parser).ParseUnverified
+     10923 0.019% 94.90%     448669  0.78%  github.com/pengfeifei6/NexusDesk/internal/auth.(*accessClaims).UnmarshalJSON
+     10923 0.019% 94.92%    4619364  8.05%  github.com/pengfeifei6/NexusDesk/internal/ticket.(*Service).List
+         0     0% 94.92%     356629  0.62%  context.WithDeadline (inline)
+         0     0% 94.92%     356629  0.62%  context.WithTimeout
+         0     0% 94.92%    3339139  5.82%  encoding/json.(*decodeState).array
+         0     0% 94.92%    3946190  6.88%  encoding/json.(*decodeState).unmarshal
+         0     0% 94.92%    3946190  6.88%  encoding/json.(*decodeState).value
+         0     0% 94.92%   33502066 58.41%  encoding/json.(*encodeState).marshal
+         0     0% 94.92%   33502066 58.41%  encoding/json.(*encodeState).reflectValue
+         0     0% 94.92%   33306820 58.07%  encoding/json.arrayEncoder.encode
+         0     0% 94.92%   33482951 58.38%  encoding/json.interfaceEncoder
+         0     0% 94.92%   33306820 58.07%  encoding/json.sliceEncoder.encode
+         0     0% 94.92%   56938159 99.27%  github.com/gin-gonic/gin.(*Context).Next
+         0     0% 94.92%   33663981 58.69%  github.com/gin-gonic/gin.(*Context).Render
+         0     0% 94.92%   56977194 99.34%  github.com/gin-gonic/gin.(*Engine).ServeHTTP
+         0     0% 94.92%   56938159 99.27%  github.com/gin-gonic/gin.(*Engine).handleHTTPRequest
+         0     0% 94.92%   33564148 58.52%  github.com/gin-gonic/gin/codec/json.jsonApi.Marshal
+         0     0% 94.92%   33663981 58.69%  github.com/gin-gonic/gin/render.JSON.Render
+         0     0% 94.92%   33663981 58.69%  github.com/gin-gonic/gin/render.WriteJSON

@@ -10,6 +10,8 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/multitracer"
 	"github.com/jackc/pgx/v5/pgconn"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/pengfeifei6/NexusDesk/internal/platform/config"
@@ -17,7 +19,7 @@ import (
 
 // Open creates a pool and verifies a real connection within five seconds.
 // The caller owns the returned pool and must close it after HTTP shutdown.
-func Open(ctx context.Context, cfg config.DatabaseConfig) (*pgxpool.Pool, error) {
+func Open(ctx context.Context, cfg config.DatabaseConfig, tracers ...pgx.QueryTracer) (*pgxpool.Pool, error) {
 	if err := ctx.Err(); err != nil {
 		return nil, fmt.Errorf("connect PostgreSQL: %w", err)
 	}
@@ -34,6 +36,9 @@ func Open(ctx context.Context, cfg config.DatabaseConfig) (*pgxpool.Pool, error)
 	if err != nil {
 		// pgx parse errors can contain the full connection URL. Never forward it.
 		return nil, errors.New("configure PostgreSQL: invalid connection settings")
+	}
+	if len(tracers) > 0 {
+		poolConfig.ConnConfig.Tracer = multitracer.New(tracers...)
 	}
 	poolConfig.ConnConfig.ConnectTimeout = 5 * time.Second
 	startupCtx, cancel := context.WithTimeout(ctx, 5*time.Second)

@@ -1,5 +1,7 @@
 # NexusDesk 架构说明
 
+> W12 当前交付：39业务API、14迁移、10主要页面；请先读[当前架构](release/architecture.md)、[API索引](release/api-index.md)和[功能边界](release/acceptance.md)。下文保留历史设计与逐周增量，旧阶段限制不代表当前能力。
+
 > 2026-11-11当前阶段：API + 独立cmd/worker、PostgreSQL业务任务、专用Redis/Asynq、本地Ollama；设计见[异步任务](jobs-design.md)，实际验收见[第七周记录](weekly/week07.md)。旧段落保留历史。
 
 - 版本：v0.2

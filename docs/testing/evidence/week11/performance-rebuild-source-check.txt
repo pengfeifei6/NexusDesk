@@ -1,0 +1,27 @@
+Total: 36.93s
+ROUTINE ======================== github.com/pengfeifei6/NexusDesk/internal/platform/cache.(*Cache).get in internal/platform/cache/cache.go
+      10ms     14.10s (flat, cum) 38.18% of Total
+         .          .     81:func (c *Cache) get(ctx context.Context, key string, org int64, target any) bool {
+         .       30ms     82:	ctx, cancel := context.WithTimeout(ctx, c.options.Timeout)
+         .          .     83:	defer cancel()
+         .          .     84:	// GETRANGE bounds the bytes read even when Redis contains an oversized value.
+         .      630ms     85:	b, err := c.client.GetRange(ctx, key, 0, int64(c.options.MaxBytes)).Bytes()
+         .          .     86:	if err != nil {
+         .          .     87:		c.failures.Add(1)
+         .          .     88:		return false
+         .          .     89:	}
+         .          .     90:	if len(b) == 0 {
+         .          .     91:		c.misses.Add(1)
+         .          .     92:		return false
+         .          .     93:	}
+         .       30ms     94:	var e envelope
+      10ms     13.38s     95:	if len(b) > c.options.MaxBytes || json.Unmarshal(b, &e) != nil || e.OrgID != org || len(e.Data) == 0 || string(e.Data) == "null" || json.Unmarshal(e.Data, target) != nil {
+         .          .     96:		c.corrupt.Add(1)
+         .          .     97:		return false
+         .          .     98:	}
+         .       30ms     99:	return true
+         .          .    100:}
+         .          .    101:func (c *Cache) set(ctx context.Context, key string, org int64, value any) {
+         .          .    102:	data, err := json.Marshal(value)
+         .          .    103:	if err != nil {
+         .          .    104:		return

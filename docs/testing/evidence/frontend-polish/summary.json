@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "business_operations": 39,
+  "openapi_operations_with_healthz": 40,
+  "schemas": 82,
+  "resolved_local_refs": 707,
+  "example_checks": 400,
+  "semantic_assertions": 376,
+  "source_dto_field_sets": 14,
+  "frontend_unit_tests": 166,
+  "frontend_test_files": 9,
+  "browser_groups": 12,
+  "main_screenshots": 17,
+  "responsive_screenshots": 12,
+  "core_text_contrast_samples": 353,
+  "page_errors": 0,
+  "independent_review": {
+    "critical": 0,
+    "important_found": 3,
+    "important_fixed_with_regressions": 3,
+    "deferred_minor": 0
+  },
+  "checks": "checks.json",
+  "browser": "after/smoke.json",
+  "review": "final-review.md",
+  "preservation": "preservation.json",
+  "runtime": "runtime.json",
+  "links": "links.json",
+  "backend_modified": false,
+  "cloud_calls": 0,
+  "daily_config_modified": false,
+  "git_writes": false
+}

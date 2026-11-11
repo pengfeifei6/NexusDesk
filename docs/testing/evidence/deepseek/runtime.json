@@ -1,0 +1,13 @@
+{
+  "api_health": 200,
+  "frontend_http": 200,
+  "worker_started": true,
+  "chat_provider": "deepseek",
+  "chat_model": "deepseek-flash",
+  "embedding_model": "bge-m3:567m",
+  "env_mode": "0600",
+  "env_git_ignored": true,
+  "runtime_secret_isolation": true,
+  "credentials_in_changed_files": false,
+  "no_daily_test_accounts_created": true
+}

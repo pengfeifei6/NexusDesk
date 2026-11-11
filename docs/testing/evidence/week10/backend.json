@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "synthetic_data_only": true,
+  "daily_database_modified": false,
+  "cloud_model_called": false,
+  "migration": "latest 14 (W10 adds no schema)",
+  "go_pass_nodes": 1110,
+  "go_top_level_tests": 252,
+  "go_skips": 0
+}

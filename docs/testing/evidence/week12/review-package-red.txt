@@ -1,0 +1,13 @@
+.F...
+======================================================================
+FAIL: test_archive_preserves_explicit_web_format_configuration_without_following_links (test_package_release.PackageTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/yjz/pzp/Go/projects/NexusDesk/scripts/test_package_release.py", line 43, in test_archive_preserves_explicit_web_format_configuration_without_following_links
+    self.assertIn('web/.prettierrc.json', paths)
+AssertionError: 'web/.prettierrc.json' not found in {'cmd/api/main.go', 'web/package-lock.json', '.env.example', 'README.md', 'web/package.json', 'go.mod', 'docs/release/quickstart.md', 'go.sum', 'migrations/00001.sql', 'web/src/main.ts'}
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.024s
+
+FAILED (failures=1)

@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "main_folder": "/media/yjz/pzp/Go/projects/NexusDesk",
+  "branch": "main",
+  "main_head_unchanged": "6f66fb96f8f671f82df51a0ec8e5fcf193930e57",
+  "source_files_verified": 773,
+  "business_code_changed_by_relocation": false,
+  "go_pass_nodes": 1079,
+  "go_top_level_tests": 243,
+  "go_skip_nodes": 0,
+  "frontend_tests": 141,
+  "python_tests": 6,
+  "browser_steps": 5,
+  "all_checks_exit_zero": true,
+  "daily_database_migrated": false,
+  "schema": 14,
+  "future_development_main_folder_only": true,
+  "updated_utc": "2026-11-11T09:22:04.466511+00:00",
+  "auxiliary_worktree_removed": true,
+  "source_branch_preserved": true,
+  "review": "PASS; preservation mapping refreshed and all773 destinations rehashed before cleanup",
+  "deferred_findings": 0
+}

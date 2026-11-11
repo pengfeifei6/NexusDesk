@@ -1,0 +1,83 @@
+{
+  "status": "PASS",
+  "node": "/media/yjz/pzp/Go/projects/NexusDesk/.local/week04-tools/node_modules/node/bin/node",
+  "checks": [
+    {
+      "name": "python unit",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_*.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.616
+    },
+    {
+      "name": "go vet",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "exit_code": 0,
+      "seconds": 0.918
+    },
+    {
+      "name": "go build",
+      "command": [
+        "go",
+        "build",
+        "./..."
+      ],
+      "exit_code": 0,
+      "seconds": 1.779
+    },
+    {
+      "name": "frontend unit",
+      "command": [
+        "npm",
+        "run",
+        "test:unit",
+        "--",
+        "--run"
+      ],
+      "exit_code": 0,
+      "seconds": 2.641
+    },
+    {
+      "name": "frontend typecheck/build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "seconds": 5.412
+    },
+    {
+      "name": "frontend lint",
+      "command": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "exit_code": 0,
+      "seconds": 3.28
+    },
+    {
+      "name": "frontend format",
+      "command": [
+        "npm",
+        "run",
+        "format:check"
+      ],
+      "exit_code": 0,
+      "seconds": 2.737
+    }
+  ]
+}

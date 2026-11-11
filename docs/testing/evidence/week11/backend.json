@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "synthetic_only": true,
+  "daily_database_modified": false,
+  "cloud_calls": 0,
+  "migration": 14,
+  "go_pass_nodes": 1181,
+  "go_top_level_tests": 286,
+  "go_skips": 0,
+  "owned_resources_removed": true
+}

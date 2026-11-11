@@ -9,6 +9,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/pengfeifei6/NexusDesk/internal/platform/observe"
 )
 
 const maxAuthBody = 16 * 1024
@@ -22,7 +23,7 @@ func (h *Handler) RegisterRoutes(group *gin.RouterGroup) {
 }
 
 func apiError(c *gin.Context, status int, code, message string) {
-	c.JSON(status, gin.H{"error": gin.H{"code": code, "message": message, "request_id": ""}})
+	c.JSON(status, gin.H{"error": gin.H{"code": code, "message": message, "request_id": observe.RequestID(c.Request.Context())}})
 }
 
 // ReadStringFields reuses the strict bounded JSON contract for public and protected writes.

@@ -1,0 +1,7 @@
+{
+  "command": "go build -overlay .local/week11-runs/performance-rebuild-check/baseline-overlay.json -o .local/week11-runs/performance-rebuild-check/api ./cmd/api",
+  "baseline_sha256": "fdc18ea1cc7ddf05d1fb3b6d37b207c2ad9c40b609dda624220eb325ec485125",
+  "rebuilt_sha256": "fdc18ea1cc7ddf05d1fb3b6d37b207c2ad9c40b609dda624220eb325ec485125",
+  "byte_identical": true,
+  "source_lookup": "frozen snapshot used with pprof -source_path and -trim_path, verified old double-unmarshal line displayed"
+}

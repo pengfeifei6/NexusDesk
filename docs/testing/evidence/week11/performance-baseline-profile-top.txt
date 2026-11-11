@@ -1,0 +1,59 @@
+File: api
+Build ID: d8479883d58b6690f6c78442abbdae22cf493193
+Type: cpu
+Time: 2026-11-11 19:04:21 CST
+Duration: 5s, Total samples = 36.93s (738.52%)
+Showing nodes accounting for 24.85s, 67.29% of 36.93s total
+Dropped 702 nodes (cum <= 0.18s)
+Showing top 50 nodes out of 288
+      flat  flat%   sum%        cum   cum%
+     2.94s  7.96%  7.96%      4.96s 13.43%  encoding/json.checkValid
+     2.13s  5.77% 13.73%      2.32s  6.28%  encoding/json.stateInString
+     1.67s  4.52% 18.25%      1.67s  4.52%  internal/runtime/syscall/linux.Syscall6
+     1.31s  3.55% 21.80%      2.64s  7.15%  encoding/json.(*decodeState).skip
+     1.03s  2.79% 24.59%      1.17s  3.17%  encoding/json.appendString[go.shape.string]
+     0.95s  2.57% 27.16%      1.90s  5.14%  runtime.tryDeferToSpanScan
+     0.84s  2.27% 29.43%      0.84s  2.27%  runtime.futex
+     0.78s  2.11% 31.55%      0.78s  2.11%  runtime.(*lfstack).pop
+     0.62s  1.68% 33.23%      0.62s  1.68%  runtime.memclrNoHeapPointers
+     0.59s  1.60% 34.82%      1.19s  3.22%  runtime.scanObjectsSmall
+     0.59s  1.60% 36.42%      1.12s  3.03%  slices.insertionSortCmpFunc[go.shape.struct { encoding/json.v reflect.Value; encoding/json.ks string }] (inline)
+     0.58s  1.57% 37.99%      0.58s  1.57%  runtime.procyieldAsm
+     0.56s  1.52% 39.51%      0.56s  1.52%  runtime.memmove
+     0.55s  1.49% 41.00%      0.55s  1.49%  runtime.spanClass.sizeclass (inline)
+     0.54s  1.46% 42.46%      0.77s  2.09%  encoding/json.(*decodeState).rescanLiteral
+     0.54s  1.46% 43.92%      1.04s  2.82%  encoding/json.unquoteBytes
+     0.50s  1.35% 45.27%      0.71s  1.92%  encoding/json.stateEndValue
+     0.49s  1.33% 46.60%      0.49s  1.33%  unicode/utf8.DecodeRune (inline)
+     0.47s  1.27% 47.87%      1.75s  4.74%  runtime.scanObject
+     0.43s  1.16% 49.04%      0.43s  1.16%  runtime.tgkill
+     0.41s  1.11% 50.15%      0.41s  1.11%  runtime.madvise
+     0.40s  1.08% 51.23%      8.36s 22.64%  encoding/json.(*decodeState).object
+     0.32s  0.87% 52.10%      0.86s  2.33%  runtime.stealWork
+     0.31s  0.84% 52.94%      1.63s  4.41%  runtime.mallocgcSmallScanNoHeader
+     0.30s  0.81% 53.75%      0.30s  0.81%  internal/runtime/atomic.(*Uint32).Load (inline)
+     0.27s  0.73% 54.48%      4.03s 10.91%  runtime.mallocgc
+     0.27s  0.73% 55.21%      0.27s  0.73%  runtime.nextFreeFast (inline)
+     0.26s   0.7% 55.92%      6.10s 16.52%  runtime.gcDrain
+     0.25s  0.68% 56.59%      0.33s  0.89%  runtime.spanOf (inline)
+     0.25s  0.68% 57.27%      0.25s  0.68%  runtime.typePointers.nextFast (inline)
+     0.24s  0.65% 57.92%      0.31s  0.84%  runtime.typePointers.next
+     0.22s   0.6% 58.52%      0.26s   0.7%  runtime.(*mspan).writeHeapBitsSmall
+     0.22s   0.6% 59.11%      0.77s  2.09%  runtime.(*sweepLocked).sweep
+     0.22s   0.6% 59.71%      0.28s  0.76%  runtime.heapArenaOf (inline)
+     0.21s  0.57% 60.28%      1.09s  2.95%  runtime.wbBufFlush1
+     0.20s  0.54% 60.82%      0.88s  2.38%  gcWriteBarrier
+     0.20s  0.54% 61.36%      0.21s  0.57%  runtime.(*lfstack).push
+     0.20s  0.54% 61.90%      1.04s  2.82%  runtime.lock2
+     0.20s  0.54% 62.44%      0.20s  0.54%  runtime.osyield
+     0.19s  0.51% 62.96%      0.31s  0.84%  encoding/json.(*decodeState).scanWhile
+     0.19s  0.51% 63.47%      0.52s  1.41%  runtime.findObject
+     0.18s  0.49% 63.96%      1.06s  2.87%  encoding/json.indirect
+     0.18s  0.49% 64.45%      0.38s  1.03%  reflect.(*rtype).Name
+     0.17s  0.46% 64.91%      0.60s  1.62%  runtime.scanblock
+     0.16s  0.43% 65.34%      5.82s 15.76%  encoding/json.mapEncoder.encode
+     0.16s  0.43% 65.77%      0.30s  0.81%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).Load
+     0.15s  0.41% 66.18%      0.31s  0.84%  runtime.runqgrab
+     0.14s  0.38% 66.56%      2.94s  7.96%  encoding/json.(*decodeState).literalStore
+     0.14s  0.38% 66.94%      0.25s  0.68%  encoding/json.stateBeginString
+     0.13s  0.35% 67.29%      8.67s 23.48%  encoding/json.(*decodeState).value

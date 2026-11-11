@@ -1,0 +1,139 @@
+FAIL semantic: register: operation-specific example context missing
+FAIL semantic: register: registered user does not match input
+FAIL semantic: login: operation-specific example context missing
+FAIL semantic: getMe: operation-specific example context missing
+FAIL semantic: createOrganization: operation-specific example context missing
+FAIL semantic: createOrganization: creator must be admin and name must match
+FAIL semantic: listOrganizations: operation-specific example context missing
+FAIL semantic: listOrganizations: pagination example does not match defaults/query
+FAIL semantic: listMembers: operation-specific example context missing
+FAIL semantic: listMembers: example path parameters incomplete
+FAIL semantic: listMembers: pagination example does not match defaults/query
+FAIL semantic: addMember: operation-specific example context missing
+FAIL semantic: addMember: example path parameters incomplete
+FAIL semantic: createTicket: operation-specific example context missing
+FAIL semantic: createTicket: example path parameters incomplete
+FAIL semantic: createTicket: created ticket does not match request
+FAIL semantic: listTickets: operation-specific example context missing
+FAIL semantic: listTickets: example path parameters incomplete
+FAIL semantic: listTickets: pagination example does not match defaults/query
+FAIL semantic: getTicket: operation-specific example context missing
+FAIL semantic: getTicket: example path parameters incomplete
+FAIL semantic: getTicket: read/delete/download example requires visible scoped resource
+FAIL semantic: patchTicket: operation-specific example context missing
+FAIL semantic: patchTicket: example path parameters incomplete
+FAIL semantic: patchTicket: before-ticket example missing
+FAIL semantic: patchTicket: successful mutation must increment version
+FAIL semantic: patchTicket: PATCH cannot contain only expected_version
+FAIL semantic: patchTicket: PATCH must actually change a field
+FAIL semantic: patchTicket: PATCH requires OPEN
+FAIL semantic: deleteTicket: operation-specific example context missing
+FAIL semantic: deleteTicket: example path parameters incomplete
+FAIL semantic: deleteTicket: read/delete/download example requires visible scoped resource
+FAIL semantic: transitionTicket: operation-specific example context missing
+FAIL semantic: transitionTicket: example path parameters incomplete
+FAIL semantic: transitionTicket: before-ticket example missing
+FAIL semantic: transitionTicket: successful mutation must increment version
+FAIL semantic: transitionTicket: impossible transition
+FAIL semantic: transitionTicket: transition example must have active assignee
+FAIL semantic: createComment: operation-specific example context missing
+FAIL semantic: createComment: example path parameters incomplete
+FAIL semantic: createComment: comment does not match request/actor
+FAIL semantic: createComment: comment requires nonCLOSED parent
+FAIL semantic: listComments: operation-specific example context missing
+FAIL semantic: listComments: example path parameters incomplete
+FAIL semantic: listComments: pagination example does not match defaults/query
+FAIL semantic: listTicketEvents: operation-specific example context missing
+FAIL semantic: listTicketEvents: example path parameters incomplete
+FAIL semantic: listTicketEvents: pagination example does not match defaults/query
+FAIL semantic: claimTicket: operation-specific example context missing
+FAIL semantic: claimTicket: example path parameters incomplete
+FAIL semantic: claimTicket: before-ticket example missing
+FAIL semantic: claimTicket: successful mutation must increment version
+FAIL semantic: claimTicket: claim precondition
+FAIL semantic: claimTicket: claim must assign actor and retain OPEN
+FAIL semantic: uploadDocument: operation-specific example context missing
+FAIL semantic: uploadDocument: document must be nonempty
+FAIL semantic: uploadDocument: filename/media mismatch
+FAIL semantic: uploadDocument: example path parameters incomplete
+FAIL semantic: uploadDocument: nonempty uploaded byte count mismatch
+FAIL semantic: uploadDocument: uploaded source hash mismatch
+FAIL semantic: uploadDocument: uploaded filename mismatch
+FAIL semantic: listDocuments: operation-specific example context missing
+FAIL semantic: listDocuments: example path parameters incomplete
+FAIL semantic: listDocuments: pagination example does not match defaults/query
+FAIL semantic: getDocument: operation-specific example context missing
+FAIL semantic: getDocument: document must be nonempty
+FAIL semantic: getDocument: filename/media mismatch
+FAIL semantic: getDocument: example path parameters incomplete
+FAIL semantic: getDocument: read/delete/download example requires visible scoped resource
+FAIL semantic: deleteDocument: operation-specific example context missing
+FAIL semantic: deleteDocument: example path parameters incomplete
+FAIL semantic: deleteDocument: read/delete/download example requires visible scoped resource
+FAIL semantic: processDocument: operation-specific example context missing
+FAIL semantic: processDocument: document must be nonempty
+FAIL semantic: processDocument: filename/media mismatch
+FAIL semantic: processDocument: example path parameters incomplete
+FAIL semantic: processDocument: process precondition
+FAIL semantic: processDocument: process must return READY with nonempty extracted text
+FAIL semantic: getDocumentText: operation-specific example context missing
+FAIL semantic: getDocumentText: example path parameters incomplete
+FAIL semantic: getDocumentText: text/hash mismatch
+FAIL semantic: downloadDocument: operation-specific example context missing
+FAIL semantic: downloadDocument: example path parameters incomplete
+FAIL semantic: downloadDocument: read/delete/download example requires visible scoped resource
+FAIL semantic: indexDocument: operation-specific example context missing
+FAIL semantic: indexDocument: example path parameters incomplete
+FAIL semantic: indexDocument: index must return usable READY index
+FAIL semantic: indexDocument: index requires READY document
+FAIL semantic: indexDocument: index source hash mismatch
+FAIL semantic: getDocumentIndex: operation-specific example context missing
+FAIL semantic: getDocumentIndex: example path parameters incomplete
+FAIL semantic: getDocumentIndex: read/delete/download example requires visible scoped resource
+FAIL semantic: searchKnowledge: operation-specific example context missing
+FAIL semantic: searchKnowledge: example path parameters incomplete
+FAIL semantic: askKnowledge: operation-specific example context missing
+FAIL semantic: askKnowledge: example path parameters incomplete
+FAIL semantic: submitDocumentJob: operation-specific example context missing
+FAIL semantic: submitDocumentJob: example path parameters incomplete
+FAIL semantic: submitDocumentJob: submitted job actor/version
+FAIL semantic: listDocumentJobs: operation-specific example context missing
+FAIL semantic: listDocumentJobs: example path parameters incomplete
+FAIL semantic: getJob: operation-specific example context missing
+FAIL semantic: getJob: example path parameters incomplete
+FAIL semantic: getJob: read/delete/download example requires visible scoped resource
+FAIL semantic: retryJob: operation-specific example context missing
+FAIL semantic: retryJob: example path parameters incomplete
+FAIL semantic: retryJob: retry precondition
+FAIL semantic: retryJob: retry must start next PENDING run
+FAIL semantic: retryJob: retry actor mismatch
+FAIL semantic: cancelJob: operation-specific example context missing
+FAIL semantic: cancelJob: example path parameters incomplete
+FAIL semantic: cancelJob: cancel precondition
+FAIL semantic: cancelJob: cancel must return terminal CANCELED job
+FAIL semantic: createConversation: operation-specific example context missing
+FAIL semantic: createConversation: example path parameters incomplete
+FAIL semantic: createConversation: created conversation mismatch
+FAIL semantic: listConversations: operation-specific example context missing
+FAIL semantic: listConversations: example path parameters incomplete
+FAIL semantic: getConversationHistory: operation-specific example context missing
+FAIL semantic: getConversationHistory: example path parameters incomplete
+FAIL semantic: sendConversationMessage: operation-specific example context missing
+FAIL semantic: sendConversationMessage: example path parameters incomplete
+FAIL semantic: sendConversationMessage: USER and ASSISTANT IDs must differ
+FAIL semantic: sendConversationMessage: SSE conversation differs from path
+FAIL semantic: confirmToolAction: operation-specific example context missing
+FAIL semantic: confirmToolAction: Markdown/OpenAPI response example differs
+FAIL semantic: confirmToolAction: example path parameters incomplete
+FAIL semantic: confirmToolAction: decision example requires saved PROPOSED action
+FAIL semantic: confirmToolAction: decision cannot change saved arguments
+FAIL semantic: confirmToolAction: confirmation must return executed ticket and confirmer
+FAIL semantic: rejectToolAction: operation-specific example context missing
+FAIL semantic: rejectToolAction: Markdown/OpenAPI response example differs
+FAIL semantic: rejectToolAction: example path parameters incomplete
+FAIL semantic: rejectToolAction: decision example requires saved PROPOSED action
+FAIL semantic: rejectToolAction: decision cannot change saved arguments
+FAIL semantic: rejectToolAction: rejection must return REJECTED
+FAIL: 136/267 operation/example semantic invariants failed across 39 business operations
+
+exit_code=1

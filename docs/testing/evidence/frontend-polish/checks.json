@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "frontend_tests": 166,
+  "checks": [
+    {
+      "name": "frontend unit",
+      "command": [
+        "npm",
+        "--prefix",
+        "web",
+        "run",
+        "test:unit",
+        "--",
+        "--run"
+      ],
+      "exit_code": 0,
+      "seconds": 3.066
+    },
+    {
+      "name": "frontend build",
+      "command": [
+        "npm",
+        "--prefix",
+        "web",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "seconds": 5.977
+    },
+    {
+      "name": "frontend lint",
+      "command": [
+        "npm",
+        "--prefix",
+        "web",
+        "run",
+        "lint"
+      ],
+      "exit_code": 0,
+      "seconds": 2.583
+    },
+    {
+      "name": "frontend format",
+      "command": [
+        "npm",
+        "--prefix",
+        "web",
+        "run",
+        "format:check"
+      ],
+      "exit_code": 0,
+      "seconds": 2.644
+    },
+    {
+      "name": "API reference",
+      "command": [
+        "python3",
+        "scripts/check_api_reference.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.089
+    }
+  ],
+  "backend_tests_not_rerun": "backend unchanged; owned browser checks existing API integration"
+}

@@ -79,17 +79,38 @@ export interface RAGSource {
   chunk_index: number
   source_name: string
   score: number
+  fusion_score?: number
   excerpt: string
   start_rune: number
   end_rune: number
 }
+export type RetrievalMode = 'vector' | 'hybrid'
+export interface RAGUsage {
+  known: boolean
+  model_called: boolean
+  prompt_tokens: number | null
+  completion_tokens: number | null
+  total_tokens: number | null
+  cache_hit_tokens: number | null
+  cache_miss_tokens: number | null
+}
+export interface RAGTimings {
+  embedding_ms: number
+  search_ms: number
+  generation_ms: number
+  total_ms: number
+}
 export interface SearchResponse {
+  retrieval_mode: RetrievalMode
   items: RAGSource[]
   embedding_model: string
   embedding_ms: number
   search_ms: number
 }
 export interface AskResponse {
+  retrieval_mode: RetrievalMode
+  usage: RAGUsage
+  timings: RAGTimings
   answer: string
   sources: RAGSource[]
   request_id: string
@@ -121,4 +142,52 @@ export interface KnowledgeJob {
   started_at: string | null
   completed_at: string | null
   next_run_at: string
+}
+
+export interface AIConversation {
+  id: string
+  org_id: string
+  owner_user_id: string
+  title: string
+  status: 'ACTIVE'
+  created_at: string
+  updated_at: string
+}
+export interface AIMessage {
+  id: string
+  conversation_id: string
+  client_request_id: string
+  role: 'USER' | 'ASSISTANT'
+  content: string
+  status: 'STREAMING' | 'COMPLETED' | 'FAILED' | 'INTERRUPTED'
+  model_name: string
+  org_id: string
+  citations: RAGSource[]
+  input_tokens: number
+  output_tokens: number
+  created_at: string
+  completed_at: string | null
+}
+export interface AIToolAction {
+  id: string
+  conversation_id: string
+  assistant_message_id: string
+  tool_name: 'propose_create_ticket'
+  status: 'PROPOSED' | 'EXECUTED' | 'REJECTED' | 'EXPIRED'
+  org_id: string
+  proposed_by_user_id: string
+  arguments: { title: string; body: string; priority: 1 | 2 | 3 }
+  expires_at: string
+  created_at: string
+  confirmed_by_user_id: string | null
+  ticket_id: string | null
+  confirmed_at: string | null
+}
+
+export interface Member {
+  user_id: string
+  display_name: string
+  role: 'admin' | 'member'
+  status: 'active' | 'disabled'
+  created_at: string
 }

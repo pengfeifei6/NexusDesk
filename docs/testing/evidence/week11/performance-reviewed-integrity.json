@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "old_performance_artifacts_unchanged": 41,
+  "reviewed_cases": 48,
+  "recomputed_percentiles": "PASS (all48 p50/p95/p99 verified in summary derivation)",
+  "request_status_error_latency_accounting": "PASS",
+  "row_counts_and_same_seed_scenarios_method": "PASS",
+  "final_source_matches_measured_snapshot": "PASS",
+  "noncache_product_manifest": "PASS",
+  "report_relative_links": "PASS",
+  "reviewed_baseline_binary_equals_original": true
+}

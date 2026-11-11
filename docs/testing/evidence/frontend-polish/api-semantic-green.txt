@@ -1,0 +1,7 @@
+PASS: 376 semantic invariants across all 39 business operations; Markdown/OpenAPI examples agree
+PASS: 39 canonical Handler routes = 39 index operations = 39 OpenAPI business operations
+PASS: 40 unique operationIds (including healthz), 82 schemas, 707 resolved local refs
+PASS: 400 examples, 14 source DTO field sets, path parameters, security, media, statuses and Markdown coverage
+Scope: static standard-library checks only; no backend mutation, DB, cloud model or runtime HTTP test
+
+exit_code=0

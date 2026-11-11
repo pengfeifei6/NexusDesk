@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "main_directory": "/media/yjz/pzp/Go/projects/NexusDesk",
+  "application_readiness": {
+    "8080": true,
+    "5173": true
+  },
+  "worker_process_alive": true,
+  "worker_startup_marker": true,
+  "migration": 14,
+  "schema_changed_by_week10": false,
+  "daily_data_seeded": false,
+  "configuration_preserved": true,
+  "final_readiness_rechecked_at": "2026-11-11T10:25:46.929455+00:00",
+  "all_owned_process_identities_match": true
+}

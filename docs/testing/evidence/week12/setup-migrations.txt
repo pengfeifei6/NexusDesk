@@ -1,0 +1,37 @@
+up
+2026/11/11 20:20:04 OK   00001_create_organizations.sql (4.9ms)
+2026/11/11 20:20:04 OK   00002_create_users.sql (4.96ms)
+2026/11/11 20:20:04 OK   00003_create_organization_members.sql (4.95ms)
+2026/11/11 20:20:04 OK   00004_create_tickets.sql (7.32ms)
+2026/11/11 20:20:04 OK   00005_create_ticket_comments.sql (5.01ms)
+2026/11/11 20:20:04 OK   00006_create_ticket_events.sql (4.86ms)
+2026/11/11 20:20:04 OK   00007_create_knowledge_documents.sql (7.23ms)
+2026/11/11 20:20:04 OK   00008_create_knowledge_document_texts.sql (2.52ms)
+2026/11/11 20:20:04 OK   00009_enable_pgvector_and_create_chunks.sql (25.69ms)
+2026/11/11 20:20:04 OK   00010_create_knowledge_document_indexes.sql (4.07ms)
+2026/11/11 20:20:04 OK   00011_create_knowledge_jobs.sql (8.31ms)
+2026/11/11 20:20:04 OK   00012_create_ai_conversations_messages_actions.sql (13.47ms)
+2026/11/11 20:20:04 OK   00013_cache_revisions.sql (3.38ms)
+2026/11/11 20:20:04 OK   00014_ticket_priority_list_index.sql (1.65ms)
+2026/11/11 20:20:04 goose: successfully migrated database to version: 14
+
+status
+2026/11/11 20:20:04     Applied At                  Migration
+2026/11/11 20:20:04     =======================================
+2026/11/11 20:20:04     Wed Nov 11 12:20:04 2026 -- 00001_create_organizations.sql
+2026/11/11 20:20:04     Wed Nov 11 12:20:04 2026 -- 00002_create_users.sql
+2026/11/11 20:20:04     Wed Nov 11 12:20:04 2026 -- 00003_create_organization_members.sql
+2026/11/11 20:20:04     Wed Nov 11 12:20:04 2026 -- 00004_create_tickets.sql
+2026/11/11 20:20:04     Wed Nov 11 12:20:04 2026 -- 00005_create_ticket_comments.sql
+2026/11/11 20:20:04     Wed Nov 11 12:20:04 2026 -- 00006_create_ticket_events.sql
+2026/11/11 20:20:04     Wed Nov 11 12:20:04 2026 -- 00007_create_knowledge_documents.sql
+2026/11/11 20:20:04     Wed Nov 11 12:20:04 2026 -- 00008_create_knowledge_document_texts.sql
+2026/11/11 20:20:04     Wed Nov 11 12:20:04 2026 -- 00009_enable_pgvector_and_create_chunks.sql
+2026/11/11 20:20:04     Wed Nov 11 12:20:04 2026 -- 00010_create_knowledge_document_indexes.sql
+2026/11/11 20:20:04     Wed Nov 11 12:20:04 2026 -- 00011_create_knowledge_jobs.sql
+2026/11/11 20:20:04     Wed Nov 11 12:20:04 2026 -- 00012_create_ai_conversations_messages_actions.sql
+2026/11/11 20:20:04     Wed Nov 11 12:20:04 2026 -- 00013_cache_revisions.sql
+2026/11/11 20:20:04     Wed Nov 11 12:20:04 2026 -- 00014_ticket_priority_list_index.sql
+
+up
+2026/11/11 20:20:04 goose: no migrations to run. current version: 14

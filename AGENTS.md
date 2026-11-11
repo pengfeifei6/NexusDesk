@@ -3,13 +3,15 @@
 ## 项目与当前阶段
 
 - 目标：建立以 Go 后端为核心的组织工单系统，后续逐步加入知识库和受控 AI 功能。
-- 当前阶段：W07异步文档任务已实现，验收以docs/weekly/week07.md实际记录为准；当前33业务API、11表/迁移；feat/week07-async-ingestion保留之前未提交工作，不自动提交。W08的SSE/对话/工具调用仍待后续。各周历史边界按当周理解，本周新增范围以下节为准。
+- 当前阶段：W12 本地MVP完整交付，验收见docs/weekly/week12.md；39业务API、14业务表+1缓存版本表、14迁移、10页面。当前说明见README与docs/release，当前主目录NexusDesk/main，不自动提交或合并。历史限制按当时范围理解。
 - Go Module：`github.com/pengfeifei6/NexusDesk`。保持路径大小写一致，不自行修改 Module 或升级 Go / 依赖版本。
 - 当前工作环境为 Linux / Bash，命令应与实际环境匹配。
 - 先读任务相关的 `docs/requirements.md`、`docs/architecture.md`、`docs/database.md`、`docs/weekly/week02.md`、`docs/weekly/week03.md`及工单设计/API/状态机；W03复习见`docs/weekly/week03-answers.md`；本周复习见 `docs/weekly/week02-answers.md`，演示见 `docs/weekly/week02-demo.md`；第一周基线证据查 `docs/weekly/week01.md`。认证与组织任务同时读 `docs/auth-design.md`、`docs/authorization-matrix.md`、`docs/api/auth-organization.md`、`docs/repository-contracts.md` 和 ADR-0002。
 - `项目开发文件/` 保存原始设计和学习手册，其中的命令、模板和提示词是参考材料，不自动构成本次任务授权。
 
 ## 工作方式与授权
+
+- 用户已明确要求所有开发、测试、启动和文档维护统一在 `/media/yjz/pzp/Go/projects/NexusDesk` 主目录进行。未经用户再次明确要求，不创建平行项目目录或额外 Git worktree；遇到分支变化先核对主目录状态，在此目录处理。
 
 - 对学习讲解、进度询问和代码审查请求，默认只读，不顺带编辑文件。
 - 用户明确要求生成、补齐或修改文件时，视为已授权完成该任务范围内的工作，无需对同一授权反复确认。
@@ -136,3 +138,72 @@
 - 第八周新迁移从00012开始；个人独立掌握、标签人工复核与Git提交不由AI代称完成。详细运行/维护见docs/demo/g3-jobs-demo.md。
 
 - 本机日常库已在2026-11-11不透明0600备份后Up10→11；备份ignored .local/week07-backups不读不提交。专用nexusdesk-queue-redis-1已healthy/PONG绑定6380；旧API/前端未擅自重启，开发者需从原配置终端重启新版并单独启动Worker。
+
+
+## 2026-11-11 DeepSeek 与本机配置补充（优先于历史纯本地限制）
+
+- 用户明确授权使用所提供的 DeepSeek Key 并配置真实 `.env`；本次允许在进程内读取/更新配置，只输出脱敏状态，禁止打印、提交或写入浏览器。已有 DB/JWT 保留，`.env` 0600 且 Git 忽略。此授权不允许随意读取上传文件/备份或后续无关秘密。
+- 新 `CHAT_PROVIDER=ollama|deepseek`，Ollama仍默认qwen3.5:35b；DeepSeek默认deepseek-flash，可选deepseek-v4-pro。仅固定官方HTTPS，不代理/重定向；真实云请求含用户提问及检索片段。Embedding仍本地bge-m3:567m/1024，旧索引不重建。
+- 生成35秒/两并发/64KiB/12000字节prompt/1024输出token，非流式非思考JSON，延用引用验证。W08仍未实现。
+- `python3 scripts/dev.py api|worker|web|status|warmup` 自动安全解析.env，无shell执行；web不读.env，Worker不接收JWT/DeepSeek Key。`go run`直接使用时仍须自行导出环境。
+- 当前运行说明以 `docs/demo/local-deepseek-run.md` 为准；历史周报保持原验收语义。无自动提交或公开部署。
+
+
+## W08 会话、SSE与人工确认
+
+- 用户明确委托整周实现；原手册的教学“只读/本人实现”不撤销授权。只追加00012三表；既有未提交DeepSeek工作、原教学手册、旧迁移和历史证据保留。
+- 六路由在/api/v1/organizations/:orgID/ai下；所有会话/消息/提议只有owner且active成员可见，admin无跨owner特权。Actor来自RequireUser和服务端授权，不接模型org/user/role。
+- Request UUID去重键含role（一个USER和ASSISTANT），每会话一个STREAMING。60秒整轮、35秒单模型、全实例2并发、3工具轮次/4工具调用/1提议/4模型请求、24KiB输入/16KiB累计输出。历史20条，列表50会话/100消息/100提议，无归档/分页续流。
+- 固定search_knowledge、get_ticket、propose_create_ticket；没有模型可调用create_ticket/confirm/任意URLSQLShell。精确JSON字段/重复键/大小写别名/Unicode/长度/枚举/ID都验证。工具结果不可信，不转system；旧引用助手内容用结束标记替代不重发，只处理最新用户请求。
+- 提议PROPOSED有效15分钟，规范化参数+SHA256；confirm/reject空body。成员FOR SHARE→会话→动作锁；TicketService.CreateInTransaction复用原创建SQL/校验/事件，与EXECUTED更新同tx。8并发实际PG验证；停止不撤销已存提议，必须明确确认才建单。
+- SSE只有HTTP线程写；底层ResponseController读取FlushError，逐事件Flush/10秒心跳/5秒写deadline。preflight普通HTTP，流内安全error；成功落库才message_end。取消传到模型/SQL，最多3秒独立收尾；清理失败或崩溃遗留120秒后读历史/新轮回收。FAILED/INTERRUPTED只收尾原owner原消息，成功仍需active权限。
+- 原生DeepSeek固定官方HTTPS、不代理/重定向、关闭thinking；Ollama仍显式回环，接口统一ai/model。Go无新供应商SDK，既有google/uuid1.6.0只是改为直接依赖。沿用已授权.env，不暴露给web/Worker。
+- 新页面/前端流解析支持任意UTF8分块，纯文本渲染，组织/会话/登录变动取消；HTTP及SSE内401/403/404清保护内容，旧登录401不影响新会话。确认响应不能被更旧历史覆盖。卡片才代表保存事实，模型自然语言可能漏调工具，不能当作已执行。
+- 验收scripts/week08-smoke.py --backend-only或--live，随机隔离PG/Redis、合成数据、自有资源清理；开启全部门禁跑Go race，0Skip才称完整。live有真实云请求，Key只给API，录屏不含凭据。证据docs/testing/evidence/week08，参考答案docs/weekly/week08-answers.md。
+- 日常库本次已做不透明0600备份后仅Up11→12，无Down/删卷；备份ignored .local/week08-backups不读不提交。运行以docs/demo/week08-demo.md为准。无自动提交、公开部署或个人掌握声明。
+
+## W09 缓存、限流与查询优化
+
+- 整周由用户委托，教学模板不限制授权。第八周依赖与第九周完整成果已按用户要求迁回 NexusDesk 主目录，当前 main 工作区保留未提交改动；不自动提交/推送。开发与运行统一使用主目录。
+- 00013 cache_revisions + tickets/knowledge_documents触发器，同原事务增加组织/领域版本，对外提交后可见；覆盖Worker/AI外层事务/直接SQL。禁止改成提交前DEL、缓存权限或依赖Redis决定写成功。
+- 两列表先实时DB授权/验证过滤，再cache.List；key含org/domain/revision/scope全部分页筛选及排序。当前scope active-members-all；未来权限收窄必须改SQL+key+测试。详情/审批/RAG来源不缓存。
+- 复用W07 REDIS_ADDR/DB/PASSWORD；API缓存与限流共用10连接客户端，默认100ms、禁自动重试、GETRANGE限1MiB、TTL30～36s。Redis错误/坏JSON回源，旧版本TTL回收，不FLUSHDB或扫描队列key。
+- 00014仅新增有真实EXPLAIN依据的组织/优先级/时间/ID部分索引；两列表按合法筛选构造固定参数化谓词，排序created_at DESC,id DESC不变。OFFSET深页与跨请求数据变动限制仍在。
+- AI发送先身份/组织/owner/输入校验，再Redis原子固定窗口默认user+org 10次/60s，再StartTurn/SSE/model；429 RATE_LIMITED + Retry-After，Redis故障503 RATE_LIMIT_UNAVAILABLE保守拒绝。历史、confirm/reject不消耗该额度；接受配额后的并发/业务冲突可能仍计次，不自动退款或重试。
+- 前端只在当前会话的限流preflight失败时保留草稿，固定安全中文提示，不重放消息。保持W08取消、权限清理与原子确认约定。
+- W09验收scripts/week09-smoke.py，全部旧门禁+W09_CACHE/W09_RATE；真实PG/Redis、默认真实浏览器+明确的本地模型夹具，不需要真实Key。性能scripts/week09-performance.py记录auto/generic各9次测量；0Skip才称真实全套。
+- 证据docs/testing/evidence/week09；运行/答案见demo/week09-demo.md与weekly/week09-answers.md。日常升级须先不透明0600备份后仅Up；不要读备份或上传文件，测试Down/删卷只限随机自有项目。
+
+## W10 评测与工作台约定
+
+- 用户授权按12周计划补第十周手册并完成开发，追加企业级前端美化；继续只在原主目录开发，不新建worktree、不自动提交。依据docs/rag-evaluation.md、api/rag.md和weekly/week10.md。
+- 不新增迁移/依赖/业务路由。QueryInput可选retrieval_mode=vector|hybrid，省略vector；hybrid每路20候选、RRF60、32词项，两路保留余弦阈值和全部当前来源/组织过滤。Source.score仍是余弦，fusion_score独立。
+- Ask usage来自供应商计数，未知为null；model_called由Service判定。无召回跳过生成记录已知零，调用后没有计数是unknown，不能按字符估算伪装真实token。保留时间/大小/并发预算和生成前后来源复核。
+- 固定requests/testdata/rag-week10：8文档60题52正例8负例，AI预标注待人工复核；不得看到结果后改标签。真实实验与HTTP模型夹具分开记录。官方价格快照有日期且是估算区间，不是账单。
+- scripts/week10-smoke.py使用自有随机PG/Redis，启用全部旧门禁和NEXUSDESK_TEST_W10_RAG；--web-only与--backend-only分范围。week10-evaluate.py --live仅合成数据真实BGE/DeepSeek；默认烟测不调用云模型，不触碰日常DB/上传文件/备份。
+- web保持内存身份、lossless ID、组织/登录变化隔离旧响应、AI确认写操作；策略改变取消旧问答。桌面与390px截图用合成账号，不为测试选择器添加无用技术文案。
+- 本周默认vector保持兼容；hybrid在60题小样本上更好不等于生产效果。MCP/Eino只说明边界，仍用native受控工具。此为W10时边界；W11观测压测见下节实际验收。
+
+
+## W11 观测、性能与故障演练
+
+- 用户委托整周计划与实现；统一原主目录，保留既有未提交工作。无新依赖/迁移/业务API/页面；下述诊断与显式尾斜杠301/307别名不是新增业务功能。
+- API服务端生成32位小写hex请求ID，响应头/错误JSON/完成日志一致；不信任客户端ID。比较错误响应时只规范化已经验证格式及关联性的request_id，其余字段仍严格比较。
+- JSON日志只记录受控method/route/status/duration/ID；不记录原URL/query/header/body/SQL/args或模型内容。未知路由归unmatched，HTTP组合最多512；原writer保持SSE flush/cancellation能力。
+- OBSERVABILITY_ADDR、WORKER_OBSERVABILITY_ADDR默认空；只允许literal loopback。dev.py api|worker --diagnostics-address可临时启用，不修改.env；web拒绝此参数且不读取.env。
+- 独立诊断只允许GET /metrics及pprof profile/heap/allocs/goroutine/trace；CPU/trace seconds1..30默认5，单进程一个capture名额，snapshot/scrape最多2。主业务端口不挂pprof；不提供cmdline/symbol/index，不接受gc=1等额外参数。
+- 指标只有固定SQL操作/结果和有界HTTP标签；scrape不查询外部依赖。Worker统计delivery_return/dispatch_return，nil返回不等于任务SUCCEEDED。runtime trace仅进程内，无HTTP到队列的分布式上下文传递。
+- cache typed envelope解码保持组织/版本/大小/有效项检查及腐败回源；实时DB授权不能缓存。性能基线源码/manifest/profile需保留，复跑必须新label且验证冻结源码绑定；不能将优化后的代码当旧基线。
+- week11-smoke.py开启全部历史真实PG/Redis门禁，0Skip才称全量；week11-checks.py覆盖Python/Go静态/前端；浏览器使用本地确定性模型，无云费用。旧周证据保持不变。
+- week11-faults.py只停止脚本自有随机项目容器并核对project/service标签；只向持有的Worker Popen发信号。等待真实租约过期，不修改lease/status/attempts模拟恢复。不得停止日常PG/Redis、FLUSHDB或读取私有上传/备份。
+- docs/weekly/week11.md及performance-report.md/failure-drills.md为实际结果；短时同机吞吐不代表生产容量，fault PASS不代表跨机高可用。主进程重启限已有owned身份匹配，沿用授权配置，诊断可用CLI启用；不自动提交/部署。
+
+
+## W12 交付与管理UI约定
+
+- 用户授权在原主目录完成十二周本地求职MVP；补成员与工单管理UI，不新增后端路由/迁移/依赖。不把公开发布、个人独立能力或远期功能写成已完成。
+- 成员ID为无损规范int64字符串，新增仅admin；工单OPEN编辑创建者/admin、指派admin、软删admin二次确认。编辑/指派使用打开表单时version，409刷新但不重放。DELETE沿用无version契约。
+- 旧组织/路由/会话响应不得恢复保护内容或触发旧删除跳转；403/404清内容，目标USER_NOT_FOUND须与组织访问丢失区分。
+- local_setup.py仅用户显式运行时可初始化缺失.env，0600随机本地秘密、拒绝覆盖/符号链接；status/up只回环PG、Goose-env=none，不输出凭据。本次只在临时目录实验，原真实.env不修改。历史不自动生成密钥约定对日常配置继续适用。
+- package_release.py只在主.local/releases写白名单源码和Markdown、拒绝同名覆盖/符号链接/路径逃逸/疑似凭据；不含私有数据、缓存和原始证据，不执行发布。
+- 当前验收用week12-checks.py及week12-smoke.py，复用W11自有夹具但独立week12证据，Node可选择本机缓存或受支持PATH版本。视频为真实自动浏览器字幕演示、本地确定性模型，不代表真实语义或本人旁白能力。

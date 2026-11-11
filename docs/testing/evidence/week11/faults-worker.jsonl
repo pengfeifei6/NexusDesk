@@ -1,0 +1,13 @@
+{"time":"2026-11-11T19:18:21.688467901+08:00","level":"INFO","msg":"diagnostics started","addr":"127.0.0.1:52199"}
+{"time":"2026-11-11T19:18:21.691282068+08:00","level":"INFO","msg":"Worker started","concurrency":2}
+redis: 2026/11/11 19:18:22 pubsub.go:171: redis: discarding bad PubSub connection: EOF
+{"time":"2026-11-11T19:18:22.767535414+08:00","level":"ERROR","msg":"queue runtime operation failed"}
+{"time":"2026-11-11T19:18:23.815048845+08:00","level":"ERROR","msg":"queue runtime operation failed"}
+{"time":"2026-11-11T19:18:23.825164946+08:00","level":"ERROR","msg":"queue runtime operation failed"}
+{"time":"2026-11-11T19:18:25.448057631+08:00","level":"INFO","msg":"Worker stopping"}
+{"time":"2026-11-11T19:18:25.820579868+08:00","level":"INFO","msg":"diagnostics started","addr":"127.0.0.1:52199"}
+{"time":"2026-11-11T19:18:25.822870191+08:00","level":"INFO","msg":"Worker started","concurrency":2}
+{"time":"2026-11-11T19:18:26.825270907+08:00","level":"INFO","msg":"worker delivery returned","request_id":"7279eb6c3ecc088ce79ba0558286714d","job_id":1,"run_version":1,"delivery_return":"nil","duration_seconds":0.039909221}
+{"time":"2026-11-11T19:18:29.1014847+08:00","level":"INFO","msg":"diagnostics started","addr":"127.0.0.1:52199"}
+{"time":"2026-11-11T19:18:29.103623744+08:00","level":"INFO","msg":"Worker started","concurrency":2}
+{"time":"2026-11-11T19:19:05.491087827+08:00","level":"INFO","msg":"worker delivery returned","request_id":"c36545156ef14daa181bb88a4595a98c","job_id":2,"run_version":1,"delivery_return":"nil","duration_seconds":0.032237421}

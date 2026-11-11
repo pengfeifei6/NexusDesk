@@ -1,0 +1,36 @@
+### 将变量替换为本机登录结果；不把真实Token提交仓库
+@base = http://127.0.0.1:8080/api/v1
+@token = REPLACE_WITH_LOCAL_LOGIN_TOKEN
+@org = 1
+@conversation = 00000000-0000-4000-8000-000000000001
+@proposal = 00000000-0000-4000-8000-000000000002
+
+### 创建会话
+POST {{base}}/organizations/{{org}}/ai/conversations
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"title":"第八周调试"}
+
+### 列表
+GET {{base}}/organizations/{{org}}/ai/conversations
+Authorization: Bearer {{token}}
+
+### 读取历史及持久化提议
+GET {{base}}/organizations/{{org}}/ai/conversations/{{conversation}}/messages
+Authorization: Bearer {{token}}
+
+### 流式提问。每个新的用户轮次用新的UUID；重复同一个ID返回409。
+POST {{base}}/organizations/{{org}}/ai/conversations/{{conversation}}/messages
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"content":"请先检索知识库：索引失败如何排查？","client_request_id":"550e8400-e29b-41d4-a716-446655440000"}
+
+### 确认，只能使用保存的参数，body留空
+POST {{base}}/organizations/{{org}}/ai/tool-actions/{{proposal}}/confirm
+Authorization: Bearer {{token}}
+
+### 拒绝，body留空
+POST {{base}}/organizations/{{org}}/ai/tool-actions/{{proposal}}/reject
+Authorization: Bearer {{token}}

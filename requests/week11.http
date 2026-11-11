@@ -1,0 +1,27 @@
+@api = http://127.0.0.1:8080
+@diagnostics = http://127.0.0.1:6060
+@workerDiagnostics = http://127.0.0.1:6061
+
+### 存活检查：响应含服务端X-Request-ID，不表示DB可用
+GET {{api}}/healthz
+
+### 未登录错误：比较响应头与error.request_id
+GET {{api}}/api/v1/me
+
+### API指标（需显式启用本机诊断监听）
+GET {{diagnostics}}/metrics
+
+### Worker指标：返回nil不等于任务SUCCEEDED
+GET {{workerDiagnostics}}/metrics
+
+### CPU采样：二进制profile，需另存后交给go tool pprof
+GET {{diagnostics}}/debug/pprof/profile?seconds=5
+
+### 内存采样：仅在可控合成场景保存/共享
+GET {{diagnostics}}/debug/pprof/heap
+
+### Go runtime trace：二进制格式，非分布式链路
+GET {{diagnostics}}/debug/pprof/trace?seconds=2
+
+### 不允许cmdline：预期404
+GET {{diagnostics}}/debug/pprof/cmdline

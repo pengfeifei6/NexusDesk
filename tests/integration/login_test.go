@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"reflect"
 	"strings"
 	"testing"
 	"time"
@@ -94,7 +95,14 @@ func TestWeek02Login(t *testing.T) {
 		wrong := post(t, router, map[string]string{"email": email, "password": "Wrong-Long-Login-Fixture-Password"})
 		missing := post(t, router, map[string]string{"email": "missing-" + email, "password": "Wrong-Long-Login-Fixture-Password"})
 		dummyMatch := post(t, router, map[string]string{"email": "missing-" + email, "password": "Dummy-Login-Fixture-Never-An-Account-Password"})
-		if wrong.Code != 401 || missing.Code != 401 || dummyMatch.Code != 401 || !bytes.Equal(wrong.Body.Bytes(), missing.Body.Bytes()) || !bytes.Equal(wrong.Body.Bytes(), dummyMatch.Body.Bytes()) {
+		seen := map[string]bool{}
+		wrongBody, wrongError := comparableCorrelatedError(wrong, seen)
+		missingBody, missingError := comparableCorrelatedError(missing, seen)
+		dummyBody, dummyError := comparableCorrelatedError(dummyMatch, seen)
+		if wrongError != nil || missingError != nil || dummyError != nil {
+			t.Fatal("login errors have invalid, uncorrelated or reused request identities or unsafe response shapes")
+		}
+		if wrong.Code != 401 || missing.Code != 401 || dummyMatch.Code != 401 || !reflect.DeepEqual(wrongBody, missingBody) || !reflect.DeepEqual(wrongBody, dummyBody) {
 			t.Fatal("login errors disclosed account state or dummy credential authenticated")
 		}
 		var body map[string]map[string]any

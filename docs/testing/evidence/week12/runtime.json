@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-11-11T13:01:35.108559+00:00",
+  "daily_mutations": false,
+  "cloud_calls": 0,
+  "services": [
+    {
+      "component": "api",
+      "http_status": 200
+    },
+    {
+      "component": "frontend",
+      "http_status": 200
+    },
+    {
+      "component": "api-diagnostics",
+      "http_status": 200
+    },
+    {
+      "component": "worker-diagnostics",
+      "http_status": 200
+    }
+  ]
+}

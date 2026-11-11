@@ -18,6 +18,7 @@
 /coverage.html
 /tmp/
 /.local/
+/.superpowers/
 /deploy/pgdata/
 /var/storage/
 *.log
@@ -35,3 +36,27 @@ __pycache__/
 Thumbs.db
 
 # go.mod、go.sum、迁移和设计文档均应纳入版本管理。
+
+# 脱敏的DeepSeek接入集成验收记录。
+!/docs/testing/evidence/deepseek/integration.log
+
+# W08 仅包含合成数据、经过脱敏的实际验收输出。
+!/docs/testing/evidence/week08/integration.log
+!/docs/testing/evidence/week08/checks.log
+
+# W09 owned synthetic fixture verification only.
+!/docs/testing/evidence/week09/integration.log
+!/docs/testing/evidence/week09/checks.log
+
+# W11 reviewed synthetic-fixture evidence; private/ad-hoc profiles stay ignored.
+!/docs/testing/evidence/week11/integration.log
+!/docs/testing/evidence/week11/checks.log
+!/docs/testing/evidence/week11/browser.log
+!/docs/testing/evidence/week11/performance-*.pprof
+
+# W12 owned synthetic fixture and source-package build evidence only.
+!/docs/testing/evidence/week12/integration.log
+!/docs/testing/evidence/week12/checks.log
+!/docs/testing/evidence/week12/browser.log
+!/docs/testing/evidence/week12/demo-browser.log
+!/docs/testing/evidence/week12/package-build.log

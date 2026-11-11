@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "synthetic_only": true,
+  "backend_modified": false,
+  "daily_database_modified": false,
+  "cloud_calls": 0,
+  "browser": {
+    "status": "PASS",
+    "synthetic_data_only": true,
+    "model": "deterministic local HTTP fixture, not semantic evaluation",
+    "steps": [
+      "admin adds registered member/duplicate rejected without another relationship",
+      "edit/assign/unassign/version conflict refreshes without replaying stale write",
+      "register/login/create organization/ticket/claim/transition/comment",
+      "upload/async worker/index/preview/download",
+      "hybrid retrieval/grounded answer/citations/measured usage",
+      "SSE tool proposal/no premature write/human confirmation",
+      "ordinary member read-only management/backend 403/delete cancel and explicit confirmation",
+      "390px responsive navigation/no overflow/organization scope change",
+      "360/768/1440 viewport overflow and reduced-motion mode",
+      "logout clears protected content/no token persistence/no page errors"
+    ],
+    "screenshots": [
+      "01-login",
+      "02-register",
+      "03-workspace-empty",
+      "14-members",
+      "04-tickets",
+      "15-ticket-managed",
+      "05-ticket-detail",
+      "06-document-detail",
+      "07-knowledge",
+      "08-rag",
+      "09-ai-proposal",
+      "10-ai-confirmed",
+      "11-mobile-ai",
+      "12-mobile-tickets",
+      "13-mobile-rag",
+      "16-mobile-members",
+      "17-delete-confirm"
+    ],
+    "page_errors": [],
+    "desktop": "1440x1000",
+    "mobile": "390x844"
+  },
+  "model_fixture_calls": {
+    "embedding": 2,
+    "generation": 1,
+    "stream": 2
+  },
+  "owned_resources_removed": true
+}

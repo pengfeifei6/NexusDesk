@@ -1,0 +1,36 @@
+
+> nexusdesk-web@0.4.0 test:unit
+> vitest --run src/lib/__tests__/management.spec.ts
+
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/web
+
+ ❯ src/lib/__tests__/management.spec.ts (14 tests | 2 failed) 408ms
+     × does not restore protected details from a late read after management returns 403 38ms
+     × does not restore protected details from a late read after management returns 404 27ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/__tests__/management.spec.ts > ticket management > does not restore protected details from a late read after management returns 403
+ FAIL  src/lib/__tests__/management.spec.ts > ticket management > does not restore protected details from a late read after management returns 404
+AssertionError: expected '跳至主要内容NexusDesk.组织选择请选择组织甲组 · 管理员乙组 ·…' not to contain '不能重新显示的旧保护详情'
+
+Expected: "不能重新显示的旧保护详情"
+Received: "跳至主要内容NexusDesk.组织选择请选择组织甲组 · 管理员乙组 · 管理员 上一页组织第 1 页 下一页组织 工作空间工单知识库检索问答组织成员AI 对话创建组织专注协作，沉淀知识NEXUSDESK WORKSPACE甲组工单详情管管理员工作台账户退出登录资源不存在或无法访问 重试← 返回工单列表工单 #5不能重新显示的旧保护详情待处理受理人未指派优先级普通最后更新11/11 18:00当前版本9007199254740993原始描述 领取工单刷新详情评论本页暂无评论记录处理进展，让团队及时了解情况。 上一页评论第 1 页 下一页评论 评论内容发表评论事件记录本页暂无事件 上一页事件第 1 页 下一页事件 NexusDesk · 让每一次协作都有迹可循"
+
+ ❯ src/lib/__tests__/management.spec.ts:162:32
+    160|     finishRead({ ...ticket, title: '不能重新显示的旧保护详情' })
+    161|     await flushPromises()
+    162|     expect(wrapper.text()).not.toContain('不能重新显示的旧保护详情')
+       |                                ^
+    163|     expect(wrapper.find('.ticket-management').exists()).toBe(false)
+    164|     expect(request.mock.calls).toHaveLength(callsAfterDenial)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 12 passed (14)
+   Start at  20:46:42
+   Duration  1.81s (transform 703ms, setup 0ms, import 888ms, tests 408ms, environment 373ms)
+

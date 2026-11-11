@@ -1,0 +1,27 @@
+Total: 36.02s
+ROUTINE ======================== github.com/pengfeifei6/NexusDesk/internal/platform/cache.getList[go.shape.struct { ID int64; OrgID int64; CreatorID int64; AssigneeID *int64; Title string; Body string; Priority int16; Status github.com/pengfeifei6/NexusDesk/internal/ticket.Status; Version int64; CreatedAt time.Time; UpdatedAt time.Time; DeletedAt *time.Time }] in /media/yjz/pzp/Go/projects/NexusDesk/internal/platform/cache/cache.go
+      10ms     10.66s (flat, cum) 29.59% of Total
+         .          .     95:func getList[T any](ctx context.Context, c *Cache, key string, org int64) ([]T, bool) {
+         .       20ms     96:	ctx, cancel := context.WithTimeout(ctx, c.options.Timeout)
+         .          .     97:	defer cancel()
+         .          .     98:	// GETRANGE bounds the bytes read even when Redis contains an oversized value.
+         .      810ms     99:	b, err := c.client.GetRange(ctx, key, 0, int64(c.options.MaxBytes)).Bytes()
+         .          .    100:	if err != nil {
+         .          .    101:		c.failures.Add(1)
+         .          .    102:		return nil, false
+         .          .    103:	}
+         .          .    104:	if len(b) == 0 {
+         .          .    105:		c.misses.Add(1)
+         .          .    106:		return nil, false
+         .          .    107:	}
+      10ms      9.80s    108:	items, ok := decodeList[T](b, org, c.options.MaxBytes)
+         .          .    109:	if !ok {
+         .          .    110:		c.corrupt.Add(1)
+         .          .    111:		return nil, false
+         .          .    112:	}
+         .       30ms    113:	return items, true
+         .          .    114:}
+         .          .    115:func (c *Cache) set(ctx context.Context, key string, org int64, value any) {
+         .          .    116:	data, err := json.Marshal(value)
+         .          .    117:	if err != nil {
+         .          .    118:		return

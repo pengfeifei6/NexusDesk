@@ -1,0 +1,49 @@
+$ go vet ./...
+$ go build ./...
+$ python3 scripts/test_dev.py
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.511s
+
+OK
+$ npm run test:unit -- --run
+
+> nexusdesk-web@0.4.0 test:unit
+> vitest --run
+
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/web
+
+
+ Test Files  7 passed (7)
+      Tests  141 passed (141)
+   Start at  17:18:03
+   Duration  2.22s (transform 1.80s, setup 0ms, import 4.92s, tests 1.74s, environment 5.56s)
+
+$ npm run build
+
+> nexusdesk-web@0.4.0 build
+> vue-tsc --build && vite build
+
+vite v8.3.7 building client environment for production...
+transforming...
+✓ 66 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.41 kB │ gzip:  0.31 kB
+dist/assets/index-DFbyONcz.css    2.31 kB │ gzip:  0.95 kB
+dist/assets/index-9rbbFr5F.js   165.62 kB │ gzip: 59.45 kB
+
+✓ built in 464ms
+$ npm run lint
+
+> nexusdesk-web@0.4.0 lint
+> eslint .
+
+$ npm run format:check
+
+> nexusdesk-web@0.4.0 format:check
+> prettier --check src/ vite.config.ts vitest.config.ts eslint.config.ts
+
+Checking formatting...
+All matched files use Prettier code style!

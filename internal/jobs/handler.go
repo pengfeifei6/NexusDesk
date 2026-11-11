@@ -3,6 +3,7 @@ package jobs
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/pengfeifei6/NexusDesk/internal/auth"
+	"github.com/pengfeifei6/NexusDesk/internal/platform/observe"
 )
 
 type Handler struct{ service *Service }
@@ -34,7 +35,7 @@ func failure(c *gin.Context, e error) {
 	case "ASYNC_DISABLED":
 		status = 503
 	}
-	c.JSON(status, gin.H{"error": gin.H{"code": code, "message": newError(code).Error(), "request_id": ""}})
+	c.JSON(status, gin.H{"error": gin.H{"code": code, "message": newError(code).Error(), "request_id": observe.RequestID(c.Request.Context())}})
 }
 func (h *Handler) scope(c *gin.Context) (actor, org, id int64, ok bool) {
 	c.Header("Cache-Control", "no-store")

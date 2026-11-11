@@ -1,0 +1,48 @@
+File: api
+Build ID: d8479883d58b6690f6c78442abbdae22cf493193
+Type: alloc_space
+Time: 2026-11-11 19:04:20 CST
+Showing nodes accounting for 8026.44MB, 96.81% of 8291.26MB total
+Dropped 229 nodes (cum <= 41.46MB)
+Showing top 40 nodes out of 77
+      flat  flat%   sum%        cum   cum%
+ 2249.37MB 27.13% 27.13%  2249.37MB 27.13%  bytes.growSlice
+ 1004.43MB 12.11% 39.24%  1064.43MB 12.84%  github.com/pengfeifei6/NexusDesk/internal/ticket.publicTicket
+  791.15MB  9.54% 48.79%   791.15MB  9.54%  encoding/json.(*RawMessage).UnmarshalJSON
+  767.45MB  9.26% 58.04%  4124.32MB 49.74%  encoding/json.Marshal
+  763.26MB  9.21% 67.25%   763.26MB  9.21%  github.com/redis/go-redis/v9/internal/proto.(*Reader).readStringReply
+  597.13MB  7.20% 74.45%   597.13MB  7.20%  reflect.growslice
+  575.24MB  6.94% 81.39%  3330.13MB 40.16%  encoding/json.mapEncoder.encode
+  484.01MB  5.84% 87.23%   484.01MB  5.84%  reflect.unsafe_New
+  471.63MB  5.69% 92.91%   480.63MB  5.80%  encoding/json.(*decodeState).literalStore
+  192.73MB  2.32% 95.24%   193.23MB  2.33%  sync.(*Pool).pinSlow
+      60MB  0.72% 95.96%       60MB  0.72%  time.Time.Format
+   24.50MB   0.3% 96.26%  1903.92MB 22.96%  encoding/json.Unmarshal
+   22.51MB  0.27% 96.53%  7983.30MB 96.29%  github.com/pengfeifei6/NexusDesk/internal/ticket.(*Handler).list
+       4MB 0.048% 96.58%    71.36MB  0.86%  net/http.(*conn).readRequest
+    3.50MB 0.042% 96.62%    45.01MB  0.54%  github.com/pengfeifei6/NexusDesk/internal/organization.FindActiveMembershipWith
+    3.50MB 0.042% 96.66%  1296.29MB 15.63%  encoding/json.(*decodeState).object
+       3MB 0.036% 96.70%  2252.37MB 27.17%  bytes.(*Buffer).grow
+    2.50MB  0.03% 96.73%    49.28MB  0.59%  net/http.readRequest
+    2.50MB  0.03% 96.76%   772.26MB  9.31%  github.com/redis/go-redis/v9.cmdable.GetRange (inline)
+       1MB 0.012% 96.77%    52.01MB  0.63%  github.com/pengfeifei6/NexusDesk/internal/auth.(*TokenManager).Verify
+       1MB 0.012% 96.78%    63.95MB  0.77%  github.com/pengfeifei6/NexusDesk/internal/platform/httpserver.NewRouterWithObserver.observation.func2.1
+    0.50MB 0.006% 96.79%  2726.95MB 32.89%  github.com/pengfeifei6/NexusDesk/internal/ticket.(*Service).List
+    0.50MB 0.006% 96.79%  1862.42MB 22.46%  encoding/json.(*decodeState).array
+    0.50MB 0.006% 96.80%  2701.44MB 32.58%  github.com/pengfeifei6/NexusDesk/internal/platform/cache.List[go.shape.struct { ID int64; OrgID int64; CreatorID int64; AssigneeID *int64; Title string; Body string; Priority int16; Status github.com/pengfeifei6/NexusDesk/internal/ticket.Status; Version int64; CreatedAt time.Time; UpdatedAt time.Time; DeletedAt *time.Time }]
+    0.50MB 0.006% 96.81%    42.01MB  0.51%  github.com/golang-jwt/jwt/v5.(*Parser).ParseUnverified
+         0     0% 96.81%  2251.37MB 27.15%  bytes.(*Buffer).Write
+         0     0% 96.81%  1893.42MB 22.84%  encoding/json.(*decodeState).unmarshal
+         0     0% 96.81%  1893.42MB 22.84%  encoding/json.(*decodeState).value
+         0     0% 96.81%  3331.13MB 40.18%  encoding/json.(*encodeState).marshal
+         0     0% 96.81%  3331.13MB 40.18%  encoding/json.(*encodeState).reflectValue
+         0     0% 96.81%  3325.13MB 40.10%  encoding/json.arrayEncoder.encode
+         0     0% 96.81%  3329.63MB 40.16%  encoding/json.interfaceEncoder
+         0     0% 96.81%  3325.13MB 40.10%  encoding/json.sliceEncoder.encode
+         0     0% 96.81%  2160.32MB 26.06%  encoding/json.stringEncoder
+         0     0% 96.81%  4143.40MB 49.97%  github.com/gin-gonic/gin.(*Context).JSON (inline)
+         0     0% 96.81%  8147.27MB 98.26%  github.com/gin-gonic/gin.(*Context).Next
+         0     0% 96.81%  4143.40MB 49.97%  github.com/gin-gonic/gin.(*Context).Render
+         0     0% 96.81%  8176.48MB 98.62%  github.com/gin-gonic/gin.(*Engine).ServeHTTP
+         0     0% 96.81%  8147.27MB 98.26%  github.com/gin-gonic/gin.(*Engine).handleHTTPRequest
+         0     0% 96.81%  4108.69MB 49.55%  github.com/gin-gonic/gin/codec/json.jsonApi.Marshal

@@ -1,0 +1,25 @@
+go build
+
+
+npm ci
+npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+
+added 341 packages in 4s
+
+
+frontend build
+
+> nexusdesk-web@0.4.0 build
+> vue-tsc --build && vite build
+
+vite v8.3.7 building client environment for production...
+transforming...
+✓ 78 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.61 kB │ gzip:  0.44 kB
+dist/assets/index-BHHFPhUE.css   23.30 kB │ gzip:  5.93 kB
+dist/assets/index-B3MQWnlI.js   195.52 kB │ gzip: 69.19 kB
+
+✓ built in 506ms

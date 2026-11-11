@@ -1,0 +1,71 @@
+python unit
+..启动 api；Ctrl+C 停止。配置值不输出。
+启动 worker；Ctrl+C 停止。配置值不输出。
+................................
+----------------------------------------------------------------------
+Ran 34 tests in 0.723s
+
+OK
+
+
+go vet
+
+
+go build
+
+
+frontend unit
+
+> nexusdesk-web@0.4.0 test:unit
+> vitest --run
+
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/.local/week12-package-candidate2-check/NexusDesk-v1.0.0-candidate2/web
+
+ ✓ src/lib/__tests__/client.spec.ts (34 tests) 40ms
+ ✓ src/__tests__/App.spec.ts (1 test) 53ms
+ ✓ src/lib/__tests__/app.spec.ts (11 tests) 357ms
+ ✓ src/lib/__tests__/rag.spec.ts (19 tests) 447ms
+ ✓ src/lib/__tests__/management.spec.ts (14 tests) 464ms
+ ✓ src/lib/__tests__/jobs.spec.ts (18 tests) 464ms
+ ✓ src/lib/__tests__/knowledge.spec.ts (26 tests) 658ms
+ ✓ src/lib/__tests__/ai.spec.ts (40 tests) 716ms
+
+ Test Files  8 passed (8)
+      Tests  163 passed (163)
+   Start at  20:53:33
+   Duration  2.19s (transform 2.80s, setup 0ms, import 5.98s, tests 3.20s, environment 3.57s)
+
+
+
+frontend typecheck/build
+
+> nexusdesk-web@0.4.0 build
+> vue-tsc --build && vite build
+
+vite v8.3.7 building client environment for production...
+transforming...
+✓ 78 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.61 kB │ gzip:  0.44 kB
+dist/assets/index-BHHFPhUE.css   23.30 kB │ gzip:  5.93 kB
+dist/assets/index-DK4Mv_La.js   195.72 kB │ gzip: 69.24 kB
+
+✓ built in 529ms
+
+
+frontend lint
+
+> nexusdesk-web@0.4.0 lint
+> eslint .
+
+
+
+frontend format
+
+> nexusdesk-web@0.4.0 format:check
+> prettier --check src/ vite.config.ts vitest.config.ts eslint.config.ts
+
+Checking formatting...
+All matched files use Prettier code style!

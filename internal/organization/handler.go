@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/pengfeifei6/NexusDesk/internal/auth"
+	"github.com/pengfeifei6/NexusDesk/internal/platform/observe"
 )
 
 type Handler struct{ service *Service }
@@ -19,7 +20,7 @@ func (h *Handler) RegisterRoutes(g *gin.RouterGroup) {
 	g.GET("/organizations", h.list)
 }
 func failure(c *gin.Context, status int, code, message string) {
-	c.JSON(status, gin.H{"error": gin.H{"code": code, "message": message, "request_id": ""}})
+	c.JSON(status, gin.H{"error": gin.H{"code": code, "message": message, "request_id": observe.RequestID(c.Request.Context())}})
 }
 func domainFailure(c *gin.Context, err error) {
 	switch {

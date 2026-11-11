@@ -1,0 +1,32 @@
+PASS admin adds registered member/duplicate rejected without another relationship
+PASS edit/assign/unassign/version conflict refreshes without replaying stale write
+PASS register/login/create organization/ticket/claim/transition/comment
+PASS upload/async worker/index/preview/download
+PASS hybrid retrieval/grounded answer/citations/measured usage
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: 09-ai-proposal core text contrast below 4.5:1
++ actual - expected
+
++ [
++   {
++     color: 'rgb(92, 113, 148)',
++     ratio: 4.47,
++     text: '数据库故障协作'
++   }
++ ]
+- []
+
+    at shot (file:///media/yjz/pzp/Go/projects/NexusDesk/scripts/frontend-polish-browser.mjs:64:12)
+    at async file:///media/yjz/pzp/Go/projects/NexusDesk/scripts/frontend-polish-browser.mjs:237:3 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [ { text: '数据库故障协作', ratio: 4.47, color: 'rgb(92, 113, 148)' } ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.12.0

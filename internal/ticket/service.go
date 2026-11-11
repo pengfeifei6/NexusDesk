@@ -7,7 +7,9 @@ import (
 	"math"
 	"time"
 
+	"github.com/jackc/pgx/v5"
 	"github.com/pengfeifei6/NexusDesk/internal/organization"
+	"github.com/pengfeifei6/NexusDesk/internal/platform/cache"
 )
 
 type MembershipFinder interface {
@@ -32,6 +34,7 @@ type Transaction interface {
 	Rollback(context.Context) error
 }
 type Service struct {
+	cache   *cache.Cache
 	store   Store
 	members MembershipFinder
 }
@@ -65,6 +68,9 @@ func member(ctx context.Context, f MembershipFinder, actor, org int64) (organiza
 	}
 	return m, nil
 }
+
+// WithCache optionally enables authorized list caching during service setup.
+func (s *Service) WithCache(c *cache.Cache) *Service { s.cache = c; return s }
 func (s *Service) Authorize(ctx context.Context, actor, org int64) error {
 	_, err := member(ctx, s.members, actor, org)
 	return err
@@ -113,24 +119,49 @@ func audit(ctx context.Context, tx Transaction, t Ticket, actor int64, kind stri
 func (s *Service) Create(ctx context.Context, actor, org int64, in CreateInput) (Ticket, error) {
 	var result Ticket
 	err := s.write(ctx, actor, org, func(ctx context.Context, tx Transaction, _ organization.Membership) error {
-		title, err := cleanText(in.Title, 200)
-		if err != nil {
-			return err
-		}
-		body, err := cleanText(in.Body, 10000)
-		if err != nil {
-			return err
-		}
-		if !validPriority(in.Priority) {
-			return ErrInvalidRequest
-		}
-		result, err = tx.CreateTicket(ctx, Ticket{OrgID: org, CreatorID: actor, Title: title, Body: body, Priority: in.Priority, Status: Open})
-		if err != nil {
-			return err
-		}
-		return audit(ctx, tx, result, actor, "TICKET_CREATED", map[string]any{}, snapshot(result))
+		var err error
+		result, err = s.createInTransaction(ctx, tx, actor, org, in, "")
+		return err
 	})
 	if err != nil {
+		return Ticket{}, err
+	}
+	return result, nil
+}
+
+// CreateInTransaction reuses ticket validation and audit without owning commit or rollback.
+// The caller must keep authorization, the ticket, audit and its own state in this tx.
+func (s *Service) CreateInTransaction(ctx context.Context, tx pgx.Tx, actor, org int64, in CreateInput, proposalID string) (Ticket, error) {
+	if tx == nil {
+		return Ticket{}, ErrStorage
+	}
+	wrapped := &postgresTx{tx: tx}
+	if _, err := member(ctx, wrapped, actor, org); err != nil {
+		return Ticket{}, err
+	}
+	return s.createInTransaction(ctx, wrapped, actor, org, in, proposalID)
+}
+func (s *Service) createInTransaction(ctx context.Context, tx Transaction, actor, org int64, in CreateInput, proposalID string) (Ticket, error) {
+	title, err := cleanText(in.Title, 200)
+	if err != nil {
+		return Ticket{}, err
+	}
+	body, err := cleanText(in.Body, 10000)
+	if err != nil {
+		return Ticket{}, err
+	}
+	if !validPriority(in.Priority) {
+		return Ticket{}, ErrInvalidRequest
+	}
+	result, err := tx.CreateTicket(ctx, Ticket{OrgID: org, CreatorID: actor, Title: title, Body: body, Priority: in.Priority, Status: Open})
+	if err != nil {
+		return Ticket{}, err
+	}
+	after := snapshot(result)
+	if proposalID != "" {
+		after["ai_proposal_id"] = proposalID
+	}
+	if err := audit(ctx, tx, result, actor, "TICKET_CREATED", map[string]any{}, after); err != nil {
 		return Ticket{}, err
 	}
 	return result, nil
@@ -154,7 +185,9 @@ func (s *Service) List(ctx context.Context, actor, org int64, f Filter) ([]Ticke
 	if f.Status != "" && !validStatus(f.Status) || f.Priority != nil && !validPriority(*f.Priority) {
 		return nil, ErrInvalidRequest
 	}
-	items, err := s.store.ListTickets(ctx, org, f)
+	items, err := cache.List(ctx, s.cache, org, "tickets", f, func() ([]Ticket, error) {
+		return s.store.ListTickets(ctx, org, f)
+	}, func(item Ticket) bool { return item.OrgID == org && item.ID > 0 && item.DeletedAt == nil })
 	if err != nil {
 		return nil, err
 	}

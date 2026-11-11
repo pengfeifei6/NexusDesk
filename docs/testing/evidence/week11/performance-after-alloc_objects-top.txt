@@ -1,0 +1,48 @@
+File: api
+Build ID: 986763ab5e1360ea316ca6d1c3684ff8951337d1
+Type: alloc_objects
+Time: 2026-11-11 19:08:22 CST
+Showing nodes accounting for 62236391, 94.39% of 65935626 total
+Dropped 223 nodes (cum <= 329678)
+Showing top 40 nodes out of 57
+      flat  flat%   sum%        cum   cum%
+  36394879 55.20% 55.20%   36394879 55.20%  reflect.unsafe_New
+  16424313 24.91% 80.11%   19657496 29.81%  github.com/pengfeifei6/NexusDesk/internal/ticket.publicTicket
+   3380008  5.13% 85.23%    3434624  5.21%  encoding/json.(*decodeState).literalStore
+   3233183  4.90% 90.14%    3233183  4.90%  time.Time.Format
+   1583285  2.40% 92.54%   38081048 57.75%  encoding/json.mapEncoder.encode
+    218456  0.33% 92.87%     851489  1.29%  github.com/pengfeifei6/NexusDesk/internal/auth.(*accessClaims).UnmarshalJSON
+    176956  0.27% 93.14%     881171  1.34%  github.com/pengfeifei6/NexusDesk/internal/organization.FindActiveMembershipWith
+    142780  0.22% 93.35%     383337  0.58%  github.com/jackc/pgx/v5/pgconn/ctxwatch.(*ContextWatcher).Watch
+    141997  0.22% 93.57%    4473221  6.78%  encoding/json.(*decodeState).object
+    104862  0.16% 93.73%     356086  0.54%  github.com/jackc/pgx/v5.(*baseRows).Scan
+    103977  0.16% 93.89%   63332586 96.05%  github.com/pengfeifei6/NexusDesk/internal/ticket.(*Handler).list
+    101955  0.15% 94.04%    4575169  6.94%  encoding/json.Unmarshal
+     76460  0.12% 94.16%    1422954  2.16%  github.com/pengfeifei6/NexusDesk/internal/auth.(*TokenManager).Verify
+     40773 0.062% 94.22%   38165406 57.88%  encoding/json.Marshal
+     27309 0.041% 94.26%    1039004  1.58%  github.com/golang-jwt/jwt/v5.(*Parser).ParseUnverified
+     25123 0.038% 94.30%     384530  0.58%  github.com/pengfeifei6/NexusDesk/internal/auth.(*PostgresRepository).FindUserByID
+     21846 0.033% 94.33%    4827056  7.32%  github.com/pengfeifei6/NexusDesk/internal/ticket.(*Service).List
+     21845 0.033% 94.36%    3760086  5.70%  encoding/json.(*decodeState).array
+     16384 0.025% 94.39%    3623550  5.50%  github.com/pengfeifei6/NexusDesk/internal/platform/cache.decodeList[go.shape.struct { ID int64; OrgID int64; CreatorID int64; AssigneeID *int64; Title string; Body string; Priority int16; Status github.com/pengfeifei6/NexusDesk/internal/ticket.Status; Version int64; CreatedAt time.Time; UpdatedAt time.Time; DeletedAt *time.Time }]
+         0     0% 94.39%    4473221  6.78%  encoding/json.(*decodeState).unmarshal
+         0     0% 94.39%    4473221  6.78%  encoding/json.(*decodeState).value
+         0     0% 94.39%   38089240 57.77%  encoding/json.(*encodeState).marshal
+         0     0% 94.39%   38089240 57.77%  encoding/json.(*encodeState).reflectValue
+         0     0% 94.39%   37988204 57.61%  encoding/json.arrayEncoder.encode
+         0     0% 94.39%   38061933 57.73%  encoding/json.interfaceEncoder
+         0     0% 94.39%   37988204 57.61%  encoding/json.sliceEncoder.encode
+         0     0% 94.39%   38222251 57.97%  github.com/gin-gonic/gin.(*Context).JSON (inline)
+         0     0% 94.39%   65526787 99.38%  github.com/gin-gonic/gin.(*Context).Next
+         0     0% 94.39%   38222251 57.97%  github.com/gin-gonic/gin.(*Context).Render
+         0     0% 94.39%   65563939 99.44%  github.com/gin-gonic/gin.(*Engine).ServeHTTP
+         0     0% 94.39%   65526787 99.38%  github.com/gin-gonic/gin.(*Engine).handleHTTPRequest
+         0     0% 94.39%   38120151 57.81%  github.com/gin-gonic/gin/codec/json.jsonApi.Marshal
+         0     0% 94.39%   38222251 57.97%  github.com/gin-gonic/gin/render.JSON.Render
+         0     0% 94.39%   38222251 57.97%  github.com/gin-gonic/gin/render.WriteJSON
+         0     0% 94.39%    1297340  1.97%  github.com/golang-jwt/jwt/v5.(*Parser).ParseWithClaims
+         0     0% 94.39%    1346494  2.04%  github.com/golang-jwt/jwt/v5.ParseWithClaims
+         0     0% 94.39%     641858  0.97%  github.com/jackc/pgx/v5.(*Conn).Query
+         0     0% 94.39%     641858  0.97%  github.com/jackc/pgx/v5.(*Conn).QueryRow (inline)
+         0     0% 94.39%     356086  0.54%  github.com/jackc/pgx/v5.(*connRow).Scan
+         0     0% 94.39%     383337  0.58%  github.com/jackc/pgx/v5/pgconn.(*PgConn).ExecStatement

@@ -1,0 +1,12 @@
+PASS admin adds registered member/duplicate rejected without another relationship
+PASS creation shortcut preserves draft/filter/page2/route/focus without refetch
+PASS edit/assign/unassign/version conflict refreshes without replaying stale write
+PASS register/login/create organization/ticket/claim/transition/comment
+PASS upload shortcut preserves selected file/route/focus without refetch
+PASS upload/async worker/index/preview/download
+PASS hybrid retrieval/grounded answer/citations/measured usage
+PASS SSE tool proposal/no premature write/human confirmation
+PASS ordinary member read-only management/backend 403/delete cancel and explicit confirmation
+PASS 390px responsive navigation/no overflow/organization scope change
+PASS 360/768/1440 viewport overflow and reduced-motion mode
+PASS logout clears protected content/no token persistence/no page errors

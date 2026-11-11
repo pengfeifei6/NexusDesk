@@ -95,6 +95,9 @@ func (r *testRepository) Search(_ context.Context, _ int64, v []float32, k int, 
 	r.requestedVector = v
 	return r.rows, nil
 }
+func (r *testRepository) LexicalSearch(context.Context, int64, []float32, []string, int, float64) ([]sourceSnapshot, error) {
+	return nil, nil
+}
 func (r *testRepository) Validate(_ context.Context, _ int64, sources []sourceSnapshot) error {
 	r.validations++
 	if r.validateFn != nil {

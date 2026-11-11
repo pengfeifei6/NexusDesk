@@ -1,0 +1,48 @@
+File: api
+Build ID: d8479883d58b6690f6c78442abbdae22cf493193
+Type: alloc_objects
+Time: 2026-11-11 19:04:20 CST
+Showing nodes accounting for 53745408, 94.84% of 56667597 total
+Dropped 246 nodes (cum <= 283337)
+Showing top 40 nodes out of 60
+      flat  flat%   sum%        cum   cum%
+  31708983 55.96% 55.96%   31708983 55.96%  reflect.unsafe_New
+  13376716 23.61% 79.56%   15998216 28.23%  github.com/pengfeifei6/NexusDesk/internal/ticket.publicTicket
+   3425273  6.04% 85.61%    3629170  6.40%  encoding/json.(*decodeState).literalStore
+   2621500  4.63% 90.23%    2621500  4.63%  time.Time.Format
+   1382486  2.44% 92.67%   33139601 58.48%  encoding/json.mapEncoder.encode
+    178424  0.31% 92.99%    4491306  7.93%  encoding/json.Unmarshal
+    170866   0.3% 93.29%     313951  0.55%  context.WithDeadlineCause
+    150738  0.27% 93.55%     314579  0.56%  github.com/jackc/pgx/v5.(*baseRows).Scan
+    147457  0.26% 93.81%     505780  0.89%  github.com/pengfeifei6/NexusDesk/internal/platform/cache.(*Cache).Revision
+    141996  0.25% 94.07%    4121577  7.27%  encoding/json.(*decodeState).object
+    111197   0.2% 94.26%   54491107 96.16%  github.com/pengfeifei6/NexusDesk/internal/ticket.(*Handler).list
+    107669  0.19% 94.45%     359505  0.63%  github.com/jackc/pgx/v5/pgconn/ctxwatch.(*ContextWatcher).Watch
+     55708 0.098% 94.55%     597699  1.05%  github.com/pengfeifei6/NexusDesk/internal/organization.FindActiveMembershipWith
+     38229 0.067% 94.62%    1118779  1.97%  github.com/pengfeifei6/NexusDesk/internal/auth.(*TokenManager).Verify
+     32768 0.058% 94.67%     982242  1.73%  github.com/golang-jwt/jwt/v5.(*Parser).ParseUnverified
+     22216 0.039% 94.71%   33189185 58.57%  encoding/json.Marshal
+     21845 0.039% 94.75%    3532729  6.23%  encoding/json.(*decodeState).array
+     21845 0.039% 94.79%    4484786  7.91%  github.com/pengfeifei6/NexusDesk/internal/platform/cache.List[go.shape.struct { ID int64; OrgID int64; CreatorID int64; AssigneeID *int64; Title string; Body string; Priority int16; Status github.com/pengfeifei6/NexusDesk/internal/ticket.Status; Version int64; CreatedAt time.Time; UpdatedAt time.Time; DeletedAt *time.Time }]
+     18569 0.033% 94.82%     316574  0.56%  github.com/pengfeifei6/NexusDesk/internal/auth.(*PostgresRepository).FindUserByID
+     10923 0.019% 94.84%    4832009  8.53%  github.com/pengfeifei6/NexusDesk/internal/ticket.(*Service).List
+         0     0% 94.84%     313951  0.55%  context.WithDeadline (inline)
+         0     0% 94.84%     313951  0.55%  context.WithTimeout
+         0     0% 94.84%    4240077  7.48%  encoding/json.(*decodeState).unmarshal
+         0     0% 94.84%    4240077  7.48%  encoding/json.(*decodeState).value
+         0     0% 94.84%   33155986 58.51%  encoding/json.(*encodeState).marshal
+         0     0% 94.84%   33155986 58.51%  encoding/json.(*encodeState).reflectValue
+         0     0% 94.84%   33091810 58.40%  encoding/json.arrayEncoder.encode
+         0     0% 94.84%   33128678 58.46%  encoding/json.interfaceEncoder
+         0     0% 94.84%   33091810 58.40%  encoding/json.sliceEncoder.encode
+         0     0% 94.84%   33244248 58.67%  github.com/gin-gonic/gin.(*Context).JSON (inline)
+         0     0% 94.84%   56233445 99.23%  github.com/gin-gonic/gin.(*Context).Next
+         0     0% 94.84%   33244248 58.67%  github.com/gin-gonic/gin.(*Context).Render
+         0     0% 94.84%   56313102 99.37%  github.com/gin-gonic/gin.(*Engine).ServeHTTP
+         0     0% 94.84%   56233445 99.23%  github.com/gin-gonic/gin.(*Engine).handleHTTPRequest
+         0     0% 94.84%   33163045 58.52%  github.com/gin-gonic/gin/codec/json.jsonApi.Marshal
+         0     0% 94.84%   33244248 58.67%  github.com/gin-gonic/gin/render.JSON.Render
+         0     0% 94.84%   33244248 58.67%  github.com/gin-gonic/gin/render.WriteJSON
+         0     0% 94.84%    1069627  1.89%  github.com/golang-jwt/jwt/v5.(*Parser).ParseWithClaims
+         0     0% 94.84%    1080550  1.91%  github.com/golang-jwt/jwt/v5.ParseWithClaims
+         0     0% 94.84%     512664   0.9%  github.com/jackc/pgx/v5.(*Conn).Query

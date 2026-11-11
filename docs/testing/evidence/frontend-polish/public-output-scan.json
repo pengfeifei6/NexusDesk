@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "public_text_files": 27,
+  "known_key_and_private_key_patterns_absent": true,
+  "private_config_read": false
+}

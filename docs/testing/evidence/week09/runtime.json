@@ -1,0 +1,40 @@
+{
+  "daily_schema_before": 12,
+  "daily_schema_after": 14,
+  "opaque_backup_created_before_up": true,
+  "old_migrations_unchanged": true,
+  "down_or_volume_deletion": false,
+  "utc": "2026-11-11T09:00:23.183999+00:00",
+  "application_readiness": {
+    "8080": true,
+    "5173": true
+  },
+  "worker_launched": true,
+  "processes": {
+    "api": {
+      "alive": true,
+      "cwd": ".",
+      "environment_scope_checked": true
+    },
+    "worker": {
+      "alive": true,
+      "cwd": ".",
+      "environment_scope_checked": true
+    },
+    "web": {
+      "alive": true,
+      "cwd": "web",
+      "environment_scope_checked": true
+    }
+  },
+  "storage_location_preserved": true,
+  "env_mode_octal": "0o600",
+  "runtime_source_worktree": "NexusDesk",
+  "cache_enabled": "true",
+  "ai_rate_limit_enabled": "true",
+  "worker_started_marker": true,
+  "runtime_branch": "main",
+  "relocation_utc": "2026-11-11T09:20:18.645505+00:00",
+  "relocation_daily_database_migrated": false,
+  "current_schema": 14
+}

@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "archive": "nexusdesk-v1.0.0-preview-source.tar.gz",
+  "sha256": "e37dfd2242ed05f1c0f9a1a43f76feb6d5e9be19ed782f82057c6928de08f983",
+  "manifest_files": 500,
+  "existing_node_modules_used": false,
+  "shared_toolchain_and_package_download_cache": true,
+  "daily_config_read": false,
+  "checks": [
+    {
+      "name": "go build",
+      "exit_code": 0,
+      "seconds": 3.018
+    },
+    {
+      "name": "npm ci",
+      "exit_code": 0,
+      "seconds": 3.984
+    },
+    {
+      "name": "frontend build",
+      "exit_code": 0,
+      "seconds": 5.395
+    }
+  ]
+}

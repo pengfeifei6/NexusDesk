@@ -3,6 +3,7 @@ package ticket
 import (
 	"context"
 	"errors"
+	"strconv"
 	"time"
 
 	"github.com/jackc/pgx/v5"
@@ -59,11 +60,19 @@ func (r *PostgresRepository) ListTickets(ctx context.Context, org int64, f Filte
 	}
 	ctx, cancel := context.WithTimeout(ctx, 3*time.Second)
 	defer cancel()
-	var status any
+	query := "SELECT " + ticketColumns + " FROM tickets WHERE org_id=$1 AND deleted_at IS NULL"
+	args := []any{org}
 	if f.Status != "" {
-		status = string(f.Status)
+		args = append(args, string(f.Status))
+		query += " AND status=$" + strconv.Itoa(len(args))
 	}
-	rows, err := r.pool.Query(ctx, "SELECT "+ticketColumns+" FROM tickets WHERE org_id=$1 AND deleted_at IS NULL AND ($2::text IS NULL OR status=$2) AND ($3::smallint IS NULL OR priority=$3) ORDER BY created_at DESC,id DESC LIMIT $4 OFFSET $5", org, status, f.Priority, f.Size, offset)
+	if f.Priority != nil {
+		args = append(args, *f.Priority)
+		query += " AND priority=$" + strconv.Itoa(len(args))
+	}
+	args = append(args, f.Size, offset)
+	query += " ORDER BY created_at DESC,id DESC LIMIT $" + strconv.Itoa(len(args)-1) + " OFFSET $" + strconv.Itoa(len(args))
+	rows, err := r.pool.Query(ctx, query, args...)
 	if err != nil {
 		return nil, storageError(ctx, err)
 	}

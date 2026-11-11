@@ -89,20 +89,20 @@ watch(
 onBeforeUnmount(() => scope.cancel())
 </script>
 <template>
-  <section class="panel">
+  <section class="panel" aria-label="检索索引">
     <h2>检索索引</h2>
     <p>正文提取完成后，还需建立索引才能参与检索和问答。</p>
     <p v-if="index">
       {{ labels[index.status] }} · {{ index.chunk_count }} 块 · 版本 {{ index.index_version }}
     </p>
     <p v-if="index" class="meta">
-      {{ index.embedding_model }} · {{ index.embedding_dimension }} 维 · {{ index.chunker_version }}
+      {{ index.embedding_model }} · {{ index.embedding_dimension }} 维
     </p>
     <p v-if="index?.failure_code" class="notice">
       上次索引失败，可检查模型服务后重试。错误码：{{ index.failure_code }}
     </p>
     <p v-if="index?.status === 'INDEXING'">
-      索引正在处理中。若长时间未完成，请联系管理员检查，不要直接修改数据库状态。
+      索引正在处理中，完成后即可检索。若长时间未完成，请联系管理员。
     </p>
     <p v-if="document.status !== 'READY'">请先完成正文提取。</p>
     <p v-if="error" role="alert" class="error">{{ error }}</p>

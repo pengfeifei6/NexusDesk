@@ -1,0 +1,21 @@
+..E...
+======================================================================
+ERROR: test_extracted_archive_keeps_the_frozen_corpus_needed_by_unit_checks (test_package_release.PackageTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/yjz/pzp/Go/projects/NexusDesk/scripts/test_package_release.py", line 63, in test_extracted_archive_keeps_the_frozen_corpus_needed_by_unit_checks
+    _, labels, texts = load_corpus(extracted/'NexusDesk-v1.0.0/requests/testdata/rag-week10')
+  File "/media/yjz/pzp/Go/projects/NexusDesk/scripts/week10_metrics.py", line 17, in load_corpus
+    raw = (directory / 'rag-eval.jsonl').read_bytes()
+  File "/usr/lib/python3.8/pathlib.py", line 1229, in read_bytes
+    with self.open(mode='rb') as f:
+  File "/usr/lib/python3.8/pathlib.py", line 1222, in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+  File "/usr/lib/python3.8/pathlib.py", line 1078, in _opener
+    return self._accessor.open(self, flags, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/media/yjz/pzp/Go/projects/NexusDesk/.local/week12-unit/tmpphnyor8n/extracted/NexusDesk-v1.0.0/requests/testdata/rag-week10/rag-eval.jsonl'
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.052s
+
+FAILED (errors=1)

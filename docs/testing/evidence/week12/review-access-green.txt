@@ -1,0 +1,13 @@
+
+> nexusdesk-web@0.4.0 test:unit
+> vitest --run src/lib/__tests__/management.spec.ts
+
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/web
+
+
+ Test Files  1 passed (1)
+      Tests  14 passed (14)
+   Start at  20:48:05
+   Duration  1.82s (transform 712ms, setup 0ms, import 906ms, tests 393ms, environment 365ms)
+

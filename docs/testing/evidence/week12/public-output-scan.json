@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "synthetic_text_artifacts": 45,
+  "archive_source_files": 504,
+  "known_key_and_private_key_patterns_absent": true,
+  "private_config_read": false
+}

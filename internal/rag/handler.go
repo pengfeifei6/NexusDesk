@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/pengfeifei6/NexusDesk/internal/auth"
+	"github.com/pengfeifei6/NexusDesk/internal/platform/observe"
 )
 
 type Handler struct{ service *Service }
@@ -42,7 +43,7 @@ func failure(c *gin.Context, err error) {
 	case "MODEL_TIMEOUT", "INDEX_TIMEOUT":
 		status = 504
 	}
-	c.JSON(status, gin.H{"error": gin.H{"code": code, "message": errorMessages[code], "request_id": ""}})
+	c.JSON(status, gin.H{"error": gin.H{"code": code, "message": errorMessages[code], "request_id": observe.RequestID(c.Request.Context())}})
 }
 func positive(raw string) (int64, error) {
 	if raw == "" {
@@ -97,7 +98,7 @@ func readQuery(c *gin.Context) (QueryInput, bool) {
 		failure(c, NewError("INVALID_REQUEST"))
 		return QueryInput{}, false
 	}
-	fields, ok := auth.ReadJSONFields(c, 16*1024, []string{"query", "top_k"}, []string{"query"})
+	fields, ok := auth.ReadJSONFields(c, 16*1024, []string{"query", "top_k", "retrieval_mode"}, []string{"query"})
 	if !ok {
 		return QueryInput{}, false
 	}
@@ -114,6 +115,14 @@ func readQuery(c *gin.Context) (QueryInput, bool) {
 			return QueryInput{}, false
 		}
 		input.TopK = *k
+	}
+	if raw, present := fields["retrieval_mode"]; present {
+		var mode *string
+		if err := json.Unmarshal(raw, &mode); err != nil || mode == nil || (*mode != "vector" && *mode != "hybrid") {
+			failure(c, NewError("INVALID_REQUEST"))
+			return QueryInput{}, false
+		}
+		input.RetrievalMode = *mode
 	}
 	input, err := normalizeQuery(input)
 	if err != nil {

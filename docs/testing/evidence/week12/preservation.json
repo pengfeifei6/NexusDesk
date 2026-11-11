@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "baseline_files": 994,
+  "deleted": 0,
+  "modified_existing_files": [
+    ".gitignore",
+    "AGENTS.md",
+    "README.md",
+    "docs/architecture.md",
+    "docs/database.md",
+    "docs/requirements.md",
+    "web/src/App.vue",
+    "web/src/assets/main.css",
+    "web/src/components/UiIcon.vue",
+    "web/src/composables/desk.ts",
+    "web/src/lib/client.ts",
+    "web/src/lib/types.ts",
+    "web/src/router/index.ts",
+    "web/src/views/DeskView.vue",
+    "web/src/views/TicketDetailView.vue"
+  ],
+  "old_evidence_files_unchanged": 496,
+  "migrations_and_dependency_locks_unchanged": true,
+  "history_readme_exact_copy": true,
+  "private_paths_ignored": true,
+  "head": "6f66fb96f8f671f82df51a0ec8e5fcf193930e57",
+  "git_writes": false,
+  "daily_env_modified_by_this_task": false
+}

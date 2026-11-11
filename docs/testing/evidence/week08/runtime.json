@@ -1,0 +1,35 @@
+{
+  "daily_schema_before": 11,
+  "daily_schema_after": 12,
+  "opaque_backup_created_before_up": true,
+  "old_migrations_unchanged": true,
+  "down_or_volume_deletion": false,
+  "utc": "2026-11-11T08:09:43.067518+00:00",
+  "application_readiness": {
+    "8080": true,
+    "5173": true
+  },
+  "worker_launched": true,
+  "process_isolation": {
+    "api": {
+      "pid_identity_matches": true,
+      "running": true,
+      "key_present": true,
+      "jwt_present": true
+    },
+    "worker": {
+      "pid_identity_matches": true,
+      "running": true,
+      "key_present": false,
+      "jwt_present": false
+    },
+    "web": {
+      "pid_identity_matches": true,
+      "running": true,
+      "key_present": false,
+      "jwt_present": false
+    }
+  },
+  "configured_key_absent_from_reviewable_files": true,
+  "env_mode": "0600"
+}

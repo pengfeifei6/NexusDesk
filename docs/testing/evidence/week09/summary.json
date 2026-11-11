@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "go_pass_nodes": 1079,
+  "go_top_level_tests": 243,
+  "go_skips": 0,
+  "frontend_tests": 141,
+  "python_tests": 6,
+  "browser_steps": 5,
+  "sql_samples_per_case": 9,
+  "full_review": "PASS, no findings",
+  "daily_schema": 14,
+  "all_checks_exit_zero": true,
+  "artifact_secret_scan": "PASS",
+  "env_ignored": true,
+  "live_cloud_called_in_week09_acceptance": false
+}

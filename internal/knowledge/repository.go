@@ -7,6 +7,7 @@ import (
 	"github.com/jackc/pgx/v5/pgconn"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/pengfeifei6/NexusDesk/internal/platform/taskguard"
+	"strconv"
 	"time"
 )
 
@@ -68,7 +69,15 @@ func (r *PostgresRepository) Get(ctx context.Context, org, id int64) (Document, 
 func (r *PostgresRepository) List(ctx context.Context, org int64, f Filter) ([]Document, error) {
 	ctx, cancel := context.WithTimeout(ctx, 3*time.Second)
 	defer cancel()
-	rows, err := r.pool.Query(ctx, `SELECT `+documentColumns+` FROM knowledge_documents WHERE org_id=$1 AND deleted_at IS NULL AND ($2='' OR status=$2) ORDER BY created_at DESC,id DESC LIMIT $3 OFFSET $4`, org, string(f.Status), f.PageSize, (f.Page-1)*f.PageSize)
+	query := "SELECT " + documentColumns + " FROM knowledge_documents WHERE org_id=$1 AND deleted_at IS NULL"
+	args := []any{org}
+	if f.Status != "" {
+		args = append(args, string(f.Status))
+		query += " AND status=$2"
+	}
+	args = append(args, f.PageSize, (f.Page-1)*f.PageSize)
+	query += " ORDER BY created_at DESC,id DESC LIMIT $" + strconv.Itoa(len(args)-1) + " OFFSET $" + strconv.Itoa(len(args))
+	rows, err := r.pool.Query(ctx, query, args...)
 	if err != nil {
 		return nil, ErrStorage
 	}

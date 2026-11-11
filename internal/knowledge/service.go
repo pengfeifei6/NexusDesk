@@ -6,6 +6,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"github.com/pengfeifei6/NexusDesk/internal/organization"
+	"github.com/pengfeifei6/NexusDesk/internal/platform/cache"
 	"github.com/pengfeifei6/NexusDesk/internal/platform/storage"
 	"io"
 	"log/slog"
@@ -28,6 +29,7 @@ type Store interface {
 	GetText(context.Context, int64, int64) (DocumentText, error)
 }
 type Service struct {
+	cache     *cache.Cache
 	store     Store
 	members   MembershipFinder
 	objects   storage.ObjectStorage
@@ -36,8 +38,11 @@ type Service struct {
 }
 
 func NewService(repo Store, members MembershipFinder, objects storage.ObjectStorage, extractor TextExtractor, limits Limits) *Service {
-	return &Service{repo, members, objects, extractor, limits}
+	return &Service{store: repo, members: members, objects: objects, extractor: extractor, limits: limits}
 }
+
+// WithCache optionally enables authorized list caching during service setup.
+func (s *Service) WithCache(c *cache.Cache) *Service { s.cache = c; return s }
 func (s *Service) membership(ctx context.Context, actor, org int64) (organization.Membership, error) {
 	if err := ctx.Err(); err != nil {
 		return organization.Membership{}, err
@@ -135,7 +140,9 @@ func (s *Service) List(ctx context.Context, actor, org int64, f Filter) ([]Docum
 	if f.Status != "" && f.Status != Uploaded && f.Status != Processing && f.Status != Ready && f.Status != Failed {
 		return nil, ErrInvalidRequest
 	}
-	result, err := s.store.List(ctx, org, f)
+	result, err := cache.List(ctx, s.cache, org, "documents", f, func() ([]Document, error) {
+		return s.store.List(ctx, org, f)
+	}, func(item Document) bool { return item.OrgID == org && item.ID > 0 && item.DeletedAt == nil })
 	if result == nil && err == nil {
 		result = []Document{}
 	}

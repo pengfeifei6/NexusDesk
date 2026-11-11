@@ -1,0 +1,16 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.waitFor: Timeout 30000ms exceeded.
+Call log:
+  - waiting for getByRole('alert').filter({ hasText: '已是本组织成员' }) to be visible
+
+    at /media/yjz/pzp/Go/projects/NexusDesk/scripts/week12-browser.mjs:111:64 {
+  log: [
+    "  - waiting for getByRole('alert').filter({ hasText: '已是本组织成员' }) to be visible"
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.12.0

@@ -1,0 +1,37 @@
+[
+  {
+    "command": "go vet ./...",
+    "directory": ".",
+    "exit": 0
+  },
+  {
+    "command": "go build ./...",
+    "directory": ".",
+    "exit": 0
+  },
+  {
+    "command": "python3 scripts/test_dev.py",
+    "directory": ".",
+    "exit": 0
+  },
+  {
+    "command": "npm run test:unit -- --run",
+    "directory": "web",
+    "exit": 0
+  },
+  {
+    "command": "npm run build",
+    "directory": "web",
+    "exit": 0
+  },
+  {
+    "command": "npm run lint",
+    "directory": "web",
+    "exit": 0
+  },
+  {
+    "command": "npm run format:check",
+    "directory": "web",
+    "exit": 0
+  }
+]

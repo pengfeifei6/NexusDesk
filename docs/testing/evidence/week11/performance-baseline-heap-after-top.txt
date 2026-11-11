@@ -1,0 +1,57 @@
+File: api
+Build ID: d8479883d58b6690f6c78442abbdae22cf493193
+Type: inuse_space
+Time: 2026-11-11 19:04:32 CST
+Showing nodes accounting for 7251.89kB, 100% of 7251.89kB total
+Showing top 50 nodes out of 104
+      flat  flat%   sum%        cum   cum%
+ 3605.08kB 49.71% 49.71%  3605.08kB 49.71%  runtime.mallocgc
+  561.50kB  7.74% 57.46%   561.50kB  7.74%  bytes.growSlice
+  521.05kB  7.19% 64.64%   521.05kB  7.19%  encoding/xml.map.init.0
+  516.01kB  7.12% 71.76%   516.01kB  7.12%  github.com/jackc/pgx/v5/internal/iobufpool.init.0.func1
+  512.12kB  7.06% 78.82%   512.12kB  7.06%  runtime.(*timer).reset (inline)
+  512.05kB  7.06% 85.88%   512.05kB  7.06%  internal/sync.runtime_SemacquireMutex
+  512.05kB  7.06% 92.94%   512.05kB  7.06%  sync.runtime_SemacquireWaitGroup
+  512.02kB  7.06%   100%   512.02kB  7.06%  syscall.anyToSockaddr
+         0     0%   100%   561.50kB  7.74%  bytes.(*Buffer).Write
+         0     0%   100%   561.50kB  7.74%  bytes.(*Buffer).grow
+         0     0%   100%   561.50kB  7.74%  encoding/json.(*encodeState).marshal
+         0     0%   100%   561.50kB  7.74%  encoding/json.(*encodeState).reflectValue
+         0     0%   100%   561.50kB  7.74%  encoding/json.Marshal
+         0     0%   100%   561.50kB  7.74%  encoding/json.arrayEncoder.encode
+         0     0%   100%   561.50kB  7.74%  encoding/json.interfaceEncoder
+         0     0%   100%   561.50kB  7.74%  encoding/json.mapEncoder.encode
+         0     0%   100%   561.50kB  7.74%  encoding/json.sliceEncoder.encode
+         0     0%   100%   561.50kB  7.74%  encoding/json.stringEncoder
+         0     0%   100%   521.05kB  7.19%  encoding/xml.init
+         0     0%   100%   512.05kB  7.06%  github.com/alexedwards/argon2id.CreateHash
+         0     0%   100%   561.50kB  7.74%  github.com/gin-gonic/gin.(*Context).JSON (inline)
+         0     0%   100%  1073.62kB 14.80%  github.com/gin-gonic/gin.(*Context).Next
+         0     0%   100%   561.50kB  7.74%  github.com/gin-gonic/gin.(*Context).Render
+         0     0%   100%  1073.62kB 14.80%  github.com/gin-gonic/gin.(*Engine).ServeHTTP
+         0     0%   100%  1073.62kB 14.80%  github.com/gin-gonic/gin.(*Engine).handleHTTPRequest
+         0     0%   100%   561.50kB  7.74%  github.com/gin-gonic/gin/codec/json.jsonApi.Marshal
+         0     0%   100%   561.50kB  7.74%  github.com/gin-gonic/gin/render.JSON.Render
+         0     0%   100%   561.50kB  7.74%  github.com/gin-gonic/gin/render.WriteJSON
+         0     0%   100%   512.12kB  7.06%  github.com/jackc/pgx/v5.(*Conn).Query
+         0     0%   100%   512.12kB  7.06%  github.com/jackc/pgx/v5.(*Conn).QueryRow (inline)
+         0     0%   100%   516.01kB  7.12%  github.com/jackc/pgx/v5.ConnectConfig
+         0     0%   100%   516.01kB  7.12%  github.com/jackc/pgx/v5.connect
+         0     0%   100%   516.01kB  7.12%  github.com/jackc/pgx/v5/internal/iobufpool.Get
+         0     0%   100%   512.12kB  7.06%  github.com/jackc/pgx/v5/pgconn.(*PgConn).ExecStatement
+         0     0%   100%   512.12kB  7.06%  github.com/jackc/pgx/v5/pgconn.(*PgConn).enterPotentialWriteReadDeadlock (inline)
+         0     0%   100%   512.12kB  7.06%  github.com/jackc/pgx/v5/pgconn.(*PgConn).execExtendedSuffix
+         0     0%   100%   512.12kB  7.06%  github.com/jackc/pgx/v5/pgconn.(*PgConn).flushWithPotentialWriteReadDeadlock
+         0     0%   100%   516.01kB  7.12%  github.com/jackc/pgx/v5/pgconn.ConnectConfig
+         0     0%   100%   516.01kB  7.12%  github.com/jackc/pgx/v5/pgconn.connectOne
+         0     0%   100%   516.01kB  7.12%  github.com/jackc/pgx/v5/pgconn.connectPreferred
+         0     0%   100%   516.01kB  7.12%  github.com/jackc/pgx/v5/pgproto3.NewFrontend
+         0     0%   100%   516.01kB  7.12%  github.com/jackc/pgx/v5/pgproto3.newChunkReader (inline)
+         0     0%   100%   512.12kB  7.06%  github.com/jackc/pgx/v5/pgxpool.(*Conn).QueryRow
+         0     0%   100%   512.12kB  7.06%  github.com/jackc/pgx/v5/pgxpool.(*Pool).QueryRow
+         0     0%   100%   516.01kB  7.12%  github.com/jackc/pgx/v5/pgxpool.NewWithConfig.func3
+         0     0%   100%   516.01kB  7.12%  github.com/jackc/puddle/v2.(*Pool[go.shape.*uint8]).initResourceValue.func1
+         0     0%   100%   512.05kB  7.06%  github.com/pengfeifei6/NexusDesk/internal/auth.(*PasswordHasher).HashPassword
+         0     0%   100%   512.05kB  7.06%  github.com/pengfeifei6/NexusDesk/internal/auth.NewLoginService
+         0     0%   100%   512.12kB  7.06%  github.com/pengfeifei6/NexusDesk/internal/organization.(*PostgresRepository).FindActiveMembership
+         0     0%   100%   512.12kB  7.06%  github.com/pengfeifei6/NexusDesk/internal/organization.FindActiveMembershipWith

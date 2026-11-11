@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import StatusBadge from '../components/StatusBadge.vue'
+import { dateTime, fileSize } from '../lib/presentation'
 import RAGIndexPanel from '../components/RAGIndexPanel.vue'
 import AsyncJobPanel from '../components/AsyncJobPanel.vue'
 import { useKnowledge } from '../composables/knowledge'
@@ -30,22 +32,48 @@ const failures: Record<string, string> = {
 }
 </script>
 <template>
-  <RouterLink :to="base">← 返回知识库列表</RouterLink>
+  <RouterLink :to="base" class="back-link">← 返回知识库列表</RouterLink>
   <p v-if="error" role="alert" class="error">{{ error }}</p>
   <p v-if="busy" role="status">正在处理文档请求…</p>
   <section v-if="detail" class="panel detail">
     <div class="row">
-      <h1>{{ detail.original_filename }}</h1>
-      <span class="badge">{{ detail.status }}</span>
+      <h1 class="detail-title">{{ detail.original_filename }}</h1>
+      <StatusBadge :status="detail.status" />
     </div>
-    <p class="meta">
-      文档 #{{ detail.id }} · 上传者 {{ detail.uploaded_by }} · {{ detail.media_type }} ·
-      {{ detail.size_bytes }} 字节
-    </p>
-    <p class="meta">
-      上传 {{ detail.created_at }} · 更新 {{ detail.updated_at }} · 已提取
-      {{ detail.extracted_chars }} 字符
-    </p>
+    <dl class="detail-meta">
+      <div>
+        <dt>文档编号</dt>
+        <dd>#{{ detail.id }}</dd>
+      </div>
+      <div>
+        <dt>上传者</dt>
+        <dd>成员 {{ detail.uploaded_by }}</dd>
+      </div>
+      <div>
+        <dt>文件大小</dt>
+        <dd>{{ fileSize(detail.size_bytes) }}</dd>
+      </div>
+      <div>
+        <dt>上传时间</dt>
+        <dd>
+          <time :datetime="detail.created_at" :title="detail.created_at">{{
+            dateTime(detail.created_at)
+          }}</time>
+        </dd>
+      </div>
+      <div>
+        <dt>最后更新</dt>
+        <dd>
+          <time :datetime="detail.updated_at" :title="detail.updated_at">{{
+            dateTime(detail.updated_at)
+          }}</time>
+        </dd>
+      </div>
+      <div>
+        <dt>已提取正文</dt>
+        <dd>{{ detail.extracted_chars }} 字符</dd>
+      </div>
+    </dl>
     <p v-if="detail.failure_code" class="notice">
       {{
         Object.prototype.hasOwnProperty.call(failures, detail.failure_code)
@@ -60,18 +88,22 @@ const failures: Record<string, string> = {
     <div class="actions">
       <button v-if="canProcess" class="primary" :disabled="busy" @click="process">提取正文</button
       ><button :disabled="busy" @click="download">下载原文件</button
-      ><button v-if="canDelete" :disabled="busy" @click="remove">删除文档</button
+      ><button v-if="canDelete" class="danger" :disabled="busy" @click="remove">删除文档</button
       ><button :disabled="busy" @click="loadDetail">刷新文档</button>
     </div>
   </section>
   <p v-if="detail && submissionNotice?.documentID === detail.id" class="notice">
     {{ submissionNotice.message }}
   </p>
-  <RAGIndexPanel v-if="detail" :document="detail" />
-  <AsyncJobPanel v-if="detail" :document="detail" @completed="refreshCompletedJob" />
-  <section v-if="detail && preview" class="panel">
+  <div v-if="detail" class="document-operations">
+    <RAGIndexPanel :document="detail" /><AsyncJobPanel
+      :document="detail"
+      @completed="refreshCompletedJob"
+    />
+  </div>
+  <section v-if="detail && preview" class="panel document-preview">
     <h2>正文预览</h2>
-    <p class="meta">{{ preview.extractor_version }} · {{ preview.extracted_at }}</p>
+    <p class="meta">提取于 {{ dateTime(preview.extracted_at) }}</p>
     <pre class="body">{{ preview.content_text }}</pre>
   </section>
   <button v-if="!detail && !busy" @click="loadDetail">重试文档</button>

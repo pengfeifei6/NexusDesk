@@ -1,0 +1,89 @@
+{
+  "status": "PASS",
+  "started_at": "2026-11-11T10:46:58.881437+00:00",
+  "synthetic_only": true,
+  "daily_services_modified": false,
+  "cloud_calls": 0,
+  "model": "local deterministic fixture",
+  "drills": [
+    {
+      "name": "redis_outage",
+      "injected_at": "2026-11-11T10:47:09.117608+00:00",
+      "list_fallback_status": 200,
+      "ai_rejection": {
+        "status": 503,
+        "code": "RATE_LIMIT_UNAVAILABLE",
+        "request_id": "b60fbec4bf97feedd448a67024d45cf4"
+      },
+      "cache_failure_metric_increased": true,
+      "no_message_action_or_model_call": true,
+      "failure_observed_seconds": 0.7161312308162451,
+      "recovered_at": "2026-11-11T10:47:10.872697+00:00",
+      "recovery_seconds": 0.3234903048723936,
+      "status": "PASS"
+    },
+    {
+      "name": "postgres_outage",
+      "injected_at": "2026-11-11T10:47:10.872840+00:00",
+      "health_status": 200,
+      "business_failure": {
+        "status": 500,
+        "code": "INTERNAL_ERROR",
+        "request_id": "4c2279f90c99fabdfb286f9c0c7349e1"
+      },
+      "no_cached_authorization_bypass": true,
+      "failure_observed_seconds": 0.489583701826632,
+      "recovered_at": "2026-11-11T10:47:12.108337+00:00",
+      "recovery_seconds": 0.22525800578296185,
+      "original_record_preserved": true,
+      "status": "PASS"
+    },
+    {
+      "name": "worker_graceful_restart",
+      "injected_at": "2026-11-11T10:47:12.108398+00:00",
+      "shutdown": {
+        "exit_code": 0,
+        "seconds": 0.6642819093540311
+      },
+      "recovered_at": "2026-11-11T10:47:14.099165+00:00",
+      "job_id": 1,
+      "final_status": "SUCCEEDED",
+      "attempts": 1,
+      "status": "PASS"
+    },
+    {
+      "name": "worker_crash_lease_recovery",
+      "started_at": "2026-11-11T10:47:14.099223+00:00",
+      "injected_at": "2026-11-11T10:47:14.934001+00:00",
+      "phase_before_crash": "INDEXING",
+      "status_before_crash": "RUNNING",
+      "attempts_before": 1,
+      "remaining_lease_seconds_at_kill": 29.839615,
+      "kill": {
+        "exit_code": -9,
+        "seconds": 0.0072919344529509544
+      },
+      "recovered_at": "2026-11-11T10:47:52.722993+00:00",
+      "recovery_seconds": 37.45554877538234,
+      "job_id": 2,
+      "final_status": "SUCCEEDED",
+      "attempts_after": 2,
+      "index_invariants": {
+        "index_status": "READY",
+        "chunk_count": 1,
+        "actual_chunks": 1,
+        "current_chunks": 1,
+        "distinct_positions": 1
+      },
+      "lease_shortened_by_test": false,
+      "status": "PASS"
+    }
+  ],
+  "model_fixture_calls": {
+    "embedding": 3,
+    "generation": 0,
+    "stream": 1
+  },
+  "owned_resources_removed": true,
+  "completed_at": "2026-11-11T10:47:54.451230+00:00"
+}

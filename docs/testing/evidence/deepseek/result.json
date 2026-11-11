@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "synthetic_data_only": true,
+  "daily_database_modified": false,
+  "integration_pass_nodes": 285,
+  "integration_skip_nodes": 0,
+  "model": "deepseek-flash",
+  "browser": {
+    "status": "PASS",
+    "upload_task": "202→SUCCEEDED",
+    "real_embedding": "bge-m3:567m/1024",
+    "real_generation": "deepseek-flash",
+    "answer": "数据库连接超时首先检查 DB_HOST 和 DB_PORT。",
+    "citations": 1,
+    "desktop_mobile": true,
+    "browser_secrets_absent": true
+  }
+}

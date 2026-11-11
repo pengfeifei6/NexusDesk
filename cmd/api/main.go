@@ -13,20 +13,25 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/pengfeifei6/NexusDesk/internal/ai"
 	"github.com/pengfeifei6/NexusDesk/internal/auth"
 	"github.com/pengfeifei6/NexusDesk/internal/jobs"
 	"github.com/pengfeifei6/NexusDesk/internal/knowledge"
 	"github.com/pengfeifei6/NexusDesk/internal/organization"
+	"github.com/pengfeifei6/NexusDesk/internal/platform/cache"
 	"github.com/pengfeifei6/NexusDesk/internal/platform/config"
 	"github.com/pengfeifei6/NexusDesk/internal/platform/database"
 	"github.com/pengfeifei6/NexusDesk/internal/platform/httpserver"
 	"github.com/pengfeifei6/NexusDesk/internal/platform/llm"
+	"github.com/pengfeifei6/NexusDesk/internal/platform/observe"
+	"github.com/pengfeifei6/NexusDesk/internal/platform/ratelimit"
 	"github.com/pengfeifei6/NexusDesk/internal/platform/storage"
 	"github.com/pengfeifei6/NexusDesk/internal/rag"
 	"github.com/pengfeifei6/NexusDesk/internal/ticket"
 )
 
 func main() {
+	slog.SetDefault(slog.New(slog.NewJSONHandler(os.Stdout, nil)))
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	err := run(ctx)
 	stop()
@@ -41,12 +46,38 @@ func run(ctx context.Context) error {
 	if err != nil {
 		return fmt.Errorf("load configuration: %w", err)
 	}
-	pool, err := database.Open(ctx, cfg.Database)
+	registry := observe.NewRegistry()
+	pool, err := database.Open(ctx, cfg.Database, observe.NewQueryTracer(registry))
 	if err != nil {
 		return err
 	}
 	defer pool.Close()
+	registry.SetPool(pool)
 	slog.Info("PostgreSQL connection verified")
+	redisClient := cache.NewClient(cfg.Async, cfg.Cache.Timeout)
+	defer redisClient.Close()
+	var listCache *cache.Cache
+	if cfg.Cache.Enabled {
+		listCache = cache.New(redisClient, pool, cache.Options{TTL: cfg.Cache.TTL, Timeout: cfg.Cache.Timeout, MaxBytes: cfg.Cache.MaxBytes})
+		defer func() {
+			stats := listCache.Stats()
+			slog.Info("list cache stopped", "hits", stats.Hits, "misses", stats.Misses, "failures", stats.Failures, "corrupt", stats.Corrupt, "stores", stats.Stores)
+		}()
+	}
+	if listCache != nil {
+		registry.SetCacheStats(func() observe.CacheStats {
+			s := listCache.Stats()
+			return observe.CacheStats{Hits: s.Hits, Misses: s.Misses, Failures: s.Failures, Corrupt: s.Corrupt, Stores: s.Stores}
+		})
+	}
+	diagnostics, err := observe.StartDiagnostics(ctx, cfg.ObservabilityAddr, registry)
+	if err != nil {
+		return err
+	}
+	defer diagnostics.Close()
+	if diagnostics.Addr() != "" {
+		slog.Info("diagnostics started", "addr", diagnostics.Addr())
+	}
 	users := auth.NewPostgresRepository(pool)
 	passwords := auth.NewPasswordHasher()
 	registration := auth.NewHandler(auth.NewService(users, passwords))
@@ -68,22 +99,43 @@ func run(ctx context.Context) error {
 	defer objects.Close()
 	knowledgeService := knowledge.NewService(knowledge.NewPostgresRepository(pool), organization.NewPostgresRepository(pool), objects,
 		knowledge.NewTextExtractor(cfg.Storage.MaxFileBytes, cfg.Storage.MaxTextBytes),
-		knowledge.Limits{MaxFileBytes: cfg.Storage.MaxFileBytes, MaxRequestBytes: cfg.Storage.MaxRequestBytes, ProcessTimeout: cfg.Storage.ExtractTimeout})
+		knowledge.Limits{MaxFileBytes: cfg.Storage.MaxFileBytes, MaxRequestBytes: cfg.Storage.MaxRequestBytes, ProcessTimeout: cfg.Storage.ExtractTimeout}).WithCache(listCache)
 	models, err := llm.New(cfg.RAG.OllamaBaseURL)
 	if err != nil {
 		return err
 	}
-	ragService := rag.NewService(pool, knowledgeService, models.Embedder(), models.Generator(), rag.Limits{Enabled: cfg.RAG.Enabled, MinimumScore: cfg.RAG.MinimumScore})
-	return runHTTP(ctx, cfg.HTTPAddr, httpserver.NewRouter(registration.RegisterRoutes, login.RegisterRoutes, func(group *gin.RouterGroup) {
+	generator := models.Generator()
+	streamModel := models.StreamModel()
+	if cfg.RAG.ChatProvider == "deepseek" {
+		generator, err = llm.NewDeepSeek(cfg.RAG.DeepSeekAPIKey, cfg.RAG.ChatModel)
+		if err != nil {
+			return err
+		}
+		streamModel, err = llm.NewDeepSeekStream(cfg.RAG.DeepSeekAPIKey, cfg.RAG.ChatModel)
+		if err != nil {
+			return err
+		}
+	}
+	slog.Info("AI configured", "chat_provider", cfg.RAG.ChatProvider, "chat_model", cfg.RAG.ChatModel, "embedding_model", rag.EmbeddingModel)
+	ragService := rag.NewService(pool, knowledgeService, models.Embedder(), generator, rag.Limits{Enabled: cfg.RAG.Enabled, MinimumScore: cfg.RAG.MinimumScore})
+	tickets := ticket.NewService(ticket.NewPostgresRepository(pool), organization.NewPostgresRepository(pool)).WithCache(listCache)
+	aiStore := ai.NewStore(pool, tickets)
+	aiChat := ai.NewChatService(aiStore, ai.NewRunner(streamModel, ragService, tickets, aiStore))
+	return runHTTP(ctx, cfg.HTTPAddr, httpserver.NewRouterWithObserver(registry, slog.Default(), registration.RegisterRoutes, login.RegisterRoutes, func(group *gin.RouterGroup) {
 		protected := group.Group("")
 		protected.Use(auth.RequireUser(tokens, users))
 		me.RegisterRoutes(protected)
 		organizations.RegisterRoutes(protected)
 		organization.NewMemberHandler(organization.NewMemberService(organization.NewPostgresRepository(pool))).RegisterRoutes(protected)
-		ticket.NewHandler(ticket.NewService(ticket.NewPostgresRepository(pool), organization.NewPostgresRepository(pool))).RegisterRoutes(protected)
+		ticket.NewHandler(tickets).RegisterRoutes(protected)
 		knowledge.NewHandler(knowledgeService).RegisterRoutes(protected)
 		rag.NewHandler(ragService).RegisterRoutes(protected)
 		jobs.NewHandler(jobs.NewService(pool, knowledgeService, ragService, jobs.Limits{Enabled: cfg.Async.Enabled})).RegisterRoutes(protected)
+		aiHandler := ai.NewHandler(aiChat)
+		if cfg.AIRate.Enabled {
+			aiHandler.WithLimiter(ratelimit.New(redisClient, cfg.AIRate.Requests, cfg.AIRate.Window, cfg.Cache.Timeout))
+		}
+		aiHandler.RegisterRoutes(protected)
 	}))
 }
 
@@ -95,6 +147,7 @@ func runHTTP(ctx context.Context, addr string, handler http.Handler) error {
 	defer listener.Close()
 
 	server := &http.Server{
+		BaseContext:       func(net.Listener) context.Context { return ctx },
 		Handler:           handler,
 		ReadHeaderTimeout: 5 * time.Second,
 		ReadTimeout:       15 * time.Second,

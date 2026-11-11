@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "actual_container_duration_seconds": 319.0,
+  "bytes": 32201332,
+  "chapters": 7,
+  "audio": false,
+  "automated_captioned_synthetic_browser_demo": true,
+  "semantic_evaluation": false,
+  "after_review_fixes": true
+}

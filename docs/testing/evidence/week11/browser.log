@@ -1,0 +1,6 @@
+PASS register/login/create organization/ticket/claim/transition/comment
+PASS upload/async worker/index/preview/download
+PASS hybrid retrieval/grounded answer/citations/measured usage
+PASS SSE tool proposal/no premature write/human confirmation
+PASS 390px responsive navigation/no overflow/organization scope change
+PASS logout clears protected content/no token persistence/no page errors

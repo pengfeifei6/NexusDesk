@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"reflect"
 	"strings"
 	"sync"
 	"testing"
@@ -121,9 +122,18 @@ func TestWeek02Members(t *testing.T) {
 	t.Run("non_member_disabled_missing_org_are_identical_and_precede_input", func(t *testing.T) {
 		baseline := call(router, daveToken, "GET", a, "", "")
 		assertError(baseline, 404, "NOT_FOUND")
+		seen := map[string]bool{}
+		baselineBody, err := comparableCorrelatedError(baseline, seen)
+		if err != nil {
+			t.Fatal("baseline member error has invalid request identity or unsafe response shape")
+		}
 		for _, rec := range []*httptest.ResponseRecorder{call(router, carolToken, "GET", a, "", ""), call(router, aliceToken, "GET", b, "", ""), call(router, aliceToken, "GET", 9223372036854775807, "", ""), call(router, daveToken, "GET", a, "?page=bad", ""), call(router, carolToken, "POST", a, "", "invalid"), call(router, aliceToken, "POST", b, "", addBody(dave.ID, "member"))} {
 			assertError(rec, 404, "NOT_FOUND")
-			if rec.Body.String() != baseline.Body.String() {
+			body, err := comparableCorrelatedError(rec, seen)
+			if err != nil {
+				t.Fatal("member error has invalid, uncorrelated or reused request identity or unsafe response shape")
+			}
+			if !reflect.DeepEqual(body, baselineBody) {
 				t.Fatal("404 disclosed membership/resource state")
 			}
 		}

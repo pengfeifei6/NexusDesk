@@ -14,13 +14,16 @@ import (
 
 // Config contains the settings needed to start the API.
 type Config struct {
-	AppEnv   string
-	HTTPAddr string
-	Database DatabaseConfig
-	JWT      JWTConfig
-	Storage  StorageConfig
-	RAG      RAGConfig
-	Async    AsyncConfig
+	AppEnv            string
+	HTTPAddr          string
+	ObservabilityAddr string
+	Database          DatabaseConfig
+	JWT               JWTConfig
+	Storage           StorageConfig
+	RAG               RAGConfig
+	Async             AsyncConfig
+	Cache             CacheConfig
+	AIRate            AIRateConfig
 }
 
 type JWTConfig struct {
@@ -78,6 +81,9 @@ func Load() (Config, error) {
 	if ip := net.ParseIP(host); ip == nil || !ip.IsLoopback() {
 		return Config{}, fmt.Errorf("HTTP_ADDR must use an explicit loopback IP for local authentication")
 	}
+	if cfg.ObservabilityAddr, err = loadObservability("OBSERVABILITY_ADDR"); err != nil {
+		return Config{}, err
+	}
 	cfg.Database, err = loadDatabase()
 	if err != nil {
 		return Config{}, err
@@ -105,6 +111,14 @@ func Load() (Config, error) {
 		return Config{}, err
 	}
 	cfg.Async, err = loadAsync()
+	if err != nil {
+		return Config{}, err
+	}
+	cfg.Cache, err = loadCache()
+	if err != nil {
+		return Config{}, err
+	}
+	cfg.AIRate, err = loadAIRate()
 	if err != nil {
 		return Config{}, err
 	}

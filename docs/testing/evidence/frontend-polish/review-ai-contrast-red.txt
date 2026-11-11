@@ -1,0 +1,42 @@
+PASS admin adds registered member/duplicate rejected without another relationship
+PASS creation shortcut preserves draft/filter/page2/route/focus without refetch
+PASS edit/assign/unassign/version conflict refreshes without replaying stale write
+PASS register/login/create organization/ticket/claim/transition/comment
+PASS upload shortcut preserves selected file/route/focus without refetch
+PASS upload/async worker/index/preview/download
+PASS hybrid retrieval/grounded answer/citations/measured usage
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: 09-ai-proposal core text contrast below 4.5:1
++ actual - expected
+
++ [
++   {
++     color: 'rgb(109, 130, 167)',
++     ratio: 3.79,
++     text: '我的对话'
++   },
++   {
++     color: 'rgb(148, 164, 191)',
++     ratio: 2.46,
++     text: '对话标题'
++   }
++ ]
+- []
+
+    at shot (file:///media/yjz/pzp/Go/projects/NexusDesk/scripts/frontend-polish-browser.mjs:64:12)
+    at async file:///media/yjz/pzp/Go/projects/NexusDesk/scripts/frontend-polish-browser.mjs:272:3 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [
+    { text: '我的对话', ratio: 3.79, color: 'rgb(109, 130, 167)' },
+    { text: '对话标题', ratio: 2.46, color: 'rgb(148, 164, 191)' }
+  ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.12.0

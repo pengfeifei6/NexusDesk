@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "archive": ".local/releases/nexusdesk-v1.0.0-source.tar.gz",
+  "files": 504,
+  "sha256": "5bcc7d022e1605db6cdb10957139928a92aca1acdf52d2a88e4b3eff66106acf",
+  "all_file_hashes_match_main": true,
+  "non_markdown_files_identical_to_fully_tested_candidate": 312,
+  "private_runtime_and_raw_evidence_excluded": true,
+  "published": false,
+  "previous_doc_snapshot_preserved_in_ignored_release_history": true
+}

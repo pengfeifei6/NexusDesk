@@ -1,0 +1,13 @@
+
+> nexusdesk-web@0.4.0 test:unit
+> vitest --run src/lib/__tests__/polish.spec.ts
+
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/web
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  21:35:08
+   Duration  1.50s (transform 689ms, setup 0ms, import 876ms, tests 130ms, environment 354ms)
+

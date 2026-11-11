@@ -1,5 +1,7 @@
 # NexusDesk 核心数据库设计
 
+> W12 当前交付：39业务API、14迁移、10主要页面；请先读[当前架构](release/architecture.md)、[API索引](release/api-index.md)和[功能边界](release/acceptance.md)。下文保留历史设计与逐周增量，旧阶段限制不代表当前能力。
+
 > 2026-11-11当前阶段：W07追加knowledge_jobs及文档/索引task_token，共11张业务表、11条迁移；状态和日常升级证据以[第七周记录](weekly/week07.md)为准。旧段落保留当周历史。
 
 - 版本：v0.3
@@ -335,3 +337,10 @@ chunks.content_sha256存全文hash用于当前正文快照过滤；片段内容�
 迁移00011创建knowledge_jobs：org/document/requested_by/actor联合外键，原文件hash+提取器+模型+切块版本业务唯一键；状态、阶段、三次预算、run_version、lease_token/lease_until、投递seq/时间及安全失败码。lease仅RUNNING，completed_at仅终态，SUCCEEDED必须DONE且无失败码。文档/索引新增nullable task_token(lowerhex32)。索引覆盖待投递、过期租约、组织文档最近任务。
 
 完整字段见[迁移](../migrations/00011_create_knowledge_jobs.sql)；这张表是任务记录，不是执行日志或对话表。Down仅专用库执行；日常保留备份后只Up。恢复先核对当前权限/原文件依据，再核验正文hash与索引版本，不能仅看status。
+
+
+## W08～W12 当前补充索引
+
+W08迁移00012增加ai_conversations、ai_messages、ai_tool_actions；W09迁移00013增加cache_revisions，00014增加工单按组织/优先级/创建时间排序的未软删除部分索引；W10～W12无新迁移。当前14业务表+1技术表，Goose历史表不计。具体结构以migrations原文件为准，不能修改已应用迁移。
+
+AI会话/消息/action以org_id和owner范围限制，确认动作与工单结果在数据库中关联以避免重复写。cache_revisions是PG缓存版本真相，Redis只保存可丢的副本；读缓存仍先检查数据库成员。相关契约见[AI](api/ai-conversation.md)、[RAG](api/rag.md)及[当前架构](release/architecture.md)。

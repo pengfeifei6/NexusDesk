@@ -51,11 +51,12 @@ func loadAsync() (AsyncConfig, error) {
 
 // WorkerConfig deliberately carries neither HTTP nor JWT signing configuration.
 type WorkerConfig struct {
-	AppEnv   string
-	Database DatabaseConfig
-	Storage  StorageConfig
-	RAG      RAGConfig
-	Async    AsyncConfig
+	ObservabilityAddr string
+	AppEnv            string
+	Database          DatabaseConfig
+	Storage           StorageConfig
+	RAG               RAGConfig
+	Async             AsyncConfig
 }
 
 func LoadWorker() (WorkerConfig, error) {
@@ -64,13 +65,16 @@ func LoadWorker() (WorkerConfig, error) {
 		return WorkerConfig{}, fmt.Errorf("APP_ENV is required")
 	}
 	var err error
+	if cfg.ObservabilityAddr, err = loadObservability("WORKER_OBSERVABILITY_ADDR"); err != nil {
+		return WorkerConfig{}, err
+	}
 	if cfg.Database, err = loadDatabase(); err != nil {
 		return WorkerConfig{}, err
 	}
 	if cfg.Storage, err = loadStorage(); err != nil {
 		return WorkerConfig{}, err
 	}
-	if cfg.RAG, err = loadRAG(); err != nil {
+	if cfg.RAG, err = loadRAGSettings(false); err != nil {
 		return WorkerConfig{}, err
 	}
 	if cfg.Async, err = loadAsync(); err != nil {

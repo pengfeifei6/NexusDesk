@@ -3,8 +3,6 @@ package knowledge
 import (
 	"context"
 	"errors"
-	"github.com/gin-gonic/gin"
-	"github.com/pengfeifei6/NexusDesk/internal/auth"
 	"io"
 	"log/slog"
 	"mime"
@@ -12,6 +10,10 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
+	"github.com/pengfeifei6/NexusDesk/internal/auth"
+	"github.com/pengfeifei6/NexusDesk/internal/platform/observe"
 )
 
 type Handler struct{ service *Service }
@@ -55,7 +57,7 @@ func failure(c *gin.Context, err error) {
 			status, code, message = 422, extraction.Code, "document text extraction failed"
 		}
 	}
-	c.JSON(status, gin.H{"error": gin.H{"code": code, "message": message, "request_id": ""}})
+	c.JSON(status, gin.H{"error": gin.H{"code": code, "message": message, "request_id": observe.RequestID(c.Request.Context())}})
 }
 func positive(value string) (int64, error) {
 	if value == "" {

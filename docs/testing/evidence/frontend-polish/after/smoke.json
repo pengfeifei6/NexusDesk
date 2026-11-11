@@ -1,0 +1,155 @@
+{
+  "status": "PASS",
+  "synthetic_only": true,
+  "backend_modified": false,
+  "daily_database_modified": false,
+  "cloud_calls": 0,
+  "browser": {
+    "status": "PASS",
+    "synthetic_data_only": true,
+    "model": "deterministic local HTTP fixture, not semantic evaluation",
+    "steps": [
+      "admin adds registered member/duplicate rejected without another relationship",
+      "creation shortcut preserves draft/filter/page2/route/focus without refetch",
+      "edit/assign/unassign/version conflict refreshes without replaying stale write",
+      "register/login/create organization/ticket/claim/transition/comment",
+      "upload shortcut preserves selected file/route/focus without refetch",
+      "upload/async worker/index/preview/download",
+      "hybrid retrieval/grounded answer/citations/measured usage",
+      "SSE tool proposal/no premature write/human confirmation",
+      "ordinary member read-only management/backend 403/delete cancel and explicit confirmation",
+      "390px responsive navigation/no overflow/organization scope change",
+      "360/768/1440 viewport overflow and reduced-motion mode",
+      "logout clears protected content/no token persistence/no page errors"
+    ],
+    "screenshots": [
+      "01-login",
+      "02-register",
+      "03-workspace-empty",
+      "14-members",
+      "04-tickets",
+      "15-ticket-managed",
+      "05-ticket-detail",
+      "06-document-detail",
+      "07-knowledge",
+      "08-rag",
+      "09-ai-proposal",
+      "10-ai-confirmed",
+      "11-mobile-ai",
+      "12-mobile-tickets",
+      "13-mobile-rag",
+      "16-mobile-members",
+      "17-delete-confirm"
+    ],
+    "responsive_screenshots": [
+      "01-login-360",
+      "01-login-768",
+      "14-members-360",
+      "14-members-768",
+      "04-tickets-360",
+      "04-tickets-768",
+      "15-ticket-managed-360",
+      "15-ticket-managed-768",
+      "08-rag-360",
+      "08-rag-768",
+      "09-ai-proposal-360",
+      "09-ai-proposal-768"
+    ],
+    "core_text_contrast": [
+      {
+        "screenshot": "01-login",
+        "checked": 5,
+        "failures": []
+      },
+      {
+        "screenshot": "02-register",
+        "checked": 6,
+        "failures": []
+      },
+      {
+        "screenshot": "03-workspace-empty",
+        "checked": 8,
+        "failures": []
+      },
+      {
+        "screenshot": "14-members",
+        "checked": 19,
+        "failures": []
+      },
+      {
+        "screenshot": "04-tickets",
+        "checked": 30,
+        "failures": []
+      },
+      {
+        "screenshot": "15-ticket-managed",
+        "checked": 21,
+        "failures": []
+      },
+      {
+        "screenshot": "05-ticket-detail",
+        "checked": 24,
+        "failures": []
+      },
+      {
+        "screenshot": "06-document-detail",
+        "checked": 21,
+        "failures": []
+      },
+      {
+        "screenshot": "07-knowledge",
+        "checked": 16,
+        "failures": []
+      },
+      {
+        "screenshot": "08-rag",
+        "checked": 24,
+        "failures": []
+      },
+      {
+        "screenshot": "09-ai-proposal",
+        "checked": 30,
+        "failures": []
+      },
+      {
+        "screenshot": "10-ai-confirmed",
+        "checked": 28,
+        "failures": []
+      },
+      {
+        "screenshot": "11-mobile-ai",
+        "checked": 29,
+        "failures": []
+      },
+      {
+        "screenshot": "12-mobile-tickets",
+        "checked": 32,
+        "failures": []
+      },
+      {
+        "screenshot": "13-mobile-rag",
+        "checked": 18,
+        "failures": []
+      },
+      {
+        "screenshot": "16-mobile-members",
+        "checked": 20,
+        "failures": []
+      },
+      {
+        "screenshot": "17-delete-confirm",
+        "checked": 22,
+        "failures": []
+      }
+    ],
+    "page_errors": [],
+    "desktop": "1440x1000",
+    "mobile": "390x844"
+  },
+  "model_fixture_calls": {
+    "embedding": 2,
+    "generation": 1,
+    "stream": 2
+  },
+  "owned_resources_removed": true
+}

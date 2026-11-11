@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "baseline_files": 1106,
+  "deleted": 0,
+  "changed_existing": [
+    "docs/release/api-index.md",
+    "web/src/components/UiIcon.vue",
+    "web/src/views/OrganizationMembersView.vue",
+    "README.md",
+    "web/src/App.vue",
+    "web/src/components/TicketForm.vue",
+    "web/src/views/DeskView.vue",
+    "web/src/views/KnowledgeListView.vue",
+    "web/src/views/TicketListView.vue"
+  ],
+  "protected_backend_config_lock_old_evidence_and_business_composables_files": 758,
+  "old_evidence_files": 577,
+  "head": "6f66fb96f8f671f82df51a0ec8e5fcf193930e57",
+  "git_writes": false,
+  "backend_modified": false,
+  "migrations_dependencies_api_client_and_business_composables_unchanged": true,
+  "daily_env_modified": false
+}

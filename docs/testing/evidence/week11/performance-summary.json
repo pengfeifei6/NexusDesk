@@ -1,0 +1,425 @@
+{
+  "status": "PASS",
+  "matrix_cases": 48,
+  "seconds_per_case": 3,
+  "rounds_per_stage": 2,
+  "zero_errors": true,
+  "same_seed_and_method": true,
+  "fairness_count_assertions": "all48 starts20k/table; create ends20k+successes, events=successes; reads unchanged; both final20k/table",
+  "stages": {
+    "baseline": {
+      "requests": 139127,
+      "failures": 0,
+      "runtime_alloc_bytes_total_delta": 21990077960.0,
+      "profiled_requests": 14070,
+      "source_sha256": "ce83febe00719677514e832c89a8a07b0846b77d8e9cac345acc4ba74521650f",
+      "binary_sha256": "fdc18ea1cc7ddf05d1fb3b6d37b207c2ad9c40b609dda624220eb325ec485125"
+    },
+    "after": {
+      "requests": 147196,
+      "failures": 0,
+      "runtime_alloc_bytes_total_delta": 22031188152.0,
+      "profiled_requests": 16103,
+      "source_sha256": "aab5fc6c8c68f043e7463a02b5bcc6eec1f7351b6281473063ee7fd0c74056d4",
+      "binary_sha256": "b4bb69efa9c5a076898b209f6f6b51ee2fa6f0607df1685d50ce82a87d22f6c7"
+    }
+  },
+  "comparisons": [
+    {
+      "scenario": "ticket_list",
+      "concurrency": 1,
+      "baseline": {
+        "round_rps": [
+          194.64941203442,
+          197.62191992582555
+        ],
+        "mean_round_rps": 196.13566598012278,
+        "mean_round_percentiles_ms": {
+          "p50": 5.138828,
+          "p95": 6.4040395,
+          "p99": 6.839434499999999
+        },
+        "alloc_bytes": 683949792.0,
+        "alloc_bytes_per_request": 581095.8300764656
+      },
+      "after": {
+        "round_rps": [
+          233.53639796205584,
+          233.88846880235795
+        ],
+        "mean_round_rps": 233.71243338220688,
+        "mean_round_percentiles_ms": {
+          "p50": 4.276738999999999,
+          "p95": 5.530095,
+          "p99": 5.9697185
+        },
+        "alloc_bytes": 711750032.0,
+        "alloc_bytes_per_request": 507305.7961511048
+      },
+      "mean_rps_change_percent": 19.15855905875492
+    },
+    {
+      "scenario": "ticket_list",
+      "concurrency": 8,
+      "baseline": {
+        "round_rps": [
+          1068.732882686186,
+          1093.2003268230897
+        ],
+        "mean_round_rps": 1080.966604754638,
+        "mean_round_percentiles_ms": {
+          "p50": 7.189078,
+          "p95": 9.465232,
+          "p99": 10.361214
+        },
+        "alloc_bytes": 4117838904.0,
+        "alloc_bytes_per_request": 633806.2034785285
+      },
+      "after": {
+        "round_rps": [
+          1231.1425271073902,
+          1227.410864653381
+        ],
+        "mean_round_rps": 1229.2766958803854,
+        "mean_round_percentiles_ms": {
+          "p50": 6.3823785,
+          "p95": 8.2554235,
+          "p99": 9.167246
+        },
+        "alloc_bytes": 4221890464.0,
+        "alloc_bytes_per_request": 571452.4179750948
+      },
+      "mean_rps_change_percent": 13.720136262619453
+    },
+    {
+      "scenario": "ticket_list",
+      "concurrency": 16,
+      "baseline": {
+        "round_rps": [
+          1744.221400568941,
+          1728.4007339836267
+        ],
+        "mean_round_rps": 1736.3110672762837,
+        "mean_round_percentiles_ms": {
+          "p50": 9.188887000000001,
+          "p95": 11.1922545,
+          "p99": 12.406470500000001
+        },
+        "alloc_bytes": 6455734928.0,
+        "alloc_bytes_per_request": 618187.7743943312
+      },
+      "after": {
+        "round_rps": [
+          1996.0098757924604,
+          1976.9065435065045
+        ],
+        "mean_round_rps": 1986.4582096494823,
+        "mean_round_percentiles_ms": {
+          "p50": 7.8159385,
+          "p95": 10.1131605,
+          "p99": 10.996542999999999
+        },
+        "alloc_bytes": 6602922944.0,
+        "alloc_bytes_per_request": 552869.7097881604
+      },
+      "mean_rps_change_percent": 14.406816099237307
+    },
+    {
+      "scenario": "knowledge_list",
+      "concurrency": 1,
+      "baseline": {
+        "round_rps": [
+          298.2201125764931,
+          301.8868950558984
+        ],
+        "mean_round_rps": 300.05350381619576,
+        "mean_round_percentiles_ms": {
+          "p50": 3.4217364999999997,
+          "p95": 4.4375979999999995,
+          "p99": 5.070368500000001
+        },
+        "alloc_bytes": 438685824.0,
+        "alloc_bytes_per_request": 243579.02498611883
+      },
+      "after": {
+        "round_rps": [
+          349.93519328529925,
+          379.65721484075976
+        ],
+        "mean_round_rps": 364.7962040630295,
+        "mean_round_percentiles_ms": {
+          "p50": 2.666545,
+          "p95": 3.717739,
+          "p99": 4.2668785
+        },
+        "alloc_bytes": 418284280.0,
+        "alloc_bytes_per_request": 190997.3881278539
+      },
+      "mean_rps_change_percent": 21.57705190021486
+    },
+    {
+      "scenario": "knowledge_list",
+      "concurrency": 8,
+      "baseline": {
+        "round_rps": [
+          1622.424880354655,
+          1600.042492975425
+        ],
+        "mean_round_rps": 1611.2336866650398,
+        "mean_round_percentiles_ms": {
+          "p50": 4.863967000000001,
+          "p95": 6.6018995,
+          "p99": 7.380850000000001
+        },
+        "alloc_bytes": 3185750584.0,
+        "alloc_bytes_per_request": 329072.4701993596
+      },
+      "after": {
+        "round_rps": [
+          1889.7959786048357,
+          1923.5569523607562
+        ],
+        "mean_round_rps": 1906.676465482796,
+        "mean_round_percentiles_ms": {
+          "p50": 4.2081245,
+          "p95": 5.511214,
+          "p99": 6.257925500000001
+        },
+        "alloc_bytes": 3040730216.0,
+        "alloc_bytes_per_request": 265473.2159944124
+      },
+      "mean_rps_change_percent": 18.33643258969273
+    },
+    {
+      "scenario": "knowledge_list",
+      "concurrency": 16,
+      "baseline": {
+        "round_rps": [
+          2531.1494920677565,
+          2525.7965019859753
+        ],
+        "mean_round_rps": 2528.472997026866,
+        "mean_round_percentiles_ms": {
+          "p50": 6.2661465,
+          "p95": 8.0436895,
+          "p99": 8.947678
+        },
+        "alloc_bytes": 5044217800.0,
+        "alloc_bytes_per_request": 331834.6029866456
+      },
+      "after": {
+        "round_rps": [
+          2946.4780999716945,
+          2924.5622741027287
+        ],
+        "mean_round_rps": 2935.5201870372116,
+        "mean_round_percentiles_ms": {
+          "p50": 5.3204975,
+          "p95": 7.117020999999999,
+          "p99": 7.80755
+        },
+        "alloc_bytes": 4967384176.0,
+        "alloc_bytes_per_request": 281565.8188414012
+      },
+      "mean_rps_change_percent": 16.09853814887392
+    },
+    {
+      "scenario": "ticket_detail",
+      "concurrency": 1,
+      "baseline": {
+        "round_rps": [
+          934.9738988241446,
+          917.7673282387898
+        ],
+        "mean_round_rps": 926.3706135314671,
+        "mean_round_percentiles_ms": {
+          "p50": 1.0472795,
+          "p95": 1.3538835,
+          "p99": 1.793597
+        },
+        "alloc_bytes": 110913080.0,
+        "alloc_bytes_per_request": 19948.395683453236
+      },
+      "after": {
+        "round_rps": [
+          923.3444610002782,
+          914.9384087861563
+        ],
+        "mean_round_rps": 919.1414348932173,
+        "mean_round_percentiles_ms": {
+          "p50": 1.0556565,
+          "p95": 1.337962,
+          "p99": 1.8869105
+        },
+        "alloc_bytes": 109924144.0,
+        "alloc_bytes_per_request": 19928.234952864394
+      },
+      "mean_rps_change_percent": -0.78037650726972
+    },
+    {
+      "scenario": "ticket_detail",
+      "concurrency": 8,
+      "baseline": {
+        "round_rps": [
+          5061.480118501431,
+          4994.039872643587
+        ],
+        "mean_round_rps": 5027.759995572509,
+        "mean_round_percentiles_ms": {
+          "p50": 1.492251,
+          "p95": 2.3967895,
+          "p99": 2.8663765000000003
+        },
+        "alloc_bytes": 621328568.0,
+        "alloc_bytes_per_request": 20585.38143988338
+      },
+      "after": {
+        "round_rps": [
+          5035.541891832932,
+          5024.1733481578685
+        ],
+        "mean_round_rps": 5029.8576199954005,
+        "mean_round_percentiles_ms": {
+          "p50": 1.501817,
+          "p95": 2.308619,
+          "p99": 2.8208585
+        },
+        "alloc_bytes": 616799296.0,
+        "alloc_bytes_per_request": 20427.199735055474
+      },
+      "mean_rps_change_percent": 0.041720854311644295
+    },
+    {
+      "scenario": "ticket_detail",
+      "concurrency": 16,
+      "baseline": {
+        "round_rps": [
+          7937.11753310452,
+          7815.461307623663
+        ],
+        "mean_round_rps": 7876.289420364092,
+        "mean_round_percentiles_ms": {
+          "p50": 1.8242655,
+          "p95": 3.1751195,
+          "p99": 3.5791120000000003
+        },
+        "alloc_bytes": 1048918544.0,
+        "alloc_bytes_per_request": 22174.93010866348
+      },
+      "after": {
+        "round_rps": [
+          8070.742275507275,
+          7927.119745695868
+        ],
+        "mean_round_rps": 7998.931010601571,
+        "mean_round_percentiles_ms": {
+          "p50": 1.7795585,
+          "p95": 3.1630504999999998,
+          "p99": 3.568023
+        },
+        "alloc_bytes": 1054872448.0,
+        "alloc_bytes_per_request": 21958.667915651866
+      },
+      "mean_rps_change_percent": 1.5570985738587728
+    },
+    {
+      "scenario": "ticket_create",
+      "concurrency": 1,
+      "baseline": {
+        "round_rps": [
+          390.3434263980139,
+          389.26667388078687
+        ],
+        "mean_round_rps": 389.80505013940035,
+        "mean_round_percentiles_ms": {
+          "p50": 2.4791875,
+          "p95": 3.0826945,
+          "p99": 3.8842715
+        },
+        "alloc_bytes": 58513312.0,
+        "alloc_bytes_per_request": 25005.68888888889
+      },
+      "after": {
+        "round_rps": [
+          393.2855902980039,
+          388.09405821077814
+        ],
+        "mean_round_rps": 390.68982425439106,
+        "mean_round_percentiles_ms": {
+          "p50": 2.484633,
+          "p95": 2.985658,
+          "p99": 3.6738705
+        },
+        "alloc_bytes": 58690416.0,
+        "alloc_bytes_per_request": 25027.895948827292
+      },
+      "mean_rps_change_percent": 0.22697861781788564
+    },
+    {
+      "scenario": "ticket_create",
+      "concurrency": 8,
+      "baseline": {
+        "round_rps": [
+          815.9944930706318,
+          790.7697588368227
+        ],
+        "mean_round_rps": 803.3821259537273,
+        "mean_round_percentiles_ms": {
+          "p50": 7.3418655,
+          "p95": 25.9679695,
+          "p99": 41.933094
+        },
+        "alloc_bytes": 120945632.0,
+        "alloc_bytes_per_request": 25024.960066211464
+      },
+      "after": {
+        "round_rps": [
+          803.7239561716189,
+          815.9970338248457
+        ],
+        "mean_round_rps": 809.8604949982323,
+        "mean_round_percentiles_ms": {
+          "p50": 7.359731,
+          "p95": 25.1963635,
+          "p99": 38.926398
+        },
+        "alloc_bytes": 122294728.0,
+        "alloc_bytes_per_request": 25096.39400779807
+      },
+      "mean_rps_change_percent": 0.8063870025505349
+    },
+    {
+      "scenario": "ticket_create",
+      "concurrency": 16,
+      "baseline": {
+        "round_rps": [
+          673.8031108920405,
+          686.1008109394847
+        ],
+        "mean_round_rps": 679.9519609157626,
+        "mean_round_percentiles_ms": {
+          "p50": 17.604840000000003,
+          "p95": 63.602498499999996,
+          "p99": 91.46801099999999
+        },
+        "alloc_bytes": 103280992.0,
+        "alloc_bytes_per_request": 25135.310781211974
+      },
+      "after": {
+        "round_rps": [
+          675.380447481115,
+          716.8343275558615
+        ],
+        "mean_round_rps": 696.1073875184882,
+        "mean_round_percentiles_ms": {
+          "p50": 16.916456,
+          "p95": 61.649438,
+          "p99": 96.04594349999999
+        },
+        "alloc_bytes": 105645008.0,
+        "alloc_bytes_per_request": 25105.752851711026
+      },
+      "mean_rps_change_percent": 2.3759658816142615
+    }
+  ]
+}

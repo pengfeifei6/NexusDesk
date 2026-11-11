@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "date": "2026-11-11",
+  "main_directory": "/media/yjz/pzp/Go/projects/NexusDesk",
+  "go_pass_nodes": 1110,
+  "go_top_level_tests": 252,
+  "go_skips": 0,
+  "frontend_tests": 149,
+  "python_tests": 15,
+  "browser_workflow_groups": 6,
+  "screenshots": 13,
+  "real_model_searches": 120,
+  "real_model_ask_requests": 32,
+  "real_cloud_generations": 30,
+  "human_label_review": "pending",
+  "no_new_migrations_or_dependencies": true,
+  "no_commit_or_new_worktree": true,
+  "secret_scan_new_text": "PASS",
+  "preexisting_file_and_evidence_preservation": "PASS"
+}

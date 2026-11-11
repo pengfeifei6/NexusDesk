@@ -1,0 +1,57 @@
+File: api
+Build ID: 986763ab5e1360ea316ca6d1c3684ff8951337d1
+Type: inuse_space
+Time: 2026-11-11 19:08:34 CST
+Showing nodes accounting for 8294.05kB, 100% of 8294.05kB total
+Showing top 50 nodes out of 80
+      flat  flat%   sum%        cum   cum%
+ 2579.08kB 31.10% 31.10%  2579.08kB 31.10%  runtime.mallocgc
+ 1536.58kB 18.53% 49.62%  1536.58kB 18.53%  github.com/pengfeifei6/NexusDesk/internal/ticket.publicTicket
+ 1060.47kB 12.79% 62.41%  1060.47kB 12.79%  bytes.growSlice
+  528.17kB  6.37% 68.78%   528.17kB  6.37%  bufio.NewReaderSize (inline)
+  528.17kB  6.37% 75.14%   528.17kB  6.37%  bufio.NewWriterSize (inline)
+  525.43kB  6.33% 81.48%   525.43kB  6.33%  github.com/jackc/pgx/v5/internal/stmtcache.NewLRUCache (inline)
+  512.05kB  6.17% 87.65%   512.05kB  6.17%  context.(*cancelCtx).propagateCancel.func2
+  512.05kB  6.17% 93.83%   512.05kB  6.17%  sync.runtime_SemacquireWaitGroup
+  512.05kB  6.17%   100%   512.05kB  6.17%  sync.runtime_notifyListWait
+         0     0%   100%  1060.47kB 12.79%  bytes.(*Buffer).Write
+         0     0%   100%  1060.47kB 12.79%  bytes.(*Buffer).grow
+         0     0%   100%  1060.47kB 12.79%  encoding/json.(*encodeState).marshal
+         0     0%   100%  1060.47kB 12.79%  encoding/json.(*encodeState).reflectValue
+         0     0%   100%  1060.47kB 12.79%  encoding/json.Marshal
+         0     0%   100%  1060.47kB 12.79%  encoding/json.arrayEncoder.encode
+         0     0%   100%  1060.47kB 12.79%  encoding/json.interfaceEncoder
+         0     0%   100%  1060.47kB 12.79%  encoding/json.mapEncoder.encode
+         0     0%   100%  1060.47kB 12.79%  encoding/json.sliceEncoder.encode
+         0     0%   100%  1060.47kB 12.79%  encoding/json.stringEncoder
+         0     0%   100%   512.05kB  6.17%  github.com/alexedwards/argon2id.CreateHash
+         0     0%   100%  1060.47kB 12.79%  github.com/gin-gonic/gin.(*Context).JSON (inline)
+         0     0%   100%  3653.38kB 44.05%  github.com/gin-gonic/gin.(*Context).Next
+         0     0%   100%  1060.47kB 12.79%  github.com/gin-gonic/gin.(*Context).Render
+         0     0%   100%  3653.38kB 44.05%  github.com/gin-gonic/gin.(*Engine).ServeHTTP
+         0     0%   100%  3653.38kB 44.05%  github.com/gin-gonic/gin.(*Engine).handleHTTPRequest
+         0     0%   100%  1060.47kB 12.79%  github.com/gin-gonic/gin/codec/json.jsonApi.Marshal
+         0     0%   100%  1060.47kB 12.79%  github.com/gin-gonic/gin/render.JSON.Render
+         0     0%   100%  1060.47kB 12.79%  github.com/gin-gonic/gin/render.WriteJSON
+         0     0%   100%   525.43kB  6.33%  github.com/jackc/pgx/v5.ConnectConfig
+         0     0%   100%   525.43kB  6.33%  github.com/jackc/pgx/v5.connect
+         0     0%   100%   525.43kB  6.33%  github.com/jackc/pgx/v5/pgxpool.NewWithConfig.func3
+         0     0%   100%   525.43kB  6.33%  github.com/jackc/puddle/v2.(*Pool[go.shape.*uint8]).initResourceValue.func1
+         0     0%   100%   512.05kB  6.17%  github.com/pengfeifei6/NexusDesk/internal/auth.(*PasswordHasher).HashPassword
+         0     0%   100%   512.05kB  6.17%  github.com/pengfeifei6/NexusDesk/internal/auth.NewLoginService
+         0     0%   100%  1056.33kB 12.74%  github.com/pengfeifei6/NexusDesk/internal/platform/cache.List[go.shape.struct { ID int64; OrgID int64; CreatorID int64; AssigneeID *int64; Title string; Body string; Priority int16; Status github.com/pengfeifei6/NexusDesk/internal/ticket.Status; Version int64; CreatedAt time.Time; UpdatedAt time.Time; DeletedAt *time.Time }]
+         0     0%   100%  1056.33kB 12.74%  github.com/pengfeifei6/NexusDesk/internal/platform/cache.getList[go.shape.struct { ID int64; OrgID int64; CreatorID int64; AssigneeID *int64; Title string; Body string; Priority int16; Status github.com/pengfeifei6/NexusDesk/internal/ticket.Status; Version int64; CreatedAt time.Time; UpdatedAt time.Time; DeletedAt *time.Time }]
+         0     0%   100%  3653.38kB 44.05%  github.com/pengfeifei6/NexusDesk/internal/platform/httpserver.NewRouterWithObserver.observation.func2
+         0     0%   100%  3653.38kB 44.05%  github.com/pengfeifei6/NexusDesk/internal/ticket.(*Handler).list
+         0     0%   100%  1056.33kB 12.74%  github.com/pengfeifei6/NexusDesk/internal/ticket.(*Service).List
+         0     0%   100%  1056.33kB 12.74%  github.com/redis/go-redis/v9.(*Client).Process
+         0     0%   100%  1056.33kB 12.74%  github.com/redis/go-redis/v9.(*baseClient)._getConn
+         0     0%   100%  1056.33kB 12.74%  github.com/redis/go-redis/v9.(*baseClient)._process
+         0     0%   100%  1056.33kB 12.74%  github.com/redis/go-redis/v9.(*baseClient).getConn
+         0     0%   100%  1056.33kB 12.74%  github.com/redis/go-redis/v9.(*baseClient).process
+         0     0%   100%  1056.33kB 12.74%  github.com/redis/go-redis/v9.(*baseClient).withConn
+         0     0%   100%  1056.33kB 12.74%  github.com/redis/go-redis/v9.(*hooksMixin).processHook (inline)
+         0     0%   100%  1056.33kB 12.74%  github.com/redis/go-redis/v9.cmdable.GetRange
+         0     0%   100%  1056.33kB 12.74%  github.com/redis/go-redis/v9/internal/pool.(*ConnPool).Get
+         0     0%   100%  1056.33kB 12.74%  github.com/redis/go-redis/v9/internal/pool.(*ConnPool).dialConn
+         0     0%   100%  1056.33kB 12.74%  github.com/redis/go-redis/v9/internal/pool.(*ConnPool).newConn

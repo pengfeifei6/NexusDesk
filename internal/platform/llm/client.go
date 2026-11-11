@@ -1,4 +1,4 @@
-// Package llm provides bounded, local-only Ollama adapters. It never pulls models.
+// Package llm provides bounded model adapters. Ollama stays local; DeepSeek uses its fixed HTTPS API.
 package llm
 
 import (
@@ -28,6 +28,7 @@ const (
 
 type Client struct {
 	baseURL string
+	apiKey  string
 	http    *http.Client
 	slots   chan struct{}
 }
@@ -100,6 +101,9 @@ func (c *Client) post(ctx context.Context, path string, payload any, timeout tim
 		return nil, rag.NewError("MODEL_UPSTREAM_ERROR")
 	}
 	req.Header.Set("Content-Type", "application/json")
+	if c.apiKey != "" {
+		req.Header.Set("Authorization", "Bearer "+c.apiKey)
+	}
 	resp, err := c.http.Do(req)
 	if err != nil {
 		return nil, requestError(ctx, err)

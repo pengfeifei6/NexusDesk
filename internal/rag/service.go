@@ -2,8 +2,6 @@ package rag
 
 import (
 	"context"
-	"crypto/rand"
-	"encoding/hex"
 	"errors"
 	"strings"
 	"time"
@@ -11,6 +9,7 @@ import (
 
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/pengfeifei6/NexusDesk/internal/knowledge"
+	"github.com/pengfeifei6/NexusDesk/internal/platform/observe"
 )
 
 type Access interface {
@@ -24,8 +23,9 @@ type Limits struct {
 	IndexTimeout, SearchTimeout, AskTimeout time.Duration
 }
 type QueryInput struct {
-	Query string `json:"query"`
-	TopK  int    `json:"top_k"`
+	RetrievalMode string `json:"retrieval_mode"`
+	Query         string `json:"query"`
+	TopK          int    `json:"top_k"`
 }
 type IndexInfo struct {
 	DocumentID          int64      `json:"document_id"`
@@ -42,12 +42,16 @@ type IndexInfo struct {
 	UpdatedAt           *time.Time `json:"updated_at"`
 }
 type SearchResponse struct {
+	RetrievalMode  string   `json:"retrieval_mode"`
 	Items          []Source `json:"items"`
 	EmbeddingModel string   `json:"embedding_model"`
 	EmbeddingMS    int64    `json:"embedding_ms"`
 	SearchMS       int64    `json:"search_ms"`
 }
 type AskResponse struct {
+	RetrievalMode        string   `json:"retrieval_mode"`
+	Usage                Usage    `json:"usage"`
+	Timings              Timings  `json:"timings"`
 	Answer               string   `json:"answer"`
 	Sources              []Source `json:"sources"`
 	RequestID            string   `json:"request_id"`
@@ -71,6 +75,7 @@ type repository interface {
 	Fail(context.Context, int64, int64, int64, string) error
 	Status(context.Context, int64, int64) (IndexInfo, error)
 	Search(context.Context, int64, []float32, int, float64) ([]sourceSnapshot, error)
+	LexicalSearch(context.Context, int64, []float32, []string, int, float64) ([]sourceSnapshot, error)
 	Validate(context.Context, int64, []sourceSnapshot) error
 }
 type Service struct {
@@ -100,12 +105,18 @@ func (s *Service) available() error {
 	if !s.limits.Enabled || s.embedder == nil || s.generator == nil {
 		return NewError("MODEL_UNAVAILABLE")
 	}
-	if s.embedder.Model() != EmbeddingModel || s.embedder.Dimension() != EmbeddingDimension || s.generator.Model() != ChatModel {
+	if s.embedder.Model() != EmbeddingModel || s.embedder.Dimension() != EmbeddingDimension || !SupportedChatModel(s.generator.Model()) {
 		return NewError("MODEL_UNAVAILABLE")
 	}
 	return nil
 }
 func normalizeQuery(in QueryInput) (QueryInput, error) {
+	if in.RetrievalMode == "" {
+		in.RetrievalMode = "vector"
+	}
+	if in.RetrievalMode != "vector" && in.RetrievalMode != "hybrid" {
+		return in, NewError("INVALID_REQUEST")
+	}
 	in.Query = strings.TrimSpace(in.Query)
 	if !utf8.ValidString(in.Query) || strings.ContainsRune(in.Query, 0) || len(in.Query) > 4000 || utf8.RuneCountInString(in.Query) < 1 || utf8.RuneCountInString(in.Query) > 1000 {
 		return in, NewError("INVALID_REQUEST")
@@ -172,18 +183,23 @@ func (s *Service) revalidate(ctx context.Context, actor, org int64, rows []sourc
 const insufficientAnswer = "知识库未检索到足够依据。"
 
 func (s *Service) Ask(ctx context.Context, actor, org int64, input QueryInput) (AskResponse, error) {
+	started := time.Now()
 	ctx, cancel := context.WithTimeout(ctx, s.limits.AskTimeout)
 	defer cancel()
 	result, rows, err := s.retrieve(ctx, actor, org, input)
 	if err != nil {
 		return AskResponse{}, operationError(ctx, err, false)
 	}
-	var requestBytes [16]byte
-	if _, err = rand.Read(requestBytes[:]); err != nil {
-		return AskResponse{}, NewError("INTERNAL_ERROR")
+	if observe.RequestID(ctx) == "" {
+		ctx = observe.WithRequestID(ctx)
 	}
-	answer := AskResponse{Answer: insufficientAnswer, Sources: []Source{}, RequestID: hex.EncodeToString(requestBytes[:]), InsufficientEvidence: true, EmbeddingModel: EmbeddingModel, GenerationModel: ChatModel}
+	answer := AskResponse{Answer: insufficientAnswer, Sources: []Source{}, RequestID: observe.RequestID(ctx), InsufficientEvidence: true, EmbeddingModel: EmbeddingModel, GenerationModel: s.generator.Model()}
+	answer.RetrievalMode = result.RetrievalMode
+	answer.Timings = Timings{EmbeddingMS: result.EmbeddingMS, SearchMS: result.SearchMS}
 	if len(rows) == 0 {
+		zero := int64(0)
+		answer.Usage = Usage{Known: true, PromptTokens: &zero, CompletionTokens: &zero, TotalTokens: &zero, CacheHitTokens: &zero, CacheMissTokens: &zero}
+		answer.Timings.TotalMS = time.Since(started).Milliseconds()
 		return answer, nil
 	}
 	// Revalidate the entire retrieval set, including any evidence the adapter may omit for its budget.
@@ -191,13 +207,24 @@ func (s *Service) Ask(ctx context.Context, actor, org int64, input QueryInput) (
 		return AskResponse{}, operationError(ctx, err, false)
 	}
 	input, _ = normalizeQuery(input)
+	generationStarted := time.Now()
 	generated, err := s.generator.Generate(ctx, input.Query, result.Items)
+	answer.Timings.GenerationMS = time.Since(generationStarted).Milliseconds()
+	answer.Usage = generated.Usage
+	if !answer.Usage.Known {
+		answer.Usage = Usage{}
+	}
+	answer.Usage.ModelCalled = true
+	if generated.Model != "" {
+		answer.GenerationModel = generated.Model
+	}
 	if err = operationError(ctx, err, false); err != nil {
 		return AskResponse{}, err
 	}
 	if err = s.revalidate(ctx, actor, org, rows); err != nil {
 		return AskResponse{}, operationError(ctx, err, false)
 	}
+	answer.Timings.TotalMS = time.Since(started).Milliseconds()
 	if generated.InsufficientEvidence {
 		return answer, nil
 	}
@@ -222,5 +249,6 @@ func (s *Service) Ask(ctx context.Context, actor, org int64, input QueryInput) (
 	}
 	answer.Answer = text
 	answer.InsufficientEvidence = false
+	answer.Timings.TotalMS = time.Since(started).Milliseconds()
 	return answer, nil
 }

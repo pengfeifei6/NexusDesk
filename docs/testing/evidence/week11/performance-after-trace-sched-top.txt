@@ -1,0 +1,164 @@
+Type: delay
+Showing nodes accounting for 1053879.55us, 76.35% of 1380331.21us total
+Dropped 467 nodes (cum <= 6901.66us)
+      flat  flat%   sum%        cum   cum%
+164186.77us 11.89% 11.89% 164186.77us 11.89%  runtime.systemstack_switch
+102332.22us  7.41% 19.31% 102416.51us  7.42%  encoding/json.stateInString
+86954.69us  6.30% 25.61% 86954.69us  6.30%  runtime.gcTrigger.test
+67574.20us  4.90% 30.50% 67574.20us  4.90%  encoding/json.mapEncoder.encode.func1
+67427.39us  4.88% 35.39% 70919.17us  5.14%  encoding/json.(*decodeState).scanWhile
+47499.52us  3.44% 38.83% 80492.29us  5.83%  runtime.slicebytetostring
+47185.66us  3.42% 42.25% 47209.79us  3.42%  encoding/json.stateEndValue
+37980.80us  2.75% 45.00% 37980.80us  2.75%  reflect.typedmemmove
+36879.36us  2.67% 47.67% 76962.95us  5.58%  runtime.gcStart
+31062.33us  2.25% 49.92% 51497.28us  3.73%  bytes.(*Buffer).Write
+27740.29us  2.01% 51.93% 129690.76us  9.40%  runtime.gcMarkDone
+17166.07us  1.24% 53.17% 17528.70us  1.27%  internal/poll.setDeadlineImpl
+16546.75us  1.20% 54.37% 147157.51us 10.66%  encoding/json.(*decodeState).literalStore
+16526.40us  1.20% 55.57% 19390.47us  1.40%  reflect.(*MapIter).Next
+15892.61us  1.15% 56.72% 18486.02us  1.34%  runtime.mapassign_faststr
+15310.79us  1.11% 57.83% 15310.79us  1.11%  runtime.ifaceeq
+14068.16us  1.02% 58.85% 14068.16us  1.02%  encoding/json.stateBeginString
+12091.84us  0.88% 59.73% 12091.84us  0.88%  encoding/json.unquoteBytes
+11892.93us  0.86% 60.59% 36486.27us  2.64%  reflect.(*MapIter).Key
+10903.04us  0.79% 61.38% 12936.13us  0.94%  runtime.convTstring
+10836.29us  0.79% 62.16% 27587.27us  2.00%  encoding/json.(*decodeState).rescanLiteral
+10277.95us  0.74% 62.91% 10277.95us  0.74%  reflect.Value.Field
+10239.68us  0.74% 63.65% 60121.60us  4.36%  runtime.mallocgcSmallScanNoHeader
+ 9873.47us  0.72% 64.36% 10979.58us   0.8%  runtime.convT64
+ 9347.52us  0.68% 65.04%  9863.49us  0.71%  internal/poll.(*FD).Write
+ 9307.39us  0.67% 65.72% 11153.53us  0.81%  encoding/json.stateBeginValue
+ 8729.73us  0.63% 66.35%  9187.52us  0.67%  runtime.mapaccess1_faststr
+ 8381.50us  0.61% 66.96%  8381.50us  0.61%  internal/runtime/maps.rand
+ 8241.28us   0.6% 67.55%  8241.28us   0.6%  runtime.efaceeq
+ 8174.47us  0.59% 68.15% 12270.98us  0.89%  reflect.Value.Addr
+ 8130.88us  0.59% 68.73% 35155.58us  2.55%  reflect.(*MapIter).Value
+ 7953.53us  0.58% 69.31%  8411.65us  0.61%  encoding/json.state1
+ 7947.90us  0.58% 69.89% 323591.49us 23.44%  encoding/json.(*decodeState).value
+ 6885.70us   0.5% 70.39% 57341.45us  4.15%  runtime.mallocgcSmallNoscan
+ 6861.63us   0.5% 70.88%  6861.63us   0.5%  encoding/json.resolveKeyName
+ 6802.18us  0.49% 71.38% 32045.19us  2.32%  runtime.newobject
+ 6416.77us  0.46% 71.84%  6992.51us  0.51%  reflect.Value.Elem
+ 6081.22us  0.44% 72.28%  6081.22us  0.44%  reflect.Value.SetLen
+ 5861.89us  0.42% 72.71%  6464.44us  0.47%  bytes.(*Buffer).WriteByte
+ 4946.30us  0.36% 73.06% 10801.73us  0.78%  encoding/json.appendString[...]
+ 3956.22us  0.29% 73.35%  7519.81us  0.54%  runtime.mallocgcTiny
+ 3853.38us  0.28% 73.63% 78361.41us  5.68%  github.com/pengfeifei6/NexusDesk/internal/ticket.publicTicket
+ 2888.83us  0.21% 73.84%  6809.28us  0.49%  time.Time.Format
+ 2428.93us  0.18% 74.01% 22110.34us  1.60%  internal/runtime/maps.newTable
+ 2028.42us  0.15% 74.16% 284905.21us 20.64%  encoding/json.Marshal
+ 1928.13us  0.14% 74.30% 19127.10us  1.39%  internal/runtime/maps.(*table).reset
+ 1760.45us  0.13% 74.43% 194540.81us 14.09%  runtime.mallocgc
+ 1759.49us  0.13% 74.56%  6974.46us  0.51%  runtime.deductAssistCredit
+ 1736.64us  0.13% 74.68% 30726.21us  2.23%  encoding/json.indirect
+ 1661.70us  0.12% 74.80% 34542.09us  2.50%  runtime.makeslice
+ 1478.34us  0.11% 74.91% 272417.27us 19.74%  encoding/json.(*encodeState).reflectValue
+ 1477.50us  0.11% 75.02%  8611.46us  0.62%  io.ReadAtLeast
+ 1064.90us 0.077% 75.09%  9545.02us  0.69%  time.(*Time).UnmarshalJSON
+ 1003.71us 0.073% 75.17% 996133.18us 72.17%  github.com/gin-gonic/gin.(*Context).Next
+  957.63us 0.069% 75.24% 34118.14us  2.47%  github.com/pengfeifei6/NexusDesk/internal/organization.(*PostgresRepository).FindActiveMembership
+  946.24us 0.069% 75.30% 15348.03us  1.11%  github.com/jackc/pgx/v5/pgxpool.(*poolRow).Scan
+  939.39us 0.068% 75.37% 13238.46us  0.96%  github.com/jackc/pgx/v5/pgconn.(*PgConn).execExtendedSuffix
+  921.92us 0.067% 75.44% 270668.15us 19.61%  encoding/json.interfaceEncoder
+  915.46us 0.066% 75.51% 12727.68us  0.92%  encoding/json.typeEncoder
+  912.38us 0.066% 75.57% 60162.37us  4.36%  runtime.growslice
+  883.78us 0.064% 75.64%  7098.18us  0.51%  fmt.(*pp).doPrintf
+  877.57us 0.064% 75.70%  9057.99us  0.66%  context.WithDeadlineCause
+  673.47us 0.049% 75.75% 35549.31us  2.58%  github.com/pengfeifei6/NexusDesk/internal/ticket.member
+  634.94us 0.046% 75.79% 51618.04us  3.74%  reflect.copyVal
+  611.58us 0.044% 75.84%  6890.30us   0.5%  github.com/jackc/pgx/v5/pgconn.(*PgConn).flushWithPotentialWriteReadDeadlock
+  611.58us 0.044% 75.88%  9631.42us   0.7%  net.(*conn).Write
+  588.86us 0.043% 75.93% 13120.51us  0.95%  internal/sync.(*HashTrieMap[...]).Load
+  558.34us  0.04% 75.97% 492167.55us 35.66%  encoding/json.Unmarshal
+  524.74us 0.038% 76.00% 23667.91us  1.71%  runtime.mallocgcLarge
+  482.82us 0.035% 76.04% 14533.44us  1.05%  github.com/redis/go-redis/v9/internal/proto.(*Reader).readStringReply
+  473.73us 0.034% 76.07%  7896.96us  0.57%  net/http.readRequest
+  358.27us 0.026% 76.10% 13862.46us  1.00%  reflect.unsafe_New
+  332.03us 0.024% 76.12% 13311.10us  0.96%  fmt.Sprintf
+  322.43us 0.023% 76.15% 13050.11us  0.95%  encoding/json.valueEncoder
+  299.58us 0.022% 76.17% 16380.79us  1.19%  net.(*conn).SetReadDeadline
+  259.84us 0.019% 76.19% 996583.80us 72.20%  github.com/gin-gonic/gin.(*Engine).handleHTTPRequest
+  251.90us 0.018% 76.21% 44105.99us  3.20%  encoding/json.stringEncoder
+  237.63us 0.017% 76.22% 37155.14us  2.69%  runtime.mallocgcSmallScanHeader
+  212.10us 0.015% 76.24%  7174.40us  0.52%  github.com/pengfeifei6/NexusDesk/internal/platform/observe.(*QueryTracer).TraceQueryStart
+  190.34us 0.014% 76.25%  6022.14us  0.44%  github.com/jackc/pgx/v5.(*baseRows).Scan
+  184.13us 0.013% 76.26% 68285.82us  4.95%  slices.pdqsortCmpFunc[...]
+  179.14us 0.013% 76.28% 510590.91us 36.99%  github.com/pengfeifei6/NexusDesk/internal/platform/cache.getList[...]
+  143.94us  0.01% 76.29%  8222.46us   0.6%  time.parseStrictRFC3339
+  124.35us 0.009% 76.30%  8078.53us  0.59%  time.parseRFC3339[...]
+   96.19us 0.007% 76.30% 288981.56us 20.94%  github.com/gin-gonic/gin/render.WriteJSON
+   90.43us 0.0066% 76.31% 17317.44us  1.25%  github.com/jackc/pgx/v5/pgconn.(*PgConn).ExecStatement
+   84.54us 0.0061% 76.32% 986681.72us 71.48%  main.run.func3.RequireUser.1
+   72.13us 0.0052% 76.32% 23391.81us  1.69%  github.com/redis/go-redis/v9.(*Client).Process
+   67.07us 0.0049% 76.33% 323842.82us 23.46%  encoding/json.(*decodeState).unmarshal
+   55.23us 0.004% 76.33%  9113.22us  0.66%  context.WithTimeout
+   54.91us 0.004% 76.34% 15931.46us  1.15%  github.com/pengfeifei6/NexusDesk/internal/platform/cache.Key
+   52.42us 0.0038% 76.34% 270491.77us 19.60%  encoding/json.arrayEncoder.encode
+   48.32us 0.0035% 76.34% 289029.88us 20.94%  github.com/gin-gonic/gin.(*Context).Render
+   27.84us 0.002% 76.34%  7341.95us  0.53%  github.com/pengfeifei6/NexusDesk/internal/platform/httpserver.NewRouterWithObserver.observation.func2.1
+   23.74us 0.0017% 76.35% 29812.10us  2.16%  runtime.makemap
+   18.30us 0.0013% 76.35% 168596.41us 12.21%  encoding/json.checkValid
+   17.92us 0.0013% 76.35% 12148.93us  0.88%  github.com/pengfeifei6/NexusDesk/internal/auth.(*PostgresRepository).FindUserByID
+   13.12us 0.00095% 76.35% 22037.51us  1.60%  reflect.Value.grow
+    1.54us 0.00011% 76.35% 23318.21us  1.69%  github.com/redis/go-redis/v9.(*baseClient).process
+         0     0% 76.35% 21037.51us  1.52%  bytes.(*Buffer).grow
+         0     0% 76.35% 20434.95us  1.48%  bytes.growSlice
+         0     0% 76.35%  9057.99us  0.66%  context.WithDeadline
+         0     0% 76.35% 313228.81us 22.69%  encoding/json.(*decodeState).array
+         0     0% 76.35% 323557.70us 23.44%  encoding/json.(*decodeState).object
+         0     0% 76.35% 272417.27us 19.74%  encoding/json.(*encodeState).marshal
+         0     0% 76.35% 271759.03us 19.69%  encoding/json.mapEncoder.encode
+         0     0% 76.35% 270491.77us 19.60%  encoding/json.sliceEncoder.encode
+         0     0% 76.35% 289029.88us 20.94%  github.com/gin-gonic/gin.(*Context).JSON
+         0     0% 76.35% 999689.66us 72.42%  github.com/gin-gonic/gin.(*Engine).ServeHTTP
+         0     0% 76.35% 282837.43us 20.49%  github.com/gin-gonic/gin/codec/json.jsonApi.Marshal
+         0     0% 76.35% 288981.56us 20.94%  github.com/gin-gonic/gin/render.JSON.Render
+         0     0% 76.35% 12290.17us  0.89%  github.com/golang-jwt/jwt/v5.(*Parser).ParseUnverified
+         0     0% 76.35% 15438.08us  1.12%  github.com/golang-jwt/jwt/v5.(*Parser).ParseWithClaims
+         0     0% 76.35% 15438.08us  1.12%  github.com/golang-jwt/jwt/v5.ParseWithClaims
+         0     0% 76.35% 32763.52us  2.37%  github.com/jackc/pgx/v5.(*Conn).Query
+         0     0% 76.35% 32763.52us  2.37%  github.com/jackc/pgx/v5.(*Conn).QueryRow
+         0     0% 76.35% 11867.78us  0.86%  github.com/jackc/pgx/v5.(*connRow).Scan
+         0     0% 76.35%  7174.40us  0.52%  github.com/jackc/pgx/v5/multitracer.(*Tracer).TraceQueryStart
+         0     0% 76.35% 32763.52us  2.37%  github.com/jackc/pgx/v5/pgxpool.(*Conn).QueryRow
+         0     0% 76.35% 36793.86us  2.67%  github.com/jackc/pgx/v5/pgxpool.(*Pool).QueryRow
+         0     0% 76.35% 16434.49us  1.19%  github.com/pengfeifei6/NexusDesk/internal/auth.(*TokenManager).Verify
+         0     0% 76.35%  6588.28us  0.48%  github.com/pengfeifei6/NexusDesk/internal/auth.(*accessClaims).UnmarshalJSON
+         0     0% 76.35% 33160.51us  2.40%  github.com/pengfeifei6/NexusDesk/internal/organization.FindActiveMembershipWith
+         0     0% 76.35% 18494.40us  1.34%  github.com/pengfeifei6/NexusDesk/internal/platform/cache.(*Cache).Revision
+         0     0% 76.35% 545023.30us 39.48%  github.com/pengfeifei6/NexusDesk/internal/platform/cache.List[...]
+         0     0% 76.35% 482056.77us 34.92%  github.com/pengfeifei6/NexusDesk/internal/platform/cache.decodeList[...]
+         0     0% 76.35% 995129.46us 72.09%  github.com/pengfeifei6/NexusDesk/internal/platform/httpserver.NewRouterWithObserver.observation.func2
+         0     0% 76.35% 956169.59us 69.27%  github.com/pengfeifei6/NexusDesk/internal/ticket.(*Handler).list
+         0     0% 76.35% 21654.59us  1.57%  github.com/pengfeifei6/NexusDesk/internal/ticket.(*Handler).scope
+         0     0% 76.35% 35549.31us  2.58%  github.com/pengfeifei6/NexusDesk/internal/ticket.(*Service).Authorize
+         0     0% 76.35% 560628.55us 40.62%  github.com/pengfeifei6/NexusDesk/internal/ticket.(*Service).List
+         0     0% 76.35% 15213.64us  1.10%  github.com/redis/go-redis/v9.(*StringCmd).readReply
+         0     0% 76.35% 23316.67us  1.69%  github.com/redis/go-redis/v9.(*baseClient)._process
+         0     0% 76.35% 18749.06us  1.36%  github.com/redis/go-redis/v9.(*baseClient)._process.func1
+         0     0% 76.35% 23316.67us  1.69%  github.com/redis/go-redis/v9.(*baseClient).withConn
+         0     0% 76.35% 23319.68us  1.69%  github.com/redis/go-redis/v9.(*hooksMixin).processHook
+         0     0% 76.35% 25163.90us  1.82%  github.com/redis/go-redis/v9.cmdable.GetRange
+         0     0% 76.35% 15582.02us  1.13%  github.com/redis/go-redis/v9/internal/pool.(*Conn).WithReader
+         0     0% 76.35% 15213.64us  1.10%  github.com/redis/go-redis/v9/internal/proto.(*Reader).ReadString
+         0     0% 76.35% 16081.21us  1.17%  internal/poll.(*FD).SetReadDeadline
+         0     0% 76.35% 29788.35us  2.16%  internal/runtime/maps.NewMap
+         0     0% 76.35% 21069.18us  1.53%  internal/runtime/maps.newGroups
+         0     0% 76.35% 21069.18us  1.53%  internal/runtime/maps.newarray
+         0     0% 76.35%  8241.28us   0.6%  internal/sync.(*entry[...]).lookup
+         0     0% 76.35% 16081.21us  1.17%  net.(*netFD).SetReadDeadline
+         0     0% 76.35%  9019.84us  0.65%  net.(*netFD).Write
+         0     0% 76.35% 14124.29us  1.02%  net/http.(*conn).readRequest
+         0     0% 76.35% 1033340.28us 74.86%  net/http.(*conn).serve
+         0     0% 76.35% 15193.40us  1.10%  net/http.(*connReader).abortPendingRead
+         0     0% 76.35% 16140.60us  1.17%  net/http.(*response).finishRequest
+         0     0% 76.35% 999689.66us 72.42%  net/http.serverHandler.ServeHTTP
+         0     0% 76.35% 22037.51us  1.60%  reflect.Value.Grow
+         0     0% 76.35% 22024.39us  1.60%  reflect.growslice
+         0     0% 76.35% 147506.18us 10.69%  runtime.gcBgMarkWorker
+         0     0% 76.35% 101404.35us  7.35%  runtime.gcMarkTermination
+         0     0% 76.35% 21069.18us  1.53%  runtime.newarray
+         0     0% 76.35% 68285.82us  4.95%  slices.SortFunc[...]
+         0     0% 76.35% 68100.35us  4.93%  slices.insertionSortCmpFunc[...]
+         0     0% 76.35% 13120.51us  0.95%  sync.(*Map).Load
+         0     0% 76.35%  8352.90us  0.61%  sync.(*Pool).Get

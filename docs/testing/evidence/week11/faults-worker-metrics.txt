@@ -1,0 +1,188 @@
+# HELP nexusdesk_http_requests_total Completed HTTP requests.
+# TYPE nexusdesk_http_requests_total counter
+# HELP nexusdesk_http_request_duration_seconds HTTP request duration.
+# TYPE nexusdesk_http_request_duration_seconds histogram
+# HELP nexusdesk_http_in_flight HTTP requests currently running.
+# TYPE nexusdesk_http_in_flight gauge
+nexusdesk_http_in_flight 0
+# HELP nexusdesk_sql_queries_total SQL query returns by fixed operation.
+# TYPE nexusdesk_sql_queries_total counter
+nexusdesk_sql_queries_total{operation="begin",result="nil"} 5
+nexusdesk_sql_queries_total{operation="update",result="nil"} 11
+nexusdesk_sql_queries_total{operation="commit",result="nil"} 5
+nexusdesk_sql_queries_total{operation="delete",result="nil"} 1
+nexusdesk_sql_queries_total{operation="insert",result="nil"} 1
+nexusdesk_sql_queries_total{operation="select",result="nil"} 72
+# HELP nexusdesk_sql_query_duration_seconds SQL query duration.
+# TYPE nexusdesk_sql_query_duration_seconds histogram
+nexusdesk_sql_query_duration_seconds_sum{operation="begin",result="nil"} 0.001458558
+nexusdesk_sql_query_duration_seconds_count{operation="begin",result="nil"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="begin",result="nil",le="0.005"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="begin",result="nil",le="0.01"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="begin",result="nil",le="0.025"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="begin",result="nil",le="0.05"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="begin",result="nil",le="0.1"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="begin",result="nil",le="0.25"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="begin",result="nil",le="0.5"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="begin",result="nil",le="1"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="begin",result="nil",le="2.5"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="begin",result="nil",le="5"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="begin",result="nil",le="10"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="begin",result="nil",le="30"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="begin",result="nil",le="+Inf"} 5
+nexusdesk_sql_query_duration_seconds_sum{operation="update",result="nil"} 0.014051271999999998
+nexusdesk_sql_query_duration_seconds_count{operation="update",result="nil"} 11
+nexusdesk_sql_query_duration_seconds_bucket{operation="update",result="nil",le="0.005"} 11
+nexusdesk_sql_query_duration_seconds_bucket{operation="update",result="nil",le="0.01"} 11
+nexusdesk_sql_query_duration_seconds_bucket{operation="update",result="nil",le="0.025"} 11
+nexusdesk_sql_query_duration_seconds_bucket{operation="update",result="nil",le="0.05"} 11
+nexusdesk_sql_query_duration_seconds_bucket{operation="update",result="nil",le="0.1"} 11
+nexusdesk_sql_query_duration_seconds_bucket{operation="update",result="nil",le="0.25"} 11
+nexusdesk_sql_query_duration_seconds_bucket{operation="update",result="nil",le="0.5"} 11
+nexusdesk_sql_query_duration_seconds_bucket{operation="update",result="nil",le="1"} 11
+nexusdesk_sql_query_duration_seconds_bucket{operation="update",result="nil",le="2.5"} 11
+nexusdesk_sql_query_duration_seconds_bucket{operation="update",result="nil",le="5"} 11
+nexusdesk_sql_query_duration_seconds_bucket{operation="update",result="nil",le="10"} 11
+nexusdesk_sql_query_duration_seconds_bucket{operation="update",result="nil",le="30"} 11
+nexusdesk_sql_query_duration_seconds_bucket{operation="update",result="nil",le="+Inf"} 11
+nexusdesk_sql_query_duration_seconds_sum{operation="commit",result="nil"} 0.005824641
+nexusdesk_sql_query_duration_seconds_count{operation="commit",result="nil"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="commit",result="nil",le="0.005"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="commit",result="nil",le="0.01"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="commit",result="nil",le="0.025"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="commit",result="nil",le="0.05"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="commit",result="nil",le="0.1"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="commit",result="nil",le="0.25"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="commit",result="nil",le="0.5"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="commit",result="nil",le="1"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="commit",result="nil",le="2.5"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="commit",result="nil",le="5"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="commit",result="nil",le="10"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="commit",result="nil",le="30"} 5
+nexusdesk_sql_query_duration_seconds_bucket{operation="commit",result="nil",le="+Inf"} 5
+nexusdesk_sql_query_duration_seconds_sum{operation="delete",result="nil"} 0.000461672
+nexusdesk_sql_query_duration_seconds_count{operation="delete",result="nil"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="delete",result="nil",le="0.005"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="delete",result="nil",le="0.01"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="delete",result="nil",le="0.025"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="delete",result="nil",le="0.05"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="delete",result="nil",le="0.1"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="delete",result="nil",le="0.25"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="delete",result="nil",le="0.5"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="delete",result="nil",le="1"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="delete",result="nil",le="2.5"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="delete",result="nil",le="5"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="delete",result="nil",le="10"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="delete",result="nil",le="30"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="delete",result="nil",le="+Inf"} 1
+nexusdesk_sql_query_duration_seconds_sum{operation="insert",result="nil"} 0.003076362
+nexusdesk_sql_query_duration_seconds_count{operation="insert",result="nil"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="insert",result="nil",le="0.005"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="insert",result="nil",le="0.01"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="insert",result="nil",le="0.025"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="insert",result="nil",le="0.05"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="insert",result="nil",le="0.1"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="insert",result="nil",le="0.25"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="insert",result="nil",le="0.5"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="insert",result="nil",le="1"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="insert",result="nil",le="2.5"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="insert",result="nil",le="5"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="insert",result="nil",le="10"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="insert",result="nil",le="30"} 1
+nexusdesk_sql_query_duration_seconds_bucket{operation="insert",result="nil",le="+Inf"} 1
+nexusdesk_sql_query_duration_seconds_sum{operation="select",result="nil"} 0.04369161300000001
+nexusdesk_sql_query_duration_seconds_count{operation="select",result="nil"} 72
+nexusdesk_sql_query_duration_seconds_bucket{operation="select",result="nil",le="0.005"} 71
+nexusdesk_sql_query_duration_seconds_bucket{operation="select",result="nil",le="0.01"} 72
+nexusdesk_sql_query_duration_seconds_bucket{operation="select",result="nil",le="0.025"} 72
+nexusdesk_sql_query_duration_seconds_bucket{operation="select",result="nil",le="0.05"} 72
+nexusdesk_sql_query_duration_seconds_bucket{operation="select",result="nil",le="0.1"} 72
+nexusdesk_sql_query_duration_seconds_bucket{operation="select",result="nil",le="0.25"} 72
+nexusdesk_sql_query_duration_seconds_bucket{operation="select",result="nil",le="0.5"} 72
+nexusdesk_sql_query_duration_seconds_bucket{operation="select",result="nil",le="1"} 72
+nexusdesk_sql_query_duration_seconds_bucket{operation="select",result="nil",le="2.5"} 72
+nexusdesk_sql_query_duration_seconds_bucket{operation="select",result="nil",le="5"} 72
+nexusdesk_sql_query_duration_seconds_bucket{operation="select",result="nil",le="10"} 72
+nexusdesk_sql_query_duration_seconds_bucket{operation="select",result="nil",le="30"} 72
+nexusdesk_sql_query_duration_seconds_bucket{operation="select",result="nil",le="+Inf"} 72
+# HELP nexusdesk_worker_returns_total Worker function returns, not business outcomes.
+# TYPE nexusdesk_worker_returns_total counter
+nexusdesk_worker_returns_total{phase="delivery_return",result="nil"} 1
+nexusdesk_worker_returns_total{phase="dispatch_return",result="nil"} 19
+# HELP nexusdesk_worker_return_duration_seconds Worker function duration.
+# TYPE nexusdesk_worker_return_duration_seconds histogram
+nexusdesk_worker_return_duration_seconds_sum{phase="delivery_return",result="nil"} 0.032237421
+nexusdesk_worker_return_duration_seconds_count{phase="delivery_return",result="nil"} 1
+nexusdesk_worker_return_duration_seconds_bucket{phase="delivery_return",result="nil",le="0.005"} 0
+nexusdesk_worker_return_duration_seconds_bucket{phase="delivery_return",result="nil",le="0.01"} 0
+nexusdesk_worker_return_duration_seconds_bucket{phase="delivery_return",result="nil",le="0.025"} 0
+nexusdesk_worker_return_duration_seconds_bucket{phase="delivery_return",result="nil",le="0.05"} 1
+nexusdesk_worker_return_duration_seconds_bucket{phase="delivery_return",result="nil",le="0.1"} 1
+nexusdesk_worker_return_duration_seconds_bucket{phase="delivery_return",result="nil",le="0.25"} 1
+nexusdesk_worker_return_duration_seconds_bucket{phase="delivery_return",result="nil",le="0.5"} 1
+nexusdesk_worker_return_duration_seconds_bucket{phase="delivery_return",result="nil",le="1"} 1
+nexusdesk_worker_return_duration_seconds_bucket{phase="delivery_return",result="nil",le="2.5"} 1
+nexusdesk_worker_return_duration_seconds_bucket{phase="delivery_return",result="nil",le="5"} 1
+nexusdesk_worker_return_duration_seconds_bucket{phase="delivery_return",result="nil",le="10"} 1
+nexusdesk_worker_return_duration_seconds_bucket{phase="delivery_return",result="nil",le="30"} 1
+nexusdesk_worker_return_duration_seconds_bucket{phase="delivery_return",result="nil",le="+Inf"} 1
+nexusdesk_worker_return_duration_seconds_sum{phase="dispatch_return",result="nil"} 0.054054282
+nexusdesk_worker_return_duration_seconds_count{phase="dispatch_return",result="nil"} 19
+nexusdesk_worker_return_duration_seconds_bucket{phase="dispatch_return",result="nil",le="0.005"} 16
+nexusdesk_worker_return_duration_seconds_bucket{phase="dispatch_return",result="nil",le="0.01"} 17
+nexusdesk_worker_return_duration_seconds_bucket{phase="dispatch_return",result="nil",le="0.025"} 19
+nexusdesk_worker_return_duration_seconds_bucket{phase="dispatch_return",result="nil",le="0.05"} 19
+nexusdesk_worker_return_duration_seconds_bucket{phase="dispatch_return",result="nil",le="0.1"} 19
+nexusdesk_worker_return_duration_seconds_bucket{phase="dispatch_return",result="nil",le="0.25"} 19
+nexusdesk_worker_return_duration_seconds_bucket{phase="dispatch_return",result="nil",le="0.5"} 19
+nexusdesk_worker_return_duration_seconds_bucket{phase="dispatch_return",result="nil",le="1"} 19
+nexusdesk_worker_return_duration_seconds_bucket{phase="dispatch_return",result="nil",le="2.5"} 19
+nexusdesk_worker_return_duration_seconds_bucket{phase="dispatch_return",result="nil",le="5"} 19
+nexusdesk_worker_return_duration_seconds_bucket{phase="dispatch_return",result="nil",le="10"} 19
+nexusdesk_worker_return_duration_seconds_bucket{phase="dispatch_return",result="nil",le="30"} 19
+nexusdesk_worker_return_duration_seconds_bucket{phase="dispatch_return",result="nil",le="+Inf"} 19
+# HELP nexusdesk_pg_pool_acquires_total Cumulative process local value.
+# TYPE nexusdesk_pg_pool_acquires_total counter
+nexusdesk_pg_pool_acquires_total 51
+# HELP nexusdesk_pg_pool_acquire_duration_seconds_total Cumulative process local value.
+# TYPE nexusdesk_pg_pool_acquire_duration_seconds_total counter
+nexusdesk_pg_pool_acquire_duration_seconds_total 0.010027025
+# HELP nexusdesk_pg_pool_canceled_acquires_total Cumulative process local value.
+# TYPE nexusdesk_pg_pool_canceled_acquires_total counter
+nexusdesk_pg_pool_canceled_acquires_total 0
+# HELP nexusdesk_pg_pool_empty_acquires_total Cumulative process local value.
+# TYPE nexusdesk_pg_pool_empty_acquires_total counter
+nexusdesk_pg_pool_empty_acquires_total 1
+# HELP nexusdesk_runtime_goroutines Process local snapshot.
+# TYPE nexusdesk_runtime_goroutines gauge
+nexusdesk_runtime_goroutines 17
+# HELP nexusdesk_runtime_heap_alloc_bytes Process local snapshot.
+# TYPE nexusdesk_runtime_heap_alloc_bytes gauge
+nexusdesk_runtime_heap_alloc_bytes 2.980024e+06
+# HELP nexusdesk_runtime_heap_inuse_bytes Process local snapshot.
+# TYPE nexusdesk_runtime_heap_inuse_bytes gauge
+nexusdesk_runtime_heap_inuse_bytes 4.702208e+06
+# HELP nexusdesk_runtime_sys_bytes Process local snapshot.
+# TYPE nexusdesk_runtime_sys_bytes gauge
+nexusdesk_runtime_sys_bytes 1.9691784e+07
+# HELP nexusdesk_pg_pool_total_connections Process local snapshot.
+# TYPE nexusdesk_pg_pool_total_connections gauge
+nexusdesk_pg_pool_total_connections 1
+# HELP nexusdesk_pg_pool_idle_connections Process local snapshot.
+# TYPE nexusdesk_pg_pool_idle_connections gauge
+nexusdesk_pg_pool_idle_connections 1
+# HELP nexusdesk_pg_pool_acquired_connections Process local snapshot.
+# TYPE nexusdesk_pg_pool_acquired_connections gauge
+nexusdesk_pg_pool_acquired_connections 0
+# HELP nexusdesk_pg_pool_max_connections Process local snapshot.
+# TYPE nexusdesk_pg_pool_max_connections gauge
+nexusdesk_pg_pool_max_connections 64
+# HELP nexusdesk_runtime_gc_cycles_total Cumulative process local value.
+# TYPE nexusdesk_runtime_gc_cycles_total counter
+nexusdesk_runtime_gc_cycles_total 1
+# HELP nexusdesk_runtime_gc_pause_seconds_total Cumulative process local value.
+# TYPE nexusdesk_runtime_gc_pause_seconds_total counter
+nexusdesk_runtime_gc_pause_seconds_total 0.002927131
+# HELP nexusdesk_runtime_alloc_bytes_total Cumulative process local value.
+# TYPE nexusdesk_runtime_alloc_bytes_total counter
+nexusdesk_runtime_alloc_bytes_total 3.26108e+06

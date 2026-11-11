@@ -42,12 +42,36 @@ export function createDesk() {
     ticketID = computed(() => String(route.params.ticketID || ''))
   const base = computed(() => `/organizations/${orgID.value}/tickets`)
   const role = ref<Organization['my_role']>()
+  const accessEpoch = ref(0)
   const canWork = computed(
     () => role.value === 'admin' || detail.value?.assignee_id === session.user?.id,
   )
   let retryOperation: () => Promise<unknown> = loadOrgs
+  // All consumers must revoke the shared request scope as well as visible refs.
+  function invalidateAccess() {
+    active = scope.begin()
+    listSequence++
+    commentSequence++
+    eventSequence++
+    orgSequence++
+    accessEpoch.value++
+    detail.value = null
+    tickets.value = []
+    comments.value = []
+    events.value = []
+    role.value = undefined
+    selectedOrg.value = null
+    title.value = ''
+    body.value = ''
+    content.value = ''
+    busy.value = false
+    notice.value = ''
+    retryOperation = loadOrgs
+  }
   function fail(e: unknown, operation: () => Promise<unknown> = load) {
-    retryOperation = operation
+    if (e instanceof ApiError && [403, 404].includes(e.status)) {
+      invalidateAccess()
+    } else retryOperation = operation
     error.value = e instanceof Error ? e.message : '请求失败'
   }
   async function register() {
@@ -204,7 +228,7 @@ export function createDesk() {
     error.value = ''
     busy.value = true
     try {
-      if (route.path.includes('/knowledge')) return
+      if (!route.path.includes('/tickets')) return
       if (ticketID.value) {
         const d = await api.request<Ticket>(`${base.value}/${ticketID.value}`, {
           signal: run.signal,
@@ -368,7 +392,7 @@ export function createDesk() {
     const id = (event.target as HTMLSelectElement).value
     if (id)
       router.push(
-        `/organizations/${id}/${route.path.endsWith('/knowledge/search') ? 'knowledge/search' : route.path.includes('/knowledge') ? 'knowledge' : 'tickets'}`,
+        `/organizations/${id}/${route.path.endsWith('/members') ? 'members' : route.path.endsWith('/ai') ? 'ai' : route.path.endsWith('/knowledge/search') ? 'knowledge/search' : route.path.includes('/knowledge') ? 'knowledge' : 'tickets'}`,
       )
   }
   function changePage(kind: 'org' | 'ticket' | 'comment' | 'event', delta: number) {
@@ -389,6 +413,8 @@ export function createDesk() {
 
   return {
     session,
+    accessEpoch,
+    invalidateAccess,
     displayName,
     organizationName,
     selectedOrg,

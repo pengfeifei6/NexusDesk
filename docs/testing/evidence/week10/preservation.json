@@ -1,0 +1,31 @@
+{
+  "main_directory": "/media/yjz/pzp/Go/projects/NexusDesk",
+  "new_worktree_created": false,
+  "head_unchanged": "6f66fb96f8f671f82df51a0ec8e5fcf193930e57",
+  "groups": {
+    "migrations/": {
+      "files": 14,
+      "unchanged": true
+    },
+    "go.mod": {
+      "files": 1,
+      "unchanged": true
+    },
+    "go.sum": {
+      "files": 1,
+      "unchanged": true
+    },
+    "web/package": {
+      "files": 2,
+      "unchanged": true
+    },
+    "docs/testing/evidence/week09/": {
+      "files": 13,
+      "unchanged": true
+    },
+    "docs/weekly/evidence/week06": {
+      "files": 52,
+      "unchanged": true
+    }
+  }
+}

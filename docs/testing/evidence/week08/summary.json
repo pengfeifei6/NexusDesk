@@ -1,0 +1,49 @@
+{
+  "go_race": {
+    "top_level_pass": 227,
+    "all_pass_nodes": 1051,
+    "fail": 0,
+    "skip": 0,
+    "real_postgresql_redis": true
+  },
+  "frontend": {
+    "files": 7,
+    "passed": 130,
+    "week08_tests": 29,
+    "type_check": "PASS",
+    "build": "PASS",
+    "lint": "PASS",
+    "format": "PASS"
+  },
+  "python_launcher_tests": 5,
+  "live": {
+    "status": "PASS",
+    "synthetic_data_only": true,
+    "model": "deepseek-flash",
+    "embedding": "bge-m3:567m",
+    "steps": [
+      "上传 → Worker → 本地BGE索引",
+      "浏览器新建owner私有会话",
+      "真实DeepSeek流式知识回答与当前组织引用",
+      "真实get_ticket只读查询返回随机合成标题",
+      "持久化提议可见且未确认时无工单新增",
+      "用户确认 → 工单与审计；并发重复确认返回同一ID",
+      "第二个独立提议拒绝且无工单写入",
+      "其他组织读取与确认均404",
+      "浏览器停止生成持久化INTERRUPTED",
+      "移动端布局无横向溢出",
+      "已创建工单可跳转到既有工单工作流"
+    ],
+    "content_delta_events": 313,
+    "owner_only": true,
+    "unconfirmed_ticket_delta": 0,
+    "confirmed_ticket_delta": 1,
+    "duplicate_confirm_requests": 4,
+    "stop_status": "INTERRUPTED",
+    "desktop_mobile": true,
+    "browser_credentials_absent": true,
+    "duration_seconds": 181
+  },
+  "final_frontend_fix_after_recording": "independent citation arrays; red-green focused regression and full130tests",
+  "scope": "local learning release; no public deployment, no personal mastery claim"
+}

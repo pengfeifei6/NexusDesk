@@ -1,0 +1,49 @@
+
+> nexusdesk-web@0.4.0 format:check
+> prettier --check src/ vite.config.ts vitest.config.ts eslint.config.ts
+
+Checking formatting...
+[warn] src/__tests__/App.spec.ts
+[warn] src/App.vue
+[warn] src/assets/main.css
+[warn] src/components/AsyncJobPanel.vue
+[warn] src/components/RAGIndexPanel.vue
+[warn] src/components/RAGSourceList.vue
+[warn] src/components/StatusBadge.vue
+[warn] src/components/TicketForm.vue
+[warn] src/components/TicketManagementPanel.vue
+[warn] src/components/UiIcon.vue
+[warn] src/composables/conversation.ts
+[warn] src/composables/desk.ts
+[warn] src/composables/knowledge.ts
+[warn] src/composables/members.ts
+[warn] src/composables/ticket-management.ts
+[warn] src/lib/__tests__/ai.spec.ts
+[warn] src/lib/__tests__/app.spec.ts
+[warn] src/lib/__tests__/client.spec.ts
+[warn] src/lib/__tests__/jobs.spec.ts
+[warn] src/lib/__tests__/knowledge.spec.ts
+[warn] src/lib/__tests__/management.spec.ts
+[warn] src/lib/__tests__/rag.spec.ts
+[warn] src/lib/ai-stream.ts
+[warn] src/lib/client.ts
+[warn] src/lib/identifiers.ts
+[warn] src/lib/presentation.ts
+[warn] src/lib/types.ts
+[warn] src/main.ts
+[warn] src/router/index.ts
+[warn] src/stores/session.ts
+[warn] src/views/AIConversationView.vue
+[warn] src/views/DeskView.vue
+[warn] src/views/KnowledgeDetailView.vue
+[warn] src/views/KnowledgeListView.vue
+[warn] src/views/KnowledgeSearchView.vue
+[warn] src/views/LoginView.vue
+[warn] src/views/OrganizationMembersView.vue
+[warn] src/views/RegisterView.vue
+[warn] src/views/TicketDetailView.vue
+[warn] src/views/TicketListView.vue
+[warn] vite.config.ts
+[warn] vitest.config.ts
+[warn] eslint.config.ts
+[warn] Code style issues found in 43 files. Run Prettier with --write to fix.

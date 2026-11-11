@@ -39,7 +39,7 @@ const labels = {
   CANCELED: '已取消',
 }
 const phases = {
-  WAITING: '等待 Worker',
+  WAITING: '等待后台处理',
   EXTRACTING: '提取正文',
   INDEXING: '建立索引',
   DONE: '完成',
@@ -157,7 +157,7 @@ onBeforeUnmount(() => {
         }}
       </p>
       <p v-if="job.last_dispatch_error" class="notice">
-        队列暂时不可用，任务已保存，Worker 恢复后会继续投递。
+        后台服务暂时不可用，任务已保存，恢复后会继续处理。
       </p>
     </template>
     <p v-else>尚未提交异步任务。</p>

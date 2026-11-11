@@ -11,6 +11,11 @@ const (
 	ChatModel          = "qwen3.5:35b"
 )
 
+// SupportedChatModel preserves the configured generation allowlist independently of embedding indexes.
+func SupportedChatModel(model string) bool {
+	return model == ChatModel || model == "deepseek-flash" || model == "deepseek-v4-pro"
+}
+
 type Embedder interface {
 	Model() string
 	Dimension() int
@@ -23,17 +28,37 @@ type Generator interface {
 }
 
 type Source struct {
-	ChunkID    int64   `json:"chunk_id"`
-	DocumentID int64   `json:"document_id"`
-	ChunkIndex int     `json:"chunk_index"`
-	SourceName string  `json:"source_name"`
-	Score      float64 `json:"score"`
-	Excerpt    string  `json:"excerpt"`
-	StartRune  int     `json:"start_rune"`
-	EndRune    int     `json:"end_rune"`
+	FusionScore *float64 `json:"fusion_score,omitempty"`
+	ChunkID     int64    `json:"chunk_id"`
+	DocumentID  int64    `json:"document_id"`
+	ChunkIndex  int      `json:"chunk_index"`
+	SourceName  string   `json:"source_name"`
+	Score       float64  `json:"score"`
+	Excerpt     string   `json:"excerpt"`
+	StartRune   int      `json:"start_rune"`
+	EndRune     int      `json:"end_rune"`
+}
+
+type Usage struct {
+	Known            bool   `json:"known"`
+	ModelCalled      bool   `json:"model_called"`
+	PromptTokens     *int64 `json:"prompt_tokens"`
+	CompletionTokens *int64 `json:"completion_tokens"`
+	TotalTokens      *int64 `json:"total_tokens"`
+	CacheHitTokens   *int64 `json:"cache_hit_tokens"`
+	CacheMissTokens  *int64 `json:"cache_miss_tokens"`
+}
+
+type Timings struct {
+	EmbeddingMS  int64 `json:"embedding_ms"`
+	SearchMS     int64 `json:"search_ms"`
+	GenerationMS int64 `json:"generation_ms"`
+	TotalMS      int64 `json:"total_ms"`
 }
 
 type Generated struct {
+	Model                string
+	Usage                Usage
 	Answer               string
 	CitationIDs          []int64
 	InsufficientEvidence bool

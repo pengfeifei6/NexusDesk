@@ -7,6 +7,103 @@ import { routes } from '../../router'
 import { useSession } from '../../stores/session'
 import { api } from '../client'
 afterEach(() => vi.restoreAllMocks())
+it('returns focus to the menu trigger when Escape closes navigation from a sidebar link', async () => {
+  const pinia = createPinia()
+  setActivePinia(pinia)
+  useSession().user = { id: '1', display_name: '测试', email: 'test@example.test' }
+  vi.spyOn(api, 'request').mockResolvedValue({ items: [] })
+  const router = createRouter({ history: createMemoryHistory(), routes })
+  await router.push('/organizations/10/tickets')
+  const wrapper = mount(App, { attachTo: document.body, global: { plugins: [pinia, router] } })
+  try {
+    await flushPromises()
+    const trigger = wrapper.get<HTMLButtonElement>('[aria-label="打开导航"]')
+    await trigger.trigger('click')
+    expect(trigger.attributes('aria-expanded')).toBe('true')
+    const link = wrapper.get<HTMLAnchorElement>('nav a')
+    link.element.focus()
+    expect(document.activeElement).toBe(link.element)
+    await link.trigger('keydown', { key: 'Escape' })
+    await flushPromises()
+    expect(trigger.attributes('aria-expanded')).toBe('false')
+    expect(wrapper.get('#workspace-navigation').classes()).not.toContain('is-open')
+    expect(document.activeElement).toBe(trigger.element)
+  } finally {
+    wrapper.unmount()
+  }
+})
+it('shows the Chinese comment event in the timeline after posting a comment', async () => {
+  const pinia = createPinia()
+  setActivePinia(pinia)
+  useSession().user = { id: '1', display_name: '测试', email: 'test@example.test' }
+  const createdAt = '2026-11-11T10:00:00Z'
+  const comment = {
+    id: '6',
+    ticket_id: '5',
+    author_id: '1',
+    content: '已核对连接配置',
+    created_at: createdAt,
+  }
+  let posted = false
+  vi.spyOn(api, 'request').mockImplementation(async (path, options) => {
+    if (path.startsWith('/organizations?'))
+      return { items: [{ id: '10', name: '测试组织', my_role: 'member' }] }
+    if (path === '/organizations/10/tickets/5')
+      return {
+        id: '5',
+        org_id: '10',
+        creator_id: '1',
+        assignee_id: null,
+        title: '连接排查',
+        body: '记录复验结果',
+        priority: 2,
+        status: 'OPEN',
+        version: '1',
+        created_at: createdAt,
+        updated_at: createdAt,
+      }
+    if (path === '/organizations/10/tickets/5/comments' && options?.method === 'POST') {
+      if (JSON.stringify(options.body) !== JSON.stringify({ content: comment.content }))
+        throw new Error('Unexpected comment content')
+      posted = true
+      return comment
+    }
+    if (path.startsWith('/organizations/10/tickets/5/comments?'))
+      return { items: posted ? [comment] : [] }
+    if (path.startsWith('/organizations/10/tickets/5/events?'))
+      return {
+        items: posted
+          ? [
+              {
+                id: '7',
+                ticket_id: '5',
+                actor_id: '1',
+                event_type: 'TICKET_COMMENTED',
+                ticket_version: '1',
+                before_data: {},
+                after_data: { comment_id: '6' },
+                created_at: createdAt,
+              },
+            ]
+          : [],
+      }
+    throw new Error('Unexpected request: ' + path)
+  })
+  const router = createRouter({ history: createMemoryHistory(), routes })
+  await router.push('/organizations/10/tickets/5')
+  const wrapper = mount(App, { global: { plugins: [pinia, router] } })
+  try {
+    await flushPromises()
+    expect(wrapper.findAll('.timeline-entry')).toHaveLength(0)
+    await wrapper.get('.comment-form textarea').setValue(comment.content)
+    await wrapper.get('.comment-form').trigger('submit')
+    await flushPromises()
+    expect(wrapper.get('.comment .body').text()).toBe('已核对连接配置')
+    expect(wrapper.get('.timeline-entry strong').text()).toBe('添加评论')
+  } finally {
+    wrapper.unmount()
+  }
+})
 describe('mounted request isolation', () => {
   it('clears old org immediately and ignores late responses', async () => {
     const pinia = createPinia()

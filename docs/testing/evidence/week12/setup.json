@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "created_config_mode": "0600",
+  "owned_database_only": true,
+  "migration": 14,
+  "repeated_up_preserved_schema": true,
+  "daily_env_modified": false,
+  "cloud_calls": 0
+}

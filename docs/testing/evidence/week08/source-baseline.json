@@ -1,0 +1,206 @@
+{
+  ".env.example": {
+    "sha256": "5148c3c6c47fb9001fb8a9f3b3dfd8eec34c9dfeba810e0b5c48a01e170d91b3",
+    "bytes": 1913
+  },
+  ".gitignore": {
+    "sha256": "567e761941462864d3f4d2684707baa265e4f2476143236f47d48baf5980801a",
+    "bytes": 848
+  },
+  "AGENTS.md": {
+    "sha256": "d799f7dbef19cd1c5719c29acc1c1cc54a8cac1bc63bb9bda797e56c69e5192c",
+    "bytes": 24673
+  },
+  "README.md": {
+    "sha256": "bd38986bbe78bc381eb943af6aa11415ee6a127160809ae056e1dd2eeb27c7e5",
+    "bytes": 31641
+  },
+  "cmd/api/main.go": {
+    "sha256": "8d5e3d230f9896ff010d054e2e030fe1e037ba40e2a6e4f47a86debd0ce8577c",
+    "bytes": 5556
+  },
+  "docs/ai/agent-flow.md": {
+    "sha256": "3c978acba91052795608e33ed4d816c9da2985850d15eee46bbba3c01cb2910d",
+    "bytes": 3085
+  },
+  "docs/ai/approval-security.md": {
+    "sha256": "7120a81de5ad534f80ac6bdba5eb10391442f88c5e648048510df2c53cc501c4",
+    "bytes": 2460
+  },
+  "docs/ai/sse-protocol.md": {
+    "sha256": "61a6c9616737db94d208b7e4e196bf60cded7a9eca72b3ac7435a54134f3e863",
+    "bytes": 2279
+  },
+  "docs/ai/tool-registry.md": {
+    "sha256": "a05026b09ac0e7d44005cf9b197a3c309f282c97d8908741853e7cdea913aae5",
+    "bytes": 2233
+  },
+  "docs/api/ai-conversation.md": {
+    "sha256": "ccfafbcf7aebcf45e63b430166912f2d63053002f6938ad3fc4f155adefb6ff7",
+    "bytes": 4669
+  },
+  "docs/decisions/0008-native-function-calling-first.md": {
+    "sha256": "5eab1355786317d21a78d4493c12d528fb0479552cdf9a5aee9e17d975ee718a",
+    "bytes": 1801
+  },
+  "docs/demo/week08-demo.md": {
+    "sha256": "6b728d8b5a6a66cc8e9134195b531506f444759586c5dbe0797d930f933ff99e",
+    "bytes": 4118
+  },
+  "docs/superpowers/plans/2026-11-11-week08-conversation-tools.md": {
+    "sha256": "82d27767238d20feed8bf5defbd46a5e5120b325fea774812f4078cbbc6b9cb8",
+    "bytes": 4782
+  },
+  "docs/superpowers/specs/2026-11-11-week08-conversation-tools.md": {
+    "sha256": "fce832ccd1f83e7c6286e7a879dce487c30dd1a69dc59fa3fdc41d8e8b2a4f4d",
+    "bytes": 6751
+  },
+  "docs/testing/week08-test-plan.md": {
+    "sha256": "6df8ca2cbc88c3a33d270ebb74d35f87466341d4a324e4825e4c9fcb52ec1e9c",
+    "bytes": 6198
+  },
+  "docs/weekly/week08-answers.md": {
+    "sha256": "b6052d9c2c372ff96c4b65ffe4626afb0b1c85382fe62e6269638dd32b1c396f",
+    "bytes": 8340
+  },
+  "docs/weekly/week08.md": {
+    "sha256": "aa8a4806bec29862c6d0ccbb0da325d4097d8eb94bfa3d79c8857d88dc39393e",
+    "bytes": 4909
+  },
+  "docs/项目阶段介绍_第八周.md": {
+    "sha256": "3a0d80fe4097485ff524f0b63a9492a74b926249f4c6bf63c716a718ce84e1f6",
+    "bytes": 3461
+  },
+  "go.mod": {
+    "sha256": "188e4f7a4295ce393da56e8f3cfe913d75ff71240d689f0d1fba8fcfc1619d4a",
+    "bytes": 2239
+  },
+  "internal/ai/approval.go": {
+    "sha256": "c7f3963ed23fbad3fc5ae40f4a9a0c301a6149d0c101013523cf8f92b03825f1",
+    "bytes": 5777
+  },
+  "internal/ai/chat.go": {
+    "sha256": "5ace1aa7900fcf5bcb0c10baf2960a7a16557504f9a96e669f40eea4c24de95a",
+    "bytes": 1796
+  },
+  "internal/ai/chat_test.go": {
+    "sha256": "0e1d745d0cb36b8627497dc320bdcf166ad03a7aaea8d8af75215bd9b1700fd6",
+    "bytes": 2185
+  },
+  "internal/ai/errors.go": {
+    "sha256": "858cbbdf846b1e9b084b6d9d6fa253a002f16e52f562ef259dc5645b88ab1a6a",
+    "bytes": 770
+  },
+  "internal/ai/handler.go": {
+    "sha256": "0e68c84d44a3e0d2c4c434412870e0b2e43abc683dd2761a49d3957fc90f685c",
+    "bytes": 6331
+  },
+  "internal/ai/model/types.go": {
+    "sha256": "cdfe9e85267faba68db9195dc7cc03970b3573def731c9a9ce798aea634cbe2b",
+    "bytes": 1645
+  },
+  "internal/ai/runner.go": {
+    "sha256": "0c0002eb078671a020620d5d05994853afe159225915f802b7e911fae1ea885d",
+    "bytes": 8113
+  },
+  "internal/ai/runner_test.go": {
+    "sha256": "175fadd00de97812d67584b14dd5baec950b5239fe0e3fa7fe169301519495f9",
+    "bytes": 10208
+  },
+  "internal/ai/sse.go": {
+    "sha256": "07454bc084ae25e7d3391b0c4b188360218fc6f9a33872f8f515f8523bc3f0bb",
+    "bytes": 1644
+  },
+  "internal/ai/sse_test.go": {
+    "sha256": "e29083354b7e1b68ba0230e7272aee61169ee763ad3204b743423f3962c928d4",
+    "bytes": 1881
+  },
+  "internal/ai/store.go": {
+    "sha256": "fbef5a19a68ea8e4c875980a22440605d7636c4657eed54f4d51d351dd8d6ac0",
+    "bytes": 11090
+  },
+  "internal/ai/tools.go": {
+    "sha256": "2ae91574b66b7d15136248a3fc564109ae88ef24762050eca8aed3c3d96257da",
+    "bytes": 7423
+  },
+  "internal/ai/types.go": {
+    "sha256": "081ce42f4c8d9baeee77ad60cad633c8f8d311eef3fea6a2fdcd4d9f2fdea232",
+    "bytes": 3592
+  },
+  "internal/ai/types_test.go": {
+    "sha256": "62a70f4f4bdf557282ec01e31dd3369ea44cbf552614a903a53e21cfe74e3646",
+    "bytes": 1599
+  },
+  "internal/platform/llm/stream.go": {
+    "sha256": "230145be6c93ab18433a233099b9890cb738f2a95fe45c6c8c6b0508c9fdab5e",
+    "bytes": 12879
+  },
+  "internal/platform/llm/stream_test.go": {
+    "sha256": "34cdef346e77abffe5cb4a92a3b110abb5772e44c26518394620b62a262520a1",
+    "bytes": 6866
+  },
+  "internal/rag/ai_search_test.go": {
+    "sha256": "ac585681e814a0796ca9532e18f683a60db97586b852538f6aa73454ccf063b9",
+    "bytes": 1003
+  },
+  "internal/rag/retriever.go": {
+    "sha256": "d32bf9676b4bd27f89d57722302b0ac889ce1cf8f1567314012a84b1288f16ff",
+    "bytes": 2940
+  },
+  "internal/ticket/service.go": {
+    "sha256": "016bd3436d86dc5b93e47642ac97a8fbb23d6298ad875c3fd6147b348619858f",
+    "bytes": 12690
+  },
+  "migrations/00012_create_ai_conversations_messages_actions.sql": {
+    "sha256": "90f9d9d697c938c43c5f3613da5b6a3b724ea34bbfa07c55619284140ff42ba8",
+    "bytes": 3686
+  },
+  "requests/week08.http": {
+    "sha256": "d78249916a9180b16ad732dc0b736159d99c82d2b8b353ee6e8ebeb9b701b0de",
+    "bytes": 1313
+  },
+  "scripts/week08-browser.mjs": {
+    "sha256": "87a4685a183ed698346656dfe7ee7fe64e83728e263a440cfaaa03c879e4bd9c",
+    "bytes": 14200
+  },
+  "scripts/week08-smoke.py": {
+    "sha256": "7876e1f617978e578c40ecc54ff643a3a384ee45d1698e36dc90ce7bcaddc52e",
+    "bytes": 9521
+  },
+  "web/src/App.vue": {
+    "sha256": "aaff8b5a16deac6974dc5632d753b5fd5f6ab89eeb1be50380b42413d8a1c723",
+    "bytes": 2644
+  },
+  "web/src/composables/conversation.ts": {
+    "sha256": "47e4d62fb1129ed83737aaa805f981712f96e0dc59fc37eff8c9e67793989020",
+    "bytes": 11895
+  },
+  "web/src/composables/desk.ts": {
+    "sha256": "94e5bcb54eb35e8986ceb49d48f1a6806fc56612155c2e35eeeca08cf5d1990e",
+    "bytes": 13432
+  },
+  "web/src/lib/__tests__/ai.spec.ts": {
+    "sha256": "29a35684670dc233b4ca962f844a8c5e5d6ff1536703e377c57ef43567cd72fc",
+    "bytes": 22821
+  },
+  "web/src/lib/ai-stream.ts": {
+    "sha256": "71700f0a04105d8d67f64ab704627dfbb67af95073e2da9f6d9788d8badc196d",
+    "bytes": 4918
+  },
+  "web/src/lib/client.ts": {
+    "sha256": "62f7f6bd65d1cbabe0b854817b0c03db3fa72aea7a924e598ed634541cd02d54",
+    "bytes": 11447
+  },
+  "web/src/lib/types.ts": {
+    "sha256": "17fcba0a9b24533507005ca77a97abc9569417ceb8e85a812f96a311d3b58922",
+    "bytes": 3766
+  },
+  "web/src/router/index.ts": {
+    "sha256": "e93a5faf4d7d0d79c8af9ff8826169bd8ae707a6cbf0f3e768c0d112e4e2aa2e",
+    "bytes": 1384
+  },
+  "web/src/views/AIConversationView.vue": {
+    "sha256": "ff0b94cf12ab53ae61d619654365a9be5484c13890cb0ae70dd8b0748464e7d3",
+    "bytes": 5492
+  }
+}

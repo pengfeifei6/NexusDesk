@@ -1,5 +1,7 @@
 # 第七周运行与演示
 
+> 后续已按用户要求配置 DeepSeek。当前本机启动请优先阅读 [DeepSeek 运行指南](local-deepseek-run.md)；下文保留 W07 原始本地 Qwen 验收方式。
+
 本周新增独立 Worker 和 Redis；API、Worker 必须使用同一个数据库和同一个私有 STORAGE_ROOT。使用本工作区新版 API，避免旧 W06 二进制绕过任务所有权。本机日常库已在不透明0600备份后只Up到migration11，独立Redis6380已healthy/PONG；备份在ignored `.local/week07-backups/`，没有读取内容。详细证据见[第七周记录](../weekly/week07.md)。
 
 ## 1. 启动依赖

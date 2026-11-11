@@ -1,0 +1,7 @@
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/cache	1.095s
+ok  	github.com/pengfeifei6/NexusDesk/cmd/loadtest	1.293s
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.004s
+
+OK

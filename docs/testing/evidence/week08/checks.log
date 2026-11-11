@@ -1,0 +1,34 @@
+Final scoped checks; full Go race + realPGRedis is in integration.log.
+$ go vet ./...
+exit=0
+
+$ go build ./...
+exit=0
+
+$ go mod tidy -diff
+exit=0
+
+$ python3 scripts/test_dev.py
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.514s
+
+OK
+exit=0
+
+$ git diff --check
+exit=0
+
+gofmt -l internal/ cmd/ tests/: empty output
+Full gated Go race: 1051 PASS nodes / 0 SKIP nodes
+Live browser: PASS, 11 steps, 181s recorded, real DeepSeek+BGE.
+
+Frontend implementer final fresh checks (recorded in task-3-report.md; after final citation fix):
+PATH=.local/week04-tools/node_modules/node/bin:$PATH npm --prefix web run test:unit -- --run : PASS 7 files /130 tests (29 W08)
+npm --prefix web run type-check : PASS
+npm --prefix web run build : PASS
+npm --prefix web run lint : PASS
+npm --prefix web run format:check : PASS
+git diff --check -- web : PASS
+Live browser recording predates the final isolated citation-array display fix; changed open-stream state verified by new focused regression and full130test suite, no extra cloud run.
+Final local documentation links, old migration/manual checksums and WebM artifact: PASS

@@ -145,7 +145,7 @@ describe('RAG front-end contracts', () => {
       expect.objectContaining({
         path: '/organizations/10/knowledge/search',
         options: expect.objectContaining({
-          body: { query: '数据库连接超时', top_k: 5 },
+          body: { query: '数据库连接超时', top_k: 5, retrieval_mode: 'vector' },
           timeoutMs: 30000,
         }),
       }),
@@ -240,6 +240,104 @@ describe('RAG front-end contracts', () => {
     await button(wrapper, '检索文档').trigger('click')
     await flushPromises()
     expect(count).toBe(1)
+  })
+  it('defaults to exact vector retrieval and submits the selected hybrid strategy', async () => {
+    const requests: unknown[] = []
+    setup((path, options) => {
+      if (path.endsWith('/search')) {
+        requests.push(options?.body)
+        return { items: [], retrieval_mode: 'hybrid', embedding_ms: 1, search_ms: 2 }
+      }
+    })
+    const { wrapper } = await open('/organizations/10/knowledge/search')
+    const strategy = wrapper.get('select[aria-label="检索策略"]')
+    expect((strategy.element as HTMLSelectElement).value).toBe('vector')
+    await wrapper.get('textarea').setValue('数据库连接')
+    await strategy.setValue('hybrid')
+    await button(wrapper, '检索文档').trigger('click')
+    await flushPromises()
+    expect(requests).toEqual([{ query: '数据库连接', top_k: 5, retrieval_mode: 'hybrid' }])
+  })
+  it('cancels an old request and clears existing evidence when the retrieval strategy changes', async () => {
+    let resolve!: (value: unknown) => void
+    let signal: AbortSignal | undefined
+    setup((path, options) => {
+      if (path.endsWith('/ask')) {
+        signal = options?.signal
+        return new Promise((r) => {
+          resolve = r
+        })
+      }
+      if (path.endsWith('/search')) return { items: [source], embedding_ms: 1, search_ms: 1 }
+    })
+    const { wrapper } = await open('/organizations/10/knowledge/search')
+    await wrapper.get('textarea').setValue('数据库连接')
+    await button(wrapper, '检索文档').trigger('click')
+    await flushPromises()
+    expect(wrapper.text()).toContain('guide.md')
+    await wrapper.get('select[aria-label="检索策略"]').setValue('hybrid')
+    expect(wrapper.text()).not.toContain('guide.md')
+    await button(wrapper, '基于知识库回答').trigger('click')
+    await wrapper.get('select[aria-label="检索策略"]').setValue('vector')
+    expect(signal?.aborted).toBe(true)
+    resolve({ answer: '过期策略的答案', sources: [source], insufficient_evidence: false })
+    await flushPromises()
+    expect(wrapper.text()).not.toContain('过期策略的答案')
+    expect(wrapper.text()).not.toContain(source.excerpt)
+  })
+  it.each([
+    {
+      known: false,
+      model_called: true,
+      prompt_tokens: null,
+      completion_tokens: null,
+      total_tokens: null,
+      label: '用量未知',
+    },
+    {
+      known: true,
+      model_called: false,
+      prompt_tokens: 0,
+      completion_tokens: 0,
+      total_tokens: 0,
+      label: '未调用生成模型',
+    },
+    {
+      known: true,
+      model_called: true,
+      prompt_tokens: 10,
+      completion_tokens: 4,
+      total_tokens: 14,
+      label: '14 tokens',
+    },
+  ])('shows measured or unknown usage without invented counts: $label', async (usage) => {
+    setup((path) =>
+      path.endsWith('/ask')
+        ? {
+            answer: '回答',
+            sources: [],
+            insufficient_evidence: false,
+            request_id: 'fixture',
+            generation_model: 'fixture-model',
+            retrieval_mode: 'vector',
+            usage,
+            timings: { embedding_ms: 12, search_ms: 3, generation_ms: 85, total_ms: 105 },
+          }
+        : undefined,
+    )
+    const { wrapper } = await open('/organizations/10/knowledge/search')
+    await wrapper.get('textarea').setValue('数据库连接')
+    await button(wrapper, '基于知识库回答').trigger('click')
+    await flushPromises()
+    expect(wrapper.text()).toContain(usage.label)
+    expect(wrapper.text()).toContain('105 ms')
+    expect(!usage.known && wrapper.text().includes('0 tokens')).toBe(false)
+  })
+  it('decodes fractional fusion scores separately from cosine scores', () => {
+    expect(decode('{"fusion_score":0.03279,"score":0.81}')).toEqual({
+      fusion_score: 0.03279,
+      score: 0.81,
+    })
   })
   it('refreshes index metadata after a model failure and preserves a safe error', async () => {
     let attempted = false

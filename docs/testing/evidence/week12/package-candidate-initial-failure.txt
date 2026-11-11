@@ -1,0 +1,15 @@
+npm ci
+npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+
+added 341 packages in 3s
+
+
+all seven extracted gates
+FAIL python unit
+PASS go vet
+PASS go build
+PASS frontend unit
+PASS frontend typecheck/build
+PASS frontend lint
+PASS frontend format

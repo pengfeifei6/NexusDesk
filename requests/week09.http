@@ -1,0 +1,24 @@
+@base = http://127.0.0.1:8080/api/v1
+@token = REPLACE_WITH_CURRENT_ACCESS_TOKEN
+@org = 1
+@conversation = REPLACE_WITH_OWN_CONVERSATION_UUID
+
+### 两次相同请求可命中服务端缓存，每次仍检查数据库成员
+GET {{base}}/organizations/{{org}}/tickets?page=1&page_size=20&priority=3
+Authorization: Bearer {{token}}
+
+### 文档元数据列表；不缓存正文、下载、权限
+GET {{base}}/organizations/{{org}}/knowledge/documents?page=1&page_size=20&status=READY
+Authorization: Bearer {{token}}
+
+### 发消息：默认同 user+org 60秒10次；超限普通JSON429+Retry-After
+### 每次主动新请求换 client_request_id；不要对失败请求自动循环重放。
+POST {{base}}/organizations/{{org}}/ai/conversations/{{conversation}}/messages
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"content":"请介绍当前工单状态。","client_request_id":"550e8400-e29b-41d4-a716-446655440099"}
+
+### 历史仍可读取，限流不消耗此接口
+GET {{base}}/organizations/{{org}}/ai/conversations/{{conversation}}/messages
+Authorization: Bearer {{token}}

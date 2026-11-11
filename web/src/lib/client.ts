@@ -1,3 +1,4 @@
+import { aiMessages, consumeSSE, validAIEvent } from './ai-stream'
 import { parse, stringify, LosslessNumber } from 'lossless-json'
 const intKeys =
   /^(id|.*_id|uploaded_by|requested_by|run_version|index_version|version|ticket_version|expected_version)$/
@@ -6,7 +7,7 @@ export function decode<T = Record<string, unknown>>(text: string): T {
     if (!(value instanceof LosslessNumber)) return value
     if (intKeys.test(key)) return value.value
     const number = Number(value.value)
-    if (['score', 'embedding_ms', 'search_ms'].includes(key)) {
+    if (['score', 'fusion_score', 'embedding_ms', 'search_ms'].includes(key)) {
       if (
         !Number.isFinite(number) ||
         (key === 'score' ? Math.abs(number) > 1 : number < 0 || number > Number.MAX_SAFE_INTEGER)
@@ -28,6 +29,7 @@ export class ApiError extends Error {
     public status: number,
     message: string,
     public code?: string,
+    public retryAfter?: number,
   ) {
     super(message)
   }
@@ -57,6 +59,117 @@ export class Client {
     this.generation++
   }
   onExpired = () => {}
+  async stream(
+    path: string,
+    options: {
+      body: unknown
+      signal?: AbortSignal
+      onEvent: (name: string, data: unknown) => void
+    },
+  ): Promise<void> {
+    const token = this.token
+    const generation = this.generation
+    const controller = new AbortController()
+    let timedOut = false
+    let ended = false
+    const abort = () => controller.abort()
+    options.signal?.addEventListener('abort', abort, { once: true })
+    if (options.signal?.aborted) abort()
+    const timer = setTimeout(() => {
+      timedOut = true
+      controller.abort()
+    }, 75000)
+    try {
+      const response = await fetch('/api/v1' + path, {
+        method: 'POST',
+        headers: {
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          'Content-Type': 'application/json',
+          Accept: 'text/event-stream',
+        },
+        body: encode(options.body),
+        signal: controller.signal,
+        credentials: 'omit',
+        cache: 'no-store',
+      })
+      if (!response.ok) {
+        if (response.status === 401 && token && this.generation === generation) {
+          this.token = ''
+          this.onExpired()
+        }
+        let code: string | undefined
+        try {
+          const value = decode<{ error?: { code?: unknown } }>(await response.text())
+          if (typeof value?.error?.code === 'string') code = value.error.code
+        } catch {
+          /* Untrusted errors must not reach the UI. */
+        }
+        const rateRejected =
+          (response.status === 429 && code === 'RATE_LIMITED') ||
+          (response.status === 503 && code === 'RATE_LIMIT_UNAVAILABLE')
+        const rawRetry = response.headers.get('Retry-After') || ''
+        const retryAfter =
+          rateRejected && /^[1-9][0-9]{0,3}$/.test(rawRetry) && Number(rawRetry) <= 3600
+            ? Number(rawRetry)
+            : undefined
+        const message =
+          code && Object.prototype.hasOwnProperty.call(aiMessages, code)
+            ? aiMessages[code]!
+            : '生成请求失败，请重新读取历史'
+        throw new ApiError(
+          response.status,
+          retryAfter ? `${message}；请在 ${retryAfter} 秒后重试` : message,
+          code,
+          retryAfter,
+        )
+      }
+      if (
+        !response.body ||
+        !/^text\/event-stream(?:;|$)/i.test(response.headers.get('content-type') || '')
+      )
+        throw new ApiError(0, '响应格式异常，请重新读取历史')
+      await consumeSSE(
+        response.body,
+        (name, raw) => {
+          if (controller.signal.aborted || generation !== this.generation)
+            throw new ApiError(0, '请求已取消')
+          let data: unknown
+          try {
+            data = decode(raw)
+          } catch {
+            throw new ApiError(0, '响应格式异常，请重新读取历史')
+          }
+          if (ended || !validAIEvent(name, data))
+            throw new ApiError(0, '响应格式异常，请重新读取历史')
+          const value = data as Record<string, unknown>
+          if (name === 'error') {
+            const code = String(value.code)
+            throw new ApiError(
+              0,
+              Object.prototype.hasOwnProperty.call(aiMessages, code)
+                ? aiMessages[code]!
+                : '生成失败，请重新读取历史',
+              code,
+            )
+          }
+          if (name === 'message_end') ended = true
+          options.onEvent(name, data)
+        },
+        controller.signal,
+      )
+      if (controller.signal.aborted)
+        throw new ApiError(0, timedOut ? '生成超时，请重新读取历史' : '请求已取消')
+      if (!ended) throw new ApiError(0, '连接中断，请重新读取历史')
+    } catch (error) {
+      if (controller.signal.aborted)
+        throw new ApiError(0, timedOut ? '生成超时，请重新读取历史' : '请求已取消')
+      if (error instanceof ApiError) throw error
+      throw new ApiError(0, '连接中断或响应格式异常，请重新读取历史')
+    } finally {
+      clearTimeout(timer)
+      options.signal?.removeEventListener('abort', abort)
+    }
+  }
   async request<T = unknown>(
     path: string,
     options: {
@@ -112,7 +225,10 @@ export class Client {
           // Never display arbitrary response text, including proxy HTML.
         }
         const messages: Record<number, Record<string, string>> = {
+          400: { INVALID_ASSIGNEE: '受理人必须是本组织正常成员，请刷新候选成员' },
+          404: { USER_NOT_FOUND: '该账号不存在，请确认同事已注册并核对账号编号' },
           409: {
+            MEMBER_ALREADY_EXISTS: '该账号已是组织成员，请查看成员列表',
             EMAIL_ALREADY_EXISTS: '该邮箱已注册，请登录',
             INDEX_STATE_CONFLICT: '索引状态已变化，请刷新后重试',
             INDEX_SOURCE_CHANGED: '文档依据已变化，请重新建立索引',
@@ -155,7 +271,10 @@ export class Client {
             : undefined
         throw new ApiError(
           response.status,
-          businessMessage ||
+          (code && code.startsWith('AI_') && Object.prototype.hasOwnProperty.call(aiMessages, code)
+            ? aiMessages[code]
+            : undefined) ||
+            businessMessage ||
             (
               {
                 400: '输入不符合要求',

@@ -1,0 +1,64 @@
+frontend unit
+
+> nexusdesk-web@0.4.0 test:unit
+> vitest --run
+
+
+ RUN  v4.1.12 /media/yjz/pzp/Go/projects/NexusDesk/web
+
+ ✓ src/lib/__tests__/client.spec.ts (34 tests) 35ms
+ ✓ src/__tests__/App.spec.ts (1 test) 64ms
+ ✓ src/lib/__tests__/polish.spec.ts (3 tests) 225ms
+ ✓ src/lib/__tests__/app.spec.ts (11 tests) 483ms
+ ✓ src/lib/__tests__/rag.spec.ts (19 tests) 489ms
+ ✓ src/lib/__tests__/jobs.spec.ts (18 tests) 536ms
+ ✓ src/lib/__tests__/management.spec.ts (14 tests) 565ms
+ ✓ src/lib/__tests__/knowledge.spec.ts (26 tests) 794ms
+ ✓ src/lib/__tests__/ai.spec.ts (40 tests) 803ms
+
+ Test Files  9 passed (9)
+      Tests  166 passed (166)
+   Start at  22:20:30
+   Duration  2.36s (transform 4.02s, setup 0ms, import 7.66s, tests 3.99s, environment 3.86s)
+
+
+
+frontend build
+
+> nexusdesk-web@0.4.0 build
+> vue-tsc --build && vite build
+
+vite v8.3.7 building client environment for production...
+transforming...
+✓ 79 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.61 kB │ gzip:  0.44 kB
+dist/assets/index-Bl1OvPWc.css   53.35 kB │ gzip: 12.01 kB
+dist/assets/index-Bcwpn4He.js   201.58 kB │ gzip: 71.13 kB
+
+✓ built in 604ms
+
+
+frontend lint
+
+> nexusdesk-web@0.4.0 lint
+> eslint .
+
+
+
+frontend format
+
+> nexusdesk-web@0.4.0 format:check
+> prettier --check src/ vite.config.ts vitest.config.ts eslint.config.ts
+
+Checking formatting...
+All matched files use Prettier code style!
+
+
+API reference
+PASS: 376 semantic invariants across all 39 business operations; Markdown/OpenAPI examples agree
+PASS: 39 canonical Handler routes = 39 index operations = 39 OpenAPI business operations
+PASS: 40 unique operationIds (including healthz), 82 schemas, 707 resolved local refs
+PASS: 400 examples, 14 source DTO field sets, path parameters, security, media, statuses and Markdown coverage
+Scope: static standard-library checks only; no backend mutation, DB, cloud model or runtime HTTP test

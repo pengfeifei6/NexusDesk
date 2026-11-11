@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "synthetic_data_only": true,
+  "daily_database_modified": false,
+  "real_cloud_model_called": false,
+  "migration_13_14_up_down_up": "PASS",
+  "go_pass_nodes": 1079,
+  "go_top_level_tests": 243,
+  "go_skip_nodes": 0,
+  "browser": {
+    "status": "PASS",
+    "model": "deterministic local HTTP fixture",
+    "model_calls": 1,
+    "browser": {
+      "status": "PASS",
+      "steps": [
+        "浏览器工单列表正常读取",
+        "真实 API SSE + 本地确定性模型传输完成",
+        "429 与 Retry-After 提示、输入保留",
+        "真实 Redis 停止：列表回源、写入成功、AI 503 且不新增消息",
+        "Redis 恢复后读取新版本与空知识列表"
+      ],
+      "synthetic_model": true,
+      "cloud_calls": 0
+    }
+  }
+}

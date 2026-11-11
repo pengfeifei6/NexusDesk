@@ -1,0 +1,21 @@
+PASS admin adds registered member/duplicate rejected without another relationship
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: creation shortcut must not route
++ actual - expected
+
++ 'http://127.0.0.1:33991/organizations/1/tickets#ticket-create'
+- 'http://127.0.0.1:33991/organizations/1/tickets'
+
+    at file:///media/yjz/pzp/Go/projects/NexusDesk/scripts/frontend-polish-browser.mjs:171:12 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'http://127.0.0.1:33991/organizations/1/tickets#ticket-create',
+  expected: 'http://127.0.0.1:33991/organizations/1/tickets',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.12.0

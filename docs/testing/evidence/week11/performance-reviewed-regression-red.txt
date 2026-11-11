@@ -1,0 +1,14 @@
+--- FAIL: TestRepeatedDataStartsWithFreshItems (0.00s)
+    --- FAIL: TestRepeatedDataStartsWithFreshItems/empty_object (0.00s)
+        decode_test.go:129: got=[{ID:1 OrgID:7 CreatorID:5 AssigneeID:<nil> Title:old Body:stale Priority:2 Status:OPEN Version:3 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC DeletedAt:<nil>}] ok=true want=[{ID:0 OrgID:0 CreatorID:0 AssigneeID:<nil> Title: Body: Priority:0 Status: Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC DeletedAt:<nil>}]
+    --- FAIL: TestRepeatedDataStartsWithFreshItems/null_item (0.00s)
+        decode_test.go:129: got=[{ID:1 OrgID:7 CreatorID:5 AssigneeID:<nil> Title:old Body:stale Priority:2 Status:OPEN Version:3 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC DeletedAt:<nil>}] ok=true want=[{ID:0 OrgID:0 CreatorID:0 AssigneeID:<nil> Title: Body: Priority:0 Status: Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC DeletedAt:<nil>}]
+    --- FAIL: TestRepeatedDataStartsWithFreshItems/partial_item (0.00s)
+        decode_test.go:129: got=[{ID:1 OrgID:7 CreatorID:5 AssigneeID:<nil> Title:partial Body:stale Priority:2 Status:OPEN Version:3 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC DeletedAt:<nil>}] ok=true want=[{ID:0 OrgID:0 CreatorID:0 AssigneeID:<nil> Title:partial Body: Priority:0 Status: Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC DeletedAt:<nil>}]
+    --- FAIL: TestRepeatedDataStartsWithFreshItems/valid_replacement (0.00s)
+        decode_test.go:129: got=[{ID:9 OrgID:7 CreatorID:5 AssigneeID:<nil> Title:new Body:stale Priority:2 Status:OPEN Version:3 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC DeletedAt:<nil>}] ok=true want=[{ID:9 OrgID:7 CreatorID:0 AssigneeID:<nil> Title:new Body: Priority:0 Status: Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC DeletedAt:<nil>}]
+    --- FAIL: TestRepeatedDataStartsWithFreshItems/escaped_key (0.00s)
+        decode_test.go:129: got=[{ID:1 OrgID:7 CreatorID:5 AssigneeID:<nil> Title:old Body:stale Priority:2 Status:OPEN Version:3 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC DeletedAt:<nil>}] ok=true want=[{ID:0 OrgID:0 CreatorID:0 AssigneeID:<nil> Title: Body: Priority:0 Status: Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC DeletedAt:<nil>}]
+FAIL
+FAIL	github.com/pengfeifei6/NexusDesk/internal/platform/cache	0.010s
+FAIL

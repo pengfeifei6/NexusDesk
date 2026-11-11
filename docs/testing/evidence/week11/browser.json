@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "synthetic_data_only": true,
+  "model": "deterministic local HTTP fixture, not semantic evaluation",
+  "steps": [
+    "register/login/create organization/ticket/claim/transition/comment",
+    "upload/async worker/index/preview/download",
+    "hybrid retrieval/grounded answer/citations/measured usage",
+    "SSE tool proposal/no premature write/human confirmation",
+    "390px responsive navigation/no overflow/organization scope change",
+    "logout clears protected content/no token persistence/no page errors"
+  ],
+  "screenshots": [
+    "01-login",
+    "02-register",
+    "03-workspace-empty",
+    "04-tickets",
+    "05-ticket-detail",
+    "06-document-detail",
+    "07-knowledge",
+    "08-rag",
+    "09-ai-proposal",
+    "10-ai-confirmed",
+    "11-mobile-ai",
+    "12-mobile-tickets",
+    "13-mobile-rag"
+  ],
+  "page_errors": [],
+  "desktop": "1440x1000",
+  "mobile": "390x844"
+}

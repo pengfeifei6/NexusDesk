@@ -1,0 +1,57 @@
+File: api
+Build ID: 1b6efc4b622e919106dffe2d9505827afebe3c73
+Type: inuse_space
+Time: 2026-11-11 19:29:52 CST
+Showing nodes accounting for 10394.53kB, 100% of 10394.53kB total
+Showing top 50 nodes out of 103
+      flat  flat%   sum%        cum   cum%
+ 3084.28kB 29.67% 29.67%  3084.28kB 29.67%  runtime.mallocgc
+ 1536.16kB 14.78% 44.45%  1536.16kB 14.78%  context.(*cancelCtx).propagateCancel.func2
+ 1081.02kB 10.40% 54.85%  1642.52kB 15.80%  encoding/json.Marshal
+ 1024.03kB  9.85% 64.70%  1024.03kB  9.85%  syscall.anyToSockaddr
+  561.50kB  5.40% 70.10%   561.50kB  5.40%  bytes.growSlice
+  532.26kB  5.12% 75.22%   532.26kB  5.12%  github.com/jackc/pgx/v5/pgtype.(*Map).RegisterDefaultPgType (inline)
+  525.43kB  5.05% 80.28%   525.43kB  5.05%  github.com/jackc/pgx/v5/internal/stmtcache.NewLRUCache (inline)
+  513.31kB  4.94% 85.22%  2083.02kB 20.04%  github.com/jackc/pgx/v5/pgxpool.NewWithConfig.func3
+  512.44kB  4.93% 90.15%   512.44kB  4.93%  github.com/jackc/pgx/v5/pgproto3.(*DataRow).Decode
+  512.05kB  4.93% 95.07%   512.05kB  4.93%  github.com/pengfeifei6/NexusDesk/internal/platform/observe.StartDiagnostics.func4
+  512.05kB  4.93%   100%   512.05kB  4.93%  github.com/gabriel-vasile/mimetype.newMIME (inline)
+         0     0%   100%   561.50kB  5.40%  bytes.(*Buffer).Write
+         0     0%   100%   561.50kB  5.40%  bytes.(*Buffer).grow
+         0     0%   100%   561.50kB  5.40%  encoding/json.(*encodeState).marshal
+         0     0%   100%   561.50kB  5.40%  encoding/json.(*encodeState).reflectValue
+         0     0%   100%   561.50kB  5.40%  encoding/json.arrayEncoder.encode
+         0     0%   100%   561.50kB  5.40%  encoding/json.interfaceEncoder
+         0     0%   100%   561.50kB  5.40%  encoding/json.mapEncoder.encode
+         0     0%   100%   561.50kB  5.40%  encoding/json.sliceEncoder.encode
+         0     0%   100%   561.50kB  5.40%  encoding/json.stringEncoder
+         0     0%   100%   512.05kB  4.93%  github.com/gabriel-vasile/mimetype.init
+         0     0%   100%  1642.52kB 15.80%  github.com/gin-gonic/gin.(*Context).JSON (inline)
+         0     0%   100%  2154.96kB 20.73%  github.com/gin-gonic/gin.(*Context).Next
+         0     0%   100%  1642.52kB 15.80%  github.com/gin-gonic/gin.(*Context).Render
+         0     0%   100%  2154.96kB 20.73%  github.com/gin-gonic/gin.(*Engine).ServeHTTP
+         0     0%   100%  2154.96kB 20.73%  github.com/gin-gonic/gin.(*Engine).handleHTTPRequest
+         0     0%   100%  1642.52kB 15.80%  github.com/gin-gonic/gin/codec/json.jsonApi.Marshal
+         0     0%   100%  1642.52kB 15.80%  github.com/gin-gonic/gin/render.JSON.Render
+         0     0%   100%  1642.52kB 15.80%  github.com/gin-gonic/gin/render.WriteJSON
+         0     0%   100%   512.44kB  4.93%  github.com/jackc/pgx/v5.(*Conn).Query
+         0     0%   100%   512.44kB  4.93%  github.com/jackc/pgx/v5.(*Conn).QueryRow (inline)
+         0     0%   100%  1569.70kB 15.10%  github.com/jackc/pgx/v5.ConnectConfig
+         0     0%   100%  1569.70kB 15.10%  github.com/jackc/pgx/v5.connect
+         0     0%   100%   512.44kB  4.93%  github.com/jackc/pgx/v5/pgconn.(*PgConn).ExecStatement
+         0     0%   100%   512.44kB  4.93%  github.com/jackc/pgx/v5/pgconn.(*PgConn).execExtendedSuffix
+         0     0%   100%   512.44kB  4.93%  github.com/jackc/pgx/v5/pgconn.(*PgConn).peekMessage
+         0     0%   100%   512.44kB  4.93%  github.com/jackc/pgx/v5/pgconn.(*PgConn).receiveMessage
+         0     0%   100%   512.44kB  4.93%  github.com/jackc/pgx/v5/pgconn.(*ResultReader).readUntilRowDescription
+         0     0%   100%   512.44kB  4.93%  github.com/jackc/pgx/v5/pgconn.(*ResultReader).receiveMessage
+         0     0%   100%   512.02kB  4.93%  github.com/jackc/pgx/v5/pgconn.ConnectConfig
+         0     0%   100%   512.02kB  4.93%  github.com/jackc/pgx/v5/pgconn.connectOne
+         0     0%   100%   512.02kB  4.93%  github.com/jackc/pgx/v5/pgconn.connectPreferred
+         0     0%   100%   512.44kB  4.93%  github.com/jackc/pgx/v5/pgproto3.(*Frontend).Receive
+         0     0%   100%   532.26kB  5.12%  github.com/jackc/pgx/v5/pgtype.NewMap
+         0     0%   100%   532.26kB  5.12%  github.com/jackc/pgx/v5/pgtype.initDefaultMap
+         0     0%   100%   532.26kB  5.12%  github.com/jackc/pgx/v5/pgtype.registerDefaultPgTypeVariants[go.shape.[]github.com/jackc/pgx/v5/pgtype.Range[github.com/jackc/pgx/v5/pgtype.Float8]]
+         0     0%   100%   512.44kB  4.93%  github.com/jackc/pgx/v5/pgxpool.(*Conn).QueryRow
+         0     0%   100%   512.44kB  4.93%  github.com/jackc/pgx/v5/pgxpool.(*Pool).QueryRow
+         0     0%   100%  2083.02kB 20.04%  github.com/jackc/puddle/v2.(*Pool[go.shape.*uint8]).initResourceValue.func1
+         0     0%   100%   512.44kB  4.93%  github.com/pengfeifei6/NexusDesk/internal/auth.(*PostgresRepository).FindUserByID

@@ -1,0 +1,68 @@
+{
+  "version": "w10-corpus-v1",
+  "author": "AI generated fictional evaluation material; no private user data",
+  "human_label_review": "pending",
+  "fixed_before_model_run": true,
+  "question_count": 60,
+  "label_sha256": "2fdadc35b1c7a8978a78cacca23c94ff70f7737d82318a796ce2a10ceb15c8d4",
+  "ask_ids": [
+    "F01",
+    "F04",
+    "F12",
+    "F18",
+    "K06",
+    "S11",
+    "M06",
+    "M08",
+    "N01",
+    "N02",
+    "X01",
+    "X02",
+    "N03",
+    "N04",
+    "X03",
+    "X04"
+  ],
+  "documents": [
+    {
+      "file": "org-a-access-guide.md",
+      "organization_slot": "A",
+      "sha256": "d432060f6789e03a355b73dd1da24da2af01aeeaa7c667acb30945297a6c6011"
+    },
+    {
+      "file": "org-a-db-playbook.md",
+      "organization_slot": "A",
+      "sha256": "45c691df06086eb2853de430c355620d4971351e3c8f3ed939a8f6f5994751df"
+    },
+    {
+      "file": "org-a-incident-process.md",
+      "organization_slot": "A",
+      "sha256": "df449483dbeefc2b78a6264a1e917f10d6809e6f4f1868a9b1f08e01b9be31b1"
+    },
+    {
+      "file": "org-a-job-errors.md",
+      "organization_slot": "A",
+      "sha256": "a83c5fba804519b38d4c9b556091928729cd4f4665e1e8138d1d80a191dde5b1"
+    },
+    {
+      "file": "org-a-rag-standards.md",
+      "organization_slot": "A",
+      "sha256": "4c0e097a209db68c7ae1f27e95d1d1d47bf2b8a3789562b22d98a9e42c67339b"
+    },
+    {
+      "file": "org-a-release-checklist.md",
+      "organization_slot": "A",
+      "sha256": "54f0350e05060692fba784ec2cd0b70c9718fe4fedb090ea8162783836d722fb"
+    },
+    {
+      "file": "org-a-upload-policy.md",
+      "organization_slot": "A",
+      "sha256": "0ced8b9517d00b02133263451a3ffff1e650554c51111c9502453cc47d261dbb"
+    },
+    {
+      "file": "org-b-private-guide.md",
+      "organization_slot": "B",
+      "sha256": "bee4ac8903fbcb807d887e6add930f2bf22ba88155f301e1a4b6e3769f34b039"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "status": "PASS",
+  "archive": "nexusdesk-v1.0.0-candidate2-source.tar.gz",
+  "sha256": "2eff19f4bc11b895951f4591816697bd811cdd96389e7ba38a208d8a53b18f6e",
+  "files": 504,
+  "existing_node_modules_used": false,
+  "shared_toolchain_and_download_cache": true,
+  "checks": [
+    {
+      "name": "npm ci",
+      "exit_code": 0,
+      "seconds": 2.405
+    },
+    {
+      "name": "all seven extracted gates",
+      "exit_code": 0,
+      "seconds": 19.029
+    }
+  ],
+  "extracted_checks": {
+    "status": "PASS",
+    "node": "/media/yjz/pzp/Go/projects/NexusDesk/.local/week04-tools/node_modules/node/bin/node",
+    "checks": [
+      {
+        "name": "python unit",
+        "command": [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "scripts",
+          "-p",
+          "test_*.py"
+        ],
+        "exit_code": 0,
+        "seconds": 0.835
+      },
+      {
+        "name": "go vet",
+        "command": [
+          "go",
+          "vet",
+          "./..."
+        ],
+        "exit_code": 0,
+        "seconds": 2.234
+      },
+      {
+        "name": "go build",
+        "command": [
+          "go",
+          "build",
+          "./..."
+        ],
+        "exit_code": 0,
+        "seconds": 1.927
+      },
+      {
+        "name": "frontend unit",
+        "command": [
+          "npm",
+          "run",
+          "test:unit",
+          "--",
+          "--run"
+        ],
+        "exit_code": 0,
+        "seconds": 2.883
+      },
+      {
+        "name": "frontend typecheck/build",
+        "command": [
+          "npm",
+          "run",
+          "build"
+        ],
+        "exit_code": 0,
+        "seconds": 5.639
+      },
+      {
+        "name": "frontend lint",
+        "command": [
+          "npm",
+          "run",
+          "lint"
+        ],
+        "exit_code": 0,
+        "seconds": 3.0
+      },
+      {
+        "name": "frontend format",
+        "command": [
+          "npm",
+          "run",
+          "format:check"
+        ],
+        "exit_code": 0,
+        "seconds": 2.424
+      }
+    ]
+  }
+}

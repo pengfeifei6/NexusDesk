@@ -1,0 +1,16 @@
+goos: linux
+goarch: amd64
+pkg: github.com/pengfeifei6/NexusDesk/internal/platform/cache
+cpu: AMD EPYC 7542 32-Core Processor                
+BenchmarkCacheEnvelope/baseline-64         	    1030	   1289085 ns/op	  41.67 MB/s	  135011 B/op	     322 allocs/op
+BenchmarkCacheEnvelope/baseline-64         	     939	   1274229 ns/op	  42.15 MB/s	  135009 B/op	     322 allocs/op
+BenchmarkCacheEnvelope/baseline-64         	     874	   1263883 ns/op	  42.50 MB/s	  135007 B/op	     322 allocs/op
+BenchmarkCacheEnvelope/baseline-64         	    1033	   1299018 ns/op	  41.35 MB/s	  135004 B/op	     322 allocs/op
+BenchmarkCacheEnvelope/baseline-64         	    1005	   1240164 ns/op	  43.31 MB/s	  135005 B/op	     322 allocs/op
+BenchmarkCacheEnvelope/typed-64            	    1030	   1128981 ns/op	  47.58 MB/s	   77664 B/op	     321 allocs/op
+BenchmarkCacheEnvelope/typed-64            	    1015	   1125962 ns/op	  47.70 MB/s	   77656 B/op	     321 allocs/op
+BenchmarkCacheEnvelope/typed-64            	    1029	   1153510 ns/op	  46.56 MB/s	   77656 B/op	     321 allocs/op
+BenchmarkCacheEnvelope/typed-64            	     999	   1140256 ns/op	  47.11 MB/s	   77659 B/op	     321 allocs/op
+BenchmarkCacheEnvelope/typed-64            	    1058	   1128718 ns/op	  47.59 MB/s	   77661 B/op	     321 allocs/op
+PASS
+ok  	github.com/pengfeifei6/NexusDesk/internal/platform/cache	12.076s

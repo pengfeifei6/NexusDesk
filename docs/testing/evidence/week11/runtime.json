@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "main_directory": "/media/yjz/pzp/Go/projects/NexusDesk",
+  "api": 8080,
+  "frontend": 5173,
+  "api_diagnostics": 6060,
+  "worker_diagnostics": 6061,
+  "owned_api_worker_restarted": true,
+  "frontend_preserved": true,
+  "worker_startup_marker": true,
+  "schema_changed": false,
+  "daily_dependencies_restarted": false,
+  "daily_data_seeded": false,
+  "configuration_file_changed": false,
+  "old_owned_groups_exited": true,
+  "new_owned_identities_verified": true,
+  "frontend_identity_preserved": true,
+  "main_error_header_body_correlated": true,
+  "diagnostic_allowlist_verified": true
+}

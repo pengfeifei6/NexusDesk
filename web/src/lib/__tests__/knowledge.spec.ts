@@ -117,7 +117,7 @@ describe('new user onboarding', () => {
     await flushPromises()
     expect(bodies).toEqual([{ name: '首个组织' }])
     expect(router.currentRoute.value.path).toBe('/organizations/9007199254740993/tickets')
-    expect(wrapper.text()).toContain('首个组织 · admin')
+    expect(wrapper.text()).toContain('首个组织 · 管理员')
     expect(wrapper.text()).toContain('暂无工单')
     await router.push('/desk')
     expect(wrapper.find('input[name=organization_name]').exists()).toBe(true)
@@ -198,7 +198,7 @@ describe('knowledge workflow', () => {
     await flushPromises()
     expect(wrapper.get('pre').text()).toBe(text.content_text)
     expect(wrapper.find('img').exists()).toBe(false)
-    expect(wrapper.text()).toContain('READY')
+    expect(wrapper.text()).toContain('已就绪')
   })
   it.each([
     ['admin', '2'],
@@ -433,7 +433,7 @@ it('refreshes FAILED metadata after extraction rejection and shows only the safe
   const { wrapper } = await open(`/organizations/10/knowledge/${document.id}`)
   await button(wrapper, '提取正文').trigger('click')
   await flushPromises()
-  expect(wrapper.text()).toContain('FAILED')
+  expect(wrapper.text()).toContain('失败')
   expect(wrapper.text()).toContain('文档没有可提取的正文')
   expect(wrapper.find('pre').exists()).toBe(false)
 })

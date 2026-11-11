@@ -259,21 +259,7 @@ func (r *indexRepository) Search(ctx context.Context, org int64, vector []float3
 	if err != nil {
 		return nil, err
 	}
-	defer rows.Close()
-	result := make([]sourceSnapshot, 0, k)
-	for rows.Next() {
-		var item sourceSnapshot
-		var distance float64
-		if err = rows.Scan(&item.ChunkID, &item.DocumentID, &item.ChunkIndex, &item.SourceName, &item.Excerpt, &item.StartRune, &item.EndRune, &distance, &item.Hash, &item.Version); err != nil {
-			return nil, err
-		}
-		if math.IsNaN(distance) || math.IsInf(distance, 0) {
-			return nil, NewError("EMBEDDING_INVALID_VECTOR")
-		}
-		item.Score = max(-1.0, min(1.0, 1-distance))
-		result = append(result, item)
-	}
-	return result, rows.Err()
+	return decodeSourceRows(rows, k)
 }
 func (r *indexRepository) Validate(ctx context.Context, org int64, sources []sourceSnapshot) (resultErr error) {
 	ctx, cancel := context.WithTimeout(ctx, 3*time.Second)
@@ -301,4 +287,45 @@ func (r *indexRepository) Validate(ctx context.Context, org int64, sources []sou
 		return NewError("INDEX_SOURCE_CHANGED")
 	}
 	return nil
+}
+
+// LexicalSearch ranks by the number of distinct literal query terms present.
+// It deliberately shares every current-source and cosine predicate with Search.
+func (r *indexRepository) LexicalSearch(ctx context.Context, org int64, vector []float32, terms []string, k int, minimum float64) (resultRows []sourceSnapshot, resultErr error) {
+	ctx, cancel := context.WithTimeout(ctx, 3*time.Second)
+	defer cancel()
+	defer databaseResult(ctx, &resultErr, "MODEL_TIMEOUT")
+	if len(terms) == 0 {
+		return []sourceSnapshot{}, ctx.Err()
+	}
+	if err := normalizeVectors([][]float32{vector}, 1); err != nil {
+		return nil, err
+	}
+	rows, err := r.pool.Query(ctx, `SELECT c.id,c.document_id,c.chunk_index,d.original_filename,c.content_text,c.start_rune,c.end_rune,c.embedding <=> $2::vector AS distance,t.content_sha256,i.index_version FROM knowledge_chunks c `+currentSourceJoins+`
+ CROSS JOIN LATERAL (SELECT count(*) AS hits FROM unnest($5::text[]) AS terms(term) WHERE strpos(lower(c.content_text),term)>0) lexical
+ WHERE `+currentSourceWhere+` AND 1-(c.embedding <=> $2::vector)>=$3 AND lexical.hits>0 ORDER BY lexical.hits DESC,c.id ASC LIMIT $4`, org, vectorLiteral(vector), minimum, k, terms)
+	if err != nil {
+		return nil, err
+	}
+	return decodeSourceRows(rows, k)
+}
+
+// decodeSourceRows preserves the shared source projection and cosine validation
+// for both candidate routes, including row closure on every return path.
+func decodeSourceRows(rows pgx.Rows, k int) ([]sourceSnapshot, error) {
+	defer rows.Close()
+	result := make([]sourceSnapshot, 0, k)
+	for rows.Next() {
+		var item sourceSnapshot
+		var distance float64
+		if err := rows.Scan(&item.ChunkID, &item.DocumentID, &item.ChunkIndex, &item.SourceName, &item.Excerpt, &item.StartRune, &item.EndRune, &distance, &item.Hash, &item.Version); err != nil {
+			return nil, err
+		}
+		if math.IsNaN(distance) || math.IsInf(distance, 0) {
+			return nil, NewError("EMBEDDING_INVALID_VECTOR")
+		}
+		item.Score = max(-1.0, min(1.0, 1-distance))
+		result = append(result, item)
+	}
+	return result, rows.Err()
 }

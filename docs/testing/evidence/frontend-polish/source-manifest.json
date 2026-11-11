@@ -1,0 +1,228 @@
+{
+  "files": [
+    {
+      "path": "docs/api/NexusDesk_API完整文档.md",
+      "sha256": "f65f74a2fdf13e9277ffb16a0b6360f82655f14b291e259cbe6615e81224e119"
+    },
+    {
+      "path": "docs/api/README.md",
+      "sha256": "2166a0a2643dc063d30e08b361395f385d6a2d7ce3ce9734716c01135fda883f"
+    },
+    {
+      "path": "docs/api/ai-conversation.md",
+      "sha256": "21e4ea00538c5114b32549ca8b06ba2f51ca8bdb7a4f022515dab62c51f9f8cf"
+    },
+    {
+      "path": "docs/api/auth-organization.md",
+      "sha256": "3a8a046c073cd2801b6b0d3ef88e6fb37999e6d68f0f879ad1121bef799569b7"
+    },
+    {
+      "path": "docs/api/knowledge-documents.md",
+      "sha256": "bb71debd314fcb27d4a4794a90fec62b398562da318497912e6af0653cd50bd7"
+    },
+    {
+      "path": "docs/api/knowledge-jobs.md",
+      "sha256": "41f35080972c92778dad1ba968696d4af37ec40e8e79c8caefd5e5b0f15e055b"
+    },
+    {
+      "path": "docs/api/openapi.json",
+      "sha256": "41d21e30fa521039379c32c3f654f06677b2f8ef00772417ce22938ac5b01d00"
+    },
+    {
+      "path": "docs/api/rag.md",
+      "sha256": "81043e60ff105e5e5758a7ca463863f5ed88bacdab9610301aefa999686b6a02"
+    },
+    {
+      "path": "docs/api/ticket-claim.md",
+      "sha256": "dd617af6680e1a0f981377817095782f5567e4b4591c0954c46edfae374fe845"
+    },
+    {
+      "path": "docs/api/ticket.md",
+      "sha256": "742850ef1bc9cfa9db6773d4a9fe74a694d4734bfcfae2477013d46c1cf897c3"
+    },
+    {
+      "path": "scripts/check_api_reference.py",
+      "sha256": "0d5b3e77e0a722f0ecf74455e144e90187efcff001726edbb4598356fa133556"
+    },
+    {
+      "path": "scripts/frontend-polish-browser.mjs",
+      "sha256": "e89538861092df996593a05813bfc7c72359fd92778c8b52fdae96374ddab8f6"
+    },
+    {
+      "path": "scripts/frontend-polish-smoke.py",
+      "sha256": "da09eb8462b3e4c3335759bf92c30bfe874d15296fc7a7e8cbbc16a3bf19a928"
+    },
+    {
+      "path": "web/src/App.vue",
+      "sha256": "91100f23f5c33ca3fb779cff157e817d3689322cac1670e7122f16fe296bcaae"
+    },
+    {
+      "path": "web/src/__tests__/App.spec.ts",
+      "sha256": "dcd037647226a720e78a4272f7afe0f86584d897ec405d65ce099c231a7d6b86"
+    },
+    {
+      "path": "web/src/assets/main.css",
+      "sha256": "3a9cc7ea83f2bf9097637ea9f0dcf92f16c1184515d07e47810333d671e889db"
+    },
+    {
+      "path": "web/src/assets/workspace-theme.css",
+      "sha256": "ed703c428e77b2e1b00c8dfe271f11471da2d60dbdd789ac64d2811dad5e3795"
+    },
+    {
+      "path": "web/src/components/AsyncJobPanel.vue",
+      "sha256": "fbe9437de48e42a9e0ce193c71ae4c8b61ecf29cb7b818698b5634876f0ba820"
+    },
+    {
+      "path": "web/src/components/RAGIndexPanel.vue",
+      "sha256": "43a7a4274bffad92868ea57560d04dae834e1c746e7a0b8e930868dd4234e0da"
+    },
+    {
+      "path": "web/src/components/RAGSourceList.vue",
+      "sha256": "6099e24331037d1ad13638312e3d3ba26ae3006343b781fdbd97e02e3c3594ed"
+    },
+    {
+      "path": "web/src/components/StatusBadge.vue",
+      "sha256": "e7f858f2ad55fdb14e1c7c0ad13b71c8abd49fe33df15cfdeddb6865507f3d46"
+    },
+    {
+      "path": "web/src/components/TicketForm.vue",
+      "sha256": "b56923b34ad91a684e40be635b45ca035a36b7ae8c4d76f71acf4b1e8f67ec4f"
+    },
+    {
+      "path": "web/src/components/TicketManagementPanel.vue",
+      "sha256": "d9c17c18c85cda73f73c56c1faacbd8788f28c3f9c48b5805af9fdcf982d4769"
+    },
+    {
+      "path": "web/src/components/UiIcon.vue",
+      "sha256": "50fdc68228dca7e3647a7d3f166d3e61d0ac7411152462a9eaf4fb89bbed6c54"
+    },
+    {
+      "path": "web/src/composables/conversation.ts",
+      "sha256": "d12980683f88d47e069161d318e67452706499591b1dcca50b76477ad44b3d85"
+    },
+    {
+      "path": "web/src/composables/desk.ts",
+      "sha256": "4209abc469be60d42f1a2d838be5aaae87561bc79b1621cf7430f9c00abab449"
+    },
+    {
+      "path": "web/src/composables/knowledge.ts",
+      "sha256": "a37d26b7f9d8b5a44fd707a35004175971b1ae1ae90020606d8f24bd3b6172bd"
+    },
+    {
+      "path": "web/src/composables/members.ts",
+      "sha256": "4e2109c3523f85533aadc578c5a63101201310d03a85fff0f758148053b847d4"
+    },
+    {
+      "path": "web/src/composables/ticket-management.ts",
+      "sha256": "14aa7c8f2314091f286cf9bf287a200cd94c9ce7a710b19e051ddc57e33c0c90"
+    },
+    {
+      "path": "web/src/lib/__tests__/ai.spec.ts",
+      "sha256": "2c70d6c3d05d547aa4deef6df799185502dc96959cb50649475bc35afa408b95"
+    },
+    {
+      "path": "web/src/lib/__tests__/app.spec.ts",
+      "sha256": "ab36a687a0f652a929f821f57aca609cd74c5688f8bffbb731404546060debd2"
+    },
+    {
+      "path": "web/src/lib/__tests__/client.spec.ts",
+      "sha256": "a36a6b80bc4a2edcb3dac3dc4019bd9aadbca9540729b2ae214cf5a308e18f48"
+    },
+    {
+      "path": "web/src/lib/__tests__/jobs.spec.ts",
+      "sha256": "8b1929600e8a1be132ee1db184418627c21f6371fb22d9158c91568fae08b6cd"
+    },
+    {
+      "path": "web/src/lib/__tests__/knowledge.spec.ts",
+      "sha256": "940b40b2e15e78a8d736b19273fbb1c5542ac026277a41f9d96ec9cbe46271f7"
+    },
+    {
+      "path": "web/src/lib/__tests__/management.spec.ts",
+      "sha256": "f50c2313905e1c4f41938154d9b3222652cbda569461889fb4bc79453a3db6d6"
+    },
+    {
+      "path": "web/src/lib/__tests__/polish.spec.ts",
+      "sha256": "0413776370a22eb844deb1f0d1a3f47278bba1a20d1cc1a3babf75b8de84ba6a"
+    },
+    {
+      "path": "web/src/lib/__tests__/rag.spec.ts",
+      "sha256": "16dbeceb6f4f8b01c58a7e00ad3d9b8a6e3813c7344e1a0ec200375d2ca4efe3"
+    },
+    {
+      "path": "web/src/lib/ai-stream.ts",
+      "sha256": "e41ef1c11093e323a1be5229ecb7b2bdc4b829fc122e16395becbe0f060f6e20"
+    },
+    {
+      "path": "web/src/lib/client.ts",
+      "sha256": "95b9fff624402c805dde5943627975ccf5eba978c329f94de723a9e16f933f65"
+    },
+    {
+      "path": "web/src/lib/focus-section.ts",
+      "sha256": "5970786b3ea4026126c7836f6f82c92a5cce687af808c48f6e9805d7100d27d2"
+    },
+    {
+      "path": "web/src/lib/identifiers.ts",
+      "sha256": "114c36dc2a6913b757c5a3fb60f746f7447694a192cc71af6b9279a2fa601050"
+    },
+    {
+      "path": "web/src/lib/presentation.ts",
+      "sha256": "adcd7422b30b6655612f1b46ba3c92bef8ee2fe0e665bc7e1b2013c6cc0daab2"
+    },
+    {
+      "path": "web/src/lib/types.ts",
+      "sha256": "4f13de169d4e6f5afcded6b28aa268ea6c9594632c6b424679ce276ed5010f79"
+    },
+    {
+      "path": "web/src/main.ts",
+      "sha256": "9c8a42607f99a10b189d92060e660704dd2753c9b40d3f7d28b39dd35cf0a8ab"
+    },
+    {
+      "path": "web/src/router/index.ts",
+      "sha256": "3c14ca908bbb1b6f33b7fd6f95202ddfdba656cf88c1e9431b19a4cda36dfc9d"
+    },
+    {
+      "path": "web/src/stores/session.ts",
+      "sha256": "8eb892c5e48d185f48ad2a96363479e8bb348e108dda99d80886a65a62ba7273"
+    },
+    {
+      "path": "web/src/views/AIConversationView.vue",
+      "sha256": "eac1b5a43799f5d085793a37fb4a1d606be9c4e58206bb10b1cbc10466ba67bf"
+    },
+    {
+      "path": "web/src/views/DeskView.vue",
+      "sha256": "6e3b30b048393a859101018b383de35f5b2de8eac0a8d95073eb9468effbe632"
+    },
+    {
+      "path": "web/src/views/KnowledgeDetailView.vue",
+      "sha256": "86a0eb692ce867cd6df6e0ebcaeab4a9eb1c40840cf2ee6be70f1a493b449cac"
+    },
+    {
+      "path": "web/src/views/KnowledgeListView.vue",
+      "sha256": "b696617a35682d356c0a83ddb65dd614c3743c78478fa0392b5af210680f341a"
+    },
+    {
+      "path": "web/src/views/KnowledgeSearchView.vue",
+      "sha256": "7de92e2f2c81e8c5cc45a41df252538fa82c4f7d43dcf1d4970f2e7314cd4556"
+    },
+    {
+      "path": "web/src/views/LoginView.vue",
+      "sha256": "fd7600afaa738b016f77dd094bc82a0d3bb4ddebb8a0a1e16841f1f137056370"
+    },
+    {
+      "path": "web/src/views/OrganizationMembersView.vue",
+      "sha256": "c751155f96642c33ab689ed8acc5adea3a4e503356663b322bf117dfc50ecfd7"
+    },
+    {
+      "path": "web/src/views/RegisterView.vue",
+      "sha256": "ac9cc066bf303a73841f8efebdcae1e84c4609a65d0f7dfce9038a04236228d9"
+    },
+    {
+      "path": "web/src/views/TicketDetailView.vue",
+      "sha256": "cc60e16c7214f68faa068b62ed8b9600b93c9647861f41407044580dbd2ad2df"
+    },
+    {
+      "path": "web/src/views/TicketListView.vue",
+      "sha256": "1d188f74833596b1d874c399ee5a78d4b4e8ba6615c1829efcc449719cdffc39"
+    }
+  ]
+}

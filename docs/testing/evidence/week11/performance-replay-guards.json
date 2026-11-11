@@ -1,0 +1,20 @@
+[
+  {
+    "arguments": [
+      "--stage",
+      "baseline"
+    ],
+    "exit_code": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"scripts/week11-performance.py\", line 218, in <module>\n    main()\n  File \"scripts/week11-performance.py\", line 82, in main\n    raise ValueError('retained stage evidence already exists; do not silently overwrite runs')\nValueError: retained stage evidence already exists; do not silently overwrite runs\n"
+  },
+  {
+    "arguments": [
+      "--stage",
+      "after",
+      "--replay-label",
+      "guard-unpaired"
+    ],
+    "exit_code": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"scripts/week11-performance.py\", line 218, in <module>\n    main()\n  File \"scripts/week11-performance.py\", line 100, in main\n    raise ValueError('complete paired baseline required before after stage')\nValueError: complete paired baseline required before after stage\n"
+  }
+]
